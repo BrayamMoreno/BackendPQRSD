@@ -4,7 +4,7 @@ import com.pqrsdf.pqrsdf.dto.auth.AuthResponse;
 import com.pqrsdf.pqrsdf.dto.auth.LoginRequest;
 import com.pqrsdf.pqrsdf.models.Usuario;
 import com.pqrsdf.pqrsdf.service.UserDetailServiceImpl;
-import com.pqrsdf.pqrsdf.service.UsuarioService;
+import com.pqrsdf.pqrsdf.service.UsuariosService;
 import com.pqrsdf.pqrsdf.utils.ResponseEntityUtil;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,18 +22,18 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Autenticacion", description = "Gestion de Sesiones y Usuarios")
 public class AuthController {
 
-    private final UsuarioService usuarioService;
+    private final UsuariosService usuariosService;
     private final UserDetailServiceImpl userDetailServiceImpl;
 
-    public AuthController(UsuarioService usuarioService, UserDetailServiceImpl userDetailServiceImpl){
-        this.usuarioService = usuarioService;
+    public AuthController(UsuariosService usuarioService, UserDetailServiceImpl userDetailServiceImpl){
+        this.usuariosService = usuarioService;
         this.userDetailServiceImpl = userDetailServiceImpl;
     }
    
     @PostMapping("/Login")
     public ResponseEntity<?> Login(@RequestBody LoginRequest entity){
         try{
-            Usuario usuario = usuarioService.getEntityByUsername(entity.username());
+            Usuario usuario = usuariosService.getEntityByUsername(entity.username());
             if(usuario == null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(new AuthResponse(null, "Usuario y/o contraseña incorrectos", null, false));

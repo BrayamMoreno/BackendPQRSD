@@ -32,4 +32,8 @@ public abstract class GenericService<T,ID> {
         BeanUtils.copyProperties(existingEntity, newEntity, "Id");
         return repository.save(existingEntity);
     }
+
+    public boolean isPresent(ID id){
+        return repository.existsById(id);
+    }
 }

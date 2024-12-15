@@ -6,6 +6,7 @@ import java.util.HashSet;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
 
 import jakarta.persistence.*;
+
 import lombok.*;
 
 @Builder
@@ -15,7 +16,7 @@ import lombok.*;
 @Getter
 @Entity
 @Table(name = "roles")
-public class Rol extends GenericEntity{
+public class Roles extends GenericEntity{
     
     @Column(name = "nombre")
     private String nombre;

@@ -1,14 +1,17 @@
 package com.pqrsdf.pqrsdf.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import com.pqrsdf.pqrsdf.dto.auth.AuthResponse;
@@ -16,17 +19,14 @@ import com.pqrsdf.pqrsdf.dto.auth.LoginRequest;
 import com.pqrsdf.pqrsdf.models.Usuario;
 import com.pqrsdf.pqrsdf.utils.JwtUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 public class UserDetailServiceImpl implements UserDetailsService{
    
-    private final UsuarioService usuarioService;
+    private final UsuariosService usuarioService;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
 
-    public UserDetailServiceImpl(UsuarioService usuarioService, PasswordEncoder passwordEncoder,
+    public UserDetailServiceImpl(UsuariosService usuarioService, PasswordEncoder passwordEncoder,
                                 JwtUtils jwtUtils){
         this.usuarioService = usuarioService;
         this.passwordEncoder = passwordEncoder;
@@ -75,11 +75,4 @@ public class UserDetailServiceImpl implements UserDetailsService{
 
         return new AuthResponse(usuario.getUsername(), "User Logged", AccesToken, true);
     }
-
-
-    public static void main(String[] args) {
-        PasswordEncoder passwordEncoder = new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder();
-        System.out.println(passwordEncoder.encode("Pelusa24"));
-    }
-
 }

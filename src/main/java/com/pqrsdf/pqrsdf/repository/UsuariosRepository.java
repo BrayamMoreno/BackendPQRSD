@@ -8,6 +8,6 @@ import com.pqrsdf.pqrsdf.models.Usuario;
 import java.util.Optional;
 
 @Repository
-public interface UsuarioRepository extends GenericRepository<Usuario,Long> {
+public interface UsuariosRepository extends GenericRepository<Usuario, Long> {
     Optional<Usuario> findByUsername(String username);
 }

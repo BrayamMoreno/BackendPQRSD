@@ -4,14 +4,14 @@ import org.springframework.stereotype.Service;
 
 import com.pqrsdf.pqrsdf.generic.GenericService;
 import com.pqrsdf.pqrsdf.models.Usuario;
-import com.pqrsdf.pqrsdf.repository.UsuarioRepository;
+import com.pqrsdf.pqrsdf.repository.UsuariosRepository;
 
 @Service
-public class UsuarioService extends GenericService<Usuario,Long> {
+public class UsuariosService extends GenericService<Usuario, Long>{
     
-    private final UsuarioRepository usuarioRepository;
+    private final UsuariosRepository usuarioRepository;
     
-    public UsuarioService(UsuarioRepository repository){
+    public UsuariosService(UsuariosRepository repository){
         super(repository);
         this.usuarioRepository = repository;
     }

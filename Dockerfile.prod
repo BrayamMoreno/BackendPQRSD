@@ -1,0 +1,16 @@
+#Instalacion de imagen de openjdk
+FROM openjdk:17-jkd-alpine
+
+WORKDIR /backend
+
+COPY . .
+
+COPY ./src/main/resources/application.properties.docker ./src/main/resources/application.properties
+
+RUN chmod +x ./mvnw
+
+RUN ./mvnw clean install -DskipTests
+
+EXPOSE 8080
+
+CMD ["java", "-jar", "./target/backend-0.0.1-SNAPSHOT.jar"]
