@@ -1,5 +1,5 @@
 #Instalacion de imagen de openjdk
-FROM openjdk:17-jkd-alpine
+FROM openjdk:17-alpine
 
 WORKDIR /backend
 
