@@ -1,20 +1,12 @@
 image: alpine:latest
 
-# Instalamos las herramientas necesarias antes de ejecutar los scripts
 before_script:
   - apk add --update --no-cache openssh sshpass
 
-# Definimos el trabajo de despliegue
-deploy:
+actualizar:
   stage: deploy
   script:
-    # Conexión remota al servidor para realizar las actualizaciones
-    - sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no -p "$PORT" "$USERNAME@$HOST" <<EOF
-        cd backend
-        git pull
-        docker-compose down --volumes --remove-orphans
-        docker-compose up --build -d
-      EOF
-  # Solo ejecutar en la rama main
+  - sshpass -p $PASSWORD ssh -o StrictHostKeyChecking=no -p $PORT $USERNAME@$HOST 'cd backend && git pull && docker compose --file ./Docker-compose.yml up --build -d'
+
   only:
-    - main
+  - main
