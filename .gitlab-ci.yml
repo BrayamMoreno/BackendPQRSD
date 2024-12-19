@@ -6,7 +6,7 @@ before_script:
 actualizar:
   stage: deploy
   script:
-  - sshpass -p $PASSWORD ssh -o StrictHostKeyChecking=no -p $PORT $USERNAME@$HOST 'cd backend && git pull && docker compose --file ./Docker-compose.yml up --build -d'
+  - sshpass -p $PASSWORD ssh -o StrictHostKeyChecking=no -p $PORT $USERNAME@$HOST 'cd backend && git pull && docker compose --file ./docker-compose.yml up --build -d'
 
   only:
   - main
