@@ -13,6 +13,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
@@ -61,6 +62,8 @@ public class JwtUtils {
             DecodedJWT decodedJWT = verifier.verify(token);
 
             return decodedJWT;
+        } catch(TokenExpiredException e){
+            throw new TokenExpiredException("Token Expirado", null);
         } catch(JWTVerificationException eJwt){
             throw new JWTVerificationException("Token Invalido");
         } catch (Exception e) {
