@@ -3,7 +3,7 @@ spring.application.name=pqrsdf
 server.port=8080
 
 #Configuracion variables de la base de datos
-spring.datasource.url=jdbc:postgresql://localhost:5432/pq
+spring.datasource.url=jdbc:postgresql://localhost:48325/pq
 spring.datasource.username=pq
 spring.datasource.password=pq_2025
 
