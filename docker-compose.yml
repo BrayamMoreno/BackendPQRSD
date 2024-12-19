@@ -8,9 +8,9 @@ services:
       - "./pq.sql:/docker-entrypoint-initdb.d/init.sql"
       - "./postgres/data:/var/lib/postgresql/data"
     environment:
-      - POSTGRES_USER=pq
-      - POSTGRES_PASSWORD=pq_2025
-      - POSTGRES_DB=pq
+      - POSTGRES_USER: pq
+      - POSTGRES_PASSWORD: pq_2025
+      - POSTGRES_DB: pq
     networks:
       - app-net
 
