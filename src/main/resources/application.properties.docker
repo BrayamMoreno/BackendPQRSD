@@ -11,8 +11,4 @@ spring.datasource.password=${SPRING_DATASOURCE_PASSWORD}
 springdoc.api-docs.path=/v3/api-docs
 springdoc.swagger-ui.path=/swagger-ui.html
 
-#Sesiones
-spring.session.store-type=jdbc
-server.servlet.session.timeout=1800
-
 logging.level.org.springdoc=DEBUG
