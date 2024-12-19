@@ -3,9 +3,9 @@ spring.application.name=pqrsdf
 server.port=8080
 
 #Configuracion variables de la base de datos
-spring.datasource.url=jdbc:postgresql://localhost:48325/pq
-spring.datasource.username=pq
-spring.datasource.password=pq_2025
+spring.datasource.url=${SPRING_DATASOURCE_URL}
+spring.datasource.username=${SPRING_DATASOURCE_USERNAME}
+spring.datasource.password=${SPRING_DATASOURCE_PASSWORD}
 
 #Configuracion Acceso a Swagger
 springdoc.api-docs.path=/v3/api-docs
