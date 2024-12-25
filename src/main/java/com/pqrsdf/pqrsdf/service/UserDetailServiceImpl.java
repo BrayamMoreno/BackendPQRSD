@@ -14,8 +14,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.pqrsdf.pqrsdf.dto.auth.AuthResponse;
 import com.pqrsdf.pqrsdf.dto.auth.LoginRequest;
+import com.pqrsdf.pqrsdf.dto.auth.RefreshRequest;
+import com.pqrsdf.pqrsdf.dto.auth.RefreshResponse;
 import com.pqrsdf.pqrsdf.models.Usuario;
 import com.pqrsdf.pqrsdf.utils.JwtUtils;
 
@@ -74,5 +77,20 @@ public class UserDetailServiceImpl implements UserDetailsService{
         String AccesToken = jwtUtils.createToken(authentication);
 
         return new AuthResponse(usuario.getUsername(), "User Logged", AccesToken, true);
+    }
+
+    public RefreshResponse refreshSession (RefreshRequest request){
+
+        DecodedJWT jwt = jwtUtils.validateToken(request.expiredJwt());
+
+        String username = jwtUtils.extractUsername(jwt);
+        UserDetails userDetails = loadUserByUsername(username);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+            userDetails.getUsername(), null, userDetails.getAuthorities()
+        );
+
+        String refreshToken = jwtUtils.generateRefreshToken(authentication);
+
+        return new RefreshResponse(refreshToken);
     }
 }

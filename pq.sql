@@ -100,8 +100,8 @@ CREATE TABLE "pqs" (
   "numero_folio" integer,
   "fecha_radicacion" date,
   "hora_radicacion" time,
-  "fecha_resolucion_estimada" timestamp,
-  "fecha_resolucion" timestamp,
+  "fecha_resolucion_estimada" date,
+  "fecha_resolucion" date,
   "respuesta" text,
   "radicador_id" integer,
   "modificador_id" integer
@@ -212,3 +212,28 @@ ALTER TABLE "historial_seguimientos_pq" ADD FOREIGN KEY ("pq_id") REFERENCES "pq
 ALTER TABLE "historial_seguimientos_pq" ADD FOREIGN KEY ("estado_anterior_id") REFERENCES "estados_pq" ("id");
 
 ALTER TABLE "historial_seguimientos_pq" ADD FOREIGN KEY ("responsable_anterior_id") REFERENCES "responsables_pq" ("id");
+
+CREATE TABLE spring_session (
+    primary_id VARCHAR(36) NOT NULL,          -- ID interno único generado por Spring Session.
+    session_id VARCHAR(36) NOT NULL,         -- ID público de la sesión (visible en las cookies del cliente).
+    creation_time BIGINT NOT NULL,           -- Marca de tiempo UNIX para cuando se creó la sesión.
+    last_access_time BIGINT NOT NULL,        -- Marca de tiempo UNIX para el último acceso.
+    max_inactive_interval INT NOT NULL,      -- Intervalo máximo de inactividad (en segundos).
+    expiry_time BIGINT NOT NULL,             -- Marca de tiempo UNIX para cuando expira la sesión.
+    principal_name VARCHAR(100),             -- Nombre del usuario autenticado, si está disponible.
+    CONSTRAINT spring_session_pk PRIMARY KEY (primary_id)  -- Clave primaria.
+);
+
+CREATE INDEX spring_session_ix1 ON spring_session (expiry_time);  -- Índice para sesiones expiradas.
+CREATE INDEX spring_session_ix2 ON spring_session (session_id);   -- Índice para búsquedas por ID de sesión.
+CREATE INDEX spring_session_ix3 ON spring_session (principal_name); -- Índice para búsquedas por usuario.
+
+
+CREATE TABLE spring_session_attributes (
+    session_primary_id VARCHAR(36) NOT NULL, -- ID único que relaciona el atributo con una sesión.
+    attribute_name VARCHAR(200) NOT NULL,   -- Nombre del atributo.
+    attribute_bytes BYTEA NOT NULL,         -- Valor del atributo almacenado como binario.
+    CONSTRAINT spring_session_attributes_pk PRIMARY KEY (session_primary_id, attribute_name), -- Clave compuesta.
+    CONSTRAINT spring_session_attributes_fk FOREIGN KEY (session_primary_id)
+    REFERENCES spring_session (primary_id) ON DELETE CASCADE  -- Relación con la tabla `spring_session`.
+);
