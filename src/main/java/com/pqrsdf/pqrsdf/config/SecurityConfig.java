@@ -56,7 +56,6 @@ public class SecurityConfig extends SecurityConfigurerAdapter {
                     http.requestMatchers(HttpMethod.POST, "/api/auth/logout").permitAll();
                     http.requestMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll();
                     http.requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll();
-                    http.requestMatchers(HttpMethod.GET, "/api/usuarios/**").hasAuthority("ROLE_administrador");
                     http.anyRequest().permitAll();
                 })
                 .sessionManagement(session -> session
