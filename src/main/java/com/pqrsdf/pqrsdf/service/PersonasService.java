@@ -16,7 +16,7 @@ public class PersonasService extends GenericService<Personas, Long>{
         this.repository = repository;
     }
 
-    public Personas findByTipoDocAndNumDoc(Long tipoDoc, String numDoc){
-        return repository.findByTipoDocAndNumDoc(tipoDoc, numDoc).orElse(null);
+    public Personas findByTipoDocAndNumDoc(Long tipoDoc, String dni){
+        return repository.findByTipoDocAndDni(tipoDoc, dni).orElse(null);
     }
 }

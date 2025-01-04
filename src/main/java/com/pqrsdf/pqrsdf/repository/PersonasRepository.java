@@ -9,6 +9,6 @@ import com.pqrsdf.pqrsdf.models.Personas;
 
 @Repository
 public interface PersonasRepository extends GenericRepository<Personas, Long> {
-   Optional<Personas> findByTipoDocAndNumDoc(Long tipoDoc, String numDoc);
+   Optional<Personas> findByTipoDocAndDni(Long tipoDoc, String dni);
 }
 

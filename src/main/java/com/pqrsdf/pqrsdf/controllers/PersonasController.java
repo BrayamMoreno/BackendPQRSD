@@ -26,7 +26,7 @@ public class PersonasController extends GenericController<Personas, Long> {
     @GetMapping("/data")
     public ResponseEntity<?> PersonData(DataRequest dataRequest) {
         try {
-            Personas persona = service.findByTipoDocAndNumDoc(dataRequest.tipoDoc(), dataRequest.numDoc());
+            Personas persona = service.findByTipoDocAndNumDoc(dataRequest.tipoDoc(), dataRequest.dni());
             if(persona != null) {
                 return ResponseEntity.status(HttpStatus.OK).body(persona);
             } else {
