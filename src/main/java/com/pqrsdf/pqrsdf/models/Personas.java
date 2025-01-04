@@ -16,12 +16,12 @@ import lombok.*;
 @Table(name = "personas")
 public class Personas extends GenericEntity{
     
-    private String nombre;
+    private String nombre; 
 
     private String apellido;
 
     @Column(name = "tipo_doc")
-    private String tipoDoc;
+    private Long tipoDoc;
 
     private String dni;
 
