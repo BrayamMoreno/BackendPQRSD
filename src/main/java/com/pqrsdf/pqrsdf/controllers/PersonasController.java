@@ -3,11 +3,10 @@ package com.pqrsdf.pqrsdf.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pqrsdf.pqrsdf.dto.DataRequest;
 import com.pqrsdf.pqrsdf.generic.GenericController;
 import com.pqrsdf.pqrsdf.models.Personas;
 import com.pqrsdf.pqrsdf.service.PersonasService;
@@ -24,10 +23,10 @@ public class PersonasController extends GenericController<Personas, Long> {
         this.service = service;
     }
 
-    @PostMapping("/data")
-    public ResponseEntity<?> PersonData(DataRequest dataRequest) {
+    @GetMapping("/data")
+    public ResponseEntity<?> PersonData(@RequestParam Long tipoDoc, @RequestParam String dni) {
         try {
-            Personas persona = service.findByTipoDocAndNumDoc(dataRequest.tipoDoc(), dataRequest.dni());
+            Personas persona = service.findByTipoDocAndNumDoc(tipoDoc, dni);
             if(persona != null) {
                 return ResponseEntity.status(HttpStatus.OK).body(persona);
             } else {
