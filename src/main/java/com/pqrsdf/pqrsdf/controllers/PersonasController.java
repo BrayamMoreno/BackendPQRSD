@@ -23,7 +23,7 @@ public class PersonasController extends GenericController<Personas, Long> {
         this.service = service;
     }
 
-    @GetMapping("/data")
+    @PostMapping("/data")
     public ResponseEntity<?> PersonData(DataRequest dataRequest) {
         try {
             Personas persona = service.findByTipoDocAndNumDoc(dataRequest.tipoDoc(), dataRequest.dni());
