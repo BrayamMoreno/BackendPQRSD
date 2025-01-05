@@ -12,3 +12,9 @@ springdoc.api-docs.path=/v3/api-docs
 springdoc.swagger-ui.path=/swagger-ui.html
 
 logging.level.org.springdoc=DEBUG
+
+
+logging.level.org.springframework.web=DEBUG
+logging.level.org.springframework.web.filter.CommonsRequestLoggingFilter=DEBUG
+logging.level.org.springframework.web.servlet.DispatcherServlet=DEBUG
+logging.level.org.springframework.http=DEBUG
