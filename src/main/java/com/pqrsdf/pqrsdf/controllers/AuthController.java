@@ -1,6 +1,5 @@
 package com.pqrsdf.pqrsdf.controllers;
 
-import com.auth0.jwt.interfaces.DecodedJWT;
 import com.pqrsdf.pqrsdf.dto.auth.AuthResponse;
 import com.pqrsdf.pqrsdf.dto.auth.LoginRequest;
 import com.pqrsdf.pqrsdf.dto.auth.RefreshRequest;
@@ -12,7 +11,6 @@ import com.pqrsdf.pqrsdf.service.UsuariosService;
 import com.pqrsdf.pqrsdf.utils.JwtUtils;
 import com.pqrsdf.pqrsdf.utils.ResponseEntityUtil;
 
-import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
