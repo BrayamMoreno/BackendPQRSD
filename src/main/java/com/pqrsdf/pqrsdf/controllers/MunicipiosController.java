@@ -34,9 +34,10 @@ public class MunicipiosController extends GenericController<Municipios, Long> {
 
     @GetMapping("/mpd_data")
     public ResponseEntity<?> getMunicipiosByDepartamento(
-            @RequestParam Long departamentoId,
-            @RequestParam int page,
-            @RequestParam int size)
+        @RequestParam Long departamentoId,
+        @RequestParam(required = false, defaultValue = "id") String order_by,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size)
     {
         try {
             Pageable pageable = PageRequest.of(page, size);
