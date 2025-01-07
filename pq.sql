@@ -51,12 +51,11 @@ CREATE TABLE "personas" (
   "dni" varchar UNIQUE NOT NULL,
   "tipo_persona" integer,
   "telefono" varchar(16),
-  "email" varchar(64),
   "direccion" varchar(126),
   "municipio_id" integer,
   "genero" integer,
-  "create_at" timestamp,
-  "update_at" timestamp,
+  "created_at" timestamp,
+  "updated_at" timestamp,
   "anonimo" boolean,
   "activo" boolean
 );
@@ -65,6 +64,7 @@ CREATE TABLE "usuarios" (
   "id" serial PRIMARY KEY,
   "username" varchar(50) UNIQUE NOT NULL,
   "password" varchar(200) NOT NULL,
+  "email" varchar(64) UNIQUE NOT NULL,
   "is_enable" boolean DEFAULT true,
   "account_no_expired" boolean DEFAULT true,
   "account_no_locked" boolean DEFAULT true,
@@ -74,8 +74,8 @@ CREATE TABLE "usuarios" (
   "reset_token" varchar(100),
   "persona_id" integer,
   "rol_id" integer,
-  "create_at" timestamp,
-  "update_at" timestamp
+  "created_at" timestamp,
+  "updated_at" timestamp
 );
 
 CREATE TABLE "tipos_pq" (
@@ -88,6 +88,12 @@ CREATE TABLE "estados_pq" (
   "id" serial PRIMARY KEY,
   "nombre" varchar(64),
   "color" varchar(64)
+);
+
+CREATE TABLE "correos_pq" (
+  "id" serial PRIMARY KEY,
+  "pq_id" integer,
+  "correo" varchar(64) UNIQUE NOT NULL
 );
 
 CREATE TABLE "pqs" (
@@ -122,7 +128,7 @@ CREATE TABLE "adjuntos_pq" (
   "pq_id" integer,
   "nombre_archivo" varchar(128),
   "ruta_archivo" varchar(128),
-  "create_at" timestamp
+  "created_at" timestamp
 );
 
 CREATE TABLE "departamentos_resp" (
@@ -180,6 +186,8 @@ ALTER TABLE "personas" ADD FOREIGN KEY ("municipio_id") REFERENCES "municipios" 
 ALTER TABLE "usuarios" ADD FOREIGN KEY ("persona_id") REFERENCES "personas" ("id");
 
 ALTER TABLE "usuarios" ADD FOREIGN KEY ("rol_id") REFERENCES "roles" ("id");
+
+ALTER TABLE "correos_pq" ADD FOREIGN KEY ("pq_id") REFERENCES "pqs" ("id");
 
 ALTER TABLE "pqs" ADD FOREIGN KEY ("tipo_pq_id") REFERENCES "tipos_pq" ("id");
 

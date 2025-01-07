@@ -30,8 +30,6 @@ public class Personas extends GenericEntity{
 
     private String telefono;
 
-    private String email;
-
     private String direccion;
 
     @Column(name = "municipio_id")

@@ -34,6 +34,8 @@ public class Usuario extends GenericEntity {
     @Column(name = "password")
     private String password;
 
+    private String email;
+
     @Column(name = "is_enable")
     private boolean isEnabled;
 
@@ -56,19 +58,19 @@ public class Usuario extends GenericEntity {
     @JoinColumn(name = "rol_id")
     private Roles rol;
 
-    @Column(name = "update_at")
+    @Column(name = "updated_at")
     @Hidden
-    private LocalDateTime update_at;
+    private LocalDateTime updated_at;
 
-    @Column(name = "create_at")
+    @Column(name = "created_at")
     @Hidden
-    private LocalDateTime create_at;
+    private LocalDateTime created_at;
 
     @PrePersist protected void onCreate() {
-        this.create_at = LocalDateTime.now();
+        this.created_at = LocalDateTime.now();
     }
     
     @PreUpdate protected void onUpdate() {
-        this.update_at = LocalDateTime.now();
+        this.updated_at = LocalDateTime.now();
     }
 }
