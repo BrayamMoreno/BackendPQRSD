@@ -50,7 +50,8 @@ CREATE TABLE "personas" (
   "tipo_doc" integer,
   "dni" varchar UNIQUE NOT NULL,
   "tipo_persona" integer,
-  "telefono" varchar(16),
+  "correo" varchar(64) NOT NULL,
+  "telefono" varchar(64) NOT NULL,
   "direccion" varchar(126),
   "municipio_id" integer,
   "genero" integer,
@@ -64,13 +65,10 @@ CREATE TABLE "usuarios" (
   "id" serial PRIMARY KEY,
   "username" varchar(50) UNIQUE NOT NULL,
   "password" varchar(200) NOT NULL,
-  "email" varchar(64) UNIQUE NOT NULL,
   "is_enable" boolean DEFAULT true,
   "account_no_expired" boolean DEFAULT true,
   "account_no_locked" boolean DEFAULT true,
   "credential_no_expired" boolean DEFAULT true,
-  "politica_privacidad_aceptada" boolean DEFAULT true,
-  "fecha_aceptacion_politica" timestamp,
   "reset_token" varchar(100),
   "persona_id" integer,
   "rol_id" integer,
@@ -88,12 +86,6 @@ CREATE TABLE "estados_pq" (
   "id" serial PRIMARY KEY,
   "nombre" varchar(64),
   "color" varchar(64)
-);
-
-CREATE TABLE "correos_pq" (
-  "id" serial PRIMARY KEY,
-  "pq_id" integer,
-  "correo" varchar(64) UNIQUE NOT NULL
 );
 
 CREATE TABLE "pqs" (
@@ -169,6 +161,20 @@ CREATE TABLE "historial_seguimientos_pq" (
   "comentario_cambio" text
 );
 
+CREATE TABLE "historial_correo" (
+  "id" serial PRIMARY KEY,
+  "correo" varchar(64) UNIQUE NOT NULL,
+  "persona_id" integer,
+  "updated_at" timestamp
+);
+
+CREATE TABLE "historial_telefonos" (
+  "id" serial PRIMARY KEY,
+  "telefono" varchar(10) NOT NULL,
+  "persona_id" integer,
+  "updated_ad" timestamp
+);
+
 COMMENT ON TABLE "usuarios" IS 'ppa = politica_privacidad_aceptada p';
 
 ALTER TABLE "roles_permisos" ADD FOREIGN KEY ("rol_id") REFERENCES "roles" ("id");
@@ -186,8 +192,6 @@ ALTER TABLE "personas" ADD FOREIGN KEY ("municipio_id") REFERENCES "municipios" 
 ALTER TABLE "usuarios" ADD FOREIGN KEY ("persona_id") REFERENCES "personas" ("id");
 
 ALTER TABLE "usuarios" ADD FOREIGN KEY ("rol_id") REFERENCES "roles" ("id");
-
-ALTER TABLE "correos_pq" ADD FOREIGN KEY ("pq_id") REFERENCES "pqs" ("id");
 
 ALTER TABLE "pqs" ADD FOREIGN KEY ("tipo_pq_id") REFERENCES "tipos_pq" ("id");
 
@@ -220,6 +224,10 @@ ALTER TABLE "historial_seguimientos_pq" ADD FOREIGN KEY ("pq_id") REFERENCES "pq
 ALTER TABLE "historial_seguimientos_pq" ADD FOREIGN KEY ("estado_anterior_id") REFERENCES "estados_pq" ("id");
 
 ALTER TABLE "historial_seguimientos_pq" ADD FOREIGN KEY ("responsable_anterior_id") REFERENCES "responsables_pq" ("id");
+
+ALTER TABLE "historial_correo" ADD FOREIGN KEY ("persona_id") REFERENCES "personas" ("id");
+
+ALTER TABLE "historial_telefonos" ADD FOREIGN KEY ("persona_id") REFERENCES "personas" ("id");
 
 CREATE TABLE spring_session (
     primary_id VARCHAR(36) NOT NULL,          -- ID interno único generado por Spring Session.

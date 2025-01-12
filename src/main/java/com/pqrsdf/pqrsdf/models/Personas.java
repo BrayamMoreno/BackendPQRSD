@@ -26,7 +26,7 @@ public class Personas extends GenericEntity{
     private String dni;
 
     @Column(name = "tipo_persona")
-    private String tipoPersona;
+    private Long tipoPersona;
 
     private String telefono;
 
@@ -37,22 +37,22 @@ public class Personas extends GenericEntity{
 
     private Long genero;
 
-    @Column(name = "create_at")
-    private LocalDateTime createAt;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
-    @Column(name = "update_at")
-    private LocalDateTime updateAt;
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     private boolean anonimo;
 
     private boolean activo;
 
     @PrePersist protected void onCreate(){
-        this.createAt = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
     }
 
     @PreUpdate protected void onUpdate(){
-        this.updateAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 }
 

@@ -30,7 +30,7 @@ public class PersonasController extends GenericController<Personas, Long> {
             if(persona != null) {
                 return ResponseEntity.status(HttpStatus.OK).body(persona);
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontro la persona");
+                return ResponseEntityUtil.handleNotFoundError("Persona no encontrada");
             }
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
