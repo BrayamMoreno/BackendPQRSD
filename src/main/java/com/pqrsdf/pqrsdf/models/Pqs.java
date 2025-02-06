@@ -1,7 +1,7 @@
 package com.pqrsdf.pqrsdf.models;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
 
@@ -9,6 +9,7 @@ import jakarta.persistence.*;
 
 import lombok.*;
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -17,6 +18,8 @@ import lombok.*;
 @Table(name = "pqs")
 public class Pqs extends GenericEntity{
     
+    private Boolean web;
+
     private String identificador;
 
     @Column(name = "numero_radicado")
@@ -31,20 +34,20 @@ public class Pqs extends GenericEntity{
     @Column(name = "solicitante_id")
     private Long solicitanteId;
 
-    @Column(name = "numerio_folio")
+    @Column(name = "numero_folio")
     private long numeroFolio;
 
     @Column(name = "fecha_radicacion")
-    private Date fechaRadicacion;
+    private LocalDate fechaRadicacion;
 
     @Column(name = "hora_radicacion ")
     private LocalTime horaRadicacion;
 
     @Column(name = "fecha_resolucion_estimada")
-    private Date fechaResolucionEstimaada;
+    private LocalDate fechaResolucionEstimaada;
 
     @Column(name = "fecha_resolucion")
-    private Date fechaResolucion;
+    private LocalDate fechaResolucion;
 
     private String respuesta;
 

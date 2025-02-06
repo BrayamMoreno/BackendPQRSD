@@ -1,6 +1,7 @@
 package com.pqrsdf.pqrsdf.dto;
 
 import java.util.List;
+import java.util.Map;
 
 public record NoLoginPq(
     Long tipo_pq_id,
@@ -11,11 +12,13 @@ public record NoLoginPq(
     Long municipio_id,
     String nombres,
     String apellidos,
-    String celular,
+    String telefono,
     String asunto,
     String correo,
+    String direccion,
     String mensaje,
     //ttd = tratamiento de datos
     boolean tratamiento_datos,
-    List<String> adjuntos
+    List<Map<String, String>> Adjuntos
+
 ){}

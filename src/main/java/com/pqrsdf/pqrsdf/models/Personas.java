@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 
 import lombok.*;
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -29,6 +30,8 @@ public class Personas extends GenericEntity{
     private Long tipoPersona;
 
     private String telefono;
+
+    private String correo;
 
     private String direccion;
 

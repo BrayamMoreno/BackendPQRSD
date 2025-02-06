@@ -172,7 +172,7 @@ CREATE TABLE "historial_telefonos" (
   "id" serial PRIMARY KEY,
   "telefono" varchar(10) NOT NULL,
   "persona_id" integer,
-  "updated_ad" timestamp
+  "updated_at" timestamp
 );
 
 COMMENT ON TABLE "usuarios" IS 'ppa = politica_privacidad_aceptada p';

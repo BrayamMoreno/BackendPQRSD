@@ -10,6 +10,7 @@ import jakarta.persistence.*;
 
 import lombok.*;
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

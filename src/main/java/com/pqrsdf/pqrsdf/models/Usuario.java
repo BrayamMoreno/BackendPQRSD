@@ -34,8 +34,6 @@ public class Usuario extends GenericEntity {
     @Column(name = "password")
     private String password;
 
-    private String email;
-
     @Column(name = "is_enable")
     private boolean isEnabled;
 

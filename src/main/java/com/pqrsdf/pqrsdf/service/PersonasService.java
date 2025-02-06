@@ -19,4 +19,18 @@ public class PersonasService extends GenericService<Personas, Long>{
     public Personas findByTipoDocAndNumDoc(Long tipoDoc, String dni){
         return repository.findByTipoDocAndDni(tipoDoc, dni).orElse(null);
     }
+
+    public Personas updateCorreo(Personas persona, String correo){
+        persona.setCorreo(correo);
+        return repository.save(persona);
+    }
+
+    public Personas updateTelefono(Personas persona, String telefono){
+        persona.setTelefono(telefono);
+        return repository.save(persona);
+    }
+
+    public Personas getByEmail(String email){
+        return repository.findByCorreo(email);
+    }
 }

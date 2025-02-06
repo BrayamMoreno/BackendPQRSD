@@ -3,6 +3,7 @@ package com.pqrsdf.pqrsdf.controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,6 @@ public class UsuarioController extends GenericController<Usuario, Long>{
     private final PasswordEncoder passwordEncoder;
     private final RolesService rolesService;
 
-
     public UsuarioController(UsuariosService service, PasswordEncoder passwordEncoder,
                             RolesService rolesService){
         super(service);
@@ -31,8 +31,7 @@ public class UsuarioController extends GenericController<Usuario, Long>{
     }
 
     @PostMapping("/user")
-    public ResponseEntity<?> createEntity(UserRequest request) {
-        
+    public ResponseEntity<?> createEntity(@RequestBody UserRequest request){
         Usuario usuario = new Usuario();
         usuario.setUsername(request.username());
         usuario.setPassword(passwordEncoder.encode(request.password()));
@@ -40,6 +39,14 @@ public class UsuarioController extends GenericController<Usuario, Long>{
         usuario.setRol(rolesService.getById(request.rolId()));
         return super.createEntity(usuario);
     }
+
+    @PostMapping("/registrar_usuario")
+    public ResponseEntity<?> postMethodName(@RequestBody String entity) {
+        //TODO: process POST request
+        
+        return null;
+    }
+    
 
 
 }

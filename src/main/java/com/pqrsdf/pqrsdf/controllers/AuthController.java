@@ -12,12 +12,14 @@ import com.pqrsdf.pqrsdf.utils.JwtUtils;
 import com.pqrsdf.pqrsdf.utils.ResponseEntityUtil;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,14 +44,11 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> Login(@RequestBody LoginRequest entity) {
+    public ResponseEntity<?> Login(@RequestBody LoginRequest entity, HttpServletResponse response) {
         try {
-            Usuario usuario = usuariosService.getEntityByUsername(entity.username());
-            if (usuario == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body(new AuthResponse(null, "Usuario y/o contraseña incorrectos", null, false));
-            }
             return ResponseEntity.status(HttpStatus.OK).body(userDetailServiceImpl.login(entity));
+        } catch (BadCredentialsException e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthResponse(null, "Credenciales incorrectas", null, false));
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }

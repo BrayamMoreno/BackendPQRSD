@@ -19,6 +19,7 @@ import com.pqrsdf.pqrsdf.dto.auth.AuthResponse;
 import com.pqrsdf.pqrsdf.dto.auth.LoginRequest;
 import com.pqrsdf.pqrsdf.dto.auth.RefreshRequest;
 import com.pqrsdf.pqrsdf.dto.auth.RefreshResponse;
+import com.pqrsdf.pqrsdf.models.Personas;
 import com.pqrsdf.pqrsdf.models.Usuario;
 import com.pqrsdf.pqrsdf.utils.JwtUtils;
 
@@ -28,12 +29,14 @@ public class UserDetailServiceImpl implements UserDetailsService{
     private final UsuariosService usuarioService;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
+    private final PersonasService personasService;
 
     public UserDetailServiceImpl(UsuariosService usuarioService, PasswordEncoder passwordEncoder,
-                                JwtUtils jwtUtils){
+                                JwtUtils jwtUtils, PersonasService personasService){
         this.usuarioService = usuarioService;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtils = jwtUtils;
+        this.personasService = personasService;
     }
 
     @Override
@@ -63,6 +66,7 @@ public class UserDetailServiceImpl implements UserDetailsService{
 
     public Authentication authentication(String correo, String password){
         UserDetails userDetails = loadUserByUsername(correo);
+
         if(userDetails == null || !passwordEncoder.matches(password, userDetails.getPassword())){
             throw new BadCredentialsException("");
         }
@@ -70,7 +74,13 @@ public class UserDetailServiceImpl implements UserDetailsService{
     }
 
     public AuthResponse login(LoginRequest loginRequest){
+
         Usuario usuario = usuarioService.getEntityByUsername(loginRequest.username());
+
+        if(usuario == null){
+            throw new BadCredentialsException("");
+        }
+
         Authentication authentication = this.authentication(loginRequest.username(), loginRequest.password());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         
