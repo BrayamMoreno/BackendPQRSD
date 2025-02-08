@@ -15,20 +15,21 @@ import com.pqrsdf.pqrsdf.generic.GenericService;
 import com.pqrsdf.pqrsdf.models.AdjuntosPq;
 import com.pqrsdf.pqrsdf.repository.AdjuntosPqRepository;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.transaction.Transactional;
 
 
 @Service
 public class AdjuntosPqService extends GenericService <AdjuntosPq, Long>{
 
-    @Value("${file.upload-dir}")
     private String uploadDir;
 
     private final AdjuntosPqRepository repository;
 
-    public AdjuntosPqService(AdjuntosPqRepository repository) {
+    public AdjuntosPqService(AdjuntosPqRepository repository, Dotenv dotenv){
         super(repository);
         this.repository = repository;
+        this.uploadDir = dotenv.get("file.upload-dir");
     }
 
     public List<AdjuntosPq> findByPqId(Long pqId){
