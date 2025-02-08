@@ -19,7 +19,6 @@ import com.pqrsdf.pqrsdf.dto.auth.AuthResponse;
 import com.pqrsdf.pqrsdf.dto.auth.LoginRequest;
 import com.pqrsdf.pqrsdf.dto.auth.RefreshRequest;
 import com.pqrsdf.pqrsdf.dto.auth.RefreshResponse;
-import com.pqrsdf.pqrsdf.models.Personas;
 import com.pqrsdf.pqrsdf.models.Usuario;
 import com.pqrsdf.pqrsdf.utils.JwtUtils;
 
