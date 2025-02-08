@@ -8,9 +8,7 @@ import com.pqrsdf.pqrsdf.repository.HistorialCorreoRepository;
 
 @Service
 public class HistorialCorreoService extends GenericService<HistorialCorreos, Long> {
-    
     public HistorialCorreoService(HistorialCorreoRepository repository){
         super(repository);
     }
-    
 }
