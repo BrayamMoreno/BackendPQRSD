@@ -14,7 +14,6 @@ import lombok.*;
 @Table(name = "estados_pq")
 public class EstadosPq extends GenericEntity{
     
+    @Column(length = 64, nullable = false)
     private String nombre;
-
-    private String color;
 }

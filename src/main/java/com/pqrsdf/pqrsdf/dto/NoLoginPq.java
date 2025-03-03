@@ -20,5 +20,4 @@ public record NoLoginPq(
     //ttd = tratamiento de datos
     boolean tratamiento_datos,
     List<Map<String, String>> Adjuntos
-
 ){}

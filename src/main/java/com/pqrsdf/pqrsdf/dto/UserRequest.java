@@ -1,9 +1,8 @@
 package com.pqrsdf.pqrsdf.dto;
 
 public record UserRequest(
-    String username,
-    String password,
+    String correo,
+    String contraseña,
     long personaId,
     long rolId
-    ){
-}
+){}

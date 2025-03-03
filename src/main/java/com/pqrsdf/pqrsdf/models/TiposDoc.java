@@ -12,7 +12,7 @@ import lombok.*;
 @Setter
 @Entity
 @Table(name = "tipos_docs")
-public class TiposDocumentos extends GenericEntity{
+public class TiposDoc extends GenericEntity{
 
     @Column(name = "nombre")
     private String nombre;

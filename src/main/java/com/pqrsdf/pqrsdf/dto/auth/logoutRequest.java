@@ -1,6 +1,5 @@
 package com.pqrsdf.pqrsdf.dto.auth;
 
-public  record logoutRequest(
+public record logoutRequest(
     String tokenjwt
-    ){
-}
+){}

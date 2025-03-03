@@ -11,9 +11,9 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "tipos_origenes")
-public class TiposOrigenes extends GenericEntity{
+@Table
+public class Generos extends GenericEntity{
     
-    @Column(nullable = false, length = 64)
-    private String name;
+    @Column(length = 16, nullable = false)
+    public String nombre;
 }

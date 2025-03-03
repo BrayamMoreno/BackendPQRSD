@@ -19,6 +19,6 @@ public class Municipios extends GenericEntity{
     @Column(name = "codigo_dane")
     private String codigoDane;
 
-    @Column(name = "departamento_id")
+    @Column(name = "departamento_id", nullable = false)
     private Long departamentoId;
 }

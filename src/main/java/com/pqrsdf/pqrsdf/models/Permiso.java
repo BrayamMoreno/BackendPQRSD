@@ -18,17 +18,12 @@ import lombok.*;
 @Schema(description = "Modelo de Permisos")
 public class Permiso extends GenericEntity {
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false, length = 20)
     private String tabla;
 
-    private boolean agregar;
-
-    @Column(nullable = false)
-    private boolean modificar;
-
-    @Column(nullable = false)
-    private boolean eliminar;
-
-    @Column(nullable = false)
-    private boolean leer;
+    private Boolean agregar;
+    private Boolean modificar;
+    private Boolean eliminar;
+    private Boolean leer;
 }
+

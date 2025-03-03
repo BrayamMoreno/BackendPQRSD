@@ -25,14 +25,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Usuarios")
+@Table(name = "usuarios")
 public class Usuario extends GenericEntity {
     
-    @Column(name = "username")
-    private String username;
+    @Column(length = 64, nullable = false)
+    private String correo;
 
-    @Column(name = "password")
-    private String password;
+    @Column(length = 200, nullable = false)
+    private String contrasena;
 
     @Column(name = "is_enable")
     private boolean isEnabled;

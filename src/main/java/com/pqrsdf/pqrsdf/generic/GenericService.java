@@ -4,6 +4,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import jakarta.transaction.Transactional;
+
 public abstract class GenericService<T,ID> {
     
     private final GenericRepository<T,ID> repository;
@@ -20,6 +22,7 @@ public abstract class GenericService<T,ID> {
         return repository.findById(id).orElse(null);
     }
 
+    @Transactional
     public T createEntity(T entity){
         return repository.save(entity);
     }

@@ -1,5 +1,5 @@
 package com.pqrsdf.pqrsdf.dto.auth;
 
-public record LoginRequest(String username, String password){
+public record LoginRequest(String correo, String contrasena){
     
 }

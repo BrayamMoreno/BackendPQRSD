@@ -11,13 +11,12 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "departamentos_resp")
-public class DepartamentosResp extends GenericEntity{
+@Table(name = "area_resp")
+public class AreasResp extends GenericEntity{
     
-    @Column(name = "codigo_dep")
-    private String codigoDep;
+    @Column(name = "codigo_area", length = 10, nullable = false)
+    private String codigoArea;
 
+    @Column(length = 64, nullable = false)
     private String nombre;
-
-    private String descripcion;
 }

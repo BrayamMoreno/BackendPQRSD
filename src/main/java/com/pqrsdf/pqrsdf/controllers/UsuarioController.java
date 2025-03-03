@@ -30,22 +30,26 @@ public class UsuarioController extends GenericController<Usuario, Long>{
         this.rolesService = rolesService;
     }
 
+
+    /**
     @PostMapping("/user")
     public ResponseEntity<?> createEntity(@RequestBody UserRequest request){
         Usuario usuario = new Usuario();
-        usuario.setUsername(request.username());
-        usuario.setPassword(passwordEncoder.encode(request.password()));
+        usuario.setUsername(request.correo());
+        usuario.setContraseña(passwordEncoder.encode(request.contraseña()));
         usuario.setPersona_id(request.personaId());
         usuario.setRol(rolesService.getById(request.rolId()));
         return super.createEntity(usuario);
     }
+    */
 
     @PostMapping("/registrar_usuario")
     public ResponseEntity<?> postMethodName(@RequestBody String entity) {
-        //TODO: process POST request
         
         return null;
     }
+
+    
     
 
 

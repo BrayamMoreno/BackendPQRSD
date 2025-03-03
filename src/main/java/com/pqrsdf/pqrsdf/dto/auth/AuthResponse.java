@@ -8,5 +8,4 @@ public record AuthResponse(
     String message,
     String jwt,
     boolean logged
-    ){
-}
+){}

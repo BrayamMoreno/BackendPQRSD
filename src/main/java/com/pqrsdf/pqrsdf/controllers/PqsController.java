@@ -1,6 +1,7 @@
 package com.pqrsdf.pqrsdf.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pqrsdf.pqrsdf.dto.NoLoginPq;
@@ -30,7 +31,6 @@ public class PqsController extends GenericController<Pqs, Long>{
     private final PersonasService personasService;
     private final AdjuntosPqService adjuntosPqService;
     
-
     public PqsController(PqsService service, PersonasService personasService,
                         AdjuntosPqService adjuntosPqService) {
         super(service);
@@ -53,6 +53,16 @@ public class PqsController extends GenericController<Pqs, Long>{
             return ResponseEntityUtil.handleInternalError(e);
         }
     }
+
+    @PostMapping("/radicar_pq")
+    public ResponseEntity<?> createPqEntity(@RequestBody String entity, @RequestParam Long personaId) {
+        try {
+            return null;
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
+    
     
 
 }

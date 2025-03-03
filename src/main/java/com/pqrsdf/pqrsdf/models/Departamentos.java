@@ -14,7 +14,9 @@ import lombok.*;
 @Table(name = "departamentos")
 public class Departamentos extends GenericEntity{
     
+    @Column(length = 64)
     private String nombre;
 
-    private String codigo_dane;
+    @Column(name = "codigo_dane", length = 10)
+    private String codigoDane;
 }

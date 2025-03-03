@@ -28,33 +28,31 @@ public class UserDetailServiceImpl implements UserDetailsService{
     private final UsuariosService usuarioService;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
-    private final PersonasService personasService;
 
     public UserDetailServiceImpl(UsuariosService usuarioService, PasswordEncoder passwordEncoder,
                                 JwtUtils jwtUtils, PersonasService personasService){
         this.usuarioService = usuarioService;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtils = jwtUtils;
-        this.personasService = personasService;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username){
-        Usuario usuario = usuarioService.getEntityByUsername(username);
+    public UserDetails loadUserByUsername(String Correo){
+        Usuario usuario = usuarioService.getEntityByCorreo(Correo);
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
         authorities.add(new SimpleGrantedAuthority("ROLE_".concat(usuario.getRol().getNombre())));
         
         usuario.getRol().getPermisos().forEach(permiso -> {
-            if (permiso.isLeer()) authorities.add(new SimpleGrantedAuthority(permiso.getTabla() + "_READ"));
-            if (permiso.isAgregar()) authorities.add(new SimpleGrantedAuthority(permiso.getTabla() + "_CREATE"));
-            if (permiso.isModificar()) authorities.add(new SimpleGrantedAuthority(permiso.getTabla() + "_UPDATE"));
-            if (permiso.isEliminar()) authorities.add(new SimpleGrantedAuthority(permiso.getTabla() + "_DELETE"));
+            if (permiso.getLeer()) authorities.add(new SimpleGrantedAuthority(permiso.getTabla() + "_READ"));
+            if (permiso.getAgregar()) authorities.add(new SimpleGrantedAuthority(permiso.getTabla() + "_CREATE"));
+            if (permiso.getModificar()) authorities.add(new SimpleGrantedAuthority(permiso.getTabla() + "_UPDATE"));
+            if (permiso.getEliminar()) authorities.add(new SimpleGrantedAuthority(permiso.getTabla() + "_DELETE"));
         });
 
         return new User(
-            usuario.getUsername(),
-            usuario.getPassword(),
+            usuario.getCorreo(),
+            usuario.getContrasena(),
             usuario.isEnabled(),
             usuario.isAccountNoExpired(),
             usuario.isCredentialNoExpired(),
@@ -74,18 +72,18 @@ public class UserDetailServiceImpl implements UserDetailsService{
 
     public AuthResponse login(LoginRequest loginRequest){
 
-        Usuario usuario = usuarioService.getEntityByUsername(loginRequest.username());
+        Usuario usuario = usuarioService.getEntityByCorreo(loginRequest.correo());
 
         if(usuario == null){
             throw new BadCredentialsException("");
         }
 
-        Authentication authentication = this.authentication(loginRequest.username(), loginRequest.password());
+        Authentication authentication = this.authentication(loginRequest.correo(), loginRequest.contrasena());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         
         String AccesToken = jwtUtils.createToken(authentication);
 
-        return new AuthResponse(usuario.getUsername(), "User Logged", AccesToken, true);
+        return new AuthResponse(usuario.getCorreo(), "User Logged", AccesToken, true);
     }
 
     public RefreshResponse refreshSession (RefreshRequest request){

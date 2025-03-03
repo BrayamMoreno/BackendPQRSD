@@ -1,8 +1,10 @@
 package com.pqrsdf.pqrsdf.controllers;
 
+import com.pqrsdf.pqrsdf.dto.Mensaje;
 import com.pqrsdf.pqrsdf.dto.auth.AuthResponse;
 import com.pqrsdf.pqrsdf.dto.auth.LoginRequest;
 import com.pqrsdf.pqrsdf.dto.auth.RefreshRequest;
+import com.pqrsdf.pqrsdf.dto.auth.RegisterRequest;
 import com.pqrsdf.pqrsdf.dto.auth.logoutRequest;
 import com.pqrsdf.pqrsdf.models.Usuario;
 import com.pqrsdf.pqrsdf.service.TokenService;
@@ -16,7 +18,9 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -24,6 +28,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping(path = "/api/auth")
@@ -77,5 +84,25 @@ public class AuthController {
             return ResponseEntityUtil.handleInternalError(e);
         }
     }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest entity) throws Exception {
+        try {
+            Usuario usuario = usuariosService.createNewUser(entity);
+            return ResponseEntity.status(HttpStatus.CREATED).body(new Mensaje("Usuario registrado con exito"));
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
+
+    @GetMapping("/test")
+    public String getMethodName(@RequestParam(required = false) String param) {
+        if (param == null) {
+            throw new DataIntegrityViolationException("");
+        }
+        return "Valor recibido: " + param;
+    }
+
+    
 
 }

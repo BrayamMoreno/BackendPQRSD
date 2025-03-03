@@ -18,7 +18,7 @@ import lombok.*;
 @Table(name = "roles")
 public class Roles extends GenericEntity{
     
-    @Column(name = "nombre")
+    @Column(unique = true, nullable = false, length = 20)
     private String nombre;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

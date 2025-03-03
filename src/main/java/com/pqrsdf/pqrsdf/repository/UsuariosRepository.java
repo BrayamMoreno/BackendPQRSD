@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface UsuariosRepository extends GenericRepository<Usuario, Long> {
-    Optional<Usuario> findByUsername(String username);
+    Optional<Usuario> findByCorreo(String Correo);
 }

@@ -1,5 +1,8 @@
 package com.pqrsdf.pqrsdf.generic;
 
+import java.sql.SQLException;
+
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.pqrsdf.pqrsdf.dto.Mensaje;
 import com.pqrsdf.pqrsdf.utils.ResponseEntityUtil;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -51,7 +55,7 @@ public class GenericController<T extends GenericEntity, ID> {
         }
     }
 
-      @GetMapping("/{id}")
+    @GetMapping("/{id}")
     @Operation(summary = "Obtiene una entidad por su ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Entidad encontrado"),
@@ -73,16 +77,33 @@ public class GenericController<T extends GenericEntity, ID> {
     @PostMapping
     @Operation(summary = "Crea una nueva entidad")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Guarda creado exitosamente"),
-            @ApiResponse(responseCode = "400", description = "Solicitud incorrecta, datos no válidos"),
-            @ApiResponse(responseCode = "409", description = "Conflicto, datos duplicados"),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+        @ApiResponse(responseCode = "201", description = "Guarda creado exitosamente"),
+        @ApiResponse(responseCode = "400", description = "Solicitud incorrecta, datos no válidos"),
+        @ApiResponse(responseCode = "409", description = "Conflicto, datos duplicados"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     public ResponseEntity<?> createEntity(@RequestBody T entity) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(service.createEntity(entity));
         } catch (DataIntegrityViolationException ex) {
-            return ResponseEntityUtil.handleBadRequest(RELACION_NO_ENCONTRADA);
+            Throwable rootCause = ex.getRootCause();
+            
+            String message = rootCause != null ? rootCause.getMessage() : ex.getMessage();
+
+            // Verificar si es una violación de clave foránea
+            if (message.contains("foreign key") || message.contains("FOREIGN KEY")) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new Mensaje("Error: Clave foránea violada. Verifique las relaciones antes de insertar."));
+            }
+
+            // Verificar si es una violación de clave única
+            if (message.contains("duplicate key") || message.contains("UNIQUE")) {
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(new Mensaje("Error: Ya existe un registro con estos datos."));
+            }
+
+            // Manejar otros errores de integridad
+            return ResponseEntityUtil.handleBadRequest("Error de integridad de datos: " + message);
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }
