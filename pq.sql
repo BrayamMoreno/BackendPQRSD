@@ -4,9 +4,7 @@ CREATE TABLE "permisos" (
   "agregar" boolean,
   "modificar" boolean,
   "eliminar" boolean,
-  "leer" boolean,
-  "opc1" boolean,
-  "opc2" boolean
+  "leer" boolean
 );
 
 CREATE TABLE "roles" (
@@ -30,17 +28,22 @@ CREATE TABLE "municipios" (
   "id" serial PRIMARY KEY,
   "nombre" varchar(64),
   "codigo_dane" varchar(10),
-  "departamento_id" integer
+  "departamento_id" integer NOT NULL
 );
 
 CREATE TABLE "tipos_docs" (
   "id" serial PRIMARY KEY,
-  "nombre" varchar(64)
+  "nombre" varchar(64) NOT NULL
 );
 
 CREATE TABLE "tipos_personas" (
   "id" serial PRIMARY KEY,
-  "nombre" varchar(32)
+  "nombre" varchar(32) NOT NULL
+);
+
+CREATE TABLE "generos" (
+  "id" serial PRIMARY KEY,
+  "nombre" varchar(16) NOT NULL
 );
 
 CREATE TABLE "personas" (
@@ -48,23 +51,22 @@ CREATE TABLE "personas" (
   "nombre" varchar(64) NOT NULL,
   "apellido" varchar(64) NOT NULL,
   "tipo_doc" integer,
-  "dni" varchar UNIQUE NOT NULL,
+  "dni" varchar(20) UNIQUE NOT NULL,
   "tipo_persona" integer,
-  "correo" varchar(64) NOT NULL,
-  "telefono" varchar(64) NOT NULL,
+  "telefono" varchar(15) NOT NULL,
   "direccion" varchar(126),
+  "codigo_radicador" varchar(5),
+  "tratamiento_datos" boolean NOT NULL,
   "municipio_id" integer,
-  "genero" integer,
+  "genero" integer NOT NULL,
   "created_at" timestamp,
-  "updated_at" timestamp,
-  "anonimo" boolean,
-  "activo" boolean
+  "updated_at" timestamp
 );
 
 CREATE TABLE "usuarios" (
   "id" serial PRIMARY KEY,
-  "username" varchar(50) UNIQUE NOT NULL,
-  "password" varchar(200) NOT NULL,
+  "correo" varchar(64) NOT NULL,
+  "contraseña" varchar(200) NOT NULL,
   "is_enable" boolean DEFAULT true,
   "account_no_expired" boolean DEFAULT true,
   "account_no_locked" boolean DEFAULT true,
@@ -78,104 +80,63 @@ CREATE TABLE "usuarios" (
 
 CREATE TABLE "tipos_pq" (
   "id" serial PRIMARY KEY,
-  "nombre" varchar(64),
-  "descripcion" varchar(256)
+  "nombre" varchar(64) NOT NULL
 );
 
 CREATE TABLE "estados_pq" (
   "id" serial PRIMARY KEY,
-  "nombre" varchar(64),
-  "color" varchar(64)
+  "nombre" varchar(64) NOT NULL
 );
 
 CREATE TABLE "pqs" (
   "id" serial PRIMARY KEY,
-  "identificador" varchar(20) UNIQUE NOT NULL,
-  "numero_radicado" varchar,
-  "detalle_asunto" text,
+  "consecutivo" varchar(20) UNIQUE NOT NULL,
+  "numero_radicado" varchar UNIQUE NOT NULL,
+  "numero_folio" integer,
+  "detalle_asunto" text NOT NULL,
   "tipo_pq_id" integer,
   "solicitante_id" integer,
-  "numero_folio" integer,
   "fecha_radicacion" date,
   "hora_radicacion" time,
   "fecha_resolucion_estimada" date,
   "fecha_resolucion" date,
-  "respuesta" text,
   "radicador_id" integer,
-  "modificador_id" integer
-);
-
-CREATE TABLE "seguimientos_pq" (
-  "id" serial PRIMARY KEY,
-  "pq_id" integer,
-  "responsable_actual_id" integer,
-  "comentario" text,
-  "estado_id" integer,
-  "fecha_creacion" timestamp NOT NULL,
-  "fecha_modificacion" timestamp
+  "responsable_id" integer,
+  "web" boolean NOT NULL
 );
 
 CREATE TABLE "adjuntos_pq" (
   "id" serial PRIMARY KEY,
-  "pq_id" integer,
-  "nombre_archivo" varchar(128),
-  "ruta_archivo" varchar(128),
+  "pq_id" integer NOT NULL,
+  "nombre_archivo" varchar(128) NOT NULL,
+  "ruta_archivo" varchar(128) NOT NULL,
   "created_at" timestamp
 );
 
-CREATE TABLE "departamentos_resp" (
+CREATE TABLE "areas_resp" (
   "id" serial PRIMARY KEY,
-  "codigo_dep" varchar(10),
-  "nombre" varchar(64),
-  "descripcion" varchar(256)
+  "codigo_dep" varchar(10) NOT NULL,
+  "nombre" varchar(64) NOT NULL
 );
 
 CREATE TABLE "responsables_pq" (
   "id" serial PRIMARY KEY,
-  "departamento_id" integer,
-  "usuario_responsable_id" integer,
+  "persona_responsable_id" integer,
+  "area_id" integer,
   "fecha_asignacion" timestamp
 );
 
-CREATE TABLE "radicador_pq" (
-  "id" serial PRIMARY KEY,
-  "persona_id" integer,
-  "codigo_radicador" integer
-);
+CREATE INDEX "index_codigo_radicador" ON "personas" ("codigo_radicador");
 
-CREATE TABLE "historial_estados_pq" (
-  "id" serial PRIMARY KEY,
-  "pq_id" integer,
-  "estado_anterior_id" integer,
-  "fecha_cambio" timestamp NOT NULL,
-  "comentario" text
-);
+CREATE INDEX "index_dni" ON "personas" ("dni");
 
-CREATE TABLE "historial_seguimientos_pq" (
-  "id" serial PRIMARY KEY,
-  "pq_id" integer,
-  "estado_anterior_id" integer,
-  "responsable_anterior_id" integer,
-  "comentario_anterior" text,
-  "fecha_cambio" timestamp NOT NULL,
-  "comentario_cambio" text
-);
+CREATE INDEX "correo_username" ON "usuarios" ("correo");
 
-CREATE TABLE "historial_correo" (
-  "id" serial PRIMARY KEY,
-  "correo" varchar(64) UNIQUE NOT NULL,
-  "persona_id" integer,
-  "updated_at" timestamp
-);
+CREATE INDEX "Index_consecutivo" ON "pqs" ("consecutivo");
 
-CREATE TABLE "historial_telefonos" (
-  "id" serial PRIMARY KEY,
-  "telefono" varchar(10) NOT NULL,
-  "persona_id" integer,
-  "updated_at" timestamp
-);
+CREATE INDEX "Index_numero_radicado" ON "pqs" ("numero_radicado");
 
-COMMENT ON TABLE "usuarios" IS 'ppa = politica_privacidad_aceptada p';
+CREATE INDEX "index_area_id" ON "responsables_pq" ("area_id");
 
 ALTER TABLE "roles_permisos" ADD FOREIGN KEY ("rol_id") REFERENCES "roles" ("id");
 
@@ -189,6 +150,8 @@ ALTER TABLE "personas" ADD FOREIGN KEY ("tipo_persona") REFERENCES "tipos_person
 
 ALTER TABLE "personas" ADD FOREIGN KEY ("municipio_id") REFERENCES "municipios" ("id");
 
+ALTER TABLE "personas" ADD FOREIGN KEY ("genero") REFERENCES "generos" ("id");
+
 ALTER TABLE "usuarios" ADD FOREIGN KEY ("persona_id") REFERENCES "personas" ("id");
 
 ALTER TABLE "usuarios" ADD FOREIGN KEY ("rol_id") REFERENCES "roles" ("id");
@@ -199,35 +162,13 @@ ALTER TABLE "pqs" ADD FOREIGN KEY ("solicitante_id") REFERENCES "personas" ("id"
 
 ALTER TABLE "pqs" ADD FOREIGN KEY ("radicador_id") REFERENCES "personas" ("id");
 
-ALTER TABLE "pqs" ADD FOREIGN KEY ("modificador_id") REFERENCES "usuarios" ("id");
-
-ALTER TABLE "seguimientos_pq" ADD FOREIGN KEY ("pq_id") REFERENCES "pqs" ("id");
-
-ALTER TABLE "seguimientos_pq" ADD FOREIGN KEY ("responsable_actual_id") REFERENCES "responsables_pq" ("id");
-
-ALTER TABLE "seguimientos_pq" ADD FOREIGN KEY ("estado_id") REFERENCES "estados_pq" ("id");
+ALTER TABLE "pqs" ADD FOREIGN KEY ("responsable_id") REFERENCES "responsables_pq" ("id");
 
 ALTER TABLE "adjuntos_pq" ADD FOREIGN KEY ("pq_id") REFERENCES "pqs" ("id");
 
-ALTER TABLE "responsables_pq" ADD FOREIGN KEY ("departamento_id") REFERENCES "departamentos_resp" ("id");
+ALTER TABLE "responsables_pq" ADD FOREIGN KEY ("persona_responsable_id") REFERENCES "personas" ("id");
 
-ALTER TABLE "responsables_pq" ADD FOREIGN KEY ("usuario_responsable_id") REFERENCES "personas" ("id");
-
-ALTER TABLE "radicador_pq" ADD FOREIGN KEY ("persona_id") REFERENCES "personas" ("id");
-
-ALTER TABLE "historial_estados_pq" ADD FOREIGN KEY ("pq_id") REFERENCES "pqs" ("id");
-
-ALTER TABLE "historial_estados_pq" ADD FOREIGN KEY ("estado_anterior_id") REFERENCES "estados_pq" ("id");
-
-ALTER TABLE "historial_seguimientos_pq" ADD FOREIGN KEY ("pq_id") REFERENCES "pqs" ("id");
-
-ALTER TABLE "historial_seguimientos_pq" ADD FOREIGN KEY ("estado_anterior_id") REFERENCES "estados_pq" ("id");
-
-ALTER TABLE "historial_seguimientos_pq" ADD FOREIGN KEY ("responsable_anterior_id") REFERENCES "responsables_pq" ("id");
-
-ALTER TABLE "historial_correo" ADD FOREIGN KEY ("persona_id") REFERENCES "personas" ("id");
-
-ALTER TABLE "historial_telefonos" ADD FOREIGN KEY ("persona_id") REFERENCES "personas" ("id");
+ALTER TABLE "responsables_pq" ADD FOREIGN KEY ("area_id") REFERENCES "areas_resp" ("id");
 
 CREATE TABLE spring_session (
     primary_id VARCHAR(36) NOT NULL,          -- ID interno único generado por Spring Session.
