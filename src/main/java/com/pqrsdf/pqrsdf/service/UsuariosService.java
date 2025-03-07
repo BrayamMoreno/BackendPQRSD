@@ -57,7 +57,6 @@ public class UsuariosService extends GenericService<Usuario, Long>{
                             .genero(entity.genero())
         .build();
         
-        
         persona = personasRepository.save(persona);
         
         Roles rol = rolesRepository.findById(new Long(1)).orElse(null);

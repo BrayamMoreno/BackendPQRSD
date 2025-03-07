@@ -15,16 +15,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        ArrayList<Mensaje> errors = new ArrayList<>();
-        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            errors.add(new Mensaje("Error en el campo " + error.getField().concat(": ").concat(error.getDefaultMessage())));
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+    public ResponseEntity<Mensaje> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        String mensajeError = ex.getBindingResult().getFieldError() != null
+                ? "Error en el campo " + ex.getBindingResult().getFieldError().getField() + ": "
+                        + ex.getBindingResult().getFieldError().getDefaultMessage()
+                : "Error de validación desconocido";
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Mensaje(mensajeError));
     }
+
 }

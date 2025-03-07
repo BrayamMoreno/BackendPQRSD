@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -90,19 +91,8 @@ public class AuthController {
         try {
             Usuario usuario = usuariosService.createNewUser(entity);
             return ResponseEntity.status(HttpStatus.CREATED).body(new Mensaje("Usuario registrado con exito"));
-        } catch (Exception e) {
+        }catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }
     }
-
-    @GetMapping("/test")
-    public String getMethodName(@RequestParam(required = false) String param) {
-        if (param == null) {
-            throw new DataIntegrityViolationException("");
-        }
-        return "Valor recibido: " + param;
-    }
-
-    
-
 }
