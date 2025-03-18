@@ -15,11 +15,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
+
 import com.pqrsdf.pqrsdf.dto.auth.AuthResponse;
 import com.pqrsdf.pqrsdf.dto.auth.LoginRequest;
 import com.pqrsdf.pqrsdf.dto.auth.RefreshRequest;
 import com.pqrsdf.pqrsdf.dto.auth.RefreshResponse;
 import com.pqrsdf.pqrsdf.models.Usuario;
+import com.pqrsdf.pqrsdf.repository.PersonasRepository;
 import com.pqrsdf.pqrsdf.utils.JwtUtils;
 
 @Service
@@ -28,12 +30,14 @@ public class UserDetailServiceImpl implements UserDetailsService{
     private final UsuariosService usuarioService;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
+    private final PersonasRepository personasRepository;
 
     public UserDetailServiceImpl(UsuariosService usuarioService, PasswordEncoder passwordEncoder,
-                                JwtUtils jwtUtils, PersonasService personasService){
+                                JwtUtils jwtUtils, PersonasRepository personasRepository){
         this.usuarioService = usuarioService;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtils = jwtUtils;
+        this.personasRepository = personasRepository;
     }
 
     @Override
@@ -83,7 +87,12 @@ public class UserDetailServiceImpl implements UserDetailsService{
         
         String AccesToken = jwtUtils.createToken(authentication);
 
-        return new AuthResponse(usuario.getCorreo(), "User Logged", AccesToken, true);
+        return new AuthResponse(usuario.getCorreo(),
+                        "User Logged",
+                                AccesToken,
+                                usuario,
+                                personasRepository.findById(usuario.getPersonaId()).orElse(null),
+                                true);
     }
 
     public RefreshResponse refreshSession (RefreshRequest request){

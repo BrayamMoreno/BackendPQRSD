@@ -5,9 +5,14 @@ import java.time.LocalTime;
 
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
 
-import jakarta.persistence.*;
-
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Builder
 @AllArgsConstructor
@@ -20,22 +25,22 @@ public class Pqs extends GenericEntity{
     
     private Boolean web;
 
-    private String identificador;
+    private String consecutivo;
 
     @Column(name = "numero_radicado")
     private String numeroRadicado;
 
+    @Column(name = "numero_folio")
+    private long numeroFolio;
+    
     @Column(name = "detalle_asunto")
     private String detalleAsunto;
 
     @Column(name = "tipo_pq_id")
-    private Long TipoPqId;
+    private Long tipoPqId;
 
     @Column(name = "solicitante_id")
     private Long solicitanteId;
-
-    @Column(name = "numero_folio")
-    private long numeroFolio;
 
     @Column(name = "fecha_radicacion")
     private LocalDate fechaRadicacion;
@@ -54,6 +59,6 @@ public class Pqs extends GenericEntity{
     @Column(name = "radicador_id")
     private Long radicadorId;
 
-    @Column(name = "modificador_id")
-    private Long modificadorId;
+    @Column(name = "responsable_id")
+    private Long responsableId;
 }

@@ -42,15 +42,4 @@ public class UsuarioController extends GenericController<Usuario, Long>{
         return super.createEntity(usuario);
     }
     */
-
-    @PostMapping("/registrar_usuario")
-    public ResponseEntity<?> postMethodName(@RequestBody String entity) {
-        
-        return null;
-    }
-
-    
-    
-
-
 }

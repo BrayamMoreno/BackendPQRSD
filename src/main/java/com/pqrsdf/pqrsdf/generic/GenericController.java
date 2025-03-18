@@ -1,8 +1,5 @@
 package com.pqrsdf.pqrsdf.generic;
 
-import java.sql.SQLException;
-
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -91,7 +88,7 @@ public class GenericController<T extends GenericEntity, ID> {
             String message = rootCause != null ? rootCause.getMessage() : ex.getMessage();
 
             // Verificar si es una violación de clave foránea
-            if (message.contains("foreign key") || message.contains("FOREIGN KEY")) {
+            if (message.contains("foreign key") || message.contains("llave foránea")) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new Mensaje("Error: Clave foránea violada. Verifique las relaciones antes de insertar."));
             }

@@ -56,7 +56,7 @@ public class AuthController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(userDetailServiceImpl.login(entity));
         } catch (BadCredentialsException e){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthResponse(null, "Credenciales incorrectas", null, false));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthResponse(null, "Credenciales incorrectas", null, null, null, false));
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }
@@ -72,9 +72,9 @@ public class AuthController {
         if (jwtToken != null && jwtToken.startsWith("Bearer ")) {
             jwtToken = jwtToken.substring(7);
             tokenService.revokeToken(jwtToken, jwtUtils.extracExpirationTime(jwtToken));
-            return ResponseEntity.status(HttpStatus.OK).body(new AuthResponse(null, "Sesion cerrada", null, false));
+            return ResponseEntity.status(HttpStatus.OK).body(new AuthResponse(null, "Sesion cerrada", null, null, null, false));
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new AuthResponse(null, "No se pudo cerrar la sesion", null, false));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new AuthResponse(null, "No se pudo cerrar la sesion", null, null, null, false));
     }
 
     @PostMapping("/refresh-token")

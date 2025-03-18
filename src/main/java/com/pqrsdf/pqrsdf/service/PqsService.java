@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -50,7 +51,7 @@ public class PqsService extends GenericService<Pqs, Long> {
         }
 
 
-        return pq.getIdentificador();
+        return pq.getConsecutivo();
     }
 
     @Transactional
@@ -71,20 +72,24 @@ public class PqsService extends GenericService<Pqs, Long> {
 
         Pqs pqs = createPq(persona.getId(), noLoginPq);
 
-        return pqs.getIdentificador();
+        return pqs.getConsecutivo();
     }
 
     public Pqs createPq(Long personaId, NoLoginPq noLoginPq) {
         Pqs pqs = Pqs.builder()
                 .web(true)
                 .detalleAsunto(noLoginPq.asunto())
-                .TipoPqId(noLoginPq.tipo_pq_id())
+                .tipoPqId(noLoginPq.tipo_pq_id())
                 .solicitanteId(personaId)
                 .horaRadicacion(LocalTime.now())
                 .fechaRadicacion(LocalDate.now())
-                .identificador(generarIdentificadorPQ())
+                .consecutivo(generarIdentificadorPQ())
         .build();
 
         return repository.save(pqs);
+    }
+
+    public List<Pqs> findByResponsableId(Long responsableId) {
+        return repository.findByResponsableId(responsableId);
     }
 }

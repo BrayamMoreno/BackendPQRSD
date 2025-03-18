@@ -50,7 +50,7 @@ public class Usuario extends GenericEntity {
     private String resetToken;
 
     @Column(name = "persona_id")
-    private Long persona_id;
+    private Long personaId;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "rol_id")

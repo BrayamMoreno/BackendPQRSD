@@ -25,4 +25,5 @@ public class PersonasController extends GenericController<Personas, Long> {
         super(service);
         this.service = service;
     }
+    
 }

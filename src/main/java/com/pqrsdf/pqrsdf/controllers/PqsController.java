@@ -19,8 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping(path = "/api/pqs")
@@ -39,21 +38,6 @@ public class PqsController extends GenericController<Pqs, Long>{
         this.adjuntosPqService = adjuntosPqService;
     }
 
-
-    @PostMapping("/nologinpq")
-    public ResponseEntity<?> getMethodName(@RequestBody NoLoginPq noLoginPq) {
-        try {
-            Personas persona = personasService.findByTipoDocAndNumDoc(noLoginPq.tipo_doc_id(), noLoginPq.dni());
-            if(persona != null) {
-                return ResponseEntity.status(HttpStatus.CREATED).body(service.oldUser(persona, noLoginPq));
-            } else {
-                return ResponseEntity.status(HttpStatus.CREATED).body(service.usuarioNuevo(noLoginPq));
-            }
-        } catch (Exception e) {
-            return ResponseEntityUtil.handleInternalError(e);
-        }
-    }
-
     @PostMapping("/radicar_pq")
     public ResponseEntity<?> createPqEntity(@RequestBody String entity, @RequestParam Long personaId) {
         try {
@@ -62,7 +46,28 @@ public class PqsController extends GenericController<Pqs, Long>{
             return ResponseEntityUtil.handleInternalError(e);
         }
     }
-    
-    
 
+    @GetMapping("/no_asignados")
+    public ResponseEntity<?> getPqsNoAssigned() {
+        try {
+            if (service.findByResponsableId(null).isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(service.findByResponsableId(null));
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
+
+    @GetMapping("/asignados")
+    public ResponseEntity<?> getPqsAssigned(@RequestParam Long responsableId) {
+        try {
+            if (service.findByResponsableId(responsableId).isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(service.findByResponsableId(responsableId));
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
 }

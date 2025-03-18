@@ -64,7 +64,7 @@ public class UsuariosService extends GenericService<Usuario, Long>{
         Usuario usuario = Usuario.builder()
                             .correo(entity.correo())
                             .contrasena(passwordEncoder.encode(entity.contraseña()))
-                            .persona_id(persona.getId())
+                            .personaId(persona.getId())
                             .rol(rol)
         .build();
         

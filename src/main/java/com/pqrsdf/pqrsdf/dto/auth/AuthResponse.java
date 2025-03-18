@@ -1,11 +1,15 @@
 package com.pqrsdf.pqrsdf.dto.auth;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.pqrsdf.pqrsdf.models.Personas;
+import com.pqrsdf.pqrsdf.models.Usuario;
 
-@JsonPropertyOrder({"username","message","jwt","logged"})
+@JsonPropertyOrder({"username","message","jwt","userId","logged"})
 public record AuthResponse(
     String username,
     String message,
     String jwt,
+    Usuario usuario,
+    Personas persona,
     boolean logged
 ){}
