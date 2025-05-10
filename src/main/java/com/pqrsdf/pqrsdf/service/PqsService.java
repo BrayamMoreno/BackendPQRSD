@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -92,4 +93,18 @@ public class PqsService extends GenericService<Pqs, Long> {
     public List<Pqs> findByResponsableId(Long responsableId) {
         return repository.findByResponsableId(responsableId);
     }
+
+    /**
+    public HashMap<String, String> countEstadosPq(Long id) {
+        HashMap<String, String> estados = new HashMap<>();
+        List<Pqs> pqList = repository.findByResponsableId(id);
+
+        for (Pqs pq : pqList) {
+            String estado = pq.get
+            estados.put(estado, estados.getOrDefault(estado, "0"));
+        }
+
+        return null;
+    }
+     */
 }
