@@ -91,8 +91,7 @@ public class UserDetailServiceImpl implements UserDetailsService{
                         "User Logged",
                                 AccesToken,
                                 usuario,
-                                personasRepository.findById(usuario.getPersona().getId())
-                                    .orElseThrow(() -> new RuntimeException("Persona not found with id: " + usuario.getPersona().getId())),
+                                usuario.getPersona(),
                                 true);
     }
 
