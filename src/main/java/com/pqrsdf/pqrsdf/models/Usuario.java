@@ -2,6 +2,7 @@ package com.pqrsdf.pqrsdf.models;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
 
 import io.swagger.v3.oas.annotations.Hidden;
@@ -12,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -38,8 +40,9 @@ public class Usuario extends GenericEntity {
     private Boolean credentialNoExpired;
     private String resetToken;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "persona_id")
+    @JsonIgnore
     private Persona persona;
 
     @ManyToOne

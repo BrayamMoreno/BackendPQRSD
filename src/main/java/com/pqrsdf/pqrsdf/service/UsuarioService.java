@@ -36,7 +36,7 @@ public class UsuarioService extends GenericService<Usuario, Long>{
         return usuarioRepository.findByCorreo(Correo).orElse(null);
     }
 
-/** 
+/**
     @Transactional
     public Usuario createNewUser(RegisterRequest entity){
         

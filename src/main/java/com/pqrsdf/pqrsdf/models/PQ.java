@@ -3,6 +3,7 @@ package com.pqrsdf.pqrsdf.models;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
 
 import jakarta.persistence.Column;
@@ -38,6 +39,7 @@ public class PQ extends GenericEntity {
     private TipoPQ tipoPQ;
 
     @ManyToOne @JoinColumn(name = "solicitante_id")
+    @JsonIgnore
     private Persona solicitante;
 
     private LocalDate fechaRadicacion;

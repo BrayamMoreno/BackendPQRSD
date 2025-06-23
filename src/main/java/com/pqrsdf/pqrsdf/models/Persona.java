@@ -2,6 +2,7 @@ package com.pqrsdf.pqrsdf.models;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
 
 import jakarta.persistence.*;
@@ -35,6 +36,7 @@ public class Persona extends GenericEntity {
     private Boolean tratamientoDatos;
 
     @ManyToOne @JoinColumn(name = "municipio_id")
+    @JsonIgnore
     private Municipio municipio;
 
     @ManyToOne @JoinColumn(name = "genero")
