@@ -1,0 +1,14 @@
+package com.pqrsdf.pqrsdf.repository;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Repository;
+
+import com.pqrsdf.pqrsdf.generic.GenericRepository;
+import com.pqrsdf.pqrsdf.models.Municipio;
+
+@Repository
+public interface MunicipioRepository extends GenericRepository<Municipio, Long>{
+    Page<Municipio> findByDepartamentoId(Long departamentoId, Pageable pageable);
+
+}

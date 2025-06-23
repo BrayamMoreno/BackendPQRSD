@@ -21,19 +21,19 @@ import com.pqrsdf.pqrsdf.dto.auth.LoginRequest;
 import com.pqrsdf.pqrsdf.dto.auth.RefreshRequest;
 import com.pqrsdf.pqrsdf.dto.auth.RefreshResponse;
 import com.pqrsdf.pqrsdf.models.Usuario;
-import com.pqrsdf.pqrsdf.repository.PersonasRepository;
+import com.pqrsdf.pqrsdf.repository.PersonaRepository;
 import com.pqrsdf.pqrsdf.utils.JwtUtils;
 
 @Service
 public class UserDetailServiceImpl implements UserDetailsService{
    
-    private final UsuariosService usuarioService;
+    private final UsuarioService usuarioService;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
-    private final PersonasRepository personasRepository;
+    private final PersonaRepository personasRepository;
 
-    public UserDetailServiceImpl(UsuariosService usuarioService, PasswordEncoder passwordEncoder,
-                                JwtUtils jwtUtils, PersonasRepository personasRepository){
+    public UserDetailServiceImpl(UsuarioService usuarioService, PasswordEncoder passwordEncoder,
+                                JwtUtils jwtUtils, PersonaRepository personasRepository){
         this.usuarioService = usuarioService;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtils = jwtUtils;
@@ -57,10 +57,10 @@ public class UserDetailServiceImpl implements UserDetailsService{
         return new User(
             usuario.getCorreo(),
             usuario.getContrasena(),
-            usuario.isEnabled(),
-            usuario.isAccountNoExpired(),
-            usuario.isCredentialNoExpired(),
-            usuario.isAccountNoLocked(),
+            usuario.getIsEnable(),
+            usuario.getAccountNoExpired(),
+            usuario.getCredentialNoExpired(),
+            usuario.getAccountNoLocked(),
             authorities
         );
     }
@@ -91,7 +91,8 @@ public class UserDetailServiceImpl implements UserDetailsService{
                         "User Logged",
                                 AccesToken,
                                 usuario,
-                                personasRepository.findById(usuario.getPersonaId()).orElse(null),
+                                personasRepository.findById(usuario.getPersona().getId())
+                                    .orElseThrow(() -> new RuntimeException("Persona not found with id: " + usuario.getPersona().getId())),
                                 true);
     }
 

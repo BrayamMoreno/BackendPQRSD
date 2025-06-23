@@ -9,7 +9,7 @@ import com.pqrsdf.pqrsdf.dto.auth.logoutRequest;
 import com.pqrsdf.pqrsdf.models.Usuario;
 import com.pqrsdf.pqrsdf.service.TokenService;
 import com.pqrsdf.pqrsdf.service.UserDetailServiceImpl;
-import com.pqrsdf.pqrsdf.service.UsuariosService;
+import com.pqrsdf.pqrsdf.service.UsuarioService;
 import com.pqrsdf.pqrsdf.utils.JwtUtils;
 import com.pqrsdf.pqrsdf.utils.ResponseEntityUtil;
 
@@ -38,12 +38,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Tag(name = "Autenticacion", description = "Gestion de Sesiones y Usuarios")
 public class AuthController {
 
-    private final UsuariosService usuariosService;
+    private final UsuarioService usuariosService;
     private final UserDetailServiceImpl userDetailServiceImpl;
     private final JwtUtils jwtUtils;
     private final TokenService tokenService;
 
-    public AuthController(UsuariosService usuarioService, UserDetailServiceImpl userDetailServiceImpl,
+    public AuthController(UsuarioService usuarioService, UserDetailServiceImpl userDetailServiceImpl,
             JwtUtils jwtUtils, TokenService tokenService) {
         this.usuariosService = usuarioService;
         this.userDetailServiceImpl = userDetailServiceImpl;
@@ -86,6 +86,7 @@ public class AuthController {
         }
     }
 
+    /**
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest entity) throws Exception {
         try {
@@ -95,4 +96,5 @@ public class AuthController {
             return ResponseEntityUtil.handleInternalError(e);
         }
     }
+    */
 }

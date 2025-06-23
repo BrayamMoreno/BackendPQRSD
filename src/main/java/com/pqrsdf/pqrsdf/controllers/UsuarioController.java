@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pqrsdf.pqrsdf.dto.UserRequest;
 import com.pqrsdf.pqrsdf.generic.GenericController;
 import com.pqrsdf.pqrsdf.models.Usuario;
-import com.pqrsdf.pqrsdf.service.RolesService;
-import com.pqrsdf.pqrsdf.service.UsuariosService;
+import com.pqrsdf.pqrsdf.service.RolService;
+import com.pqrsdf.pqrsdf.service.UsuarioService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -21,10 +21,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class UsuarioController extends GenericController<Usuario, Long>{
 
     private final PasswordEncoder passwordEncoder;
-    private final RolesService rolesService;
+    private final RolService rolesService;
 
-    public UsuarioController(UsuariosService service, PasswordEncoder passwordEncoder,
-                            RolesService rolesService){
+    public UsuarioController(UsuarioService service, PasswordEncoder passwordEncoder,
+                            RolService rolesService){
         super(service);
         this.passwordEncoder = passwordEncoder;
         this.rolesService = rolesService;
