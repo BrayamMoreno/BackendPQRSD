@@ -1,10 +1,26 @@
-#Instalacion de imagen de openjdk
+# Usa la imagen oficial de OpenJDK 17 en Alpine como base
 FROM openjdk:17-alpine
 
+# Establece el directorio de trabajo dentro del contenedor
 WORKDIR /backend
-COPY . .
+
+# Copia solo los archivos necesarios primero para aprovechar el cache de Docker
+COPY mvnw .
+COPY .mvn .mvn
+COPY pom.xml .
+
+# Descarga las dependencias del proyecto
+RUN chmod +x ./mvnw && ./mvnw dependency:go-offline
+
+# Copia el resto del código fuente al contenedor
+COPY src src
 COPY ./src/main/resources/application.properties.docker ./src/main/resources/application.properties
-RUN chmod +x ./mvnw
+
+# Limpia cualquier build anterior y compila el proyecto sin ejecutar tests
 RUN ./mvnw clean install -DskipTests
+
+# Expone el puerto de la aplicación
 EXPOSE 8080
-CMD ["java", "-jar", "./target/pqrsdf-0.0.1-SNAPSHOT.jar"]
+
+# Comando por defecto para ejecutar la aplicación
+CMD ["java", "-jar", "target/pqrsdf-0.0.1-SNAPSHOT.jar"]
