@@ -41,7 +41,7 @@ public class PQController extends GenericController<PQ, Long>{
     @PostMapping("/radicar_pq")
     public ResponseEntity<?> createPqEntity(@RequestBody String entity, @RequestParam Long personaId) {
         try {
-            return null;
+            return ResponseEntity.ok(service.getById(personaId));
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }

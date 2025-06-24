@@ -11,7 +11,7 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "area_resp")
+@Table(name = "areas_resp")
 public class AreaResp extends GenericEntity{
    
     private String codigoDep;

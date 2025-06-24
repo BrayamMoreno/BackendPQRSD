@@ -6,6 +6,6 @@ import com.pqrsdf.pqrsdf.generic.GenericRepository;
 import com.pqrsdf.pqrsdf.models.ResponsablePQ;
 
 @Repository
-public interface ResponsablesPQRepository extends GenericRepository<ResponsablePQ, Long>{
+public interface ResponsablePQRepository extends GenericRepository<ResponsablePQ, Long>{
     
 }
