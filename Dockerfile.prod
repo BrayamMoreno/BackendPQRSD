@@ -13,6 +13,7 @@ COPY pom.xml .
 RUN chmod +x ./mvnw && ./mvnw dependency:go-offline
 
 # Copia el resto del código fuente al contenedor
+COPY .env .env
 COPY src src
 COPY ./src/main/resources/application.properties.docker ./src/main/resources/application.properties
 
