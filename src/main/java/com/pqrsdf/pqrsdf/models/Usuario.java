@@ -40,7 +40,7 @@ public class Usuario extends GenericEntity {
     private Boolean credentialNoExpired;
     private String resetToken;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "persona_id")
     @JsonIgnore
     private Persona persona;
@@ -61,4 +61,9 @@ public class Usuario extends GenericEntity {
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
 }
