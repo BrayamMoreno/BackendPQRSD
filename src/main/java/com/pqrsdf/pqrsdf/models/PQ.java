@@ -35,6 +35,8 @@ public class PQ extends GenericEntity {
     private Integer numeroFolio;
     private String detalleAsunto;
 
+    private String detalleDescripcion;
+
     @ManyToOne @JoinColumn(name = "tipo_pq_id")
     private TipoPQ tipoPQ;
 
