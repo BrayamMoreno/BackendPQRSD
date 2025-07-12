@@ -9,11 +9,13 @@ import jakarta.persistence.*;
 
 import lombok.*;
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
+@Table(name = "historial_estados_pq")
 public class HistorialEstadoPQ extends GenericEntity {
 
     @ManyToOne

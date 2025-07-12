@@ -3,6 +3,8 @@ package com.pqrsdf.pqrsdf.models;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import org.hibernate.annotations.Formula;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
 
@@ -11,6 +13,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,11 +40,13 @@ public class PQ extends GenericEntity {
 
     private String detalleDescripcion;
 
-    @ManyToOne @JoinColumn(name = "tipo_pq_id")
+    @ManyToOne
+    @JoinColumn(name = "tipo_pq_id")
     private TipoPQ tipoPQ;
 
-    @ManyToOne @JoinColumn(name = "solicitante_id")
-    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "solicitante_id")
+
     private Persona solicitante;
 
     private LocalDate fechaRadicacion;
@@ -49,11 +54,19 @@ public class PQ extends GenericEntity {
     private LocalDate fechaResolucionEstimada;
     private LocalDate fechaResolucion;
 
-    @ManyToOne @JoinColumn(name = "radicador_id")
+    @ManyToOne
+    @JoinColumn(name = "radicador_id")
     private Persona radicador;
 
-    @ManyToOne @JoinColumn(name = "responsable_id")
+    @ManyToOne
+    @JoinColumn(name = "responsable_id")
     private ResponsablePQ responsable;
+
+    @Formula("(SELECT he.estado_id FROM historial_estados_pq he WHERE he.pq_id = id ORDER BY he.fecha_cambio DESC LIMIT 1)")
+    private Long ultimoEstadoId;
+
+    @Formula("(SELECT epq.nombre FROM historial_estados_pq he JOIN estados_pq epq ON epq.id = he.estado_id WHERE he.pq_id = id ORDER BY he.fecha_cambio DESC LIMIT 1)")
+    private String nombreUltimoEstado;
 
     private Boolean web;
 }

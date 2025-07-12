@@ -1,14 +1,15 @@
 package com.pqrsdf.pqrsdf.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.pqrsdf.pqrsdf.generic.GenericRepository;
 import com.pqrsdf.pqrsdf.models.PQ;
-import java.util.List;
 
 
 @Repository
 public interface PQRepository extends GenericRepository<PQ, Long>{
-    List<PQ> findByResponsableId(Long responsableId);
-    List<PQ> findBySolicitanteId(Long solicitanteId);
+    Page<PQ> findByResponsableId(Long responsableId, Pageable pageable);
+    Page<PQ> findBySolicitanteId(Long solicitanteId, Pageable pageable);
 }

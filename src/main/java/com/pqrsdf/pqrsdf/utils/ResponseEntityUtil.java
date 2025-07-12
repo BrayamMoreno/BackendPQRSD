@@ -38,8 +38,6 @@ public class ResponseEntityUtil {
                 .body(new Mensaje(mensaje));
     }
 
-    
-
     public static <T> ResponseEntity<Map<String, Object>> handlePaginationRequest(Page<T> entities) {
         Map<String, Object> response = new LinkedHashMap<>();
         boolean hasMore = entities.hasNext();
