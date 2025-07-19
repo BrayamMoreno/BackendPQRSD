@@ -86,7 +86,6 @@ public class AuthController {
         }
     }
 
-    /**
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest entity) throws Exception {
         try {
@@ -96,5 +95,5 @@ public class AuthController {
             return ResponseEntityUtil.handleInternalError(e);
         }
     }
-    */
+
 }

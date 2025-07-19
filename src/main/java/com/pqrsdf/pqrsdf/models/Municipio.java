@@ -14,11 +14,12 @@ import lombok.*;
 @Entity
 @Table(name = "municipios")
 public class Municipio extends GenericEntity {
- 
+
     private String nombre;
     private String codigoDane;
 
     @JsonIgnore
-    @ManyToOne @JoinColumn(name = "departamento_id")
+    @ManyToOne
+    @JoinColumn(name = "departamento_id")
     private Departamento departamento;
 }
