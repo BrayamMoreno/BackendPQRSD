@@ -1,5 +1,6 @@
 package com.pqrsdf.pqrsdf.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
 
 import jakarta.persistence.*;
@@ -17,6 +18,7 @@ public class Municipio extends GenericEntity {
     private String nombre;
     private String codigoDane;
 
+    @JsonIgnore
     @ManyToOne @JoinColumn(name = "departamento_id")
     private Departamento departamento;
 }
