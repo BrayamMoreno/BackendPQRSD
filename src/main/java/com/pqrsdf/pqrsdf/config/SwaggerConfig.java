@@ -14,35 +14,32 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@OpenAPIDefinition(info = @Info(title = "PQRSDF API", version = "1.0.0",
-                                description = "Bienvenido a la API del sistema de Pqrsdf"))
+@OpenAPIDefinition(info = @Info(title = "PQRSDF API", version = "1.0.0", description = "Bienvenido a la API del sistema de Pqrsdf"))
 public class SwaggerConfig {
 
-    private String url;
+        private String url;
 
-    public SwaggerConfig(Dotenv dotenv) {
-        this.url = dotenv.get("URL_SERVER");
-    }
+        public SwaggerConfig(Dotenv dotenv) {
+                this.url = dotenv.get("URL_SERVER");
+        }
 
-    @Bean
-    public OpenAPI customOpenAPI() {
-        
-        return new OpenAPI()
-                .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
-                .components(new Components()
-                        .addSecuritySchemes("bearerAuth",
-                                new SecurityScheme()
-                                        .type(Type.HTTP)
-                                        .scheme("bearer")
-                                        .bearerFormat("JWT"))
-                        // Agrega más esquemas aquí si es necesario
-                        );
+        @Bean
+        public OpenAPI customOpenAPI() {
+
+                return new OpenAPI()
+                                .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
+                                .components(new Components()
+                                                .addSecuritySchemes("bearerAuth",
+                                                                new SecurityScheme()
+                                                                                .type(Type.HTTP)
+                                                                                .scheme("bearer")
+                                                                                .bearerFormat("JWT"))
+                                // Agrega más esquemas aquí si es necesario
+                                );
                 // Otros elementos de configuración
-                //.addServersItem(new io.swagger.v3.oas.models.servers.Server()
-                        //.url(url)
-                        //.description("Servidor de Prueba"));
-
-    }
+                // .addServersItem(new io.swagger.v3.oas.models.servers.Server()
+                // .url(url)
+                // .description("Servidor de Prueba"));
+        }
 
 }
-

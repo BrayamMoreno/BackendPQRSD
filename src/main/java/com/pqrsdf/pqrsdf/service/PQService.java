@@ -1,11 +1,13 @@
 package com.pqrsdf.pqrsdf.service;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Base64;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,17 +15,21 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.pqrsdf.pqrsdf.dto.NoLoginPq;
+import com.pqrsdf.pqrsdf.dto.DocumentoDTO;
 import com.pqrsdf.pqrsdf.dto.PqDto;
 import com.pqrsdf.pqrsdf.generic.GenericService;
-import com.pqrsdf.pqrsdf.models.EstadoPQ;
 import com.pqrsdf.pqrsdf.models.HistorialEstadoPQ;
 import com.pqrsdf.pqrsdf.models.PQ;
-import com.pqrsdf.pqrsdf.models.Persona;
 import com.pqrsdf.pqrsdf.repository.HistorialEstadosRespository;
 import com.pqrsdf.pqrsdf.repository.PQRepository;
+
+import io.github.cdimascio.dotenv.Dotenv;
+import io.minio.BucketExistsArgs;
+import io.minio.MakeBucketArgs;
+import io.minio.MinioClient;
+import io.minio.PutObjectArgs;
 
 @Service
 public class PQService extends GenericService<PQ, Long> {
@@ -35,11 +41,15 @@ public class PQService extends GenericService<PQ, Long> {
     private final TipoPQService tipoPqService;
     private final EstadoPQService estadoPQService;
     private final HistorialEstadosRespository historialEstadosRespository;
+    private final MinioClient minioClient;
+
+    private String BUCKET_NAME;
 
     public PQService(PQRepository repository, PersonaService personasService,
             AdjuntoPQService adjuntosPqService, TipoPQService tipoPqService,
             HistoralEstadoService historialEstadoService, EstadoPQService estadoPQService,
-            HistorialEstadosRespository historialEstadosRespository) {
+            HistorialEstadosRespository historialEstadosRespository, MinioClient minioClient,
+            Dotenv dotenv) {
         super(repository);
         this.personasService = personasService;
         this.repository = repository;
@@ -48,6 +58,9 @@ public class PQService extends GenericService<PQ, Long> {
         this.historialEstadoService = historialEstadoService;
         this.estadoPQService = estadoPQService;
         this.historialEstadosRespository = historialEstadosRespository;
+        this.minioClient = minioClient;
+
+        this.BUCKET_NAME = dotenv.get("MINIO_BUCKET_NAME");
     }
 
     public String generarIdentificadorPQ() {
@@ -62,22 +75,6 @@ public class PQService extends GenericService<PQ, Long> {
     public Page<PQ> findBySolicitanteId(Long solicitanteId, Pageable pageable) {
         return repository.findBySolicitanteId(solicitanteId, pageable);
     }
-
-    /**
-     * @Transactional
-     *                public String oldUser(Persona persona, NoLoginPq noLoginPq)
-     *                throws IOException {
-     *                PQ pq = createPq(persona.getId(), noLoginPq);
-     * 
-     *                if(!noLoginPq.Adjuntos().isEmpty()){
-     *                adjuntosPqService.createAdjuntosPqs(noLoginPq.Adjuntos(),
-     *                pq.getId());
-     *                }
-     * 
-     * 
-     *                return pq.getConsecutivo();
-     *                }
-     */
 
     public Page<PQ> findByResponsableId(Long responsableId, Pageable pageable) {
         return repository.findByResponsableId(responsableId, pageable);
@@ -104,8 +101,43 @@ public class PQService extends GenericService<PQ, Long> {
                 .build();
 
         pq = repository.save(pq);
+
         historialEstadosRespository.save(historialEstadoPQ);
-        return pq;
+
+        if (form.lista_documentos() != null) {
+            createAdjuntosPqs(form.lista_documentos(), pq);
+        }
+            return pq;
+    }
+
+    public void createAdjuntosPqs(List<DocumentoDTO> files, PQ pq) {
+        try {
+            boolean found = minioClient.bucketExists(BucketExistsArgs.builder().bucket(BUCKET_NAME).build());
+            if (!found) {
+                minioClient.makeBucket(MakeBucketArgs.builder().bucket(BUCKET_NAME).build());
+            }
+
+            for (DocumentoDTO doc : files) {
+                try {
+                    byte[] data = Base64.getDecoder().decode(doc.Contenido());
+
+                    InputStream inputStream = new ByteArrayInputStream(data);
+                    String objectName = "documentos/" + pq.getSolicitante().getDni() + "/" + doc.Nombre();
+
+                    minioClient.putObject(
+                            PutObjectArgs.builder()
+                                    .bucket(BUCKET_NAME)
+                                    .object(objectName)
+                                    .stream(inputStream, data.length, -1)
+                                    .contentType(doc.Tipo())
+                                    .build());
+                } catch (Exception e) {
+                    throw new RuntimeException("Error al guardar el adjunto: ");
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error general al procesar los adjuntos", e);
+        }
     }
 
     /**

@@ -3,6 +3,9 @@ package com.pqrsdf.pqrsdf.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,16 +24,13 @@ import com.pqrsdf.pqrsdf.utils.ResponseEntityUtil;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-import java.util.List;
-
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @RestController
 @RequestMapping(path = "/api/pqs")
@@ -51,9 +51,9 @@ public class PQController extends GenericController<PQ, Long> {
 
     @GetMapping("/mis_pqs")
     public ResponseEntity<?> getMyPqs(@RequestParam Long solicitanteId,
-        @RequestParam(required = false, defaultValue = "id") String order_by,
-        @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "10") int size) {
+            @RequestParam(required = false, defaultValue = "id") String order_by,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
         try {
             Pageable pageable = PageRequest.of(page, size, Sort.by(order_by));
             if (solicitanteId == null) {
@@ -72,7 +72,8 @@ public class PQController extends GenericController<PQ, Long> {
     @PostMapping("/radicar_pq")
     public ResponseEntity<?> radicarPq(@RequestBody PqDto data) {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(service.createPq(data));
+            ResponseEntity.status(HttpStatus.CREATED).body(service.createPq(data));
+            return ResponseEntityUtil.handleBadRequest(null);
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }
