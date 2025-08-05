@@ -29,26 +29,4 @@ public class MunicipioController extends GenericController<Municipio, Long> {
         this.service = service;
     }
 
-    @GetMapping("/mpd_data")
-    public ResponseEntity<?> getMunicipiosByDepartamento(
-        @RequestParam Long departamentoId,
-        @RequestParam(required = false, defaultValue = "id") String order_by,
-        @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "10") int size)
-    {
-        try {
-            Pageable pageable = PageRequest.of(page, size);
-            Page<Municipio> municipios = service.findByDepartamentoId(departamentoId, pageable);
-
-            if (municipios != null) {
-                return ResponseEntityUtil.handlePaginationRequest(municipios);
-            } else {
-                return ResponseEntityUtil.handleNotFoundError(
-                        "No se encontraron municipios para el departamento con id: " + departamentoId);
-            }
-        } catch (Exception e) {
-            return ResponseEntityUtil.handleInternalError(e);
-        }
-    }
-
 }

@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.pqrsdf.pqrsdf.dto.DocumentoDTO;
 import com.pqrsdf.pqrsdf.dto.PqDto;
 import com.pqrsdf.pqrsdf.generic.GenericService;
+import com.pqrsdf.pqrsdf.models.AdjuntoPQ;
 import com.pqrsdf.pqrsdf.models.HistorialEstadoPQ;
 import com.pqrsdf.pqrsdf.models.PQ;
 import com.pqrsdf.pqrsdf.repository.HistorialEstadosRespository;
@@ -35,7 +36,7 @@ import io.minio.PutObjectArgs;
 public class PQService extends GenericService<PQ, Long> {
 
     private final AdjuntoPQService adjuntosPqService;
-    private final HistoralEstadoService historialEstadoService;
+    private final HistorialEstadoService historialEstadoService;
     private final PersonaService personasService;
     private final PQRepository repository;
     private final TipoPQService tipoPqService;
@@ -47,7 +48,7 @@ public class PQService extends GenericService<PQ, Long> {
 
     public PQService(PQRepository repository, PersonaService personasService,
             AdjuntoPQService adjuntosPqService, TipoPQService tipoPqService,
-            HistoralEstadoService historialEstadoService, EstadoPQService estadoPQService,
+            HistorialEstadoService historialEstadoService, EstadoPQService estadoPQService,
             HistorialEstadosRespository historialEstadosRespository, MinioClient minioClient,
             Dotenv dotenv) {
         super(repository);
@@ -131,6 +132,15 @@ public class PQService extends GenericService<PQ, Long> {
                                     .stream(inputStream, data.length, -1)
                                     .contentType(doc.Tipo())
                                     .build());
+
+                    AdjuntoPQ adjuntoPQ = AdjuntoPQ.builder()
+                            .pq(pq)
+                            .rutaArchivo(objectName)
+                            .nombreArchivo(doc.Nombre())
+                            .build();
+
+                    adjuntosPqService.createEntity(adjuntoPQ);
+
                 } catch (Exception e) {
                     throw new RuntimeException("Error al guardar el adjunto: ");
                 }
@@ -139,18 +149,4 @@ public class PQService extends GenericService<PQ, Long> {
             throw new RuntimeException("Error general al procesar los adjuntos", e);
         }
     }
-
-    /**
-     * public HashMap<String, String> countEstadosPq(Long id) {
-     * HashMap<String, String> estados = new HashMap<>();
-     * List<Pqs> pqList = repository.findByResponsableId(id);
-     * 
-     * for (Pqs pq : pqList) {
-     * String estado = pq.get
-     * estados.put(estado, estados.getOrDefault(estado, "0"));
-     * }
-     * 
-     * return null;
-     * }
-     */
 }

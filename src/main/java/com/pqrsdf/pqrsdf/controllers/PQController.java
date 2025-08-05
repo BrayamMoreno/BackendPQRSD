@@ -72,8 +72,7 @@ public class PQController extends GenericController<PQ, Long> {
     @PostMapping("/radicar_pq")
     public ResponseEntity<?> radicarPq(@RequestBody PqDto data) {
         try {
-            ResponseEntity.status(HttpStatus.CREATED).body(service.createPq(data));
-            return ResponseEntityUtil.handleBadRequest(null);
+            return ResponseEntity.status(HttpStatus.CREATED).body(service.createPq(data));
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }
