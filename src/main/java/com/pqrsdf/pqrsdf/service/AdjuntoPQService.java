@@ -34,38 +34,4 @@ public class AdjuntoPQService extends GenericService <AdjuntoPQ, Long>{
     public List<AdjuntoPQ> findByPqId(Long pqId){
         return repository.findByPqId(pqId);
     }
-
-    @Transactional
-    public void createAdjuntosPqs(List<Map<String, String>> Adjuntos, Long pq_id) throws IOException{
-        
-        Path rutaSubida = Paths.get(uploadDir).toAbsolutePath().normalize();
-
-        if(!Files.exists(rutaSubida)){
-            Files.createDirectories(rutaSubida);
-        }
-
-        for (Map<String, String> archivo : Adjuntos){
-            String nombreArchivo = archivo.get("filename");
-            String base64 = archivo.get("base64");
-
-            if(nombreArchivo == null || base64 == null){
-                continue;
-            }
-
-            byte[] archivoBytes = Base64.getDecoder().decode(base64);
-            Path rutaArchivo = rutaSubida.resolve(nombreArchivo);
-
-            Files.write(rutaArchivo, archivoBytes);
-
-            /**      
-            AdjuntoPQ Adjunto = AdjuntoPQ.builder()
-                .nombreArchivo(nombreArchivo)
-                .rutaArchivo(nombreArchivo)
-                .pqId(pq_id)
-                .build();
-            */
-            repository.save(null);
-        }
-    }
-
 }

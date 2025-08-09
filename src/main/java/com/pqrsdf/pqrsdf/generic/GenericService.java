@@ -3,7 +3,9 @@ package com.pqrsdf.pqrsdf.generic;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Lock;
 
+import jakarta.persistence.LockModeType;
 import jakarta.transaction.Transactional;
 
 public abstract class GenericService<T,ID> {
@@ -17,6 +19,7 @@ public abstract class GenericService<T,ID> {
     public Page<T> getAllEntitires(Pageable pageable){
         return repository.findAll(pageable);
     }
+
 
     public T getById(ID id){
         return repository.findById(id).orElse(null);

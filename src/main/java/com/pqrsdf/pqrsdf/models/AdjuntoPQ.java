@@ -3,9 +3,8 @@ package com.pqrsdf.pqrsdf.models;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
-
-import io.swagger.v3.oas.annotations.Hidden;
 
 import jakarta.persistence.*;
 
@@ -19,7 +18,8 @@ import lombok.*;
 @Entity
 @Table(name = "adjuntos_pq")
 public class AdjuntoPQ extends GenericEntity{
- 
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "pq_id", nullable = false)
     private PQ pq;

@@ -1,7 +1,6 @@
 package com.pqrsdf.pqrsdf.models;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;

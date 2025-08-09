@@ -28,19 +28,16 @@ public class AdjuntoPQController extends GenericController<AdjuntoPQ, Long> {
         this.service = service;
     }
     
-    @GetMapping("/getByPqId")
+    @GetMapping("/GetByPqId")
     public ResponseEntity<?> getMethodName(@RequestParam Long pqId) {
         try {
             if(pqId == null){
                 return ResponseEntityUtil.handleBadRequest("El id de la PQ es requerido");
             }
-
             if(pqId <= 0){
                 return ResponseEntityUtil.handleBadRequest("El id de la PQ no puede ser menor o igual a 0");
             }
-
             return ResponseEntity.status(HttpStatus.OK).body(service.findByPqId(pqId));
-
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }
