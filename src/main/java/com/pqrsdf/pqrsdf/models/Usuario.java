@@ -28,6 +28,8 @@ import lombok.Setter;
 public class Usuario extends GenericEntity {
 
     private String correo;
+
+    @JsonIgnore
     private String contrasena;
     private Boolean isEnable;
     private Boolean accountNoExpired;
@@ -37,6 +39,7 @@ public class Usuario extends GenericEntity {
 
     @ManyToOne
     @JoinColumn(name = "persona_id")
+    
     private Persona persona;
 
     @ManyToOne
