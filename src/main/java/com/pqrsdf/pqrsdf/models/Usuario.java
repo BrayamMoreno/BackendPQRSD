@@ -37,7 +37,6 @@ public class Usuario extends GenericEntity {
 
     @ManyToOne
     @JoinColumn(name = "persona_id")
-    @JsonIgnore
     private Persona persona;
 
     @ManyToOne

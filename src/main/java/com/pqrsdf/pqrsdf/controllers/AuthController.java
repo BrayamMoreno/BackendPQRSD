@@ -68,9 +68,8 @@ public class AuthController {
         if (session != null) {
             session.invalidate();
         }
-        String jwtToken = request.getHeader("Authorization");
-        if (jwtToken != null && jwtToken.startsWith("Bearer ")) {
-            jwtToken = jwtToken.substring(7);
+        String jwtToken = entity.tokenjwt();
+        if (jwtToken != null) {
             tokenService.revokeToken(jwtToken, jwtUtils.extracExpirationTime(jwtToken));
             return ResponseEntity.status(HttpStatus.OK).body(new AuthResponse(null, "Sesion cerrada", null, null, null, false));
         }
