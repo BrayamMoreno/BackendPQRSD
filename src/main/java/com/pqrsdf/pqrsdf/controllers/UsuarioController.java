@@ -2,6 +2,7 @@ package com.pqrsdf.pqrsdf.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,8 +33,8 @@ public class UsuarioController extends GenericController<Usuario, Long> {
         this.service = service;
     }
 
-    @PostMapping("/disable-account")
-    public ResponseEntity<?> disableAccount(@RequestParam Long id) {
+    @PostMapping("/disable-account/{id}")
+    public ResponseEntity<?> disableAccount(@PathVariable Long id) {
         try {
 
             if (id == null || id <= 0) {
@@ -46,8 +47,8 @@ public class UsuarioController extends GenericController<Usuario, Long> {
         }
     }
 
-    @PostMapping("/enable-account")
-    public ResponseEntity<?> enableAccount(@RequestParam Long id) {
+    @PostMapping("/enable-account/{id}")
+    public ResponseEntity<?> enableAccount(@PathVariable Long id) {
         try {
             if (id == null || id <= 0) {
                 return ResponseEntityUtil.handleBadRequest("ID de usuario inválido.");
