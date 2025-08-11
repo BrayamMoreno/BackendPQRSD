@@ -71,6 +71,25 @@ public class GenericController<T extends GenericEntity, ID> {
         }
     }
 
+    @GetMapping("/{id}")
+    @Operation(summary = "Obtiene una entidad por su ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Entidad encontrado"),
+            @ApiResponse(responseCode = "404", description = "Entidad no encontrado"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    public ResponseEntity<?> getEntityByIdByLoc(@PathVariable ID id) {
+        try {
+            T entity = service.getById(id);
+            if(entity == null){
+                return ResponseEntityUtil.handleNotFoundError(ENTIDAD_NO_ENCONTRADA);
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(entity);
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
+
     @PostMapping
     @Operation(summary = "Crea una nueva entidad")
     @ApiResponses(value = {
