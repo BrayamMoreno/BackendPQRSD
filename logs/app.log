@@ -1,122 +1,39 @@
-2025-08-12T18:19:47.745-05:00  INFO 6264 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 17.0.12 with PID 6264 (C:\Pqrsdf\target\classes started by Brayam Moreno in C:\Pqrsdf)
-2025-08-12T18:19:47.767-05:00  INFO 6264 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
-2025-08-12T18:19:47.934-05:00  INFO 6264 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\braya\.m2\repository\io\github\cdimascio\java-dotenv\5.2.2\java-dotenv-5.2.2.jar referenced one or more files that do not exist: file:/C:/Users/braya/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-1.4.0.jar,file:/C:/Users/braya/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-common-1.4.0.jar,file:/C:/Users/braya/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/annotations-13.0.jar
-2025-08-12T18:19:47.936-05:00  INFO 6264 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-08-12T18:19:47.937-05:00  INFO 6264 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-08-12T18:19:51.709-05:00  INFO 6264 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-08-12T18:19:52.065-05:00  INFO 6264 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 334 ms. Found 15 JPA repository interfaces.
-2025-08-12T18:19:57.758-05:00  INFO 6264 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2025-08-12T18:19:57.798-05:00  INFO 6264 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-08-12T18:19:57.805-05:00  INFO 6264 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-2025-08-12T18:19:58.302-05:00  INFO 6264 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-08-12T18:19:58.303-05:00  INFO 6264 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 10363 ms
-2025-08-12T18:19:59.653-05:00  INFO 6264 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-08-12T18:32:49.494-05:00 ERROR 6264 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
-
-org.postgresql.util.PSQLException: El intento de conexión falló.
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:331) ~[postgresql-42.5.0.jar:42.5.0]
-	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) ~[postgresql-42.5.0.jar:42.5.0]
-	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:247) ~[postgresql-42.5.0.jar:42.5.0]
-	at org.postgresql.Driver.makeConnection(Driver.java:434) ~[postgresql-42.5.0.jar:42.5.0]
-	at org.postgresql.Driver.connect(Driver.java:291) ~[postgresql-42.5.0.jar:42.5.0]
-	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138) ~[HikariCP-5.0.1.jar:na]
-	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359) ~[HikariCP-5.0.1.jar:na]
-	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201) ~[HikariCP-5.0.1.jar:na]
-	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470) ~[HikariCP-5.0.1.jar:na]
-	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561) ~[HikariCP-5.0.1.jar:na]
-	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100) ~[HikariCP-5.0.1.jar:na]
-	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112) ~[HikariCP-5.0.1.jar:na]
-	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:159) ~[spring-jdbc-6.0.9.jar:6.0.9]
-	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:117) ~[spring-jdbc-6.0.9.jar:6.0.9]
-	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:80) ~[spring-jdbc-6.0.9.jar:6.0.9]
-	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:330) ~[spring-jdbc-6.0.9.jar:6.0.9]
-	at org.springframework.boot.jdbc.EmbeddedDatabaseConnection.isEmbedded(EmbeddedDatabaseConnection.java:168) ~[spring-boot-3.1.0.jar:3.1.0]
-	at org.springframework.boot.autoconfigure.orm.jpa.HibernateDefaultDdlAutoProvider.getDefaultDdlAuto(HibernateDefaultDdlAutoProvider.java:42) ~[spring-boot-autoconfigure-3.1.0.jar:3.1.0]
-	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration.lambda$getVendorProperties$1(HibernateJpaConfiguration.java:142) ~[spring-boot-autoconfigure-3.1.0.jar:3.1.0]
-	at org.springframework.boot.autoconfigure.orm.jpa.HibernateSettings.getDdlAuto(HibernateSettings.java:41) ~[spring-boot-autoconfigure-3.1.0.jar:3.1.0]
-	at org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties.determineDdlAuto(HibernateProperties.java:118) ~[spring-boot-autoconfigure-3.1.0.jar:3.1.0]
-	at org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties.getAdditionalProperties(HibernateProperties.java:87) ~[spring-boot-autoconfigure-3.1.0.jar:3.1.0]
-	at org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties.determineHibernateProperties(HibernateProperties.java:80) ~[spring-boot-autoconfigure-3.1.0.jar:3.1.0]
-	at org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaConfiguration.getVendorProperties(HibernateJpaConfiguration.java:143) ~[spring-boot-autoconfigure-3.1.0.jar:3.1.0]
-	at org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration.entityManagerFactory(JpaBaseConfiguration.java:131) ~[spring-boot-autoconfigure-3.1.0.jar:3.1.0]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:139) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:655) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:647) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1156) ~[spring-context-6.0.9.jar:6.0.9]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:931) ~[spring-context-6.0.9.jar:6.0.9]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608) ~[spring-context-6.0.9.jar:6.0.9]
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.0.jar:3.1.0]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733) ~[spring-boot-3.1.0.jar:3.1.0]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435) ~[spring-boot-3.1.0.jar:3.1.0]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-	at com.pqrsdf.pqrsdf.PqrsdfApplication.main(PqrsdfApplication.java:16) ~[classes/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-3.1.0.jar:3.1.0]
-Caused by: java.net.SocketException: Connection reset
-	at java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:328) ~[na:na]
-	at java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:355) ~[na:na]
-	at java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:808) ~[na:na]
-	at java.base/java.net.Socket$SocketInputStream.read(Socket.java:966) ~[na:na]
-	at org.postgresql.core.VisibleBufferedInputStream.readMore(VisibleBufferedInputStream.java:161) ~[postgresql-42.5.0.jar:42.5.0]
-	at org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:128) ~[postgresql-42.5.0.jar:42.5.0]
-	at org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:113) ~[postgresql-42.5.0.jar:42.5.0]
-	at org.postgresql.core.VisibleBufferedInputStream.read(VisibleBufferedInputStream.java:73) ~[postgresql-42.5.0.jar:42.5.0]
-	at org.postgresql.core.PGStream.receiveChar(PGStream.java:453) ~[postgresql-42.5.0.jar:42.5.0]
-	at org.postgresql.core.v3.ConnectionFactoryImpl.enableSSL(ConnectionFactoryImpl.java:553) ~[postgresql-42.5.0.jar:42.5.0]
-	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:168) ~[postgresql-42.5.0.jar:42.5.0]
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:235) ~[postgresql-42.5.0.jar:42.5.0]
-	... 54 common frames omitted
-
-2025-08-12T18:32:49.585-05:00  INFO 6264 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-08-12T18:32:49.756-05:00  INFO 6264 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.2.Final
-2025-08-12T18:32:49.760-05:00  INFO 6264 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2025-08-12T18:32:50.112-05:00  INFO 6264 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-08-12T18:32:50.508-05:00  INFO 6264 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-08-12T18:32:50.567-05:00  INFO 6264 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-08-12T18:32:52.161-05:00  INFO 6264 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3b003fc2
-2025-08-12T18:32:52.165-05:00  INFO 6264 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-08-12T18:32:52.563-05:00  INFO 6264 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@3720bc33
-2025-08-12T18:32:53.549-05:00  INFO 6264 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-08-12T18:32:55.508-05:00  INFO 6264 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2025-08-12T18:32:55.513-05:00  INFO 6264 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-08-12T18:32:56.952-05:00  WARN 6264 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'PQController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\PQController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'PQService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\PQService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'PQRepository' defined in com.pqrsdf.pqrsdf.repository.PQRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Unresolved compilation problems: 
-	Syntax error, insert "Identifier (" to complete MethodHeaderName
-	Syntax error, insert ")" to complete MethodDeclaration
-	Syntax error, insert ";" to complete MethodDeclaration
-	Syntax error, insert "}" to complete InterfaceBody
-
-2025-08-12T18:32:56.956-05:00  INFO 6264 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-08-12T18:32:56.972-05:00  INFO 6264 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-08-12T18:32:57.250-05:00  INFO 6264 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-08-12T18:32:57.264-05:00  INFO 6264 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2025-08-12T18:32:57.341-05:00  INFO 6264 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+2025-08-13T13:23:27.422-05:00  INFO 22204 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 17.0.12 with PID 22204 (C:\Pqrsdf\target\classes started by Brayam Moreno in C:\Pqrsdf)
+2025-08-13T13:23:27.439-05:00  INFO 22204 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-08-13T13:23:27.561-05:00  INFO 22204 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\braya\.m2\repository\io\github\cdimascio\java-dotenv\5.2.2\java-dotenv-5.2.2.jar referenced one or more files that do not exist: file:/C:/Users/braya/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-1.4.0.jar,file:/C:/Users/braya/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-common-1.4.0.jar,file:/C:/Users/braya/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/annotations-13.0.jar
+2025-08-13T13:23:27.564-05:00  INFO 22204 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-13T13:23:27.565-05:00  INFO 22204 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-13T13:23:30.914-05:00  INFO 22204 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-13T13:23:31.256-05:00  INFO 22204 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 311 ms. Found 15 JPA repository interfaces.
+2025-08-13T13:23:35.692-05:00  INFO 22204 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-08-13T13:23:35.781-05:00  INFO 22204 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-13T13:23:35.783-05:00  INFO 22204 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-08-13T13:23:36.475-05:00  INFO 22204 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-13T13:23:36.485-05:00  INFO 22204 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 8917 ms
+2025-08-13T13:23:38.515-05:00  INFO 22204 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-13T13:23:40.246-05:00  INFO 22204 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@42389022
+2025-08-13T13:23:40.251-05:00  INFO 22204 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-13T13:23:40.355-05:00  INFO 22204 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-13T13:23:40.480-05:00  INFO 22204 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.2.Final
+2025-08-13T13:23:40.484-05:00  INFO 22204 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2025-08-13T13:23:40.799-05:00  INFO 22204 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-08-13T13:23:41.290-05:00  INFO 22204 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-13T13:23:41.749-05:00  INFO 22204 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@69577dd8
+2025-08-13T13:23:42.650-05:00  INFO 22204 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-08-13T13:23:44.623-05:00  INFO 22204 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-08-13T13:23:44.633-05:00  INFO 22204 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-13T13:23:46.863-05:00  INFO 22204 --- [restartedMain] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-13T13:23:48.089-05:00  WARN 22204 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'PQController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\PQController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'PQService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\PQService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'PQRepository' defined in com.pqrsdf.pqrsdf.repository.PQRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Could not create query for public abstract org.springframework.data.domain.Page com.pqrsdf.pqrsdf.repository.PQRepository.findProximasAVencer(java.time.LocalDate,java.time.LocalDate,org.springframework.data.domain.Pageable); Reason: Validation failed for query for method public abstract org.springframework.data.domain.Page com.pqrsdf.pqrsdf.repository.PQRepository.findProximasAVencer(java.time.LocalDate,java.time.LocalDate,org.springframework.data.domain.Pageable)
+2025-08-13T13:23:48.091-05:00  INFO 22204 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-13T13:23:48.108-05:00  INFO 22204 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-13T13:23:48.552-05:00  INFO 22204 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-13T13:23:48.562-05:00  INFO 22204 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-08-13T13:23:48.607-05:00  INFO 22204 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2025-08-12T18:32:57.453-05:00 ERROR 6264 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+2025-08-13T13:23:48.695-05:00 ERROR 22204 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
 
-org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'PQController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\PQController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'PQService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\PQService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'PQRepository' defined in com.pqrsdf.pqrsdf.repository.PQRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Unresolved compilation problems: 
-	Syntax error, insert "Identifier (" to complete MethodHeaderName
-	Syntax error, insert ")" to complete MethodDeclaration
-	Syntax error, insert ";" to complete MethodDeclaration
-	Syntax error, insert "}" to complete InterfaceBody
-
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'PQController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\PQController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'PQService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\PQService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'PQRepository' defined in com.pqrsdf.pqrsdf.repository.PQRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Could not create query for public abstract org.springframework.data.domain.Page com.pqrsdf.pqrsdf.repository.PQRepository.findProximasAVencer(java.time.LocalDate,java.time.LocalDate,org.springframework.data.domain.Pageable); Reason: Validation failed for query for method public abstract org.springframework.data.domain.Page com.pqrsdf.pqrsdf.repository.PQRepository.findProximasAVencer(java.time.LocalDate,java.time.LocalDate,org.springframework.data.domain.Pageable)
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:245) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-6.0.9.jar:6.0.9]
@@ -142,12 +59,7 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-3.1.0.jar:3.1.0]
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'PQService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\PQService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'PQRepository' defined in com.pqrsdf.pqrsdf.repository.PQRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Unresolved compilation problems: 
-	Syntax error, insert "Identifier (" to complete MethodHeaderName
-	Syntax error, insert ")" to complete MethodDeclaration
-	Syntax error, insert ";" to complete MethodDeclaration
-	Syntax error, insert "}" to complete InterfaceBody
-
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'PQService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\PQService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'PQRepository' defined in com.pqrsdf.pqrsdf.repository.PQRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Could not create query for public abstract org.springframework.data.domain.Page com.pqrsdf.pqrsdf.repository.PQRepository.findProximasAVencer(java.time.LocalDate,java.time.LocalDate,org.springframework.data.domain.Pageable); Reason: Validation failed for query for method public abstract org.springframework.data.domain.Page com.pqrsdf.pqrsdf.repository.PQRepository.findProximasAVencer(java.time.LocalDate,java.time.LocalDate,org.springframework.data.domain.Pageable)
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:245) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-6.0.9.jar:6.0.9]
@@ -164,12 +76,7 @@ Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Err
 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:888) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-6.0.9.jar:6.0.9]
 	... 24 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'PQRepository' defined in com.pqrsdf.pqrsdf.repository.PQRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Unresolved compilation problems: 
-	Syntax error, insert "Identifier (" to complete MethodHeaderName
-	Syntax error, insert ")" to complete MethodDeclaration
-	Syntax error, insert ";" to complete MethodDeclaration
-	Syntax error, insert "}" to complete InterfaceBody
-
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'PQRepository' defined in com.pqrsdf.pqrsdf.repository.PQRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Could not create query for public abstract org.springframework.data.domain.Page com.pqrsdf.pqrsdf.repository.PQRepository.findProximasAVencer(java.time.LocalDate,java.time.LocalDate,org.springframework.data.domain.Pageable); Reason: Validation failed for query for method public abstract org.springframework.data.domain.Page com.pqrsdf.pqrsdf.repository.PQRepository.findProximasAVencer(java.time.LocalDate,java.time.LocalDate,org.springframework.data.domain.Pageable)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.9.jar:6.0.9]
@@ -183,26 +90,14 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:888) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-6.0.9.jar:6.0.9]
 	... 38 common frames omitted
-Caused by: java.lang.Error: Unresolved compilation problems: 
-	Syntax error, insert "Identifier (" to complete MethodHeaderName
-	Syntax error, insert ")" to complete MethodDeclaration
-	Syntax error, insert ";" to complete MethodDeclaration
-	Syntax error, insert "}" to complete InterfaceBody
-
-	at com.pqrsdf.pqrsdf.repository.PQRepository.<clinit>(PQRepository.java:17) ~[classes/:na]
-	at java.base/java.lang.Class.forName0(Native Method) ~[na:na]
-	at java.base/java.lang.Class.forName(Class.java:375) ~[na:na]
-	at jdk.proxy4/jdk.proxy4.$Proxy192.<clinit>(Unknown Source) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:na]
-	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499) ~[na:na]
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480) ~[na:na]
-	at java.base/java.lang.reflect.Proxy.newProxyInstance(Proxy.java:1053) ~[na:na]
-	at java.base/java.lang.reflect.Proxy.newProxyInstance(Proxy.java:1039) ~[na:na]
-	at org.springframework.aop.framework.JdkDynamicAopProxy.getProxy(JdkDynamicAopProxy.java:128) ~[spring-aop-6.0.9.jar:6.0.9]
-	at org.springframework.aop.framework.ProxyFactory.getProxy(ProxyFactory.java:110) ~[spring-aop-6.0.9.jar:6.0.9]
-	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:363) ~[spring-data-commons-3.1.0.jar:3.1.0]
+Caused by: org.springframework.data.repository.query.QueryCreationException: Could not create query for public abstract org.springframework.data.domain.Page com.pqrsdf.pqrsdf.repository.PQRepository.findProximasAVencer(java.time.LocalDate,java.time.LocalDate,org.springframework.data.domain.Pageable); Reason: Validation failed for query for method public abstract org.springframework.data.domain.Page com.pqrsdf.pqrsdf.repository.PQRepository.findProximasAVencer(java.time.LocalDate,java.time.LocalDate,org.springframework.data.domain.Pageable)
+	at org.springframework.data.repository.query.QueryCreationException.create(QueryCreationException.java:101) ~[spring-data-commons-3.1.0.jar:3.1.0]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.lookupQuery(QueryExecutorMethodInterceptor.java:115) ~[spring-data-commons-3.1.0.jar:3.1.0]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.mapMethodsToQuery(QueryExecutorMethodInterceptor.java:99) ~[spring-data-commons-3.1.0.jar:3.1.0]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.lambda$new$0(QueryExecutorMethodInterceptor.java:88) ~[spring-data-commons-3.1.0.jar:3.1.0]
+	at java.base/java.util.Optional.map(Optional.java:260) ~[na:na]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.<init>(QueryExecutorMethodInterceptor.java:88) ~[spring-data-commons-3.1.0.jar:3.1.0]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:357) ~[spring-data-commons-3.1.0.jar:3.1.0]
 	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.lambda$afterPropertiesSet$5(RepositoryFactoryBeanSupport.java:279) ~[spring-data-commons-3.1.0.jar:3.1.0]
 	at org.springframework.data.util.Lazy.getNullable(Lazy.java:245) ~[spring-data-commons-3.1.0.jar:3.1.0]
 	at org.springframework.data.util.Lazy.get(Lazy.java:114) ~[spring-data-commons-3.1.0.jar:3.1.0]
@@ -211,73 +106,151 @@ Caused by: java.lang.Error: Unresolved compilation problems:
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766) ~[spring-beans-6.0.9.jar:6.0.9]
 	... 49 common frames omitted
+Caused by: java.lang.IllegalArgumentException: Validation failed for query for method public abstract org.springframework.data.domain.Page com.pqrsdf.pqrsdf.repository.PQRepository.findProximasAVencer(java.time.LocalDate,java.time.LocalDate,org.springframework.data.domain.Pageable)
+	at org.springframework.data.jpa.repository.query.SimpleJpaQuery.validateQuery(SimpleJpaQuery.java:100) ~[spring-data-jpa-3.1.0.jar:3.1.0]
+	at org.springframework.data.jpa.repository.query.SimpleJpaQuery.<init>(SimpleJpaQuery.java:70) ~[spring-data-jpa-3.1.0.jar:3.1.0]
+	at org.springframework.data.jpa.repository.query.JpaQueryFactory.fromMethodWithQueryString(JpaQueryFactory.java:60) ~[spring-data-jpa-3.1.0.jar:3.1.0]
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$DeclaredQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:170) ~[spring-data-jpa-3.1.0.jar:3.1.0]
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$CreateIfNotFoundQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:252) ~[spring-data-jpa-3.1.0.jar:3.1.0]
+	at org.springframework.data.jpa.repository.query.JpaQueryLookupStrategy$AbstractQueryLookupStrategy.resolveQuery(JpaQueryLookupStrategy.java:95) ~[spring-data-jpa-3.1.0.jar:3.1.0]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.lookupQuery(QueryExecutorMethodInterceptor.java:111) ~[spring-data-commons-3.1.0.jar:3.1.0]
+	... 61 common frames omitted
+Caused by: java.lang.IllegalArgumentException: org.hibernate.query.sqm.UnknownEntityException: Could not resolve root entity 'Peticion'
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:138) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:162) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:168) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:795) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:704) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:120) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.orm.jpa.ExtendedEntityManagerCreator$ExtendedEntityManagerInvocationHandler.invoke(ExtendedEntityManagerCreator.java:360) ~[spring-orm-6.0.9.jar:6.0.9]
+	at jdk.proxy4/jdk.proxy4.$Proxy177.createQuery(Unknown Source) ~[na:na]
+	at org.springframework.data.jpa.repository.query.SimpleJpaQuery.validateQuery(SimpleJpaQuery.java:94) ~[spring-data-jpa-3.1.0.jar:3.1.0]
+	... 67 common frames omitted
+Caused by: org.hibernate.query.sqm.UnknownEntityException: Could not resolve root entity 'Peticion'
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitRootEntity(SemanticQueryBuilder.java:1960) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitRootEntity(SemanticQueryBuilder.java:253) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.grammars.hql.HqlParser$RootEntityContext.accept(HqlParser.java:2473) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitEntityWithJoins(SemanticQueryBuilder.java:1874) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitFromClause(SemanticQueryBuilder.java:1865) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitQuery(SemanticQueryBuilder.java:1141) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitQuerySpecExpression(SemanticQueryBuilder.java:937) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitQuerySpecExpression(SemanticQueryBuilder.java:253) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.grammars.hql.HqlParser$QuerySpecExpressionContext.accept(HqlParser.java:1818) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitSimpleQueryGroup(SemanticQueryBuilder.java:931) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitSimpleQueryGroup(SemanticQueryBuilder.java:253) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.grammars.hql.HqlParser$SimpleQueryGroupContext.accept(HqlParser.java:1711) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitSelectStatement(SemanticQueryBuilder.java:418) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.visitStatement(SemanticQueryBuilder.java:377) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.query.hql.internal.SemanticQueryBuilder.buildSemanticModel(SemanticQueryBuilder.java:295) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.query.hql.internal.StandardHqlTranslator.translate(StandardHqlTranslator.java:81) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.internal.AbstractSharedSessionContract.lambda$interpretHql$2(AbstractSharedSessionContract.java:744) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.query.internal.QueryInterpretationCacheStandardImpl.createHqlInterpretation(QueryInterpretationCacheStandardImpl.java:141) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.query.internal.QueryInterpretationCacheStandardImpl.resolveHqlInterpretation(QueryInterpretationCacheStandardImpl.java:128) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.internal.AbstractSharedSessionContract.interpretHql(AbstractSharedSessionContract.java:741) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	at org.hibernate.internal.AbstractSharedSessionContract.createQuery(AbstractSharedSessionContract.java:786) ~[hibernate-core-6.2.2.Final.jar:6.2.2.Final]
+	... 76 common frames omitted
 
-2025-08-12T20:43:05.497-05:00  INFO 16304 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 17.0.12 with PID 16304 (C:\Pqrsdf\target\classes started by Brayam Moreno in C:\Pqrsdf)
-2025-08-12T20:43:05.503-05:00  INFO 16304 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
-2025-08-12T20:43:05.599-05:00  INFO 16304 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\braya\.m2\repository\io\github\cdimascio\java-dotenv\5.2.2\java-dotenv-5.2.2.jar referenced one or more files that do not exist: file:/C:/Users/braya/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-1.4.0.jar,file:/C:/Users/braya/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-common-1.4.0.jar,file:/C:/Users/braya/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/annotations-13.0.jar
-2025-08-12T20:43:05.600-05:00  INFO 16304 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-08-12T20:43:05.601-05:00  INFO 16304 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-08-12T20:43:08.452-05:00  INFO 16304 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-08-12T20:43:08.675-05:00  INFO 16304 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 208 ms. Found 15 JPA repository interfaces.
-2025-08-12T20:43:12.330-05:00  INFO 16304 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2025-08-12T20:43:12.397-05:00  INFO 16304 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-08-12T20:43:12.399-05:00  INFO 16304 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-2025-08-12T20:43:12.983-05:00  INFO 16304 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-08-12T20:43:12.985-05:00  INFO 16304 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 7382 ms
-2025-08-12T20:43:14.783-05:00  INFO 16304 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-08-12T20:43:17.281-05:00  INFO 16304 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6bc245a2
-2025-08-12T20:43:17.285-05:00  INFO 16304 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-08-12T20:43:17.363-05:00  INFO 16304 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-08-12T20:43:17.445-05:00  INFO 16304 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.2.Final
-2025-08-12T20:43:17.450-05:00  INFO 16304 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2025-08-12T20:43:17.720-05:00  INFO 16304 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-08-12T20:43:17.933-05:00  INFO 16304 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-08-12T20:43:18.597-05:00  INFO 16304 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@24744762
-2025-08-12T20:43:19.590-05:00  INFO 16304 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-08-12T20:43:21.348-05:00  INFO 16304 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2025-08-12T20:43:21.353-05:00  INFO 16304 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-08-12T20:43:25.877-05:00  WARN 16304 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-08-12T20:43:26.947-05:00  INFO 16304 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2025-08-12T20:43:27.160-05:00  INFO 16304 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@15b0cb7, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3008cfd9, org.springframework.security.web.context.SecurityContextHolderFilter@1d19d9c2, org.springframework.security.web.header.HeaderWriterFilter@44a468b0, org.springframework.web.filter.CorsFilter@3f999ae8, org.springframework.security.web.authentication.logout.LogoutFilter@69826b9c, com.pqrsdf.pqrsdf.config.JwtTokenValidator@6ab9f5c1, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@37ed10a0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@21a1d2a6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1b3c454e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@33de6295, org.springframework.security.web.session.SessionManagementFilter@daed8f, org.springframework.security.web.access.ExceptionTranslationFilter@3edb2061, org.springframework.security.web.access.intercept.AuthorizationFilter@59ed11f4]
-2025-08-12T20:43:28.162-05:00  INFO 16304 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2025-08-12T20:43:28.338-05:00  INFO 16304 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
-2025-08-12T20:43:28.373-05:00  INFO 16304 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Started PqrsdfApplication in 23.55 seconds (process running for 25.224)
-2025-08-12T20:43:28.961-05:00  INFO 16304 --- [RMI TCP Connection(3)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-08-12T20:43:28.962-05:00  INFO 16304 --- [RMI TCP Connection(3)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-08-12T20:43:28.965-05:00  INFO 16304 --- [RMI TCP Connection(3)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2025-08-12T20:43:56.413-05:00  INFO 16304 --- [http-nio-8081-exec-10] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 2602 ms
-2025-08-12T20:44:58.133-05:00  INFO 16304 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
-2025-08-12T20:44:58.163-05:00  INFO 16304 --- [Thread-5] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2025-08-12T20:44:58.165-05:00  INFO 16304 --- [Thread-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2025-08-12T20:44:58.190-05:00  INFO 16304 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-08-12T20:44:58.197-05:00  INFO 16304 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-08-12T20:44:58.208-05:00  INFO 16304 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-08-12T20:44:58.418-05:00  INFO 16304 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 17.0.12 with PID 16304 (C:\Pqrsdf\target\classes started by Brayam Moreno in C:\Pqrsdf)
-2025-08-12T20:44:58.423-05:00  INFO 16304 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
-2025-08-12T20:44:59.843-05:00  INFO 16304 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-08-12T20:45:00.156-05:00  INFO 16304 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 309 ms. Found 15 JPA repository interfaces.
-2025-08-12T20:45:00.508-05:00  INFO 16304 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2025-08-12T20:45:00.510-05:00  INFO 16304 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-08-12T20:45:00.511-05:00  INFO 16304 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-2025-08-12T20:45:00.589-05:00  INFO 16304 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-08-12T20:45:00.590-05:00  INFO 16304 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2163 ms
-2025-08-12T20:45:00.892-05:00  INFO 16304 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
-2025-08-12T20:45:02.366-05:00  INFO 16304 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@374f26cc
-2025-08-12T20:45:02.375-05:00  INFO 16304 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
-2025-08-12T20:45:02.378-05:00  INFO 16304 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-08-12T20:45:02.396-05:00  INFO 16304 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-08-12T20:45:02.471-05:00  INFO 16304 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-08-12T20:45:02.816-05:00  INFO 16304 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@2e42d211
-2025-08-12T20:45:03.391-05:00  INFO 16304 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-08-12T20:45:03.655-05:00  INFO 16304 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2025-08-12T20:45:03.656-05:00  INFO 16304 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-08-12T20:45:04.445-05:00  WARN 16304 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-08-12T20:45:04.714-05:00  INFO 16304 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2025-08-12T20:45:04.751-05:00  INFO 16304 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1805d381, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@23aa1efe, org.springframework.security.web.context.SecurityContextHolderFilter@6f07270f, org.springframework.security.web.header.HeaderWriterFilter@1fc0cbbf, org.springframework.web.filter.CorsFilter@455543fd, org.springframework.security.web.authentication.logout.LogoutFilter@3936ad97, com.pqrsdf.pqrsdf.config.JwtTokenValidator@4dfa3a98, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@300162b5, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@668de672, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7f89542f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7bd5617d, org.springframework.security.web.session.SessionManagementFilter@49eb25af, org.springframework.security.web.access.ExceptionTranslationFilter@43f95f52, org.springframework.security.web.access.intercept.AuthorizationFilter@14d39e99]
-2025-08-12T20:45:04.976-05:00  INFO 16304 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2025-08-12T20:45:05.057-05:00  INFO 16304 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
-2025-08-12T20:45:05.084-05:00  INFO 16304 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Started PqrsdfApplication in 6.763 seconds (process running for 121.934)
-2025-08-12T20:45:05.092-05:00  INFO 16304 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
-2025-08-12T20:45:05.131-05:00  INFO 16304 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-08-12T20:45:05.134-05:00  INFO 16304 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
-2025-08-12T20:45:06.412-05:00  INFO 16304 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2025-08-13T13:26:39.448-05:00  INFO 20468 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 17.0.12 with PID 20468 (C:\Pqrsdf\target\classes started by Brayam Moreno in C:\Pqrsdf)
+2025-08-13T13:26:39.454-05:00  INFO 20468 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-08-13T13:26:39.573-05:00  INFO 20468 --- [restartedMain] o.s.b.devtools.restart.ChangeableUrls    : The Class-Path manifest attribute in C:\Users\braya\.m2\repository\io\github\cdimascio\java-dotenv\5.2.2\java-dotenv-5.2.2.jar referenced one or more files that do not exist: file:/C:/Users/braya/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-1.4.0.jar,file:/C:/Users/braya/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/kotlin-stdlib-common-1.4.0.jar,file:/C:/Users/braya/.m2/repository/io/github/cdimascio/java-dotenv/5.2.2/annotations-13.0.jar
+2025-08-13T13:26:39.574-05:00  INFO 20468 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-13T13:26:39.575-05:00  INFO 20468 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-13T13:26:42.623-05:00  INFO 20468 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-13T13:26:42.950-05:00  INFO 20468 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 300 ms. Found 15 JPA repository interfaces.
+2025-08-13T13:26:46.029-05:00  INFO 20468 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-08-13T13:26:46.088-05:00  INFO 20468 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-13T13:26:46.093-05:00  INFO 20468 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-08-13T13:26:46.525-05:00  INFO 20468 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-13T13:26:46.528-05:00  INFO 20468 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6950 ms
+2025-08-13T13:26:47.854-05:00  INFO 20468 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-13T13:26:49.619-05:00  INFO 20468 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2d77992d
+2025-08-13T13:26:49.627-05:00  INFO 20468 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-13T13:26:49.786-05:00  INFO 20468 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-13T13:26:50.349-05:00  INFO 20468 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.2.Final
+2025-08-13T13:26:50.369-05:00  INFO 20468 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2025-08-13T13:26:50.806-05:00  INFO 20468 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-08-13T13:26:51.020-05:00  INFO 20468 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-13T13:26:51.494-05:00  INFO 20468 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@52073e2e
+2025-08-13T13:26:52.274-05:00  INFO 20468 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-08-13T13:26:54.217-05:00  INFO 20468 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-08-13T13:26:54.223-05:00  INFO 20468 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-13T13:26:57.776-05:00  WARN 20468 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-13T13:26:59.356-05:00  INFO 20468 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-13T13:26:59.530-05:00  INFO 20468 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6a224d61, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@15331d6d, org.springframework.security.web.context.SecurityContextHolderFilter@7b6f3a91, org.springframework.security.web.header.HeaderWriterFilter@4c434300, org.springframework.web.filter.CorsFilter@431d43b2, org.springframework.security.web.authentication.logout.LogoutFilter@77ce3508, com.pqrsdf.pqrsdf.config.JwtTokenValidator@4f14f31f, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@44fead1e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@60119a26, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7b9d8253, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3725e6d9, org.springframework.security.web.session.SessionManagementFilter@186ec83b, org.springframework.security.web.access.ExceptionTranslationFilter@33c216f2, org.springframework.security.web.access.intercept.AuthorizationFilter@74b16bfb]
+2025-08-13T13:27:00.488-05:00  INFO 20468 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-08-13T13:27:00.655-05:00  INFO 20468 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2025-08-13T13:27:00.686-05:00  INFO 20468 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Started PqrsdfApplication in 22.092 seconds (process running for 23.705)
+2025-08-13T13:27:02.619-05:00  INFO 20468 --- [RMI TCP Connection(2)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-13T13:27:02.620-05:00  INFO 20468 --- [RMI TCP Connection(2)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-13T13:27:02.622-05:00  INFO 20468 --- [RMI TCP Connection(2)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-08-13T13:27:10.558-05:00  INFO 20468 --- [http-nio-8081-exec-10] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 2021 ms
+2025-08-13T13:27:42.576-05:00  INFO 20468 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-08-13T13:27:42.610-05:00  INFO 20468 --- [Thread-5] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-08-13T13:27:42.614-05:00  INFO 20468 --- [Thread-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2025-08-13T13:27:42.650-05:00  INFO 20468 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-13T13:27:42.664-05:00  INFO 20468 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-08-13T13:27:42.672-05:00  INFO 20468 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-08-13T13:27:42.864-05:00  INFO 20468 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 17.0.12 with PID 20468 (C:\Pqrsdf\target\classes started by Brayam Moreno in C:\Pqrsdf)
+2025-08-13T13:27:42.866-05:00  INFO 20468 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-08-13T13:27:44.700-05:00  INFO 20468 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-13T13:27:45.237-05:00  INFO 20468 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 535 ms. Found 15 JPA repository interfaces.
+2025-08-13T13:27:46.148-05:00  INFO 20468 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-08-13T13:27:46.153-05:00  INFO 20468 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-13T13:27:46.154-05:00  INFO 20468 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-08-13T13:27:46.394-05:00  INFO 20468 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-13T13:27:46.395-05:00  INFO 20468 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3522 ms
+2025-08-13T13:27:46.687-05:00  INFO 20468 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2025-08-13T13:27:48.098-05:00  INFO 20468 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@603dc9ec
+2025-08-13T13:27:48.099-05:00  INFO 20468 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2025-08-13T13:27:48.102-05:00  INFO 20468 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-13T13:27:48.124-05:00  INFO 20468 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-08-13T13:27:48.124-05:00  INFO 20468 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-13T13:27:48.394-05:00  INFO 20468 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@580e03df
+2025-08-13T13:27:48.757-05:00  INFO 20468 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-08-13T13:27:49.236-05:00  INFO 20468 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-08-13T13:27:49.237-05:00  INFO 20468 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-13T13:27:50.286-05:00  WARN 20468 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-13T13:27:50.539-05:00  INFO 20468 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-13T13:27:50.576-05:00  INFO 20468 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@b8081cb, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4ad77e72, org.springframework.security.web.context.SecurityContextHolderFilter@2e0f0235, org.springframework.security.web.header.HeaderWriterFilter@1558e8fe, org.springframework.web.filter.CorsFilter@8ab7f22, org.springframework.security.web.authentication.logout.LogoutFilter@224b1d7e, com.pqrsdf.pqrsdf.config.JwtTokenValidator@2f45ed0e, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@5e13f0b1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@88e954b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5a4393bc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2044aff4, org.springframework.security.web.session.SessionManagementFilter@de46154, org.springframework.security.web.access.ExceptionTranslationFilter@7d8b658a, org.springframework.security.web.access.intercept.AuthorizationFilter@715ad273]
+2025-08-13T13:27:50.785-05:00  INFO 20468 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-08-13T13:27:50.833-05:00  INFO 20468 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2025-08-13T13:27:50.851-05:00  INFO 20468 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Started PqrsdfApplication in 8.051 seconds (process running for 73.87)
+2025-08-13T13:27:50.864-05:00  INFO 20468 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-08-13T13:27:52.371-05:00  INFO 20468 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-08-13T13:27:52.405-05:00  INFO 20468 --- [Thread-7] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-08-13T13:27:52.420-05:00  INFO 20468 --- [Thread-7] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-13T13:27:52.423-05:00  INFO 20468 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2025-08-13T13:27:52.965-05:00  INFO 20468 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2025-08-13T13:27:53.146-05:00  INFO 20468 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 17.0.12 with PID 20468 (C:\Pqrsdf\target\classes started by Brayam Moreno in C:\Pqrsdf)
+2025-08-13T13:27:53.147-05:00  INFO 20468 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-08-13T13:27:54.292-05:00  INFO 20468 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-13T13:27:54.375-05:00  INFO 20468 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 81 ms. Found 15 JPA repository interfaces.
+2025-08-13T13:27:54.557-05:00  INFO 20468 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2025-08-13T13:27:54.558-05:00  INFO 20468 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-13T13:27:54.559-05:00  INFO 20468 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-08-13T13:27:54.622-05:00  INFO 20468 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-13T13:27:54.623-05:00  INFO 20468 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1470 ms
+2025-08-13T13:27:54.716-05:00  INFO 20468 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2025-08-13T13:27:55.723-05:00  INFO 20468 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@30a743c9
+2025-08-13T13:27:55.724-05:00  INFO 20468 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2025-08-13T13:27:55.726-05:00  INFO 20468 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-13T13:27:55.743-05:00  INFO 20468 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-08-13T13:27:55.744-05:00  INFO 20468 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-13T13:27:55.962-05:00  INFO 20468 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@90ba631
+2025-08-13T13:27:56.310-05:00  INFO 20468 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-08-13T13:27:56.681-05:00  INFO 20468 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-08-13T13:27:56.682-05:00  INFO 20468 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-13T13:27:57.547-05:00  WARN 20468 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-13T13:27:57.838-05:00  INFO 20468 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-08-13T13:27:57.866-05:00  INFO 20468 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@26f29072, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@49168e79, org.springframework.security.web.context.SecurityContextHolderFilter@7892f066, org.springframework.security.web.header.HeaderWriterFilter@1dbd9a2, org.springframework.web.filter.CorsFilter@3daf4845, org.springframework.security.web.authentication.logout.LogoutFilter@2e4f4170, com.pqrsdf.pqrsdf.config.JwtTokenValidator@5f73821c, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@4205a1d4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@353b23be, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6af2ea72, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6d30e880, org.springframework.security.web.session.SessionManagementFilter@1d96dfdb, org.springframework.security.web.access.ExceptionTranslationFilter@542338e2, org.springframework.security.web.access.intercept.AuthorizationFilter@72621b8f]
+2025-08-13T13:27:58.029-05:00  INFO 20468 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-08-13T13:27:58.056-05:00  INFO 20468 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2025-08-13T13:27:58.063-05:00  INFO 20468 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Started PqrsdfApplication in 4.973 seconds (process running for 81.082)
+2025-08-13T13:27:58.068-05:00  INFO 20468 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-08-13T13:29:42.401-05:00  INFO 20468 --- [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-13T13:29:42.403-05:00  INFO 20468 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-13T13:29:42.407-05:00  INFO 20468 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms

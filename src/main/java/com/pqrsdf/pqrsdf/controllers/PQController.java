@@ -83,6 +83,24 @@ public class PQController extends GenericController<PQ, Long> {
         }
     }
 
+    @GetMapping("/proximas_a_vencer")
+    public ResponseEntity<?> getProximasAVencer(
+            @RequestParam(required = false, defaultValue = "id") String order_by,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        try {
+            Pageable pageable = PageRequest.of(page, size, Sort.by("fechaResolucionEstimada").ascending());
+            Page<PQ> proximasAVencer = service.findProximasAVencer(pageable);
+            if (proximasAVencer.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+            return ResponseEntityUtil.handlePaginationRequest(proximasAVencer);
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
+
+
     @PostMapping("/radicar_pq")
     public ResponseEntity<?> radicarPq(@RequestBody PqDto data) {
         try {

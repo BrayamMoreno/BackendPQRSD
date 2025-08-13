@@ -74,6 +74,12 @@ public class PQService extends GenericService<PQ, Long> {
         return "PQ-" + fecha + "-" + uuid;
     }
 
+    public Page<PQ> findProximasAVencer(Pageable pageable) {
+        LocalDate hoy = LocalDate.now();
+        LocalDate limite = hoy.plusDays(7); // Por ejemplo, 30 días a partir de hoy
+        return repository.findByFechaResolucionEstimadaBetween(hoy, limite, pageable);
+    }
+
     public Page<PQ> findBySolicitanteId(Long solicitanteId, Pageable pageable) {
         return repository.findBySolicitanteIdOrderByFechaRadicacionDesc(solicitanteId, pageable);
     }
@@ -88,7 +94,6 @@ public class PQService extends GenericService<PQ, Long> {
 
     @Transactional
     public PQ createPq(PqDto form) {
-
         PQ pq = PQ.builder()
                 .consecutivo(generarIdentificadorPQ())
                 .detalleAsunto(form.detalleAsunto())
