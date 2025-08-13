@@ -69,6 +69,20 @@ public class PQController extends GenericController<PQ, Long> {
         }
     }
 
+    @Override
+    @GetMapping()
+    public ResponseEntity<?> getAllEntities(
+            @RequestParam(required = false, defaultValue = "id") String order_by,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        try {
+            Pageable pageable = PageRequest.of(page, size, Sort.by(order_by));
+            return ResponseEntityUtil.handlePaginationRequest(service.findByFechaRadicacionDes(pageable));
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
+
     @PostMapping("/radicar_pq")
     public ResponseEntity<?> radicarPq(@RequestBody PqDto data) {
         try {

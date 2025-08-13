@@ -75,7 +75,11 @@ public class PQService extends GenericService<PQ, Long> {
     }
 
     public Page<PQ> findBySolicitanteId(Long solicitanteId, Pageable pageable) {
-        return repository.findBySolicitanteId(solicitanteId, pageable);
+        return repository.findBySolicitanteIdOrderByFechaRadicacionDesc(solicitanteId, pageable);
+    }
+
+    public Page<PQ> findByFechaRadicacionDes(Pageable pageable) {
+        return repository.findAllByOrderByFechaRadicacionDesc(pageable);
     }
 
     public Page<PQ> findByResponsableId(Long responsableId, Pageable pageable) {
