@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -100,6 +101,18 @@ public class PQController extends GenericController<PQ, Long> {
         }
     }
 
+    @GetMapping("/ultimos_7_dias")
+    public ResponseEntity<?> getUltimos7Dias() {
+        try {
+            List<Map<String, Object>> ultimos7Dias = service.obtenerTendenciasDiarias();
+            if (ultimos7Dias.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(ultimos7Dias);
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
 
     @PostMapping("/radicar_pq")
     public ResponseEntity<?> radicarPq(@RequestBody PqDto data) {

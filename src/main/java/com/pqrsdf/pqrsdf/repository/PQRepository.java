@@ -8,11 +8,12 @@ import org.springframework.stereotype.Repository;
 
 import com.pqrsdf.pqrsdf.generic.GenericRepository;
 import com.pqrsdf.pqrsdf.models.PQ;
-import java.util.List;
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 public interface PQRepository extends GenericRepository<PQ, Long> {
+
     Page<PQ> findByResponsableId(Long responsableId, Pageable pageable);
 
     Page<PQ> findBySolicitanteId(Long solicitanteId, Pageable pageable);
@@ -23,5 +24,7 @@ public interface PQRepository extends GenericRepository<PQ, Long> {
 
     Page<PQ> findByFechaResolucionEstimadaBetween(LocalDate hoy, LocalDate limite, Pageable pageable);
 
+    @Query("SELECT p FROM PQ p WHERE p.fechaRadicacion >= :fechaInicio")
+    List<PQ> findUltimos7Dias(@Param("fechaInicio") LocalDate fechaInicio);
 
 }

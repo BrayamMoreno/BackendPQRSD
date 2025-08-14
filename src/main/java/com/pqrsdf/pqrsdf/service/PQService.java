@@ -6,10 +6,16 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.TextStyle;
 import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -90,6 +96,43 @@ public class PQService extends GenericService<PQ, Long> {
 
     public Page<PQ> findByResponsableId(Long responsableId, Pageable pageable) {
         return repository.findByResponsableId(responsableId, pageable);
+    }
+
+    public List<Map<String, Object>> obtenerTendenciasDiarias() {
+        LocalDate hoy = LocalDate.now();
+        LocalDate hace7Dias = hoy.minusDays(6);
+
+        List<PQ> ultimos7Dias = repository.findUltimos7Dias(hace7Dias);
+
+        // Inicializar los 7 días con cantidad 0
+        Map<LocalDate, Long> conteo = new LinkedHashMap<>();
+        for (int i = 0; i < 7; i++) {
+            conteo.put(hoy.minusDays(i), 0L);
+        }
+
+        // Contar solicitudes por fecha
+        ultimos7Dias.forEach(pq -> {
+            LocalDate fecha = pq.getFechaRadicacion();
+            conteo.computeIfPresent(fecha, (k, v) -> v + 1);
+        });
+
+        // Convertir al formato requerido (día completo con mayúscula inicial)
+        List<Map<String, Object>> tendencias = conteo.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .map(e -> {
+                    Map<String, Object> map = new HashMap<>();
+                    String diaSemana = e.getKey()
+                            .getDayOfWeek()
+                            .getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
+                    // Capitalizar primera letra
+                    diaSemana = diaSemana.substring(0, 1).toUpperCase() + diaSemana.substring(1);
+                    map.put("fecha", diaSemana);
+                    map.put("cantidad", e.getValue());
+                    return map;
+                })
+                .collect(Collectors.toList());
+
+        return tendencias;
     }
 
     @Transactional
