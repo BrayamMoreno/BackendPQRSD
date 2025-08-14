@@ -6,7 +6,9 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.YearMonth;
 import java.time.format.TextStyle;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
@@ -133,6 +135,24 @@ public class PQService extends GenericService<PQ, Long> {
                 .collect(Collectors.toList());
 
         return tendencias;
+    }
+
+    public List<Map<String, Object>> obtenerConteoPorTipoMes() {
+        LocalDate ahora = LocalDate.now();
+        LocalDate inicioMes = ahora.withDayOfMonth(1);
+        LocalDate finMes = ahora.withDayOfMonth(ahora.lengthOfMonth());
+
+
+        List<Object[]> resultados = repository.contarPorTipoEnMes(inicioMes, finMes);
+
+        List<Map<String, Object>> lista = new ArrayList<>();
+        for (Object[] fila : resultados) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("tipo", fila[0]);
+            map.put("cantidad", ((Number) fila[1]).longValue());
+            lista.add(map);
+        }
+        return lista;
     }
 
     @Transactional

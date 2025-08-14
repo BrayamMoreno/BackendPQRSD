@@ -27,4 +27,24 @@ public interface PQRepository extends GenericRepository<PQ, Long> {
     @Query("SELECT p FROM PQ p WHERE p.fechaRadicacion >= :fechaInicio")
     List<PQ> findUltimos7Dias(@Param("fechaInicio") LocalDate fechaInicio);
 
+    @Query(value = """
+                SELECT
+                    t.nombre AS tipo,
+                    SUM(
+                        CASE
+                            WHEN p.fecha_radicacion BETWEEN :inicioMes AND :finMes
+                            THEN 1
+                            ELSE 0
+                        END
+                    ) AS cantidad
+                FROM tipos_pq t
+                LEFT JOIN pqs p
+                    ON p.tipo_pq_id = t.id
+                GROUP BY t.nombre
+                ORDER BY t.nombre
+            """, nativeQuery = true)
+    List<Object[]> contarPorTipoEnMes(
+            @Param("inicioMes") LocalDate inicioMes,
+            @Param("finMes") LocalDate finMes);
+
 }

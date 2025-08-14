@@ -114,6 +114,19 @@ public class PQController extends GenericController<PQ, Long> {
         }
     }
 
+    @GetMapping("/contar_por_tipo_mes")
+    public ResponseEntity<?> contarPorTipoMes() {
+        try {
+            List<Map<String, Object>> conteoPorTipo = service.obtenerConteoPorTipoMes();
+            if (conteoPorTipo.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(conteoPorTipo);
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
+
     @PostMapping("/radicar_pq")
     public ResponseEntity<?> radicarPq(@RequestBody PqDto data) {
         try {
