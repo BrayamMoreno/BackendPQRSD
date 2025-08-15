@@ -163,8 +163,9 @@ public class PQService extends GenericService<PQ, Long> {
                 .detalleDescripcion(form.detalleDescripcion())
                 .tipoPQ(tipoPqService.getById(Long.parseLong(form.tipo_pq_id())))
                 .solicitante(personasService.getById(Long.parseLong(form.solicitante_id())))
-                .horaRadicacion(LocalTime.now())
-                .fechaRadicacion(LocalDate.now())
+                .horaRadicacion(LocalTime.now(ZoneId.of("America/Bogota")))
+
+                .fechaRadicacion(LocalDate.now(ZoneId.of("America/Bogota")))
                 .web(true)
                 .build();
 
