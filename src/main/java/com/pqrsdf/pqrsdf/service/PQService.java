@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.YearMonth;
+import java.time.ZoneId;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -142,7 +143,6 @@ public class PQService extends GenericService<PQ, Long> {
         LocalDate inicioMes = ahora.withDayOfMonth(1);
         LocalDate finMes = ahora.withDayOfMonth(ahora.lengthOfMonth());
 
-
         List<Object[]> resultados = repository.contarPorTipoEnMes(inicioMes, finMes);
 
         List<Map<String, Object>> lista = new ArrayList<>();
@@ -181,6 +181,10 @@ public class PQService extends GenericService<PQ, Long> {
         if (form.lista_documentos() != null) {
             createAdjuntosPqs(form.lista_documentos(), pq);
         }
+
+        System.out.println("Hora local servidor: " + LocalTime.now());
+        System.out.println("Zona horaria servidor: " + ZoneId.systemDefault());
+
         return pq;
     }
 

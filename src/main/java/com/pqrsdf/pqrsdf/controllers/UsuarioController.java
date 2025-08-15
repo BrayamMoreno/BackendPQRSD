@@ -60,6 +60,8 @@ public class UsuarioController extends GenericController<Usuario, Long> {
         }
     }
 
+
+
     /**
      * @PostMapping("/user")
      * public ResponseEntity<?> createEntity(@RequestBody UserRequest request){

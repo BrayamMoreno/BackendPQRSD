@@ -2,12 +2,17 @@ package com.pqrsdf.pqrsdf.models;
 
 import java.time.LocalDateTime;
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -29,17 +34,22 @@ public class Usuario extends GenericEntity {
 
     private String correo;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String contrasena;
+
     private Boolean isEnable;
+    
     private Boolean accountNoExpired;
+    
     private Boolean accountNoLocked;
+    
     private Boolean credentialNoExpired;
+    
     private String resetToken;
 
-    @ManyToOne
+
     @JoinColumn(name = "persona_id")
-    
+    @OneToOne(cascade = CascadeType.ALL)
     private Persona persona;
 
     @ManyToOne
@@ -62,5 +72,4 @@ public class Usuario extends GenericEntity {
     public Persona getPersona() {
         return persona;
     }
-
 }
