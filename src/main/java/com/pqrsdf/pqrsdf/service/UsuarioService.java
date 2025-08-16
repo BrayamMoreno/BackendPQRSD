@@ -1,5 +1,7 @@
 package com.pqrsdf.pqrsdf.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -88,6 +90,11 @@ public class UsuarioService extends GenericService<Usuario, Long> {
 
                 return usuarioRepository.save(usuario);
         }
+
+        public Page<Usuario> findByRolId(long Id, Pageable pageable) {
+                return usuarioRepository.findByRolId(Id, pageable);
+        }
+
 
         public void disableAccount(Long id) {
                 Usuario usuario = usuarioRepository.findById(id)

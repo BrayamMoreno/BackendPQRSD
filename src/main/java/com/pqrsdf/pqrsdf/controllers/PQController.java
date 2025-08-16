@@ -15,7 +15,6 @@ import org.springframework.data.domain.Sort;
 
 import com.pqrsdf.pqrsdf.dto.PqDto;
 import com.pqrsdf.pqrsdf.generic.GenericController;
-import com.pqrsdf.pqrsdf.models.Persona;
 import com.pqrsdf.pqrsdf.models.PQ;
 import com.pqrsdf.pqrsdf.service.PersonaService;
 import com.pqrsdf.pqrsdf.service.AdjuntoPQService;
@@ -25,7 +24,6 @@ import com.pqrsdf.pqrsdf.utils.ResponseEntityUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
