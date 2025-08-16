@@ -93,6 +93,10 @@ public class PQService extends GenericService<PQ, Long> {
         return repository.findBySolicitanteIdOrderByFechaRadicacionDesc(solicitanteId, pageable);
     }
 
+    public Page<PQ> findByResponsableIdOrderByFechaRadicacionDesc( Pageable pageable) {
+        return repository.findByResponsableIdOrderByFechaRadicacionDesc(null, pageable);
+    }
+
     public Page<PQ> findByFechaRadicacionDes(Pageable pageable) {
         return repository.findAllByOrderByFechaRadicacionDesc(pageable);
     }
@@ -163,9 +167,8 @@ public class PQService extends GenericService<PQ, Long> {
                 .detalleDescripcion(form.detalleDescripcion())
                 .tipoPQ(tipoPqService.getById(Long.parseLong(form.tipo_pq_id())))
                 .solicitante(personasService.getById(Long.parseLong(form.solicitante_id())))
-                .horaRadicacion(LocalTime.now(ZoneId.of("America/Bogota")))
-
-                .fechaRadicacion(LocalDate.now(ZoneId.of("America/Bogota")))
+                .fechaRadicacion(LocalDate.now())
+                .horaRadicacion(LocalTime.now())
                 .web(true)
                 .build();
 
@@ -182,9 +185,6 @@ public class PQService extends GenericService<PQ, Long> {
         if (form.lista_documentos() != null) {
             createAdjuntosPqs(form.lista_documentos(), pq);
         }
-
-        System.out.println("Hora local servidor: " + LocalTime.now());
-        System.out.println("Zona horaria servidor: " + ZoneId.systemDefault());
 
         return pq;
     }

@@ -18,6 +18,8 @@ public interface PQRepository extends GenericRepository<PQ, Long> {
 
     Page<PQ> findBySolicitanteId(Long solicitanteId, Pageable pageable);
 
+    Page<PQ> findByResponsableIdOrderByFechaRadicacionDesc(Long responsableId, Pageable pageable);
+    
     Page<PQ> findBySolicitanteIdOrderByFechaRadicacionDesc(Long solicitanteId, Pageable pageable);
 
     Page<PQ> findAllByOrderByFechaRadicacionDesc(Pageable pageable);

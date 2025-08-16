@@ -13,7 +13,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import com.pqrsdf.pqrsdf.dto.NoLoginPq;
 import com.pqrsdf.pqrsdf.dto.PqDto;
 import com.pqrsdf.pqrsdf.generic.GenericController;
 import com.pqrsdf.pqrsdf.models.Persona;
@@ -122,6 +121,23 @@ public class PQController extends GenericController<PQ, Long> {
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
             }
             return ResponseEntity.status(HttpStatus.OK).body(conteoPorTipo);
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
+
+    @GetMapping("/sin_responsable")
+    public ResponseEntity<?> getMyPqsByResponsable(
+            @RequestParam(required = false, defaultValue = "id") String order_by,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        try {
+            Pageable pageable = PageRequest.of(page, size, Sort.by(order_by));
+            Page<PQ> pqs = service.findByResponsableIdOrderByFechaRadicacionDesc(pageable);
+            if (pqs.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+            return ResponseEntityUtil.handlePaginationRequest(pqs);
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }
