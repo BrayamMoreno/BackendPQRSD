@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import com.pqrsdf.pqrsdf.dto.PqDto;
+import com.pqrsdf.pqrsdf.dto.RadicarDto;
 import com.pqrsdf.pqrsdf.generic.GenericController;
 import com.pqrsdf.pqrsdf.models.PQ;
 import com.pqrsdf.pqrsdf.service.PersonaService;
@@ -145,6 +146,16 @@ public class PQController extends GenericController<PQ, Long> {
     public ResponseEntity<?> radicarPq(@RequestBody PqDto data) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(service.createPq(data));
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
+
+    @PostMapping("/aprobacion_pq")
+    public ResponseEntity<?> aprobacionPq(@RequestBody RadicarDto entity) {
+        try {
+            service.aceptarRechazarPq(entity);
+            return ResponseEntity.status(HttpStatus.OK).body("PQ aceptada correctamente");
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }

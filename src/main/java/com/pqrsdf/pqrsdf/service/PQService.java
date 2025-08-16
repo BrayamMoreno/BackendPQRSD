@@ -28,12 +28,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.pqrsdf.pqrsdf.dto.DocumentoDTO;
 import com.pqrsdf.pqrsdf.dto.PqDto;
+import com.pqrsdf.pqrsdf.dto.RadicarDto;
 import com.pqrsdf.pqrsdf.generic.GenericService;
 import com.pqrsdf.pqrsdf.models.AdjuntoPQ;
 import com.pqrsdf.pqrsdf.models.HistorialEstadoPQ;
 import com.pqrsdf.pqrsdf.models.PQ;
 import com.pqrsdf.pqrsdf.repository.HistorialEstadosRespository;
 import com.pqrsdf.pqrsdf.repository.PQRepository;
+import com.pqrsdf.pqrsdf.repository.ResponsablePQRepository;
+import com.pqrsdf.pqrsdf.repository.UsuarioRepository;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import io.minio.BucketExistsArgs;
@@ -46,7 +49,9 @@ import io.minio.StatObjectArgs;
 public class PQService extends GenericService<PQ, Long> {
 
     private final AdjuntoPQService adjuntosPqService;
+    private final UsuarioRepository usuarioRepository;
     private final HistorialEstadoService historialEstadoService;
+    private final ResponsablePQRepository responsablePQRepository;
     private final PersonaService personasService;
     private final PQRepository repository;
     private final TipoPQService tipoPqService;
@@ -60,7 +65,7 @@ public class PQService extends GenericService<PQ, Long> {
             AdjuntoPQService adjuntosPqService, TipoPQService tipoPqService,
             HistorialEstadoService historialEstadoService, EstadoPQService estadoPQService,
             HistorialEstadosRespository historialEstadosRespository, MinioClient minioClient,
-            Dotenv dotenv) {
+            Dotenv dotenv, ResponsablePQRepository responsablePQRepository,UsuarioRepository usuarioRepository) {
         super(repository);
         this.personasService = personasService;
         this.repository = repository;
@@ -70,6 +75,8 @@ public class PQService extends GenericService<PQ, Long> {
         this.estadoPQService = estadoPQService;
         this.historialEstadosRespository = historialEstadosRespository;
         this.minioClient = minioClient;
+        this.responsablePQRepository = responsablePQRepository;
+        this.usuarioRepository = usuarioRepository;
 
         this.BUCKET_NAME = dotenv.get("MINIO_BUCKET_NAME");
     }
@@ -268,4 +275,48 @@ public class PQService extends GenericService<PQ, Long> {
         }
     }
 
+    public void aceptarRechazarPq(RadicarDto entity){
+        if(entity.isAprobada()){
+            isAprobada(entity) ;
+        }else{
+            isNotAprobada(entity);
+        } // Implementar lógica de aceptación/rechazo
+    }
+
+    public void isAprobada (RadicarDto entity){
+        PQ pq = repository.findById(entity.solicitudId())
+                .orElseThrow(() -> new RuntimeException("PQ no encontrado con ID: " + entity.solicitudId()));
+
+        pq.setResponsable(responsablePQRepository.findById(entity.responsableId())
+                .orElseThrow(() -> new RuntimeException("Responsable no encontrado con ID: " + entity.responsableId())));
+        
+        pq.setFechaResolucionEstimada(LocalDate.parse(entity.fechaResolucionEstimada()));
+
+        HistorialEstadoPQ historialEstadoPQ = HistorialEstadoPQ.builder()
+                .usuario(usuarioRepository.findById(entity.RadicadorId())
+                        .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + entity.RadicadorId())))
+                .estado(estadoPQService.getById(2L))
+                .pq(pq)
+                .fechaCambio(new java.sql.Timestamp(System.currentTimeMillis()))
+                .observacion(entity.comentario())
+                .build();
+
+        repository.save(pq);
+        historialEstadosRespository.save(historialEstadoPQ);
+    }
+
+    public void isNotAprobada(RadicarDto entity) {
+        HistorialEstadoPQ historialEstadoPQ = HistorialEstadoPQ.builder()
+                .usuario(usuarioRepository.findById(entity.RadicadorId())
+                        .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + entity.RadicadorId())))
+                .estado(estadoPQService.getById(3L))
+                .pq(repository.findById(entity.solicitudId())
+                        .orElseThrow(() -> new RuntimeException("PQ no encontrado con ID: " + entity.solicitudId())))
+                .fechaCambio(new java.sql.Timestamp(System.currentTimeMillis()))
+                .observacion(entity.comentario())
+                .build();
+
+        historialEstadosRespository.save(historialEstadoPQ);
+        
+    }
 }
