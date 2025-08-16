@@ -293,8 +293,8 @@ public class PQService extends GenericService<PQ, Long> {
         pq.setFechaResolucionEstimada(LocalDate.parse(entity.fechaResolucionEstimada()));
 
         HistorialEstadoPQ historialEstadoPQ = HistorialEstadoPQ.builder()
-                .usuario(usuarioRepository.findById(entity.RadicadorId())
-                        .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + entity.RadicadorId())))
+                .usuario(usuarioRepository.findById(entity.radicadorId())
+                        .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + entity.radicadorId())))
                 .estado(estadoPQService.getById(2L))
                 .pq(pq)
                 .fechaCambio(new java.sql.Timestamp(System.currentTimeMillis()))
@@ -307,8 +307,8 @@ public class PQService extends GenericService<PQ, Long> {
 
     public void isNotAprobada(RadicarDto entity) {
         HistorialEstadoPQ historialEstadoPQ = HistorialEstadoPQ.builder()
-                .usuario(usuarioRepository.findById(entity.RadicadorId())
-                        .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + entity.RadicadorId())))
+                .usuario(usuarioRepository.findById(entity.radicadorId())
+                        .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + entity.radicadorId())))
                 .estado(estadoPQService.getById(3L))
                 .pq(repository.findById(entity.solicitudId())
                         .orElseThrow(() -> new RuntimeException("PQ no encontrado con ID: " + entity.solicitudId())))
