@@ -1,5 +1,6 @@
 package com.pqrsdf.pqrsdf.repository;
 
+import org.antlr.v4.runtime.atn.SemanticContext.AND;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -19,7 +20,7 @@ public interface PQRepository extends GenericRepository<PQ, Long> {
     Page<PQ> findBySolicitanteId(Long solicitanteId, Pageable pageable);
 
     Page<PQ> findByResponsableIdOrderByFechaRadicacionDesc(Long responsableId, Pageable pageable);
-    
+
     Page<PQ> findBySolicitanteIdOrderByFechaRadicacionDesc(Long solicitanteId, Pageable pageable);
 
     Page<PQ> findAllByOrderByFechaRadicacionDesc(Pageable pageable);
@@ -48,5 +49,14 @@ public interface PQRepository extends GenericRepository<PQ, Long> {
     List<Object[]> contarPorTipoEnMes(
             @Param("inicioMes") LocalDate inicioMes,
             @Param("finMes") LocalDate finMes);
+
+    @Query("SELECT p FROM PQ p WHERE p.ultimoEstadoId = 1 AND p.responsable IS NULL ORDER BY p.fechaRadicacion ASC")
+    Page<PQ> findPendientesSinResponsable(Pageable pageable);
+
+    @Query("SELECT p FROM PQ p WHERE p.responsable.id = :responsableId AND p.ultimoEstadoId = :estadoId")
+    Page<PQ> findByResponsableAndEstado(@Param("responsableId") Long responsableId, @Param("estadoId") Long estadoId, Pageable pageable);
+
+    @Query("SELECT p FROM PQ p WHERE p.ultimoEstadoId = 1 AND p.responsable.id = :responsableId ORDER BY p.fechaRadicacion ASC")
+    List<PQ> findByResponsableAndEstadoList(@Param("responsableId") Long responsableId);
 
 }

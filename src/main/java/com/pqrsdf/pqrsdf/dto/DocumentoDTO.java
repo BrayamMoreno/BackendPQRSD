@@ -3,6 +3,7 @@ package com.pqrsdf.pqrsdf.dto;
 public record DocumentoDTO(
     String Nombre,
     String Tipo,
-    String Contenido
+    String Contenido,
+    boolean isRespuesta
 ){
 }

@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 
 import com.pqrsdf.pqrsdf.dto.PqDto;
 import com.pqrsdf.pqrsdf.dto.RadicarDto;
+import com.pqrsdf.pqrsdf.dto.ResolucionDto;
 import com.pqrsdf.pqrsdf.generic.GenericController;
 import com.pqrsdf.pqrsdf.models.PQ;
 import com.pqrsdf.pqrsdf.service.PersonaService;
@@ -23,6 +24,7 @@ import com.pqrsdf.pqrsdf.service.PQService;
 import com.pqrsdf.pqrsdf.utils.ResponseEntityUtil;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import okhttp3.Response;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -132,7 +134,7 @@ public class PQController extends GenericController<PQ, Long> {
             @RequestParam(defaultValue = "10") int size) {
         try {
             Pageable pageable = PageRequest.of(page, size, Sort.by(order_by));
-            Page<PQ> pqs = service.findByResponsableIdOrderByFechaRadicacionDesc(pageable);
+            Page<PQ> pqs = service.findPendientesSinResponsable(pageable);
             if (pqs.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
             }
@@ -156,6 +158,33 @@ public class PQController extends GenericController<PQ, Long> {
         try {
             service.aceptarRechazarPq(entity);
             return ResponseEntity.status(HttpStatus.OK).body("PQ aceptada correctamente");
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
+
+    @GetMapping("/pqs_asignadas")
+    public ResponseEntity<?> getPqsAsignadas(@RequestParam Long responsableId,
+            @RequestParam(required = false, defaultValue = "id") String order_by,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        try {
+            Pageable pageable = PageRequest.of(page, size, Sort.by(order_by));
+            Page<PQ> pqs = service.pqAsignadas(responsableId, 2L, pageable);
+            if (pqs.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+            return ResponseEntityUtil.handlePaginationRequest(pqs);
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
+
+    @PostMapping("/dar_resolucion")
+    public ResponseEntity<?> darResolucion(@RequestBody ResolucionDto resolucionDto) {
+        try {
+            service.darResolucion(resolucionDto);
+            return ResponseEntity.status(HttpStatus.OK).body("Resolución dada correctamente");
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }

@@ -30,6 +30,8 @@ public class AdjuntoPQ extends GenericEntity{
     @Column(nullable = false)
     private String rutaArchivo;
 
+    private boolean respuesta;
+
     private Timestamp createdAt;
 
     @PrePersist protected void onCreate(){
