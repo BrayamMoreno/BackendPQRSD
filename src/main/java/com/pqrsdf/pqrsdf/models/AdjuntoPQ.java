@@ -3,6 +3,8 @@ package com.pqrsdf.pqrsdf.models;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.Formula;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
 
@@ -17,12 +19,15 @@ import lombok.*;
 @Setter
 @Entity
 @Table(name = "adjuntos_pq")
-public class AdjuntoPQ extends GenericEntity{
+public class AdjuntoPQ extends GenericEntity {
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "pq_id", nullable = false)
     private PQ pq;
+
+    @Formula("(select p.id from pqs p where p.id = pq_id)")
+    private String pqRadicado;
 
     @Column(nullable = false)
     private String nombreArchivo;
@@ -34,7 +39,8 @@ public class AdjuntoPQ extends GenericEntity{
 
     private Timestamp createdAt;
 
-    @PrePersist protected void onCreate(){
+    @PrePersist
+    protected void onCreate() {
         this.createdAt = Timestamp.valueOf(LocalDateTime.now());
     }
 

@@ -15,4 +15,7 @@ import lombok.*;
 public class TipoPQ extends GenericEntity {
 
     private String nombre;
+
+    @Column(name = "dias_habiles_respuesta", nullable = false)
+    private Long diasHabilesRespuesta;
 }

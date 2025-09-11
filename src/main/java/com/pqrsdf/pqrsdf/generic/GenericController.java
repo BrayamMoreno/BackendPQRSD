@@ -23,10 +23,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 public class GenericController<T extends GenericEntity, ID> {
-    
+
     private final GenericService<T, ID> service;
     private static final String ENTIDAD_NO_ENCONTRADA = "Entidad No Encontrada";
-    private static final String RELACION_NO_ENCONTRADA = "Una o Unas de las Relaciones No Existe";
 
     public GenericController(GenericService<T, ID> service){
         this.service = service;
@@ -84,7 +83,7 @@ public class GenericController<T extends GenericEntity, ID> {
             return ResponseEntity.status(HttpStatus.CREATED).body(service.createEntity(entity));
         } catch (DataIntegrityViolationException ex) {
             Throwable rootCause = ex.getRootCause();
-            
+
             String message = rootCause != null ? rootCause.getMessage() : ex.getMessage();
 
             // Verificar si es una violación de clave foránea

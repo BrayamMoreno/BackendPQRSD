@@ -12,8 +12,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping(path = "/api/roles")
 @Tag(name = "Gestion de Roles")
-public class RolConteoller extends GenericController<Rol, Long>{
-    public RolConteoller(RolService service){
+public class RolController extends GenericController<Rol, Long>{
+    public RolController(RolService service){
         super(service);
     }
 }

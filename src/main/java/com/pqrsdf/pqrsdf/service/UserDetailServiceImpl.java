@@ -26,7 +26,7 @@ import com.pqrsdf.pqrsdf.utils.JwtUtils;
 
 @Service
 public class UserDetailServiceImpl implements UserDetailsService{
-   
+
     private final UsuarioService usuarioService;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
@@ -46,12 +46,9 @@ public class UserDetailServiceImpl implements UserDetailsService{
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
         authorities.add(new SimpleGrantedAuthority("ROLE_".concat(usuario.getRol().getNombre())));
-        
+
         usuario.getRol().getPermisos().forEach(permiso -> {
-            if (permiso.getLeer()) authorities.add(new SimpleGrantedAuthority(permiso.getTabla() + "_READ"));
-            if (permiso.getAgregar()) authorities.add(new SimpleGrantedAuthority(permiso.getTabla() + "_CREATE"));
-            if (permiso.getModificar()) authorities.add(new SimpleGrantedAuthority(permiso.getTabla() + "_UPDATE"));
-            if (permiso.getEliminar()) authorities.add(new SimpleGrantedAuthority(permiso.getTabla() + "_DELETE"));
+            authorities.add(new SimpleGrantedAuthority(permiso.getTabla().concat("_").concat(permiso.getAccion())));
         });
 
         return new User(

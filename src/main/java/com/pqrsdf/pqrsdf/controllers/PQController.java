@@ -3,7 +3,6 @@ package com.pqrsdf.pqrsdf.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 
+import com.pqrsdf.pqrsdf.Specifications.PqsSpecification;
 import com.pqrsdf.pqrsdf.dto.PqDto;
 import com.pqrsdf.pqrsdf.dto.RadicarDto;
 import com.pqrsdf.pqrsdf.dto.ResolucionDto;
@@ -24,14 +25,12 @@ import com.pqrsdf.pqrsdf.service.PQService;
 import com.pqrsdf.pqrsdf.utils.ResponseEntityUtil;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import okhttp3.Response;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 @RestController
 @RequestMapping(path = "/api/pqs")
@@ -39,46 +38,76 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public class PQController extends GenericController<PQ, Long> {
 
     private final PQService service;
-    private final PersonaService personasService;
-    private final AdjuntoPQService adjuntosPqService;
 
     public PQController(PQService service, PersonaService personasService,
             AdjuntoPQService adjuntosPqService) {
         super(service);
         this.service = service;
-        this.personasService = personasService;
-        this.adjuntosPqService = adjuntosPqService;
     }
 
     @GetMapping("/mis_pqs")
-    public ResponseEntity<?> getMyPqs(@RequestParam Long solicitanteId,
-            @RequestParam(required = false, defaultValue = "id") String order_by,
+    public ResponseEntity<?> getMyPqs(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) Long tipoId,
+            @RequestParam(required = true) Long solicitanteId,
+            @RequestParam(required = false) Long estadoId,
+            @RequestParam(required = false) String numeroRadicado,
+            @RequestParam(required = false) String fechaRadicacion,
+            @RequestParam(required = false) Long responsableId) {
         try {
-            Pageable pageable = PageRequest.of(page, size, Sort.by(order_by));
-            if (solicitanteId == null) {
-                return ResponseEntityUtil.handleBadRequest(
-                        "El ID del responsable no puede ser nulo");
+            Pageable pageable = PageRequest.of(page, size, Sort.by("fechaRadicacion").descending());
+
+            if (responsableId != null) {
+                estadoId = 2L;
             }
-            if (service.findBySolicitanteId(solicitanteId, pageable).hasContent() == false) {
+
+            Specification<PQ> spec = Specification
+                    .where(PqsSpecification.hasTipoId(tipoId))
+                    .and(PqsSpecification.hasSolicitanteId(solicitanteId))
+                    .and(PqsSpecification.hasUltimoEstado(estadoId))
+                    .and(PqsSpecification.hasNumeroRadicado(numeroRadicado))
+                    .and(PqsSpecification.hasFechaRadicacion(fechaRadicacion))
+                    .and(PqsSpecification.hasResponsableId(responsableId));
+
+            if (service.findAll(pageable, spec).hasContent() == false) {
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
             }
-            return ResponseEntityUtil.handlePaginationRequest(service.findBySolicitanteId(solicitanteId, pageable));
+
+            return ResponseEntityUtil
+                    .handlePaginationRequest(service.findAll(pageable, spec));
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }
     }
 
-    @Override
-    @GetMapping()
-    public ResponseEntity<?> getAllEntities(
-            @RequestParam(required = false, defaultValue = "id") String order_by,
+    @GetMapping("/mis_pqs_contratistas")
+    public ResponseEntity<?> getMyPqs(
+            @RequestParam(required = true) Long responsableId,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) Long tipoId,
+            @RequestParam(required = false) String numeroRadicado,
+            @RequestParam(required = false) String fechaRadicacion
+        ){
         try {
-            Pageable pageable = PageRequest.of(page, size, Sort.by(order_by));
-            return ResponseEntityUtil.handlePaginationRequest(service.findByFechaRadicacionDes(pageable));
+            Pageable pageable = PageRequest.of(page, size, Sort.by("fechaRadicacion").ascending());
+
+            Long estadoId = 2L;
+
+            Specification<PQ> spec = Specification
+                        .where(PqsSpecification.hasTipoId(tipoId))
+                    .and(PqsSpecification.hasUltimoEstado(estadoId))
+                    .and(PqsSpecification.hasNumeroRadicado(numeroRadicado))
+                    .and(PqsSpecification.hasFechaRadicacion(fechaRadicacion))
+                    .and(PqsSpecification.hasResponsableId(responsableId));
+
+            if (service.findAll(pageable, spec).hasContent() == false) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+
+            return ResponseEntityUtil
+                    .handlePaginationRequest(service.findAll(pageable, spec));
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }
@@ -158,23 +187,6 @@ public class PQController extends GenericController<PQ, Long> {
         try {
             service.aceptarRechazarPq(entity);
             return ResponseEntity.status(HttpStatus.OK).body("PQ aceptada correctamente");
-        } catch (Exception e) {
-            return ResponseEntityUtil.handleInternalError(e);
-        }
-    }
-
-    @GetMapping("/pqs_asignadas")
-    public ResponseEntity<?> getPqsAsignadas(@RequestParam Long responsableId,
-            @RequestParam(required = false, defaultValue = "id") String order_by,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        try {
-            Pageable pageable = PageRequest.of(page, size, Sort.by(order_by));
-            Page<PQ> pqs = service.pqAsignadas(responsableId, 2L, pageable);
-            if (pqs.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
-            }
-            return ResponseEntityUtil.handlePaginationRequest(pqs);
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }

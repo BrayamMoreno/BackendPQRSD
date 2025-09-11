@@ -2,9 +2,6 @@ package com.pqrsdf.pqrsdf.models;
 
 import java.time.LocalDateTime;
 
-
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
 
@@ -38,15 +35,14 @@ public class Usuario extends GenericEntity {
     private String contrasena;
 
     private Boolean isEnable;
-    
-    private Boolean accountNoExpired;
-    
-    private Boolean accountNoLocked;
-    
-    private Boolean credentialNoExpired;
-    
-    private String resetToken;
 
+    private Boolean accountNoExpired;
+
+    private Boolean accountNoLocked;
+
+    private Boolean credentialNoExpired;
+
+    private String resetToken;
 
     @JoinColumn(name = "persona_id")
     @OneToOne(cascade = CascadeType.ALL)

@@ -1,9 +1,11 @@
 package com.pqrsdf.pqrsdf.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -11,10 +13,12 @@ import org.springframework.stereotype.Service;
 
 import com.pqrsdf.pqrsdf.config.FileStorageConfig;
 import com.pqrsdf.pqrsdf.dto.DocumentoDTO;
+import com.pqrsdf.pqrsdf.dto.UpdateAdjuntoRequest;
 import com.pqrsdf.pqrsdf.generic.GenericService;
 import com.pqrsdf.pqrsdf.models.AdjuntoPQ;
 import com.pqrsdf.pqrsdf.models.PQ;
 import com.pqrsdf.pqrsdf.repository.AdjuntoPQRepository;
+import com.pqrsdf.pqrsdf.repository.PQRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -23,12 +27,15 @@ public class AdjuntoPQService extends GenericService<AdjuntoPQ, Long> {
 
     private final Path uploadDir;
     private final AdjuntoPQRepository repository;
+    private final PQRepository pqRepository;
 
-    public AdjuntoPQService(AdjuntoPQRepository repository, FileStorageConfig config) throws IOException {
+    public AdjuntoPQService(AdjuntoPQRepository repository, PQRepository pqRepository, FileStorageConfig config)
+            throws IOException {
         super(repository);
         this.uploadDir = config.getUploadDir();
         Files.createDirectories(uploadDir);
         this.repository = repository;
+        this.pqRepository = pqRepository;
     }
 
     public List<AdjuntoPQ> findByPqId(Long pqId) {
@@ -36,7 +43,8 @@ public class AdjuntoPQService extends GenericService<AdjuntoPQ, Long> {
     }
 
     @Transactional
-    public void createAdjuntosPqs(List<DocumentoDTO> files, PQ pq) {
+    public List<File> createAdjuntosPqs(List<DocumentoDTO> files, PQ pq) {
+        List<File> createdFiles = new ArrayList<>();
         try {
             for (DocumentoDTO file : files) {
                 // 1. Decodificar base64
@@ -51,22 +59,21 @@ public class AdjuntoPQService extends GenericService<AdjuntoPQ, Long> {
                 // 4. Guardar archivo en disco
                 Files.write(targetPath, data, StandardOpenOption.CREATE_NEW);
 
+                // 5. Crear entidad AdjuntoPQ
                 AdjuntoPQ adjuntoPQ = AdjuntoPQ.builder()
                         .pq(pq)
                         .nombreArchivo(targetPath.getFileName().toString())
                         .rutaArchivo(targetPath.toString())
+                        .respuesta(file.isRespuesta())
                         .build();
-                
-                
-                if (file.isRespuesta()) {
-                    adjuntoPQ.setRespuesta(true);
-                } else {
-                    adjuntoPQ.setRespuesta(false);
-                }
 
-                // 5. Guardar relación en BD
+                // 6. Guardar en BD
                 repository.save(adjuntoPQ);
+
+                // 7. Agregar el File a la lista de retorno
+                createdFiles.add(targetPath.toFile());
             }
+            return createdFiles;
         } catch (Exception e) {
             throw new RuntimeException("Error general al procesar los adjuntos", e);
         }
@@ -91,5 +98,13 @@ public class AdjuntoPQService extends GenericService<AdjuntoPQ, Long> {
             counter++;
         }
         return targetPath;
+    }
+
+    public void updateAdjunto(UpdateAdjuntoRequest request) {
+        AdjuntoPQ adjuntoPq = repository.findById(request.adjuntoPqId()).orElseThrow();
+        adjuntoPq.setNombreArchivo(request.nombreArchivo());
+        adjuntoPq.setPq(pqRepository.findById(request.pqId()).orElseThrow());
+        adjuntoPq.setRespuesta(request.esRespuesta());
+        repository.save(adjuntoPq);
     }
 }

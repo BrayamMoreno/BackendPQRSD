@@ -10,5 +10,4 @@ import com.pqrsdf.pqrsdf.models.Municipio;
 @Repository
 public interface MunicipioRepository extends GenericRepository<Municipio, Long>{
     Page<Municipio> findByDepartamentoId(Long departamentoId, Pageable pageable);
-
 }

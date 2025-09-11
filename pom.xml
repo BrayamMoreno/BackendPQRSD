@@ -83,7 +83,7 @@
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.1.0</version>
         </dependency>
-		
+
         <!-- Spring Security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -98,16 +98,34 @@
 		</dependency>
 
 		<dependency>
-			<groupId>io.minio</groupId>
-			<artifactId>minio</artifactId>
-			<version>8.5.7</version>
-		</dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
 
+		<!-- Mail -->
+        <dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
 
 		<dependency>
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session-jdbc</artifactId>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/de.jollyday/jollyday -->
+		<dependency>
+			<groupId>de.focus-shift</groupId>
+			<artifactId>jollyday-core</artifactId>
+			<version>0.28.0</version> <!-- o la última disponible en Maven Central -->
+		</dependency>
+
+		<dependency>
+			<groupId>de.focus-shift</groupId>
+			<artifactId>jollyday-jaxb</artifactId>
+			<version>0.28.0</version>
+		</dependency>
+
 
 	</dependencies>
 

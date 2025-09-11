@@ -1,16 +1,22 @@
 package com.pqrsdf.pqrsdf.models;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
+import java.util.List;
 
 import org.hibernate.annotations.Formula;
 
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -31,7 +37,7 @@ public class PQ extends GenericEntity {
     @Column(unique = true)
     private String consecutivo;
 
-    @Column(unique = true)
+    @Column(unique = true, name = "numero_radicado")
     private String numeroRadicado;
 
     private Integer numeroFolio;
@@ -48,13 +54,14 @@ public class PQ extends GenericEntity {
     private Persona solicitante;
 
     @Column(name = "fecha_radicacion")
-    private LocalDate fechaRadicacion;
+    private Date fechaRadicacion;
 
     @Column(name = "hora_radicacion")
-    private LocalTime horaRadicacion;
+    private Time horaRadicacion;
 
-    private LocalDate fechaResolucionEstimada;
-    private LocalDate fechaResolucion;
+    @Column(name = "fecha_resolucion_estimada")
+    private Date fechaResolucionEstimada;
+    private Date fechaResolucion;
 
     @ManyToOne
     @JoinColumn(name = "radicador_id")
@@ -73,5 +80,12 @@ public class PQ extends GenericEntity {
     private String nombreUltimoEstado;
 
     private Boolean web;
+
+    @OneToMany(mappedBy = "pq", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("fechaCambio ASC")
+    private List<HistorialEstadoPQ> historialEstados;
+
+    @OneToMany(mappedBy = "pq", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AdjuntoPQ> adjuntos;
 
 }

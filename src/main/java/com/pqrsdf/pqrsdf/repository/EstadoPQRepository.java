@@ -7,5 +7,5 @@ import com.pqrsdf.pqrsdf.models.EstadoPQ;
 
 @Repository
 public interface EstadoPQRepository extends GenericRepository<EstadoPQ, Long>{
-    
+
 }

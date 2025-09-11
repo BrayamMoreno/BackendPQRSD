@@ -27,7 +27,6 @@ public record RegisterRequest(
 
     String direccion,
 
-    @NotNull(message = "El municipio es obligatorio")
     Long municipioId,
 
     @NotNull(message = "El género es obligatorio")

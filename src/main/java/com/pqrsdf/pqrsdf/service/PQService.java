@@ -1,8 +1,13 @@
 package com.pqrsdf.pqrsdf.service;
 
+import java.io.File;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,10 +17,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +32,6 @@ import com.pqrsdf.pqrsdf.dto.PqDto;
 import com.pqrsdf.pqrsdf.dto.RadicarDto;
 import com.pqrsdf.pqrsdf.dto.ResolucionDto;
 import com.pqrsdf.pqrsdf.generic.GenericService;
-import com.pqrsdf.pqrsdf.models.AdjuntoPQ;
 import com.pqrsdf.pqrsdf.models.HistorialEstadoPQ;
 import com.pqrsdf.pqrsdf.models.PQ;
 import com.pqrsdf.pqrsdf.repository.HistorialEstadosRespository;
@@ -32,6 +39,8 @@ import com.pqrsdf.pqrsdf.repository.PQRepository;
 import com.pqrsdf.pqrsdf.repository.ResponsablePQRepository;
 import com.pqrsdf.pqrsdf.repository.UsuarioRepository;
 
+import de.focus_shift.jollyday.core.HolidayManager;
+import de.focus_shift.jollyday.core.ManagerParameters;
 import io.github.cdimascio.dotenv.Dotenv;
 
 @Service
@@ -39,40 +48,39 @@ public class PQService extends GenericService<PQ, Long> {
 
     private final AdjuntoPQService adjuntosPqService;
     private final UsuarioRepository usuarioRepository;
-    private final HistorialEstadoService historialEstadoService;
     private final ResponsablePQRepository responsablePQRepository;
     private final PersonaService personasService;
     private final PQRepository repository;
     private final TipoPQService tipoPqService;
     private final EstadoPQService estadoPQService;
     private final HistorialEstadosRespository historialEstadosRespository;
-
-
+    private final EmailService emailService;
 
     public PQService(PQRepository repository, PersonaService personasService,
-            AdjuntoPQService adjuntosPqService, TipoPQService tipoPqService,
-            HistorialEstadoService historialEstadoService, EstadoPQService estadoPQService,
+            AdjuntoPQService adjuntosPqService, TipoPQService tipoPqService, EstadoPQService estadoPQService,
             HistorialEstadosRespository historialEstadosRespository,
-            Dotenv dotenv, ResponsablePQRepository responsablePQRepository,UsuarioRepository usuarioRepository) {
+            Dotenv dotenv, ResponsablePQRepository responsablePQRepository, UsuarioRepository usuarioRepository,
+            EmailService emailService) {
         super(repository);
         this.personasService = personasService;
         this.repository = repository;
         this.adjuntosPqService = adjuntosPqService;
         this.tipoPqService = tipoPqService;
-        this.historialEstadoService = historialEstadoService;
         this.estadoPQService = estadoPQService;
         this.historialEstadosRespository = historialEstadosRespository;
         this.responsablePQRepository = responsablePQRepository;
         this.usuarioRepository = usuarioRepository;
+        this.emailService = emailService;
     }
 
     public String generarIdentificadorPQ() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         String fecha = sdf.format(new Date());
 
-        String uuid = UUID.randomUUID().toString().substring(0, 8);
+        String uuid = UUID.randomUUID().toString();
+        String ultimos8 = uuid.substring(uuid.length() - 8);
 
-        return "PQ-" + fecha + "-" + uuid;
+        return "STTG" + fecha + ultimos8;
     }
 
     public Page<PQ> findProximasAVencer(Pageable pageable) {
@@ -81,16 +89,14 @@ public class PQService extends GenericService<PQ, Long> {
         return repository.findByFechaResolucionEstimadaBetween(hoy, limite, pageable);
     }
 
-    public Page<PQ> findBySolicitanteId(Long solicitanteId, Pageable pageable) {
-        return repository.findBySolicitanteIdOrderByFechaRadicacionDesc(solicitanteId, pageable);
-    }
-
-    public Page<PQ> findPendientesSinResponsable( Pageable pageable) {
+    public Page<PQ> findPendientesSinResponsable(Pageable pageable) {
         return repository.findPendientesSinResponsable(pageable);
     }
 
-    public Page<PQ> findByFechaRadicacionDes(Pageable pageable) {
-        return repository.findAllByOrderByFechaRadicacionDesc(pageable);
+    public Page<PQ> findAll(Pageable pageable, Specification<PQ> spec) {
+
+        return repository.findAll(
+                spec, pageable);
     }
 
     public Page<PQ> findByResponsableId(Long responsableId, Pageable pageable) {
@@ -111,7 +117,11 @@ public class PQService extends GenericService<PQ, Long> {
 
         // Contar solicitudes por fecha
         ultimos7Dias.forEach(pq -> {
-            LocalDate fecha = pq.getFechaRadicacion();
+            LocalDate fecha = pq.getFechaRadicacion()
+                    .toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+
             conteo.computeIfPresent(fecha, (k, v) -> v + 1);
         });
 
@@ -123,7 +133,6 @@ public class PQService extends GenericService<PQ, Long> {
                     String diaSemana = e.getKey()
                             .getDayOfWeek()
                             .getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
-                    // Capitalizar primera letra
                     diaSemana = diaSemana.substring(0, 1).toUpperCase() + diaSemana.substring(1);
                     map.put("fecha", diaSemana);
                     map.put("cantidad", e.getValue());
@@ -154,13 +163,13 @@ public class PQService extends GenericService<PQ, Long> {
     @Transactional
     public PQ createPq(PqDto form) {
         PQ pq = PQ.builder()
-                .consecutivo(generarIdentificadorPQ())
+                .numeroRadicado(generarIdentificadorPQ())
                 .detalleAsunto(form.detalleAsunto())
                 .detalleDescripcion(form.detalleDescripcion())
                 .tipoPQ(tipoPqService.getById(Long.parseLong(form.tipo_pq_id())))
                 .solicitante(personasService.getById(Long.parseLong(form.solicitante_id())))
-                .fechaRadicacion(LocalDate.now())
-                .horaRadicacion(LocalTime.now())
+                .fechaRadicacion(Date.from(Instant.now()))
+                .horaRadicacion(Time.valueOf(LocalTime.now()))
                 .web(true)
                 .build();
 
@@ -177,52 +186,96 @@ public class PQService extends GenericService<PQ, Long> {
         if (form.lista_documentos() != null) {
             createAdjuntosPqs(form.lista_documentos(), pq);
         }
-
         return pq;
     }
 
-    public void createAdjuntosPqs(List<DocumentoDTO> files, PQ pq) {
+    @Transactional
+    public List<File> createAdjuntosPqs(List<DocumentoDTO> files, PQ pq) {
         try {
-            adjuntosPqService.createAdjuntosPqs(files, pq);
+            return adjuntosPqService.createAdjuntosPqs(files, pq);
         } catch (Exception e) {
             throw new RuntimeException("Error general al procesar los adjuntos", e);
         }
     }
 
-    public void aceptarRechazarPq(RadicarDto entity){
-            if(entity.isAprobada()){
-            isAprobada(entity) ;
-        }else{
+    public void aceptarRechazarPq(RadicarDto entity) {
+        if (entity.isAprobada()) {
+            isAprobada(entity);
+        } else {
             isNotAprobada(entity);
         }
     }
 
-    public void isAprobada (RadicarDto entity){
+    @Transactional
+    public void isAprobada(RadicarDto entity) {
         PQ pq = repository.findById(entity.solicitudId())
                 .orElseThrow(() -> new RuntimeException("PQ no encontrado con ID: " + entity.solicitudId()));
 
         pq.setResponsable(responsablePQRepository.findById(entity.responsableId())
-                .orElseThrow(() -> new RuntimeException("Responsable no encontrado con ID: " + entity.responsableId())));
-        
-        pq.setFechaResolucionEstimada(LocalDate.parse(entity.fechaResolucionEstimada()));
+                .orElseThrow(
+                        () -> new RuntimeException("Responsable no encontrado con ID: " + entity.responsableId())));
+
+        Date fechaResolucionEstimdad = darFechaResolucion(pq);
 
         HistorialEstadoPQ historialEstadoPQ = HistorialEstadoPQ.builder()
                 .usuario(usuarioRepository.findById(entity.responsableId())
-                        .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + entity.radicadorId())))
+                        .orElseThrow(
+                                () -> new RuntimeException("Usuario no encontrado con ID: " + entity.radicadorId())))
                 .estado(estadoPQService.getById(2L))
                 .pq(pq)
                 .fechaCambio(new java.sql.Timestamp(System.currentTimeMillis()))
                 .observacion(entity.comentario())
                 .build();
 
+        pq.setFechaResolucionEstimada(fechaResolucionEstimdad);
         repository.save(pq);
         historialEstadosRespository.save(historialEstadoPQ);
     }
 
+    private Date darFechaResolucion(PQ pq) {
+        HolidayManager manager = HolidayManager.getInstance(
+                ManagerParameters.create("co"));
+
+        Long diasHabiles = tipoPqService
+                .getById(pq.getTipoPQ().getId())
+                .getDiasHabilesRespuesta();
+
+        LocalDate fechaResolucion = Instant.now()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+
+        int agregados = 0;
+        while (agregados < diasHabiles) {
+            fechaResolucion = fechaResolucion.plusDays(1);
+
+            boolean esFinDeSemana = fechaResolucion.getDayOfWeek() == DayOfWeek.SATURDAY ||
+                    fechaResolucion.getDayOfWeek() == DayOfWeek.SUNDAY;
+
+            boolean esFestivo = manager.isHoliday(fechaResolucion);
+
+            if (!esFinDeSemana && !esFestivo) {
+                agregados++;
+            }
+        }
+
+        // Convertir de nuevo a java.util.Date antes de retornar
+        return Date.from(fechaResolucion.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
+    @Transactional
     public void isNotAprobada(RadicarDto entity) {
+
+        PQ pq = repository.findById(entity.solicitudId())
+                .orElseThrow(() -> new RuntimeException("PQ no encontrado con ID: " + entity.solicitudId()));
+
+        pq.setRespuesta(entity.motivoRechazo());
+
+        repository.save(pq);
+
         HistorialEstadoPQ historialEstadoPQ = HistorialEstadoPQ.builder()
                 .usuario(usuarioRepository.findById(entity.radicadorId())
-                        .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + entity.radicadorId())))
+                        .orElseThrow(
+                                () -> new RuntimeException("Usuario no encontrado con ID: " + entity.radicadorId())))
                 .estado(estadoPQService.getById(3L))
                 .pq(repository.findById(entity.solicitudId())
                         .orElseThrow(() -> new RuntimeException("PQ no encontrado con ID: " + entity.solicitudId())))
@@ -231,10 +284,9 @@ public class PQService extends GenericService<PQ, Long> {
                 .build();
 
         historialEstadosRespository.save(historialEstadoPQ);
-        
     }
 
-    public Page<PQ> pqAsignadas (Long id, Long estadoId, Pageable pageable){
+    public Page<PQ> pqAsignadas(Long id, Long estadoId, Pageable pageable) {
         return repository.findByResponsableAndEstado(id, estadoId, pageable);
     }
 
@@ -245,7 +297,8 @@ public class PQService extends GenericService<PQ, Long> {
 
         HistorialEstadoPQ historialEstadoPQ = HistorialEstadoPQ.builder()
                 .usuario(usuarioRepository.findById(resolucionDto.responsableId())
-                        .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + resolucionDto.responsableId())))
+                        .orElseThrow(() -> new RuntimeException(
+                                "Usuario no encontrado con ID: " + resolucionDto.responsableId())))
                 .estado(estadoPQService.getById(4L))
                 .pq(pq)
                 .fechaCambio(new java.sql.Timestamp(System.currentTimeMillis()))
@@ -255,7 +308,37 @@ public class PQService extends GenericService<PQ, Long> {
         historialEstadosRespository.save(historialEstadoPQ);
 
         pq.setRespuesta(resolucionDto.respuesta());
-        createAdjuntosPqs(resolucionDto.lista_documentos(), pq);
+        List<File> adjuntos = createAdjuntosPqs(resolucionDto.lista_documentos(), pq);
+
+        emailService.sendEmailAdjuntos(pq.getSolicitante(), pq.getNumeroRadicado(), resolucionDto.listaCorreos(),
+                resolucionDto.asunto(), resolucionDto.respuesta(), adjuntos);
+
         repository.save(pq);
+
+    }
+
+    public void sendEmail(List<String> to, String subject, String body) {
+        if (to == null || to.isEmpty()) {
+            throw new IllegalArgumentException("La lista de destinatarios no puede estar vacía");
+        }
+
+        if (!validateTo(to)) {
+            throw new IllegalArgumentException("La lista de destinatarios contiene direcciones de correo no válidas");
+        }
+
+        if (to.size() > 0) {
+            System.out.println();
+        } else {
+
+        }
+    }
+
+    public boolean validateTo(List<String> to) {
+        for (String email : to) {
+            if (email == null || !email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -1,11 +1,8 @@
 package com.pqrsdf.pqrsdf.models;
 
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
-
 import io.swagger.v3.oas.annotations.media.Schema;
-
 import jakarta.persistence.*;
-
 import lombok.*;
 
 @Builder
@@ -18,12 +15,12 @@ import lombok.*;
 @Schema(description = "Modelo de Permisos")
 public class Permiso extends GenericEntity {
 
-    @Column(unique = true, nullable = false, length = 20)
+    @Column(nullable = false, length = 100)
     private String tabla;
 
-    private Boolean agregar;
-    private Boolean modificar;
-    private Boolean eliminar;
-    private Boolean leer;
-}
+    @Column(nullable = false, length = 50)
+    private String accion;
 
+    @Column(columnDefinition = "TEXT")
+    private String descripcion;
+}

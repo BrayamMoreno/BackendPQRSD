@@ -23,7 +23,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class JwtTokenValidator extends OncePerRequestFilter {
-    
+
     private final JwtUtils jwtUtils;
 
     private final TokenService tokenService;
@@ -35,32 +35,32 @@ public class JwtTokenValidator extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException{
-        
+            HttpServletResponse response,
+            FilterChain filterChain) throws ServletException, IOException {
+
         String jwtToken = request.getHeader(HttpHeaders.AUTHORIZATION);
-        
+
         if (jwtToken != null && jwtToken.startsWith("Bearer ")) {
             jwtToken = jwtToken.substring(7); // Quitar "Bearer " del token
 
-
-            if(tokenService.isTokenRevoked(jwtToken)){
+            if (tokenService.isTokenRevoked(jwtToken)) {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 response.getWriter().write("Token Revoked");
                 return;
             }
 
-
             try {
                 DecodedJWT decodedJWT = jwtUtils.validateToken(jwtToken);
                 String permisos = jwtUtils.getSpecificClaim(decodedJWT, "authorities").asString();
-                Collection<? extends GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(permisos);
-            
-                Authentication authentication = new UsernamePasswordAuthenticationToken(jwtUtils.extractUsername(decodedJWT), null, authorities);
-            
+                Collection<? extends GrantedAuthority> authorities = AuthorityUtils
+                        .commaSeparatedStringToAuthorityList(permisos);
+
+                Authentication authentication = new UsernamePasswordAuthenticationToken(
+                        jwtUtils.extractUsername(decodedJWT), null, authorities);
+
                 SecurityContext context = SecurityContextHolder.getContext();
                 context.setAuthentication(authentication);
-            }catch (TokenExpiredException e) {
+            } catch (TokenExpiredException e) {
                 // Deja pasar solicitudes al endpoint de renovación
                 if (request.getRequestURI().equals("/api/auth/refresh-token")) {
                     filterChain.doFilter(request, response);

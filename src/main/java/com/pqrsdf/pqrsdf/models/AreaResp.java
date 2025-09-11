@@ -15,5 +15,7 @@ import lombok.*;
 public class AreaResp extends GenericEntity{
    
     private String codigoDep;
+
     private String nombre;
+
 }
