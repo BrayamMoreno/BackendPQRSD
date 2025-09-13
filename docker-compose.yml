@@ -23,21 +23,8 @@ services:
       - "27845:27845"
     depends_on:
       - db
-    networks:
-      - app-net
-
-  minio:
-    container_name: minio
-    image: minio/minio:latest
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    environment:
-      - MINIO_ROOT_USER=minioadmin
-      - MINIO_ROOT_PASSWORD=minioadmin
-    command: server /data --console-address ":9001"
-    volumes:
-      - "./minio/data:/data"
+    env_file:
+      - .env
     networks:
       - app-net
 
