@@ -74,13 +74,13 @@ public class PQService extends GenericService<PQ, Long> {
     }
 
     public String generarIdentificadorPQ() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
         String fecha = sdf.format(new Date());
 
         String uuid = UUID.randomUUID().toString();
         String ultimos8 = uuid.substring(uuid.length() - 8);
 
-        return "STTG" + fecha + ultimos8;
+        return "STTG".concat("-").concat(ultimos8).concat("-").concat(fecha).concat(ultimos8);
     }
 
     public Page<PQ> findProximasAVencer(Pageable pageable) {
