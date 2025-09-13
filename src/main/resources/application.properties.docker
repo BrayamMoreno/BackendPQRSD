@@ -6,7 +6,7 @@ server.port=27845
 file.upload-dir=${FILE_DIR}
 
 #Configuracion variables de la base de datos
-spring.datasource.url=jdbc:postgresql://db_pq:5432/pq
+spring.datasource.url=jdbc:postgresql://db:5432/pq
 spring.datasource.username=pq
 spring.datasource.password=pq_2025
 
