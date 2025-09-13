@@ -16,6 +16,7 @@ springdoc.swagger-ui.path=/swagger-ui.html
 
 logging.level.org.springdoc=DEBUG
 
+spring.session.jdbc.initialize-schema=always
 
 logging.level.org.springframework.web=DEBUG
 logging.level.org.springframework.web.filter.CommonsRequestLoggingFilter=DEBUG

@@ -11,7 +11,7 @@ public class FileStorageConfig {
 
     private final Path uploadDir;
 
-    public FileStorageConfig(@Value("${file.upload-dir}") String uploadDir) {
+    public FileStorageConfig(@Value("${FILE_DIR}") String uploadDir) {
         this.uploadDir = Paths.get(uploadDir).toAbsolutePath().normalize();
     }
 
@@ -19,3 +19,4 @@ public class FileStorageConfig {
         return uploadDir;
     }
 }
+
