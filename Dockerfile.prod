@@ -12,10 +12,7 @@ COPY pom.xml .
 # Descarga las dependencias del proyecto
 RUN chmod +x ./mvnw && ./mvnw dependency:go-offline
 
-# Copia el resto del código fuente al contenedor
-COPY .env .env
 COPY src src
-COPY ./src/main/resources/application.properties.docker ./src/main/resources/application.properties
 
 # Limpia cualquier build anterior y compila el proyecto sin ejecutar tests
 RUN ./mvnw clean install -DskipTests

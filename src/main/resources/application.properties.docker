@@ -1,3 +1,5 @@
+#application.properties.docker
+
 spring.application.name=pqrsdf
 
 server.port=27845
