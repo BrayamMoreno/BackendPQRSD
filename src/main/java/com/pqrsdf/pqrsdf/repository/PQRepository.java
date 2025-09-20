@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.pqrsdf.pqrsdf.dto.InterfacePq;
 import com.pqrsdf.pqrsdf.generic.GenericRepository;
 import com.pqrsdf.pqrsdf.models.PQ;
 import java.time.LocalDate;
@@ -16,17 +17,15 @@ import java.util.List;
 @Repository
 public interface PQRepository extends GenericRepository<PQ, Long>, JpaSpecificationExecutor<PQ> {
 
-    Page<PQ> findByResponsableId(Long responsableId, Pageable pageable);
+        Page<PQ> findByResponsableId(Long responsableId, Pageable pageable);
 
-    Page<PQ> findBy(Pageable pageable, Specification<PQ> spec);
+        Page<PQ> findBy(Pageable pageable, Specification<PQ> spec);
 
     Page<PQ> findByResponsableIdOrderByFechaRadicacionDesc(Long responsableId, Pageable pageable);
 
     Page<PQ> findBySolicitanteIdOrderByFechaRadicacionDesc(Long solicitanteId, Pageable pageable);
 
     Page<PQ> findAllByOrderByFechaRadicacionDesc(Pageable pageable);
-
-    Page<PQ> findByFechaResolucionEstimadaBetween(LocalDate hoy, LocalDate limite, Pageable pageable);
 
     @Query("SELECT p FROM PQ p WHERE p.fechaRadicacion >= :fechaInicio")
     List<PQ> findUltimos7Dias(@Param("fechaInicio") LocalDate fechaInicio);

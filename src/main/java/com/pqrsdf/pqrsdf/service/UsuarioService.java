@@ -6,6 +6,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.pqrsdf.pqrsdf.dto.auth.RegisterRequest;
+import com.pqrsdf.pqrsdf.exceptions.DniAlreadyExistsException;
+import com.pqrsdf.pqrsdf.exceptions.EmailAlreadyExistsException;
 import com.pqrsdf.pqrsdf.generic.GenericService;
 import com.pqrsdf.pqrsdf.models.Persona;
 import com.pqrsdf.pqrsdf.models.Rol;
@@ -71,7 +73,11 @@ public class UsuarioService extends GenericService<Usuario, Long> {
     public Usuario createNewUser(RegisterRequest entity) {
 
         usuarioRepository.findByCorreo(entity.correo()).ifPresent(u -> {
-            throw new RuntimeException("El correo ya se encuentra registrado");
+            throw new EmailAlreadyExistsException("El correo ya se encuentra registrado");
+        });
+
+        personasRepository.findByDni(entity.dni()).ifPresent(p -> {
+            throw new DniAlreadyExistsException("El Numero de documento ya se encuentra registrado");
         });
 
         Persona persona = Persona.builder()

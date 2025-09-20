@@ -28,7 +28,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pqrsdf.pqrsdf.dto.DocumentoDTO;
+import com.pqrsdf.pqrsdf.dto.InterfacePq;
 import com.pqrsdf.pqrsdf.dto.PqDto;
+import com.pqrsdf.pqrsdf.dto.PqResponseDto;
 import com.pqrsdf.pqrsdf.dto.RadicarDto;
 import com.pqrsdf.pqrsdf.dto.ResolucionDto;
 import com.pqrsdf.pqrsdf.generic.GenericService;
@@ -83,10 +85,24 @@ public class PQService extends GenericService<PQ, Long> {
         return "STTG".concat("-").concat(ultimos8).concat("-").concat(fecha).concat(ultimos8);
     }
 
-    public Page<PQ> findProximasAVencer(Pageable pageable) {
+    public Page<PQ> findVencidas(Pageable pageable, Specification<PQ> spec) {
+        LocalDate hoy = LocalDate.now();
+
+        // Condición: fechaResolucionEstimada < hoy
+        Specification<PQ> fechaSpec = (root, query, cb) -> cb.lessThan(root.get("fechaResolucionEstimada"), hoy);
+        Specification<PQ> finalSpec = spec == null ? fechaSpec : spec.and(fechaSpec);
+
+        return repository.findAll(finalSpec, pageable);
+    }
+
+    public Page<PQ> findProximasAVencer(Pageable pageable, Specification<PQ> spec) {
         LocalDate hoy = LocalDate.now();
         LocalDate limite = hoy.plusDays(7); // Por ejemplo, 30 días a partir de hoy
-        return repository.findByFechaResolucionEstimadaBetween(hoy, limite, pageable);
+
+        Specification<PQ> fechaSpec = (root, query, cb) -> cb.between(root.get("fechaResolucionEstimada"), hoy, limite);
+        Specification<PQ> finalSpec = spec == null ? fechaSpec : spec.and(fechaSpec);
+
+        return repository.findAll(finalSpec, pageable);
     }
 
     public Page<PQ> findPendientesSinResponsable(Pageable pageable) {
@@ -94,9 +110,28 @@ public class PQService extends GenericService<PQ, Long> {
     }
 
     public Page<PQ> findAll(Pageable pageable, Specification<PQ> spec) {
-
         return repository.findAll(
                 spec, pageable);
+    }
+
+    public Page<PqResponseDto> findAllPage(Pageable pageable, Specification<PQ> spec) {
+        Page<PQ> page = repository.findAll(spec, pageable);
+        return page.map(pq -> new PqResponseDto(
+                pq.getId(),
+                pq.getConsecutivo(),
+                pq.getNumeroRadicado(),
+                pq.getNumeroFolio(),
+                pq.getDetalleAsunto(),
+                pq.getDetalleDescripcion(),
+                pq.getFechaRadicacion(),
+                pq.getHoraRadicacion(),
+                pq.getFechaResolucionEstimada(),
+                pq.getFechaResolucion(),
+                pq.getRespuesta(),
+                pq.getWeb(),
+                pq.getUltimoEstadoId(),
+                pq.getNombreUltimoEstado(),
+                pq.getTipoPQ()));
     }
 
     public Page<PQ> findByResponsableId(Long responsableId, Pageable pageable) {

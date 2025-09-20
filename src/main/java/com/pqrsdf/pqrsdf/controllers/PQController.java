@@ -45,6 +45,7 @@ public class PQController extends GenericController<PQ, Long> {
         this.service = service;
     }
 
+    /*
     @GetMapping("/mis_pqs")
     public ResponseEntity<?> getMyPqs(
             @RequestParam(defaultValue = "0") int page,
@@ -80,6 +81,43 @@ public class PQController extends GenericController<PQ, Long> {
             return ResponseEntityUtil.handleInternalError(e);
         }
     }
+    */
+
+    @GetMapping("/mis_pqs_usuarios")
+    public ResponseEntity<?> getMyPqs(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) Long tipoId,
+            @RequestParam(required = true) Long solicitanteId,
+            @RequestParam(required = false) Long estadoId,
+            @RequestParam(required = false) String numeroRadicado,
+            @RequestParam(required = false) String fechaRadicacion,
+            @RequestParam(required = false) Long responsableId) {
+        try {
+                Pageable pageable = PageRequest.of(page, size, Sort.by("fechaRadicacion").descending());
+
+            if (responsableId != null) {
+                  estadoId = 2L;
+            }
+
+            Specification<PQ> spec = Specification
+                    .where(PqsSpecification.hasTipoId(tipoId))
+                    .and(PqsSpecification.hasSolicitanteId(solicitanteId))
+                    .and(PqsSpecification.hasUltimoEstado(estadoId))
+                    .and(PqsSpecification.hasNumeroRadicado(numeroRadicado))
+                    .and(PqsSpecification.hasFechaRadicacion(fechaRadicacion))
+                    .and(PqsSpecification.hasResponsableId(responsableId));
+
+            if (service.findAllPage(pageable, spec).hasContent() == false) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+
+            return ResponseEntityUtil
+                    .handlePaginationRequest(service.findAllPage(pageable, spec));
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
 
     @GetMapping("/mis_pqs_contratistas")
     public ResponseEntity<?> getMyPqs(
@@ -87,16 +125,15 @@ public class PQController extends GenericController<PQ, Long> {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(required = false) Long tipoId,
+            @RequestParam(required = false) Long estadoId,
             @RequestParam(required = false) String numeroRadicado,
             @RequestParam(required = false) String fechaRadicacion
         ){
         try {
-            Pageable pageable = PageRequest.of(page, size, Sort.by("fechaRadicacion").ascending());
-
-            Long estadoId = 2L;
+            Pageable pageable = PageRequest.of(page, size, Sort.by("fechaRadicacion").descending());
 
             Specification<PQ> spec = Specification
-                        .where(PqsSpecification.hasTipoId(tipoId))
+                    .where(PqsSpecification.hasTipoId(tipoId))
                     .and(PqsSpecification.hasUltimoEstado(estadoId))
                     .and(PqsSpecification.hasNumeroRadicado(numeroRadicado))
                     .and(PqsSpecification.hasFechaRadicacion(fechaRadicacion))
@@ -113,14 +150,47 @@ public class PQController extends GenericController<PQ, Long> {
         }
     }
 
-    @GetMapping("/proximas_a_vencer")
-    public ResponseEntity<?> getProximasAVencer(
-            @RequestParam(required = false, defaultValue = "id") String order_by,
+    @GetMapping("/vencidas")
+    public ResponseEntity<?> getVencidas(
+            @RequestParam(required = false) Long responsableId,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @RequestParam(defaultValue = "10") int size
+        ){
         try {
             Pageable pageable = PageRequest.of(page, size, Sort.by("fechaResolucionEstimada").ascending());
-            Page<PQ> proximasAVencer = service.findProximasAVencer(pageable);
+
+            Long estadoId = 2L; // Estado "En Proceso"
+
+            Specification<PQ> spec = Specification
+                    .where(PqsSpecification.hasResponsableId(responsableId))
+                    .and(PqsSpecification.hasUltimoEstado(estadoId));
+
+            Page<PQ> vencidas = service.findVencidas(pageable, spec);
+            if (vencidas.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+            return ResponseEntityUtil.handlePaginationRequest(vencidas);
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
+
+    @GetMapping("/proximas_a_vencer")
+    public ResponseEntity<?> getProximasAVencer(
+            @RequestParam(required = false) Long responsableId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+        ){
+        try {
+            Pageable pageable = PageRequest.of(page, size, Sort.by("fechaResolucionEstimada").ascending());
+
+            Long estadoId = 2L;
+
+            Specification<PQ> spec = Specification
+                    .where(PqsSpecification.hasResponsableId(responsableId))
+                    .and(PqsSpecification.hasUltimoEstado(estadoId));
+
+            Page<PQ> proximasAVencer = service.findProximasAVencer(pageable, spec);
             if (proximasAVencer.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
             }
