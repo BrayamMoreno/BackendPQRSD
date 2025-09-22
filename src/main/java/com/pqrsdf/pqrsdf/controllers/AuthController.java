@@ -6,6 +6,8 @@ import com.pqrsdf.pqrsdf.dto.auth.LoginRequest;
 import com.pqrsdf.pqrsdf.dto.auth.RefreshRequest;
 import com.pqrsdf.pqrsdf.dto.auth.RegisterRequest;
 import com.pqrsdf.pqrsdf.dto.auth.logoutRequest;
+import com.pqrsdf.pqrsdf.exceptions.DniAlreadyExistsException;
+import com.pqrsdf.pqrsdf.exceptions.EmailAlreadyExistsException;
 import com.pqrsdf.pqrsdf.models.Usuario;
 import com.pqrsdf.pqrsdf.service.TokenService;
 import com.pqrsdf.pqrsdf.service.UserDetailServiceImpl;
@@ -22,6 +24,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,15 +52,17 @@ public class AuthController {
     public ResponseEntity<?> Login(@RequestBody LoginRequest entity, HttpServletResponse response) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(userDetailServiceImpl.login(entity));
-        } catch (BadCredentialsException e){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthResponse(null, "Credenciales incorrectas", null, null, null, false));
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new AuthResponse(null, "Credenciales incorrectas", null, null, null, false));
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> Logout(@RequestBody logoutRequest entity,HttpServletRequest request, HttpServletResponse response){
+    public ResponseEntity<?> Logout(@RequestBody logoutRequest entity, HttpServletRequest request,
+            HttpServletResponse response) {
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
@@ -65,9 +70,11 @@ public class AuthController {
         String jwtToken = entity.tokenjwt();
         if (jwtToken != null) {
             tokenService.revokeToken(jwtToken, jwtUtils.extracExpirationTime(jwtToken));
-            return ResponseEntity.status(HttpStatus.OK).body(new AuthResponse(null, "Sesion cerrada", null, null, null, false));
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new AuthResponse(null, "Sesion cerrada", null, null, null, false));
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new AuthResponse(null, "No se pudo cerrar la sesion", null, null, null, false));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new AuthResponse(null, "No se pudo cerrar la sesion", null, null, null, false));
     }
 
     @PostMapping("/refresh-token")
@@ -80,12 +87,17 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest entity) throws Exception {
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest entity) {
         try {
-            Usuario usuario = usuariosService.createNewUser(entity);
-            return ResponseEntity.status(HttpStatus.CREATED).body(new Mensaje("Usuario registrado con exito"));
-        }catch (Exception e) {
-            return ResponseEntityUtil.handleInternalError(e);
+            usuariosService.createNewUser(entity);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(new Mensaje("Usuario registrado con éxito"));
+        } catch (EmailAlreadyExistsException ex) {
+            return ResponseEntityUtil.handleDuplicatedDataError(ex.getMessage());
+        } catch (DniAlreadyExistsException ex) {
+            return ResponseEntityUtil.handleDuplicatedDataError(ex.getMessage());
+        } catch (Exception ex) {
+            return ResponseEntityUtil.handleInternalError(ex);
         }
     }
 

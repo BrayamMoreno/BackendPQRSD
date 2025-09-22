@@ -96,16 +96,21 @@ public class UsuarioService extends GenericService<Usuario, Long> {
                         .orElseThrow(() -> new RuntimeException("Municipio no encontrado")))
                 .genero(generoRepository.findById(entity.genero())
                         .orElseThrow(() -> new RuntimeException("Género no encontrado")))
+                .tratamientoDatos(entity.tratamientoDatos())
                 .build();
 
         persona = personasRepository.save(persona);
 
-        Rol rol = rolesRepository.findById(new Long(1)).orElse(null);
+        Rol rol = rolesRepository.findById(new Long(5)).orElse(null);
 
         Usuario usuario = Usuario.builder()
                 .correo(entity.correo())
                 .contrasena(passwordEncoder.encode(entity.contraseña()))
                 .persona(persona)
+                .isEnable(true)
+                .accountNoExpired(null)
+                .accountNoLocked(null)
+                .credentialNoExpired(null)
                 .rol(rol)
                 .build();
 

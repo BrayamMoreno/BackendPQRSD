@@ -27,6 +27,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pqrsdf.pqrsdf.dto.ConteoPQDTO;
 import com.pqrsdf.pqrsdf.dto.DocumentoDTO;
 import com.pqrsdf.pqrsdf.dto.InterfacePq;
 import com.pqrsdf.pqrsdf.dto.PqDto;
@@ -376,4 +377,9 @@ public class PQService extends GenericService<PQ, Long> {
         }
         return true;
     }
+
+     public ConteoPQDTO obtenerConteoPorSolicitante(Long solicitanteId) {
+        return repository.contarPorSolicitante(solicitanteId);
+    }
+
 }
