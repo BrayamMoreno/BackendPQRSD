@@ -8,7 +8,7 @@ import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class GenericEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Hidden

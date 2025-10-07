@@ -14,7 +14,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.pqrsdf.pqrsdf.Specifications.PqsSpecification;
-import com.pqrsdf.pqrsdf.dto.ConteoPQDTO;
 import com.pqrsdf.pqrsdf.dto.PqDto;
 import com.pqrsdf.pqrsdf.dto.RadicarDto;
 import com.pqrsdf.pqrsdf.dto.ResolucionDto;
@@ -33,7 +32,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PatchMapping;
 
 @RestController
 @RequestMapping(path = "/api/pqs")
@@ -103,7 +102,9 @@ public class PQController extends GenericController<PQ, Long> {
             @RequestParam(required = true) Long solicitanteId,
             @RequestParam(required = false) Long estadoId,
             @RequestParam(required = false) String numeroRadicado,
-            @RequestParam(required = false) String fechaRadicacion) {
+            @RequestParam(required = false) String fechaRadicacion,
+            @RequestParam(required = false) String fechaInicio,
+            @RequestParam(required = false) String fechaFin) {
         try {
             Pageable pageable = PageRequest.of(page, size, Sort.by("fechaRadicacion").descending());
 
@@ -112,7 +113,7 @@ public class PQController extends GenericController<PQ, Long> {
                     .and(PqsSpecification.hasSolicitanteId(solicitanteId))
                     .and(PqsSpecification.hasUltimoEstado(estadoId))
                     .and(PqsSpecification.hasNumeroRadicado(numeroRadicado))
-                    .and(PqsSpecification.hasFechaRadicacion(fechaRadicacion));
+                    .and(PqsSpecification.hasFechaRango(fechaInicio, fechaFin));
 
             if (service.findAllPage(pageable, spec).hasContent() == false) {
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
@@ -120,6 +121,34 @@ public class PQController extends GenericController<PQ, Long> {
 
             return ResponseEntityUtil
                     .handlePaginationRequest(service.findAllPage(pageable, spec));
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
+
+    @GetMapping("/sin_responsable")
+    public ResponseEntity<?> getMyPqsByResponsable(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) Long tipoId,
+            @RequestParam(required = false) String numeroRadicado,
+            @RequestParam(required = false) String fechaInicio,
+            @RequestParam(required = false) String fechaFin) {
+        try {
+            Pageable pageable = PageRequest.of(page, size, Sort.by("fechaRadicacion").ascending()   );
+
+            Specification<PQ> spec = Specification
+                    .where(PqsSpecification.hasTipoId(tipoId))
+                    .and(PqsSpecification.hasResponsableNull())
+                    .and(PqsSpecification.hasUltimoEstado(1L)) // Estado "Radicado"
+                    .and(PqsSpecification.hasNumeroRadicado(numeroRadicado))
+                    .and(PqsSpecification.hasFechaRango(fechaInicio, fechaFin));
+
+            Page<PQ> pqs = service.findAll(pageable, spec);
+            if (pqs.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+            return ResponseEntityUtil.handlePaginationRequest(pqs);
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }
@@ -141,7 +170,6 @@ public class PQController extends GenericController<PQ, Long> {
                     .where(PqsSpecification.hasTipoId(tipoId))
                     .and(PqsSpecification.hasUltimoEstado(estadoId))
                     .and(PqsSpecification.hasNumeroRadicado(numeroRadicado))
-                    .and(PqsSpecification.hasFechaRadicacion(fechaRadicacion))
                     .and(PqsSpecification.hasResponsableId(responsableId));
 
             if (service.findAll(pageable, spec).hasContent() == false) {
@@ -229,24 +257,7 @@ public class PQController extends GenericController<PQ, Long> {
         }
     }
 
-    @GetMapping("/sin_responsable")
-    public ResponseEntity<?> getMyPqsByResponsable(
-            @RequestParam(required = false, defaultValue = "id") String order_by,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        try {
-            Pageable pageable = PageRequest.of(page, size, Sort.by(order_by));
-            Page<PQ> pqs = service.findPendientesSinResponsable(pageable);
-            if (pqs.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
-            }
-            return ResponseEntityUtil.handlePaginationRequest(pqs);
-        } catch (Exception e) {
-            return ResponseEntityUtil.handleInternalError(e);
-        }
-    }
-
-    @PostMapping("/radicar_pq")
+    @PatchMapping("/radicar_pq")
     public ResponseEntity<?> radicarPq(@RequestBody PqDto data) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(service.createPq(data));
@@ -265,7 +276,7 @@ public class PQController extends GenericController<PQ, Long> {
         }
     }
 
-    @PostMapping("/dar_resolucion")
+    @PatchMapping("/dar_resolucion")
     public ResponseEntity<?> darResolucion(@RequestBody ResolucionDto resolucionDto) {
         try {
             service.darResolucion(resolucionDto);

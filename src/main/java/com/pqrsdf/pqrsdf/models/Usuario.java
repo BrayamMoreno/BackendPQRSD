@@ -36,12 +36,6 @@ public class Usuario extends GenericEntity {
 
     private Boolean isEnable;
 
-    private Boolean accountNoExpired;
-
-    private Boolean accountNoLocked;
-
-    private Boolean credentialNoExpired;
-
     private String resetToken;
 
     @JoinColumn(name = "persona_id")

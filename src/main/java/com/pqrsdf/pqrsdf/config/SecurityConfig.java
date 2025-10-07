@@ -24,7 +24,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import com.pqrsdf.pqrsdf.service.TokenService;
 import com.pqrsdf.pqrsdf.utils.JwtUtils;
 
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -34,39 +33,44 @@ public class SecurityConfig extends SecurityConfigurerAdapter {
 
     private final TokenService tokenService;
 
-    public SecurityConfig(JwtUtils jwtUtils, TokenService tokenService){
+    public SecurityConfig(JwtUtils jwtUtils, TokenService tokenService) {
         this.jwtUtils = jwtUtils;
         this.tokenService = tokenService;
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
-        return httpSecurity
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
-                .httpBasic(Customizer.withDefaults())
-                .authorizeHttpRequests(http -> {
-                    http.requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll();
-                    http.requestMatchers(HttpMethod.POST, "/api/auth/logout").permitAll();
-                    http.requestMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll();
-                    http.requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll();
-                    http.anyRequest().permitAll();
-                })
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/api/auth/login",
+                                "/api/auth/logout",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**",
+                                "/v3/api-docs.yaml",
+                                "/webjars/**")
+                        .permitAll()
+                        .anyRequest().authenticated())
                 .sessionManagement(session -> session
-                    .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                    .sessionFixation().none()
-                )
-                .addFilterBefore(new JwtTokenValidator(jwtUtils, tokenService), BasicAuthenticationFilter.class)
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                // Usa UsernamePasswordAuthenticationFilter como referencia
+                .addFilterAfter(new JwtTokenValidator(jwtUtils, tokenService),
+                        org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(new PermissionFilter(), JwtTokenValidator.class)
                 .build();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService){
+    public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService) {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder());
         provider.setUserDetailsService(userDetailsService);
@@ -74,7 +78,7 @@ public class SecurityConfig extends SecurityConfigurerAdapter {
     }
 
     @Bean
-    public UrlBasedCorsConfigurationSource corsConfigurationSource(){
+    public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOriginPattern("*");
         configuration.addAllowedHeader("*");
@@ -87,7 +91,7 @@ public class SecurityConfig extends SecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

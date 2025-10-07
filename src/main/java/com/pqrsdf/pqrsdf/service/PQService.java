@@ -17,19 +17,16 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pqrsdf.pqrsdf.dto.ConteoPQDTO;
 import com.pqrsdf.pqrsdf.dto.DocumentoDTO;
-import com.pqrsdf.pqrsdf.dto.InterfacePq;
 import com.pqrsdf.pqrsdf.dto.PqDto;
 import com.pqrsdf.pqrsdf.dto.PqResponseDto;
 import com.pqrsdf.pqrsdf.dto.RadicarDto;
@@ -83,7 +80,7 @@ public class PQService extends GenericService<PQ, Long> {
         String uuid = UUID.randomUUID().toString();
         String ultimos8 = uuid.substring(uuid.length() - 8);
 
-        return "STTG".concat("-").concat(ultimos8).concat("-").concat(fecha).concat(ultimos8);
+        return "STTG".concat("-").concat(fecha).concat("-").concat(ultimos8);
     }
 
     public Page<PQ> findVencidas(Pageable pageable, Specification<PQ> spec) {
@@ -104,10 +101,6 @@ public class PQService extends GenericService<PQ, Long> {
         Specification<PQ> finalSpec = spec == null ? fechaSpec : spec.and(fechaSpec);
 
         return repository.findAll(finalSpec, pageable);
-    }
-
-    public Page<PQ> findPendientesSinResponsable(Pageable pageable) {
-        return repository.findPendientesSinResponsable(pageable);
     }
 
     public Page<PQ> findAll(Pageable pageable, Specification<PQ> spec) {
@@ -132,18 +125,17 @@ public class PQService extends GenericService<PQ, Long> {
                 pq.getWeb(),
                 pq.getUltimoEstadoId(),
                 pq.getNombreUltimoEstado(),
-                pq.getTipoPQ()));
-    }
-
-    public Page<PQ> findByResponsableId(Long responsableId, Pageable pageable) {
-        return repository.findByResponsableId(responsableId, pageable);
+                pq.getTipoPQ(),
+                pq.getAdjuntos()));
     }
 
     public List<Map<String, Object>> obtenerTendenciasDiarias() {
         LocalDate hoy = LocalDate.now();
         LocalDate hace7Dias = hoy.minusDays(6);
 
-        List<PQ> ultimos7Dias = repository.findUltimos7Dias(hace7Dias);
+        // Si tu repositorio espera Date, convierte aquí
+        Date hace7DiasDate = Date.from(hace7Dias.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        List<PQ> ultimos7Dias = repository.findUltimos7Dias(hace7DiasDate);
 
         // Inicializar los 7 días con cantidad 0
         Map<LocalDate, Long> conteo = new LinkedHashMap<>();
@@ -161,8 +153,8 @@ public class PQService extends GenericService<PQ, Long> {
             conteo.computeIfPresent(fecha, (k, v) -> v + 1);
         });
 
-        // Convertir al formato requerido (día completo con mayúscula inicial)
-        List<Map<String, Object>> tendencias = conteo.entrySet().stream()
+        // Convertir al formato requerido
+        return conteo.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
                 .map(e -> {
                     Map<String, Object> map = new HashMap<>();
@@ -175,8 +167,6 @@ public class PQService extends GenericService<PQ, Long> {
                     return map;
                 })
                 .collect(Collectors.toList());
-
-        return tendencias;
     }
 
     public List<Map<String, Object>> obtenerConteoPorTipoMes() {
@@ -322,10 +312,6 @@ public class PQService extends GenericService<PQ, Long> {
         historialEstadosRespository.save(historialEstadoPQ);
     }
 
-    public Page<PQ> pqAsignadas(Long id, Long estadoId, Pageable pageable) {
-        return repository.findByResponsableAndEstado(id, estadoId, pageable);
-    }
-
     @Transactional
     public void darResolucion(ResolucionDto resolucionDto) {
         PQ pq = repository.findById(resolucionDto.pqId())
@@ -378,7 +364,7 @@ public class PQService extends GenericService<PQ, Long> {
         return true;
     }
 
-     public ConteoPQDTO obtenerConteoPorSolicitante(Long solicitanteId) {
+    public ConteoPQDTO obtenerConteoPorSolicitante(Long solicitanteId) {
         return repository.contarPorSolicitante(solicitanteId);
     }
 

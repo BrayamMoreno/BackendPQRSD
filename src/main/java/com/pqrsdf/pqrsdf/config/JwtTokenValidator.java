@@ -41,7 +41,7 @@ public class JwtTokenValidator extends OncePerRequestFilter {
         String jwtToken = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if (jwtToken != null && jwtToken.startsWith("Bearer ")) {
-            jwtToken = jwtToken.substring(7); // Quitar "Bearer " del token
+            jwtToken = jwtToken.substring(7);
 
             if (tokenService.isTokenRevoked(jwtToken)) {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

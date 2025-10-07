@@ -2,7 +2,7 @@ package com.pqrsdf.pqrsdf.generic;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;    
+import org.springframework.data.domain.Pageable;
 
 import jakarta.transaction.Transactional;
 

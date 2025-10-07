@@ -1,35 +1,22 @@
 package com.pqrsdf.pqrsdf.repository;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.pqrsdf.pqrsdf.dto.ConteoPQDTO;
-import com.pqrsdf.pqrsdf.dto.InterfacePq;
 import com.pqrsdf.pqrsdf.generic.GenericRepository;
 import com.pqrsdf.pqrsdf.models.PQ;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Repository
 public interface PQRepository extends GenericRepository<PQ, Long>, JpaSpecificationExecutor<PQ> {
 
-    Page<PQ> findByResponsableId(Long responsableId, Pageable pageable);
-
-    Page<PQ> findBy(Pageable pageable, Specification<PQ> spec);
-
-    Page<PQ> findByResponsableIdOrderByFechaRadicacionDesc(Long responsableId, Pageable pageable);
-
-    Page<PQ> findBySolicitanteIdOrderByFechaRadicacionDesc(Long solicitanteId, Pageable pageable);
-
-    Page<PQ> findAllByOrderByFechaRadicacionDesc(Pageable pageable);
-
     @Query("SELECT p FROM PQ p WHERE p.fechaRadicacion >= :fechaInicio")
-    List<PQ> findUltimos7Dias(@Param("fechaInicio") LocalDate fechaInicio);
+    List<PQ> findUltimos7Dias(@Param("fechaInicio") Date fechaInicio);
 
     @Query(value = """
                 SELECT
@@ -50,16 +37,6 @@ public interface PQRepository extends GenericRepository<PQ, Long>, JpaSpecificat
     List<Object[]> contarPorTipoEnMes(
             @Param("inicioMes") LocalDate inicioMes,
             @Param("finMes") LocalDate finMes);
-
-    @Query("SELECT p FROM PQ p WHERE p.ultimoEstadoId = 1 AND p.responsable IS NULL ORDER BY p.fechaRadicacion ASC")
-    Page<PQ> findPendientesSinResponsable(Pageable pageable);
-
-    @Query("SELECT p FROM PQ p WHERE p.responsable.id = :responsableId AND p.ultimoEstadoId = :estadoId")
-    Page<PQ> findByResponsableAndEstado(@Param("responsableId") Long responsableId, @Param("estadoId") Long estadoId,
-            Pageable pageable);
-
-    @Query("SELECT p FROM PQ p WHERE p.ultimoEstadoId = 1 AND p.responsable.id = :responsableId ORDER BY p.fechaRadicacion ASC")
-    List<PQ> findByResponsableAndEstadoList(@Param("responsableId") Long responsableId);
 
     @Query(value = """
                 SELECT

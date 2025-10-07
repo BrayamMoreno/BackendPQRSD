@@ -2,6 +2,7 @@ package com.pqrsdf.pqrsdf.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -108,17 +109,14 @@ public class UsuarioService extends GenericService<Usuario, Long> {
                 .contrasena(passwordEncoder.encode(entity.contraseña()))
                 .persona(persona)
                 .isEnable(true)
-                .accountNoExpired(null)
-                .accountNoLocked(null)
-                .credentialNoExpired(null)
                 .rol(rol)
                 .build();
 
         return usuarioRepository.save(usuario);
     }
 
-    public Page<Usuario> findByRolId(long Id, Pageable pageable) {
-        return usuarioRepository.findByRolId(Id, pageable);
+    public Page<Usuario> findAll(Pageable pageable, Specification<Usuario> spec) {
+        return usuarioRepository.findAll(spec, pageable);
     }
 
     public void disableAccount(Long id) {

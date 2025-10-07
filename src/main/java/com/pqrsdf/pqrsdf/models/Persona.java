@@ -37,7 +37,6 @@ public class Persona extends GenericEntity {
 
     private String telefono;
     private String direccion;
-    private String codigoRadicador;
     private Boolean tratamientoDatos;
 
     @ManyToOne

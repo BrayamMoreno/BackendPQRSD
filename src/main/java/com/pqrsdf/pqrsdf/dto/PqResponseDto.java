@@ -2,6 +2,9 @@ package com.pqrsdf.pqrsdf.dto;
 
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
+
+import com.pqrsdf.pqrsdf.models.AdjuntoPQ;
 import com.pqrsdf.pqrsdf.models.TipoPQ;
 
 public record PqResponseDto(
@@ -19,5 +22,6 @@ public record PqResponseDto(
         Boolean web,
         Long ultimoEstadoId,
         String nombreUltimoEstado,
-        TipoPQ tipoPQ) {
+        TipoPQ tipoPQ,
+        List<AdjuntoPQ> adjuntos) {
 }

@@ -3,6 +3,7 @@ package com.pqrsdf.pqrsdf.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pqrsdf.pqrsdf.Specifications.AdjuntosSpecification;
 import com.pqrsdf.pqrsdf.dto.AdjuntoRequest;
 import com.pqrsdf.pqrsdf.dto.UpdateAdjuntoRequest;
 import com.pqrsdf.pqrsdf.generic.GenericController;
@@ -15,6 +16,10 @@ import com.pqrsdf.pqrsdf.utils.ResponseEntityUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.core.io.UrlResource;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +35,7 @@ import org.springframework.http.MediaType;
 import java.nio.file.Path;
 
 @RestController
-@RequestMapping(path = "/api/adjuntosPq")
+@RequestMapping(path = "/api/adjuntos_pq")
 @Tag(name = "Gestion de Adjuntos de PQ")
 public class AdjuntoPQController extends GenericController<AdjuntoPQ, Long> {
 
@@ -41,6 +46,25 @@ public class AdjuntoPQController extends GenericController<AdjuntoPQ, Long> {
         super(service);
         this.service = service;
         this.pqService = pqService;
+    }
+
+    @GetMapping("/GetAdjuntosPq")
+    public ResponseEntity<?> getAdjuntosPq(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) Boolean respuesta,
+            @RequestParam(required = false) String nombreRadicado) {
+        try {
+            Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+
+            Specification<AdjuntoPQ> spec = Specification
+                    .where(AdjuntosSpecification.hasRespuesta(respuesta))
+                    .and(AdjuntosSpecification.hasNombreArchivoOrPqRadicado(nombreRadicado));
+
+            return ResponseEntityUtil.handlePaginationRequest(service.findAll(pageable, spec));
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
     }
 
     @GetMapping("/GetByPqId")

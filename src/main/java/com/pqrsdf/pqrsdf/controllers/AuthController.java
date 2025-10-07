@@ -1,5 +1,6 @@
 package com.pqrsdf.pqrsdf.controllers;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.pqrsdf.pqrsdf.dto.Mensaje;
 import com.pqrsdf.pqrsdf.dto.auth.AuthResponse;
 import com.pqrsdf.pqrsdf.dto.auth.LoginRequest;
@@ -8,7 +9,6 @@ import com.pqrsdf.pqrsdf.dto.auth.RegisterRequest;
 import com.pqrsdf.pqrsdf.dto.auth.logoutRequest;
 import com.pqrsdf.pqrsdf.exceptions.DniAlreadyExistsException;
 import com.pqrsdf.pqrsdf.exceptions.EmailAlreadyExistsException;
-import com.pqrsdf.pqrsdf.models.Usuario;
 import com.pqrsdf.pqrsdf.service.TokenService;
 import com.pqrsdf.pqrsdf.service.UserDetailServiceImpl;
 import com.pqrsdf.pqrsdf.service.UsuarioService;
@@ -21,10 +21,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import org.springframework.security.core.Authentication;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -77,12 +83,34 @@ public class AuthController {
                 .body(new AuthResponse(null, "No se pudo cerrar la sesion", null, null, null, false));
     }
 
-    @PostMapping("/refresh-token")
-    public ResponseEntity<?> refreshToken(@RequestBody RefreshRequest request) {
+    @PostMapping("/renew")
+    public ResponseEntity<Map<String, String>> renewToken(@RequestBody RefreshRequest authHeader) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(userDetailServiceImpl.refreshSession(request));
+            if (authHeader == null || !authHeader.authHeader().startsWith("Bearer ")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Map.of("error", "Token inválido"));
+            }
+
+            String token = authHeader.authHeader().substring(7);
+
+            // 1. Validar que el token aún no esté expirado
+            DecodedJWT decodedJWT = jwtUtils.validateToken(token);
+            String username = jwtUtils.extractUsername(decodedJWT);
+
+            UserDetails userDetails = userDetailServiceImpl.loadUserByUsername(username);
+
+            Authentication authentication = new UsernamePasswordAuthenticationToken(
+                userDetails.getUsername(), null, userDetails.getAuthorities()
+            );
+
+            // 2. Generar nuevo token
+            String newToken = jwtUtils.createToken(authentication);
+
+            return ResponseEntity.ok(Map.of("jwt", newToken));
+
         } catch (Exception e) {
-            return ResponseEntityUtil.handleInternalError(e);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("error", "No se pudo renovar el token"));
         }
     }
 
@@ -100,5 +128,4 @@ public class AuthController {
             return ResponseEntityUtil.handleInternalError(ex);
         }
     }
-
 }

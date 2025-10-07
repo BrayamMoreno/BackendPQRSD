@@ -38,10 +38,9 @@ public class ResponseEntityUtil {
 
     public static <T> ResponseEntity<Map<String, Object>> handlePaginationRequest(Page<T> entities) {
         Map<String, Object> response = new LinkedHashMap<>();
-        boolean hasMore = entities.hasNext();
         response.put("data", entities.getContent());
         response.put("total_count", entities.getTotalElements());
-        response.put("has_more", hasMore);
+        response.put("has_more", entities.hasNext());
         response.put("page", entities.getNumber());
         response.put("items_per_page", entities.getSize());
         return ResponseEntity.status(HttpStatus.OK).body(response);

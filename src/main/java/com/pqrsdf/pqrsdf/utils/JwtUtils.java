@@ -22,14 +22,12 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 @Component
 public class JwtUtils {
-    
-    private String privateKey;
 
+    private String privateKey;
     private String userGenerator;
 
-    private int accessTokenExpiration = 600000;
-
-    private int refreshTokenExpiration = 1500000;
+    private int accessTokenExpiration = 15 * 60 * 1000;   // 15 min
+    private int refreshTokenExpiration = 15 * 60 * 1000;  // 15 min
 
     public JwtUtils(Dotenv dotenv){
         this.privateKey = dotenv.get("JWT_PRIVATE_KEY_GENERATOR");
@@ -80,7 +78,7 @@ public class JwtUtils {
     public DecodedJWT validateToken(String token){
         try {
             Algorithm algorithm = Algorithm.HMAC256(this.privateKey);
-            
+
             JWTVerifier verifier = JWT.require(algorithm)
                                 .withIssuer(this.userGenerator)
                                 .build();

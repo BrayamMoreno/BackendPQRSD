@@ -26,7 +26,7 @@ public class AdjuntoPQ extends GenericEntity {
     @JoinColumn(name = "pq_id", nullable = false)
     private PQ pq;
 
-    @Formula("(select p.id from pqs p where p.id = pq_id)")
+    @Formula("(select p.numero_radicado from pqs p where p.id = pq_id)")
     private String pqRadicado;
 
     @Column(nullable = false)

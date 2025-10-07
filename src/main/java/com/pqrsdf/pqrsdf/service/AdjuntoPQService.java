@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.pqrsdf.pqrsdf.config.FileStorageConfig;
@@ -36,6 +39,10 @@ public class AdjuntoPQService extends GenericService<AdjuntoPQ, Long> {
         Files.createDirectories(uploadDir);
         this.repository = repository;
         this.pqRepository = pqRepository;
+    }
+
+    public Page<AdjuntoPQ> findAll(Pageable pageable, Specification<AdjuntoPQ> spec) {
+        return repository.findAll(spec, pageable);
     }
 
     public List<AdjuntoPQ> findByPqId(Long pqId) {
