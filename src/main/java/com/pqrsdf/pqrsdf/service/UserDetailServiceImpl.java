@@ -3,7 +3,6 @@ package com.pqrsdf.pqrsdf.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.annotations.DialectOverride.OverridesAnnotation;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -51,7 +50,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority(permiso.getTabla() + "_" + permiso.getAccion()));
         });
 
-        // ✅ Usa el constructor correcto
         return new User(
                 usuario.getCorreo(),
                 usuario.getContrasena(),

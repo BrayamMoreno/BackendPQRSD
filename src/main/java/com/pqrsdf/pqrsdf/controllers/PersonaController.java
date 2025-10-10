@@ -13,12 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping(path = "/api/personas")
 @Tag(name = "Gestion de Personas")
 public class PersonaController extends GenericController<Persona, Long> {
-
-    private final PersonaService service;
-
     public PersonaController(PersonaService service){
         super(service);
-        this.service = service;
     }
-    
 }

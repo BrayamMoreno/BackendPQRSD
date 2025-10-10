@@ -7,5 +7,5 @@ import com.pqrsdf.pqrsdf.models.Rol;
 
 @Repository
 public interface RolRepository extends GenericRepository<Rol, Long> {
-    
+
 }

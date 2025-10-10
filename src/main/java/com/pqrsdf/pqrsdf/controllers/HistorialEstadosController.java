@@ -15,9 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping(path = "/api/historial_estados")
 @Tag(name = "Historial de Estados de PQ")
 public class HistorialEstadosController extends GenericController<HistorialEstadoPQ, Long> {
-
     public HistorialEstadosController(HistorialEstadoService service) {
         super(service);
     }
-
 }

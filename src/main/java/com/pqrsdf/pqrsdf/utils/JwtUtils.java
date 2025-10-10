@@ -27,7 +27,6 @@ public class JwtUtils {
     private String userGenerator;
 
     private int accessTokenExpiration = 15 * 60 * 1000;   // 15 min
-    private int refreshTokenExpiration = 15 * 60 * 1000;  // 15 min
 
     public JwtUtils(Dotenv dotenv){
         this.privateKey = dotenv.get("JWT_PRIVATE_KEY_GENERATOR");
@@ -44,31 +43,10 @@ public class JwtUtils {
 
         String jwtToken = JWT.create()
                                 .withIssuer(this.userGenerator)
-                                .withSubject(authentication.getPrincipal().toString())
+                                .withSubject(authentication.getName())
                                 .withClaim("authorities", authorities)
                                 .withIssuedAt(new Date())
                                 .withExpiresAt(new Date(System.currentTimeMillis() + accessTokenExpiration))
-                                .withJWTId(UUID.randomUUID().toString())
-                                .withNotBefore(new Date(System.currentTimeMillis()))
-                                .sign(Algoritthm);
-        return jwtToken;
-    }
-
-    public String generateRefreshToken(Authentication authentication){
-
-        Algorithm Algoritthm = Algorithm.HMAC256(this.privateKey);
-
-        String authorities = authentication.getAuthorities()
-                                .stream()
-                                .map(GrantedAuthority::getAuthority)
-                                .collect(Collectors.joining(","));
-
-        String jwtToken = JWT.create()
-                                .withIssuer(this.userGenerator)
-                                .withSubject(authentication.getPrincipal().toString())
-                                .withClaim("authorities", authorities)
-                                .withIssuedAt(new Date())
-                                .withExpiresAt(new Date(System.currentTimeMillis() + refreshTokenExpiration))
                                 .withJWTId(UUID.randomUUID().toString())
                                 .withNotBefore(new Date(System.currentTimeMillis()))
                                 .sign(Algoritthm);
@@ -96,7 +74,7 @@ public class JwtUtils {
     }
 
     public String extractUsername(DecodedJWT decodedJWT){
-        return decodedJWT.getSubject().toString();
+        return decodedJWT.getSubject();
     }
 
     public Claim getSpecificClaim(DecodedJWT decodedJWT, String claimName) {
@@ -110,9 +88,8 @@ public class JwtUtils {
     public LocalDateTime extracExpirationTime(String token){
         DecodedJWT decodedJWT = validateToken(token);
         Date expiredAt = decodedJWT.getExpiresAt();
-        
+
         LocalDateTime expirationTime = LocalDateTime.ofInstant(expiredAt.toInstant(), expiredAt.toInstant().atZone(java.time.ZoneId.systemDefault()).getZone());
         return expirationTime;
     }
-    
 }

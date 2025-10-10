@@ -23,4 +23,7 @@ public class ResponsablePQ extends GenericEntity {
     private AreaResp area;
 
     private LocalDateTime fechaAsignacion;
+
+    @Column(name = "is_active")
+    private Boolean isActive;
 }

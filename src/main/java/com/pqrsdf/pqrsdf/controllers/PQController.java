@@ -47,52 +47,34 @@ public class PQController extends GenericController<PQ, Long> {
         this.service = service;
     }
 
-    /*
-     * @GetMapping("/mis_pqs")
-     * public ResponseEntity<?> getMyPqs(
-     * 
-     * @RequestParam(defaultValue = "0") int page,
-     * 
-     * @RequestParam(defaultValue = "10") int size,
-     * 
-     * @RequestParam(required = false) Long tipoId,
-     * 
-     * @RequestParam(required = true) Long solicitanteId,
-     * 
-     * @RequestParam(required = false) Long estadoId,
-     * 
-     * @RequestParam(required = false) String numeroRadicado,
-     * 
-     * @RequestParam(required = false) String fechaRadicacion,
-     * 
-     * @RequestParam(required = false) Long responsableId) {
-     * try {
-     * Pageable pageable = PageRequest.of(page, size,
-     * Sort.by("fechaRadicacion").descending());
-     * 
-     * if (responsableId != null) {
-     * estadoId = 2L;
-     * }
-     * 
-     * Specification<PQ> spec = Specification
-     * .where(PqsSpecification.hasTipoId(tipoId))
-     * .and(PqsSpecification.hasSolicitanteId(solicitanteId))
-     * .and(PqsSpecification.hasUltimoEstado(estadoId))
-     * .and(PqsSpecification.hasNumeroRadicado(numeroRadicado))
-     * .and(PqsSpecification.hasFechaRadicacion(fechaRadicacion))
-     * .and(PqsSpecification.hasResponsableId(responsableId));
-     * 
-     * if (service.findAll(pageable, spec).hasContent() == false) {
-     * return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
-     * }
-     * 
-     * return ResponseEntityUtil
-     * .handlePaginationRequest(service.findAll(pageable, spec));
-     * } catch (Exception e) {
-     * return ResponseEntityUtil.handleInternalError(e);
-     * }
-     * }
-     */
+    @GetMapping("/all_pqs")
+    public ResponseEntity<?> getAllPqs(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) Long tipoId,
+            @RequestParam(required = false) Long estadoId,
+            @RequestParam(required = false) String numeroRadicado,
+            @RequestParam(required = false) String fechaInicio,
+            @RequestParam(required = false) String fechaFin) {
+        try {
+            Pageable pageable = PageRequest.of(page, size, Sort.by("fechaRadicacion").descending());
+
+            Specification<PQ> spec = Specification
+                    .where(PqsSpecification.hasTipoId(tipoId))
+                    .and(PqsSpecification.hasUltimoEstado(estadoId))
+                    .and(PqsSpecification.hasNumeroRadicado(numeroRadicado))
+                    .and(PqsSpecification.hasFechaRango(fechaInicio, fechaFin));
+
+            if (service.findAll(pageable, spec).hasContent() == false) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+
+            return ResponseEntityUtil
+                    .handlePaginationRequest(service.findAll(pageable, spec));
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
 
     @GetMapping("/mis_pqs_usuarios")
     public ResponseEntity<?> getMyPqs(
