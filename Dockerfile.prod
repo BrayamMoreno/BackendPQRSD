@@ -13,7 +13,7 @@ COPY pom.xml .
 RUN chmod +x ./mvnw && ./mvnw dependency:go-offline
 
 # Instalar cliente de PostgreSQL (pg_dump, psql, etc.)
-RUN apk add --no-cache postgresql-client
+RUN apk add --no-cache postgresql15-client
 
 # Copiar el código fuente
 COPY src src
