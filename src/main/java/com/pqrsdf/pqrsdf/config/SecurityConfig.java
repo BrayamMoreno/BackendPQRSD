@@ -19,6 +19,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.pqrsdf.pqrsdf.components.AuditLoggingFilter;
+import com.pqrsdf.pqrsdf.repository.AuditLogRepository;
 import com.pqrsdf.pqrsdf.service.TokenService;
 import com.pqrsdf.pqrsdf.utils.JwtUtils;
 
@@ -37,37 +39,47 @@ public class SecurityConfig extends SecurityConfigurerAdapter {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/api/generos").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/municipios/municipios_departamento").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/departamentos").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/tipos_documentos").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/tipos_personas").permitAll()
-                        .requestMatchers(
-                                "/api/auth/login",
-                                "/api/auth/logout",
-                                "/api/auth/register",
-                                "/api/auth/renew",
-                                "/swagger-ui/**",
-                                "/swagger-ui.html",
-                                "/v3/api-docs/**",
-                                "/v3/api-docs.yaml",
-                                "/webjars/**"
-                                )
-                        .permitAll()
-                        .anyRequest().authenticated())
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                // Usa UsernamePasswordAuthenticationFilter como referencia
-                .addFilterAfter(new JwtTokenValidator(jwtUtils, tokenService),
-                        org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
-                .addFilterAfter(new PermissionFilter(), JwtTokenValidator.class)
-                .build();
-    }
+public SecurityFilterChain securityFilterChain(HttpSecurity http,
+                                               AuditLoggingFilter auditLoggingFilter) throws Exception {
+    return http
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(auth -> auth
+                    .requestMatchers(HttpMethod.GET, "/api/generos").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/municipios/municipios_departamento").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/departamentos").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/tipos_documentos").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/tipos_personas").permitAll()
+                    .requestMatchers(
+                            "/api/auth/login",
+                            "/api/auth/logout",
+                            "/api/auth/register",
+                            "/api/auth/renew",
+                            "/swagger-ui/**",
+                            "/swagger-ui.html",
+                            "/v3/api-docs/**",
+                            "/v3/api-docs.yaml",
+                            "/webjars/**")
+                    .permitAll()
+                    .anyRequest().authenticated())
+            .sessionManagement(session -> session
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+            // Registra el validador JWT antes del filtro estándar de autenticación
+            .addFilterBefore(new JwtTokenValidator(jwtUtils, tokenService),
+                    org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
+
+            // Registra tu PermissionFilter después del JWT
+            .addFilterAfter(new PermissionFilter(),
+                    org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
+
+            //Registra el filtro de auditoría al final
+            .addFilterAfter(auditLoggingFilter,
+                    org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
+
+            .build();
+}
+
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
@@ -99,5 +111,10 @@ public class SecurityConfig extends SecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuditLoggingFilter auditLoggingFilter(AuditLogRepository auditLogRepository) {
+        return new AuditLoggingFilter(auditLogRepository);
     }
 }
