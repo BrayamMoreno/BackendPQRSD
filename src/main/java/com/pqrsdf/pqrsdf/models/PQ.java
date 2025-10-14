@@ -3,14 +3,17 @@ package com.pqrsdf.pqrsdf.models;
 import java.sql.Time;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.annotations.Formula;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -32,13 +35,9 @@ import lombok.Setter;
 @Table(name = "pqs")
 public class PQ extends GenericEntity {
 
-    @Column(unique = true)
-    private String consecutivo;
-
     @Column(unique = true, name = "numero_radicado")
     private String numeroRadicado;
 
-    private Integer numeroFolio;
     private String detalleAsunto;
 
     private String detalleDescripcion;
@@ -79,9 +78,10 @@ public class PQ extends GenericEntity {
 
     private Boolean web;
 
-    @OneToMany(mappedBy = "pq", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OrderBy("fechaCambio ASC")
-    private List<HistorialEstadoPQ> historialEstados;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "pq", cascade = CascadeType.ALL)
+    @OrderBy("fechaCambio DESC")
+    private Set<HistorialEstadoPQ> historialEstados;
 
     @OneToMany(mappedBy = "pq", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AdjuntoPQ> adjuntos;

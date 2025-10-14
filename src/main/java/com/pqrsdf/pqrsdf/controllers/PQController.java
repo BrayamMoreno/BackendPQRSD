@@ -146,7 +146,7 @@ public class PQController extends GenericController<PQ, Long> {
             @RequestParam(required = false) String numeroRadicado,
             @RequestParam(required = false) String fechaRadicacion) {
         try {
-            Pageable pageable = PageRequest.of(page, size, Sort.by("fechaRadicacion").descending());
+            Pageable pageable = PageRequest.of(page, size, Sort.by("fechaRadicacion").ascending());
 
             Specification<PQ> spec = Specification
                     .where(PqsSpecification.hasTipoId(tipoId))
@@ -239,7 +239,7 @@ public class PQController extends GenericController<PQ, Long> {
         }
     }
 
-    @PatchMapping("/radicar_pq")
+    @PostMapping("/radicar_pq")
     public ResponseEntity<?> radicarPq(@RequestBody PqDto data) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(service.createPq(data));
@@ -268,7 +268,7 @@ public class PQController extends GenericController<PQ, Long> {
         }
     }
 
-    @GetMapping("/conteo")
+    @GetMapping("/conteo-usuarios")
     public ResponseEntity<?> obtenerConteo(@PathParam("solicitanteId") Long solicitanteId) {
         try {
             if (solicitanteId == null) {
@@ -280,4 +280,12 @@ public class PQController extends GenericController<PQ, Long> {
         }
     }
 
+    @GetMapping("/conteo-radicador")
+    public ResponseEntity<?> obtenerConteoRadicador() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(service.conteoRadicador());
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
 }

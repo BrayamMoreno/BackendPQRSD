@@ -14,7 +14,7 @@ import lombok.*;
 @Setter
 @Entity
 @Table(name = "responsables_pq")
-public class ResponsablePQ extends GenericEntity {
+public class    ResponsablePQ extends GenericEntity {
 
     @ManyToOne @JoinColumn(name = "persona_responsable_id")
     private Persona personaResponsable;
@@ -26,4 +26,13 @@ public class ResponsablePQ extends GenericEntity {
 
     @Column(name = "is_active")
     private Boolean isActive;
+
+
+    @PrePersist
+    public void prePersist() {
+        this.fechaAsignacion = LocalDateTime.now();
+        if (this.isActive == null) {
+            this.isActive = true;
+        }
+    }
 }

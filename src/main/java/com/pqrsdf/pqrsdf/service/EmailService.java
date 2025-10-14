@@ -10,7 +10,6 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import com.pqrsdf.pqrsdf.models.Persona;
-import com.pqrsdf.pqrsdf.models.Usuario;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;

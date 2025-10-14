@@ -58,4 +58,20 @@ public interface PQRepository extends GenericRepository<PQ, Long>, JpaSpecificat
     @Query(value = "SELECT * FROM vista_conteo_pq WHERE solicitante_id = :solicitanteId", nativeQuery = true)
     ConteoPQDTO contarPorSolicitante(@Param("solicitanteId") Long solicitanteId);
 
+    @Query(value = """
+                SELECT
+                    SUM(CASE WHEN he.estado_id = 1 THEN 1 ELSE 0 END) AS por_asignar,
+                    SUM(CASE WHEN he.estado_id = 2 THEN 1 ELSE 0 END) AS asignadas,
+                    SUM(CASE WHEN he.estado_id = 3 THEN 1 ELSE 0 END) AS rechazadas
+                FROM pqs p
+                LEFT JOIN historial_estados_pq he
+                    ON he.pq_id = p.id
+                    AND he.fecha_cambio = (
+                        SELECT MAX(he2.fecha_cambio)
+                        FROM historial_estados_pq he2
+                        WHERE he2.pq_id = p.id
+                    )
+            """, nativeQuery = true)
+    Object obtenerConteoRadicador();
+
 }

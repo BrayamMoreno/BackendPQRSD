@@ -22,4 +22,18 @@ public class ResponsablePQService extends GenericService<ResponsablePQ, Long>{
     public Page<ResponsablePQ> findAll(Specification<ResponsablePQ> spec, Pageable pageable) {
         return repository.findAll(spec, pageable);
     }
+
+    public void disableResponsable(Long id) {
+        ResponsablePQ responsable = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Responsable no encontrado con ID: " + id));
+        responsable.setIsActive(false);
+        repository.save(responsable);
+    }
+
+    public void enableResponsable(Long id) {
+        ResponsablePQ responsable = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Responsable no encontrado con ID: " + id));
+        responsable.setIsActive(true);
+        repository.save(responsable);
+    }
 }

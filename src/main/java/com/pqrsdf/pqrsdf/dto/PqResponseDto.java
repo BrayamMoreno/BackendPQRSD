@@ -9,9 +9,7 @@ import com.pqrsdf.pqrsdf.models.TipoPQ;
 
 public record PqResponseDto(
         Long id,
-        String consecutivo,
         String numeroRadicado,
-        Integer numeroFolio,
         String detalleAsunto,
         String detalleDescripcion,
         Date fechaRadicacion,

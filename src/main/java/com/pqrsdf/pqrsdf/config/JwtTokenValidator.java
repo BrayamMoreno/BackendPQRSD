@@ -62,7 +62,7 @@
                     context.setAuthentication(authentication);
                 } catch (TokenExpiredException e) {
                     // Deja pasar solicitudes al endpoint de renovación
-                    if (request.getRequestURI().equals("/api/auth/refresh-token")) {
+                    if (request.getRequestURI().equals("/api/auth/renew")) {
                         filterChain.doFilter(request, response);
                         return;
                     }

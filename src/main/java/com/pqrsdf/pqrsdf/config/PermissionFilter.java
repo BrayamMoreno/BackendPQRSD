@@ -25,7 +25,7 @@
             String method = request.getMethod();
 
             //1. Excluir rutas de autenticación (/api/auth/**)
-            if (path.startsWith("/api/auth/")) {
+            if (path.startsWith("/api/auth/**")) {
                 filterChain.doFilter(request, response);
                 return;
             }

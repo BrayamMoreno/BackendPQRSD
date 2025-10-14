@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
-public class GenericController<T extends GenericEntity, ID> {
+public class    GenericController<T extends GenericEntity, ID> {
 
     private final GenericService<T, ID> service;
     private static final String ENTIDAD_NO_ENCONTRADA = "Entidad No Encontrada";

@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.pqrsdf.pqrsdf.dto.Mensaje;
-import com.pqrsdf.pqrsdf.exceptions.DniAlreadyExistsException;
-import com.pqrsdf.pqrsdf.exceptions.EmailAlreadyExistsException;
 import com.pqrsdf.pqrsdf.utils.ResponseEntityUtil;
 
 import org.springframework.http.HttpStatus;

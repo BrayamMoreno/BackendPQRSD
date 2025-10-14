@@ -1,7 +1,6 @@
 package com.pqrsdf.pqrsdf.Specifications;
 
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.pqrsdf.pqrsdf.models.AreaResp;
 import com.pqrsdf.pqrsdf.models.Persona;

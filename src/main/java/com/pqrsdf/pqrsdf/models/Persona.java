@@ -41,7 +41,6 @@ public class Persona extends GenericEntity {
 
     @ManyToOne
     @JoinColumn(name = "municipio_id")
-    @JsonIgnore
     private Municipio municipio;
 
     @ManyToOne

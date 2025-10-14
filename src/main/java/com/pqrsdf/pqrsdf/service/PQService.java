@@ -2,6 +2,7 @@ package com.pqrsdf.pqrsdf.service;
 
 import java.io.File;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.Instant;
@@ -26,14 +27,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pqrsdf.pqrsdf.dto.ConteoPQDTO;
+import com.pqrsdf.pqrsdf.dto.ConteoRadicadorDTO;
 import com.pqrsdf.pqrsdf.dto.DocumentoDTO;
 import com.pqrsdf.pqrsdf.dto.PqDto;
 import com.pqrsdf.pqrsdf.dto.PqResponseDto;
 import com.pqrsdf.pqrsdf.dto.RadicarDto;
 import com.pqrsdf.pqrsdf.dto.ResolucionDto;
 import com.pqrsdf.pqrsdf.generic.GenericService;
+import com.pqrsdf.pqrsdf.models.EstadoPQ;
 import com.pqrsdf.pqrsdf.models.HistorialEstadoPQ;
 import com.pqrsdf.pqrsdf.models.PQ;
+import com.pqrsdf.pqrsdf.models.ResponsablePQ;
 import com.pqrsdf.pqrsdf.repository.HistorialEstadosRespository;
 import com.pqrsdf.pqrsdf.repository.PQRepository;
 import com.pqrsdf.pqrsdf.repository.ResponsablePQRepository;
@@ -112,9 +116,7 @@ public class PQService extends GenericService<PQ, Long> {
         Page<PQ> page = repository.findAll(spec, pageable);
         return page.map(pq -> new PqResponseDto(
                 pq.getId(),
-                pq.getConsecutivo(),
                 pq.getNumeroRadicado(),
-                pq.getNumeroFolio(),
                 pq.getDetalleAsunto(),
                 pq.getDetalleDescripcion(),
                 pq.getFechaRadicacion(),
@@ -224,38 +226,42 @@ public class PQService extends GenericService<PQ, Long> {
         }
     }
 
-    public void aceptarRechazarPq(RadicarDto entity) {
-        if (entity.isAprobada()) {
-            isAprobada(entity);
-        } else {
-            isNotAprobada(entity);
-        }
-    }
-
     @Transactional
-    public void isAprobada(RadicarDto entity) {
+    public void aceptarRechazarPq(RadicarDto entity) {
         PQ pq = repository.findById(entity.solicitudId())
                 .orElseThrow(() -> new RuntimeException("PQ no encontrado con ID: " + entity.solicitudId()));
 
-        pq.setResponsable(responsablePQRepository.findById(entity.responsableId())
-                .orElseThrow(
-                        () -> new RuntimeException("Responsable no encontrado con ID: " + entity.responsableId())));
+        ResponsablePQ usuarioResponsable = null;
+        EstadoPQ nuevoEstado;
+        String observacion = entity.comentario();
 
-        Date fechaResolucionEstimdad = darFechaResolucion(pq);
+        if (entity.isAprobada()) {
+            usuarioResponsable = responsablePQRepository.findById(entity.responsableId())
+                    .orElseThrow(
+                            () -> new RuntimeException("Responsable no encontrado con ID: " + entity.responsableId()));
 
-        HistorialEstadoPQ historialEstadoPQ = HistorialEstadoPQ.builder()
-                .usuario(usuarioRepository.findById(entity.responsableId())
+            pq.setResponsable(usuarioResponsable);
+            pq.setFechaResolucionEstimada(darFechaResolucion(pq));
+
+            nuevoEstado = estadoPQService.getById(2L);
+        } else {
+            pq.setRespuesta(entity.motivoRechazo());
+            nuevoEstado = estadoPQService.getById(3L);
+        }
+
+        repository.save(pq);
+
+        HistorialEstadoPQ historial = HistorialEstadoPQ.builder()
+                .usuario(usuarioRepository.findById(entity.radicadorId())
                         .orElseThrow(
                                 () -> new RuntimeException("Usuario no encontrado con ID: " + entity.radicadorId())))
-                .estado(estadoPQService.getById(2L))
+                .estado(nuevoEstado)
                 .pq(pq)
-                .fechaCambio(new java.sql.Timestamp(System.currentTimeMillis()))
-                .observacion(entity.comentario())
+                .fechaCambio(new Timestamp(System.currentTimeMillis()))
+                .observacion(observacion)
                 .build();
 
-        pq.setFechaResolucionEstimada(fechaResolucionEstimdad);
-        repository.save(pq);
-        historialEstadosRespository.save(historialEstadoPQ);
+        historialEstadosRespository.save(historial);
     }
 
     private Date darFechaResolucion(PQ pq) {
@@ -286,30 +292,6 @@ public class PQService extends GenericService<PQ, Long> {
 
         // Convertir de nuevo a java.util.Date antes de retornar
         return Date.from(fechaResolucion.atStartOfDay(ZoneId.systemDefault()).toInstant());
-    }
-
-    @Transactional
-    public void isNotAprobada(RadicarDto entity) {
-
-        PQ pq = repository.findById(entity.solicitudId())
-                .orElseThrow(() -> new RuntimeException("PQ no encontrado con ID: " + entity.solicitudId()));
-
-        pq.setRespuesta(entity.motivoRechazo());
-
-        repository.save(pq);
-
-        HistorialEstadoPQ historialEstadoPQ = HistorialEstadoPQ.builder()
-                .usuario(usuarioRepository.findById(entity.radicadorId())
-                        .orElseThrow(
-                                () -> new RuntimeException("Usuario no encontrado con ID: " + entity.radicadorId())))
-                .estado(estadoPQService.getById(3L))
-                .pq(repository.findById(entity.solicitudId())
-                        .orElseThrow(() -> new RuntimeException("PQ no encontrado con ID: " + entity.solicitudId())))
-                .fechaCambio(new java.sql.Timestamp(System.currentTimeMillis()))
-                .observacion(entity.comentario())
-                .build();
-
-        historialEstadosRespository.save(historialEstadoPQ);
     }
 
     @Transactional
@@ -368,4 +350,14 @@ public class PQService extends GenericService<PQ, Long> {
         return repository.contarPorSolicitante(solicitanteId);
     }
 
+    public ConteoRadicadorDTO conteoRadicador() {
+        Object result = repository.obtenerConteoRadicador();
+        if (result instanceof Object[] row) {
+            return new ConteoRadicadorDTO(
+                    ((Number) row[0]).longValue(),
+                    ((Number) row[1]).longValue(),
+                    ((Number) row[2]).longValue());
+        }
+        return new ConteoRadicadorDTO(0L, 0L, 0L);
+    }
 }

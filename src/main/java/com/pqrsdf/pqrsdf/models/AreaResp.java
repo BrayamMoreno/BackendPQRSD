@@ -13,7 +13,8 @@ import lombok.*;
 @Entity
 @Table(name = "areas_resp")
 public class AreaResp extends GenericEntity{
-   
+
+    @Column(name = "codigo_dep", nullable = false, length = 10)
     private String codigoDep;
 
     private String nombre;
