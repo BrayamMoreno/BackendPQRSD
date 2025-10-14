@@ -12,16 +12,17 @@ COPY pom.xml .
 # Descarga las dependencias del proyecto
 RUN chmod +x ./mvnw && ./mvnw dependency:go-offline
 
-# Instalar cliente de PostgreSQL
-RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
+# Instalar cliente de PostgreSQL (pg_dump, psql, etc.)
+RUN apk add --no-cache postgresql-client
 
+# Copiar el código fuente
 COPY src src
 
-# Limpia cualquier build anterior y compila el proyecto sin ejecutar tests
+# Compila el proyecto sin ejecutar tests
 RUN ./mvnw clean install -DskipTests
 
 # Expone el puerto de la aplicación
-EXPOSE 8080
+EXPOSE 27845
 
 # Comando por defecto para ejecutar la aplicación
 CMD ["java", "-jar", "target/pqrsdf-0.0.1-SNAPSHOT.jar"]
