@@ -37,7 +37,7 @@ public class BackupService {
         String command = String.format("pg_dump -U %s -d %s -F c -f %s", dbUser, dbName, backupFile);
 
         ProcessBuilder pb = new ProcessBuilder(
-                isWindows() ? "cmd" : "bash",
+                isWindows() ? "cmd" : "sh",
                 isWindows() ? "/c" : "-c",
                 command);
         pb.environment().put("PGPASSWORD", dbPassword);
