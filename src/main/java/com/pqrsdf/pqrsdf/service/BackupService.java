@@ -18,12 +18,16 @@ public class BackupService {
     private String dbName;
     private String dbUser;
     private String dbPassword;
+    private String dbHost;
+    private String dbPort;
 
     public BackupService(Dotenv dotenv) {
         this.backupDirectory = dotenv.get("BACKUPS_DIR", "/default/backup/path");
         this.dbName = dotenv.get("SPRING_DATASOURCE_NAME", "mydatabase");
         this.dbUser = dotenv.get("SPRING_DATASOURCE_USERNAME");
         this.dbPassword = dotenv.get("SPRING_DATASOURCE_PASSWORD");
+        this.dbHost = dotenv.get("SPRING_DATASOURCE_HOST");
+        this.dbPort = dotenv.get("SPRING_DATASOURCE_PORT");
     }
 
     public void createBackup() throws Exception {
@@ -34,7 +38,9 @@ public class BackupService {
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String backupFile = backupDirectory + "/backup_" + timestamp + ".dump";
 
-        String command = String.format("pg_dump -U %s -d %s -F c -f %s", dbUser, dbName, backupFile);
+        String command = String.format(
+                "pg_dump -h %s -p %s -U %s -d %s -F c -f %s",
+                dbHost, dbPort, dbUser, dbName, backupFile);
 
         ProcessBuilder pb = new ProcessBuilder(
                 isWindows() ? "cmd" : "sh",
@@ -45,7 +51,8 @@ public class BackupService {
         Process process = pb.start();
 
         if (process.waitFor() != 0) {
-            throw new RuntimeException("Error al crear el backup: " + new String(process.getInputStream().readAllBytes()));
+            throw new RuntimeException(
+                    "Error al crear el backup: " + new String(process.getInputStream().readAllBytes()));
         }
     }
 
