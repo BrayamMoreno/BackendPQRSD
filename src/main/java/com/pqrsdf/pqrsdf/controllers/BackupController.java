@@ -33,7 +33,7 @@ public class BackupController {
     @PostMapping()
     public ResponseEntity<?> createBackup() throws IOException {
         try {
-            service.createBackup();
+                service.createBackup();
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
@@ -43,7 +43,7 @@ public class BackupController {
     @GetMapping()
     public ResponseEntity<?> listBackups() {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.listBackups());
+            return ResponseEntity.status(HttpStatus.OK).body(service.listarBackups());
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }

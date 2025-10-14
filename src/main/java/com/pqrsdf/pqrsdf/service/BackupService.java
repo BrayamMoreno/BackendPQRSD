@@ -35,7 +35,11 @@ public class BackupService {
         if (!dir.exists())
             dir.mkdirs();
 
-        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        String time = new SimpleDateFormat("HH-mm-ss").format(new Date());
+
+        String timestamp = date + "_" + time;
+
         String backupFile = backupDirectory + "/backup_" + timestamp + ".dump";
 
         String command = String.format(
@@ -56,25 +60,41 @@ public class BackupService {
         }
     }
 
-    public List<Map<String, String>> listBackups() {
-        File dir = new File(backupDirectory);
-        if (!dir.exists())
-            return Collections.emptyList();
-
-        File[] files = dir.listFiles((d, name) -> name.endsWith(".dump"));
-        if (files == null)
-            return Collections.emptyList();
+    public List<Map<String, String>> listarBackups() {
+        File folder = new File(backupDirectory);
+        File[] files = folder.listFiles((dir, name) -> name.endsWith(".dump"));
 
         List<Map<String, String>> backups = new ArrayList<>();
-        for (File file : files) {
-            Map<String, String> info = new HashMap<>();
-            info.put("name", file.getName());
-            info.put("size", (file.length() / 1024) + " KB");
-            info.put("date", new Date(file.lastModified()).toString());
-            backups.add(info);
+
+        if (files != null) {
+            for (File file : files) {
+                String fileName = file.getName();
+
+                // Extraer timestamp: backup_2025-10-14_18-42-35+0000.dump
+                String baseName = fileName.replace("backup_", "").replace(".dump", "");
+
+                // Dividir fecha y hora
+                String[] parts = baseName.split("_");
+                String date = parts.length > 0 ? parts[0] : "N/A";
+                String time = parts.length > 1 ? parts[1] : "N/A";
+
+                Map<String, String> info = new HashMap<>();
+                info.put("nombre", fileName);
+                info.put("fecha", date);
+                info.put("hora", time);
+                info.put("ruta", file.getAbsolutePath());
+
+                backups.add(info);
+            }
         }
 
-        backups.sort((a, b) -> b.get("name").compareTo(a.get("name"))); // más recientes primero
+        // Ordenar por fecha de modificación (más recientes primero)
+        backups.sort((a, b) -> {
+            File f1 = new File(a.get("ruta"));
+            File f2 = new File(b.get("ruta"));
+            return Long.compare(f2.lastModified(), f1.lastModified());
+        });
+
         return backups;
     }
 
