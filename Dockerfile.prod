@@ -12,6 +12,9 @@ COPY pom.xml .
 # Descarga las dependencias del proyecto
 RUN chmod +x ./mvnw && ./mvnw dependency:go-offline
 
+# Instalar cliente de PostgreSQL
+RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
+
 COPY src src
 
 # Limpia cualquier build anterior y compila el proyecto sin ejecutar tests
