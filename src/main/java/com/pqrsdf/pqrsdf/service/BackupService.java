@@ -82,7 +82,8 @@ public class BackupService {
                 info.put("nombre", fileName);
                 info.put("fecha", date);
                 info.put("hora", time);
-                info.put("ruta", file.getAbsolutePath());
+                info.put("ruta", file.getAbsolutePath());info.put("size", (file.length() / 1024) + " KB");
+                info.put("tamaño", (file.length() / 1024) + " KB");
 
                 backups.add(info);
             }
