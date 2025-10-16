@@ -8,7 +8,7 @@ import org.springframework.security.authentication.event.AbstractAuthenticationF
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @Component
 public class AuthenticationEventListener {
@@ -20,11 +20,11 @@ public class AuthenticationEventListener {
     public void handleLoginSuccess(AuthenticationSuccessEvent event) {
         AuditLog log = new AuditLog();
         log.setUsername(event.getAuthentication().getName());
-        log.setMethod("LOGIN");
+        log.setMethod("POST");
+        log.setAction("LOGIN");
         log.setEndpoint("/login");
-        log.setTimestamp(LocalDateTime.now());
+        log.setTimestamp(new Timestamp(System.currentTimeMillis()));
         log.setStatusCode(200);
-        log.setRequestBody("Login exitoso");
         auditRepo.save(log);
     }
 
@@ -32,11 +32,11 @@ public class AuthenticationEventListener {
     public void handleLoginFailure(AbstractAuthenticationFailureEvent event) {
         AuditLog log = new AuditLog();
         log.setUsername(event.getAuthentication().getName());
-        log.setMethod("LOGIN");
+        log.setMethod("POST");
+        log.setAction("LOGIN");
         log.setEndpoint("/login");
-        log.setTimestamp(LocalDateTime.now());
+        log.setTimestamp(new Timestamp(System.currentTimeMillis()));
         log.setStatusCode(401);
-        log.setRequestBody("Login fallido");
         auditRepo.save(log);
     }
 }

@@ -1,14 +1,12 @@
 package com.pqrsdf.pqrsdf.models;
 
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import org.hibernate.annotations.Type;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "audit_log")
@@ -23,17 +21,15 @@ public class AuditLog {
     private Long id;
 
     private String username;
-    private String method;
-    private String endpoint;
-    private int statusCode;
-    private LocalDateTime timestamp;
 
-    @Type(JsonBinaryType.class) // ✅ forma correcta en Hibernate 6
-    @Column(columnDefinition = "jsonb")
-    private Object requestBody;
+    private String action; // acción lógica realizada (LOGIN, CREAR_BACKUP, etc.)
 
-    @Type(JsonBinaryType.class) // ✅ igual aquí
-    @Column(columnDefinition = "jsonb")
-    private Object responseBody;
+    private String method; // GET, POST, PUT, DELETE
+
+    private String endpoint; // ruta del endpoint accedido
+
+    private int statusCode; // código de respuesta
+
+    private Timestamp timestamp; // momento de la acción
 
 }
