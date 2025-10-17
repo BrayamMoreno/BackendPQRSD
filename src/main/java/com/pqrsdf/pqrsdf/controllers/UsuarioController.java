@@ -54,19 +54,6 @@ public class UsuarioController extends GenericController<Usuario, Long> {
         }
     }
 
-    @PatchMapping("/enable-account/{id}")
-    public ResponseEntity<?> enableAccount(@PathVariable Long id) {
-        try {
-            if (id == null || id <= 0) {
-                return ResponseEntityUtil.handleBadRequest("ID de usuario inválido.");
-            }
-            service.enabbleAccount(id);
-            return ResponseEntity.ok("Cuenta habilitada correctamente.");
-        } catch (Exception e) {
-            return ResponseEntityUtil.handleInternalError(e);
-        }
-    }
-
     @GetMapping("/search")
     public ResponseEntity<?> searchUsuarios(
             @RequestParam(required = false, defaultValue = "id") String order_by,

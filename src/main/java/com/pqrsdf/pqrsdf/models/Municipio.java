@@ -17,6 +17,7 @@ public class Municipio extends GenericEntity {
     private String nombre;
     private String codigoDane;
 
-    @Column(name = "departamento_id", nullable = false)
-    private Long departamentoId;
+    @ManyToOne
+    @JoinColumn(name = "departamento_id", nullable = false)
+    private Departamento departamento;
 }

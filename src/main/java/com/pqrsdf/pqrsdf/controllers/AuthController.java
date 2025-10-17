@@ -93,7 +93,6 @@ public class AuthController {
 
             String token = authHeader.authHeader().substring(7);
 
-            // 1. Validar que el token aún no esté expirado
             DecodedJWT decodedJWT = jwtUtils.validateToken(token);
             String username = jwtUtils.extractUsername(decodedJWT);
 
@@ -103,7 +102,6 @@ public class AuthController {
                 userDetails.getUsername(), null, userDetails.getAuthorities()
             );
 
-            // 2. Generar nuevo token
             String newToken = jwtUtils.createToken(authentication);
 
             return ResponseEntity.ok(Map.of("jwt", newToken));

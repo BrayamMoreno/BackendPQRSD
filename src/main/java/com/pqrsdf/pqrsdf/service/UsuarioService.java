@@ -123,13 +123,7 @@ public class UsuarioService extends GenericService<Usuario, Long> {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         usuario.setIsEnable(false);
-        usuarioRepository.save(usuario);
-    }
-
-    public void enabbleAccount(Long id) {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        usuario.setIsEnable(true);
+        usuario.setEliminado(true);
         usuarioRepository.save(usuario);
     }
 }

@@ -136,10 +136,11 @@ public class    GenericController<T extends GenericEntity, ID> {
     })
     public ResponseEntity<?> deleteEntity(@PathVariable ID id) {
         try {
-            if(!service.isPresent(id)){
+            T entity = service.getById(id);
+            if(entity == null){
                 return ResponseEntityUtil.handleNotFoundError(ENTIDAD_NO_ENCONTRADA);
             }
-            service.deleteById(id);
+            service.deleteById(entity);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);

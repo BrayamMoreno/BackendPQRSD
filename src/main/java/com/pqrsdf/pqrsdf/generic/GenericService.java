@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 import jakarta.transaction.Transactional;
 
-public abstract class GenericService<T, ID> {
+public abstract class GenericService<T extends GenericEntity, ID> {
 
     private final GenericRepository<T, ID> repository;
 
@@ -27,8 +27,9 @@ public abstract class GenericService<T, ID> {
         return repository.save(entity);
     }
 
-    public void deleteById(ID id) {
-        repository.deleteById(id);
+    public void deleteById(T entity) {
+        entity.setEliminado(true);
+        repository.save(entity);
     }
 
     public T updateEntity(T existingEntity, T newEntity) {

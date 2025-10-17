@@ -2,6 +2,7 @@ package com.pqrsdf.pqrsdf.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.pqrsdf.pqrsdf.models.AuditLog;
@@ -16,7 +17,7 @@ public class LogService {
         this.repository = repository;
     }
 
-    public Page<AuditLog> getLogs(Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<AuditLog> getLogs(Specification<AuditLog> spec, Pageable pageable) {
+        return repository.findAll(spec, pageable);
     }
 }

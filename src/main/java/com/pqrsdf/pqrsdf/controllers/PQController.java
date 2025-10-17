@@ -25,10 +25,12 @@ import com.pqrsdf.pqrsdf.service.PQService;
 import com.pqrsdf.pqrsdf.utils.ResponseEntityUtil;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.mail.MessagingException;
 import jakarta.websocket.server.PathParam;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -242,7 +244,7 @@ public class PQController extends GenericController<PQ, Long> {
     @PostMapping("/radicar_pq")
     public ResponseEntity<?> radicarPq(@RequestBody PqDto data) {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(service.createPq(data));
+                return ResponseEntity.status(HttpStatus.CREATED).body(service.createPq(data));
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }

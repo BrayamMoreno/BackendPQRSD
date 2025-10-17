@@ -3,12 +3,14 @@ package com.pqrsdf.pqrsdf.controllers;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pqrsdf.pqrsdf.Specifications.LogSpecification;
 import com.pqrsdf.pqrsdf.service.LogService;
 import com.pqrsdf.pqrsdf.utils.ResponseEntityUtil;
 
@@ -25,13 +27,17 @@ public class LogController {
     @GetMapping
     public ResponseEntity<?> getLogs(@RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "50") int size,
+            @RequestParam(required = false) String search,
             @RequestParam(required = false) String fechaInicio,
-            @RequestParam(required = false) String fechaFin) {
-
+            @RequestParam(required = false) String fechaFin)
+        {
         Pageable pageable = PageRequest.of(page, size, Sort.by("timestamp").descending());
 
+        Specification spec = LogSpecification
+            .hasFechaRango(fechaInicio, fechaFin);
+
         return ResponseEntityUtil.handlePaginationRequest(
-            logService.getLogs(pageable));
+            logService.getLogs(spec, pageable));
     }
 
 }
