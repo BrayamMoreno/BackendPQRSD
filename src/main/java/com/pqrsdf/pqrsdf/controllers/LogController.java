@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pqrsdf.pqrsdf.Specifications.LogSpecification;
+import com.pqrsdf.pqrsdf.models.AuditLog;
 import com.pqrsdf.pqrsdf.service.LogService;
 import com.pqrsdf.pqrsdf.utils.ResponseEntityUtil;
 
@@ -33,8 +34,9 @@ public class LogController {
         {
         Pageable pageable = PageRequest.of(page, size, Sort.by("timestamp").descending());
 
-        Specification spec = LogSpecification
-            .hasFechaRango(fechaInicio, fechaFin);
+        Specification<AuditLog> spec = Specification
+            .where(LogSpecification.hasFechaRango(fechaInicio, fechaFin))
+            .and(LogSpecification.hasUsuarioOrAccionEndpoitStatusCode(search));
 
         return ResponseEntityUtil.handlePaginationRequest(
             logService.getLogs(spec, pageable));

@@ -73,6 +73,15 @@ public class PqsSpecification {
         };
     }
 
+    public static Specification<PQ> hasRadicadorId(Long radicadorId) {
+        return (root, query, criteriaBuilder) -> {
+            if (radicadorId == null) {
+                return criteriaBuilder.conjunction();
+            }
+            return criteriaBuilder.equal(root.get("radicador").get("id"), radicadorId);
+        };
+    }
+
     public static Specification<PQ> hasResponsableNull() {
         return (root, query, cb) -> cb.isNull(root.get("responsable"));
     }

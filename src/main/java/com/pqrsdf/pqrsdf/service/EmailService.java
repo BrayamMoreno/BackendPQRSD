@@ -1,8 +1,10 @@
 package com.pqrsdf.pqrsdf.service;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -25,36 +27,43 @@ public class EmailService {
         this.templateEngine = templateEngine;
     }
 
-    public void sendEmailAdjuntos(Persona persona, String numeroRadicado, List<String> addresses, String subject, String body, List<File> attachments) {
+    public void sendEmailAdjuntos(
+            Persona persona,
+            String numeroRadicado,
+            List<String> addresses,
+            String subject,
+            List<File> attachments) {
 
         String nombre = persona.getNombre().concat(" ").concat(persona.getApellido());
 
-        for (String address : addresses) {
-            try {
+        try {
+            MimeMessage message = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
-                MimeMessage message = javaMailSender.createMimeMessage();
-                MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            // Generar contenido HTML con Thymeleaf
+            Context context = new Context();
+            context.setVariable("nombre", nombre);
+            context.setVariable("radicado", numeroRadicado);
+            String html = templateEngine.process("email-template", context);
 
-                Context context = new Context();
-                context.setVariable("nombre", nombre);
-                context.setVariable("radicado", numeroRadicado);
-                context.setVariable("body", body);
+            helper.setTo(addresses.toArray(new String[0]));
+            helper.setSubject(subject);
+            helper.setText(html, true);
 
-                String html = templateEngine.process("email-template", context);
+            // ✅ Agregar logo embebido (inline)
+            ClassPathResource logo = new ClassPathResource("static/Logo.webp");
+            helper.addInline("logoSTTG", logo);
 
-                helper.setTo(address);
-                helper.setSubject(subject);
-                helper.setText(html, true);
-
-                for (File file : attachments) {
-                    helper.addAttachment(file.getName(), file);
-                }
-
-                javaMailSender.send(message);
-
-            } catch (MessagingException e) {
-                throw new RuntimeException(e);
+            // ✅ Agregar archivos adjuntos
+            for (File file : attachments) {
+                helper.addAttachment(file.getName(), file);
             }
+
+            javaMailSender.send(message);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException("Error al enviar correo a " + addresses, e);
         }
+
     }
 }

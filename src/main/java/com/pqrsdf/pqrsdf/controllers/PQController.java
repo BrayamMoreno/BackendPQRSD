@@ -24,13 +24,12 @@ import com.pqrsdf.pqrsdf.service.AdjuntoPQService;
 import com.pqrsdf.pqrsdf.service.PQService;
 import com.pqrsdf.pqrsdf.utils.ResponseEntityUtil;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.mail.MessagingException;
 import jakarta.websocket.server.PathParam;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -117,13 +116,14 @@ public class PQController extends GenericController<PQ, Long> {
             @RequestParam(required = false) Long tipoId,
             @RequestParam(required = false) String numeroRadicado,
             @RequestParam(required = false) String fechaInicio,
-            @RequestParam(required = false) String fechaFin) {
+            @RequestParam(required = false) String fechaFin,
+            @RequestParam(required = false) Long radicadorId) {
         try {
-            Pageable pageable = PageRequest.of(page, size, Sort.by("fechaRadicacion").ascending()   );
+            Pageable pageable = PageRequest.of(page, size, Sort.by("fechaRadicacion").ascending());
 
             Specification<PQ> spec = Specification
                     .where(PqsSpecification.hasTipoId(tipoId))
-                    .and(PqsSpecification.hasResponsableNull())
+                    .and(PqsSpecification.hasRadicadorId(radicadorId))
                     .and(PqsSpecification.hasUltimoEstado(1L)) // Estado "Radicado"
                     .and(PqsSpecification.hasNumeroRadicado(numeroRadicado))
                     .and(PqsSpecification.hasFechaRango(fechaInicio, fechaFin));
@@ -138,7 +138,7 @@ public class PQController extends GenericController<PQ, Long> {
         }
     }
 
-    @GetMapping("/mis_pqs_contratistas")
+    @GetMapping("/mis_pqs_funcionario")
     public ResponseEntity<?> getMyPqs(
             @RequestParam(required = true) Long responsableId,
             @RequestParam(defaultValue = "0") int page,
@@ -146,15 +146,23 @@ public class PQController extends GenericController<PQ, Long> {
             @RequestParam(required = false) Long tipoId,
             @RequestParam(required = false) Long estadoId,
             @RequestParam(required = false) String numeroRadicado,
-            @RequestParam(required = false) String fechaRadicacion) {
+            @RequestParam(required = false) String fechaInicio,
+            @RequestParam(required = false) String fechaFin,
+            @RequestParam(defaultValue = "asc") String sortDir) {
         try {
-            Pageable pageable = PageRequest.of(page, size, Sort.by("fechaRadicacion").ascending());
+
+            Sort sort = sortDir.equalsIgnoreCase("desc")
+                ? Sort.by("fechaRadicacion").descending()
+                : Sort.by("fechaRadicacion").ascending();
+
+            Pageable pageable = PageRequest.of(page, size, sort);
 
             Specification<PQ> spec = Specification
                     .where(PqsSpecification.hasTipoId(tipoId))
                     .and(PqsSpecification.hasUltimoEstado(estadoId))
                     .and(PqsSpecification.hasNumeroRadicado(numeroRadicado))
-                    .and(PqsSpecification.hasResponsableId(responsableId));
+                    .and(PqsSpecification.hasResponsableId(responsableId))
+                    .and(PqsSpecification.hasFechaRango(fechaInicio, fechaFin));
 
             if (service.findAll(pageable, spec).hasContent() == false) {
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
@@ -192,6 +200,7 @@ public class PQController extends GenericController<PQ, Long> {
     }
 
     @GetMapping("/proximas_a_vencer")
+    @Operation(summary = "Obtener Pqs próximas a vencer")
     public ResponseEntity<?> getProximasAVencer(
             @RequestParam(required = false) Long responsableId,
             @RequestParam(defaultValue = "0") int page,
@@ -242,15 +251,17 @@ public class PQController extends GenericController<PQ, Long> {
     }
 
     @PostMapping("/radicar_pq")
+    @Operation(summary = "Radicar una nueva PQ")
     public ResponseEntity<?> radicarPq(@RequestBody PqDto data) {
         try {
-                return ResponseEntity.status(HttpStatus.CREATED).body(service.createPq(data));
+            return ResponseEntity.status(HttpStatus.CREATED).body(service.createPq(data));
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }
     }
 
     @PostMapping("/aprobacion_pq")
+    @Operation(summary = "Aprobar o rechazar una PQ")
     public ResponseEntity<?> aprobacionPq(@RequestBody RadicarDto entity) {
         try {
             service.aceptarRechazarPq(entity);
@@ -282,7 +293,7 @@ public class PQController extends GenericController<PQ, Long> {
         }
     }
 
-    @GetMapping("/conteo-radicador")
+    @GetMapping("/conteo-asignador")
     public ResponseEntity<?> obtenerConteoRadicador() {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(service.conteoRadicador());

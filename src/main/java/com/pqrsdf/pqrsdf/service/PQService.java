@@ -17,9 +17,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -37,7 +40,9 @@ import com.pqrsdf.pqrsdf.generic.GenericService;
 import com.pqrsdf.pqrsdf.models.EstadoPQ;
 import com.pqrsdf.pqrsdf.models.HistorialEstadoPQ;
 import com.pqrsdf.pqrsdf.models.PQ;
+import com.pqrsdf.pqrsdf.models.Persona;
 import com.pqrsdf.pqrsdf.models.ResponsablePQ;
+import com.pqrsdf.pqrsdf.models.Usuario;
 import com.pqrsdf.pqrsdf.repository.HistorialEstadosRespository;
 import com.pqrsdf.pqrsdf.repository.PQRepository;
 import com.pqrsdf.pqrsdf.repository.ResponsablePQRepository;
@@ -77,14 +82,33 @@ public class PQService extends GenericService<PQ, Long> {
         this.emailService = emailService;
     }
 
+    public Optional<PQ> getByNumeroRadicado(String numeroRadicado) {
+        return repository.findByNumeroRadicado(numeroRadicado);
+    }
+
+    @Transactional
     public String generarIdentificadorPQ() {
-        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+        // Fecha actual en formato yyyyMMdd
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         String fecha = sdf.format(new Date());
+        String prefijo = "STTG-" + fecha + "-";
 
-        String uuid = UUID.randomUUID().toString();
-        String ultimos8 = uuid.substring(uuid.length() - 8);
+        // Buscar el último número radicado del día
+        String ultimoNumero = repository.findUltimoNumeroPorFecha(prefijo + "%");
 
-        return "STTG".concat("-").concat(fecha).concat("-").concat(ultimos8);
+        int siguiente = 1;
+        if (ultimoNumero != null) {
+            try {
+                // Extraer la parte numérica final del identificador
+                String parteNumerica = ultimoNumero.substring(ultimoNumero.lastIndexOf("-") + 1);
+                siguiente = Integer.parseInt(parteNumerica) + 1;
+            } catch (NumberFormatException e) {
+                siguiente = 1; // fallback
+            }
+        }
+
+        // Formatear a 4 dígitos con ceros a la izquierda
+        return String.format("%s%04d", prefijo, siguiente);
     }
 
     public Page<PQ> findVencidas(Pageable pageable, Specification<PQ> spec) {
@@ -190,31 +214,72 @@ public class PQService extends GenericService<PQ, Long> {
 
     @Transactional
     public PQ createPq(PqDto form) {
-        PQ pq = PQ.builder()
-                .numeroRadicado(generarIdentificadorPQ())
-                .detalleAsunto(form.detalleAsunto())
-                .detalleDescripcion(form.detalleDescripcion())
-                .tipoPQ(tipoPqService.getById(Long.parseLong(form.tipo_pq_id())))
-                .solicitante(personasService.getById(Long.parseLong(form.solicitante_id())))
-                .fechaRadicacion(Date.from(Instant.now()))
-                .horaRadicacion(Time.valueOf(LocalTime.now()))
-                .web(true)
-                .build();
+        PQ pq = null;
+        int reintentos = 0;
+        final int MAX_REINTENTOS = 3;
 
-        HistorialEstadoPQ historialEstadoPQ = HistorialEstadoPQ.builder()
-                .estado(estadoPQService.getById(1L))
-                .pq(pq)
-                .fechaCambio(new java.sql.Timestamp(System.currentTimeMillis()))
-                .build();
+        while (reintentos < MAX_REINTENTOS) {
+            try {
+                pq = PQ.builder()
+                        .numeroRadicado(generarIdentificadorPQ())
+                        .detalleAsunto(form.detalleAsunto())
+                        .detalleDescripcion(form.detalleDescripcion())
+                        .tipoPQ(tipoPqService.getById(Long.parseLong(form.tipo_pq_id())))
+                        .solicitante(personasService.getById(Long.parseLong(form.solicitante_id())))
+                        .fechaRadicacion(Date.from(Instant.now()))
+                        .horaRadicacion(Time.valueOf(LocalTime.now()))
+                        .web(true)
+                        .build();
 
-        pq = repository.save(pq);
+                HistorialEstadoPQ historialEstadoPQ = HistorialEstadoPQ.builder()
+                        .estado(estadoPQService.getById(1L))
+                        .pq(pq)
+                        .fechaCambio(new java.sql.Timestamp(System.currentTimeMillis()))
+                        .build();
 
-        historialEstadosRespository.save(historialEstadoPQ);
+                pq.setRadicador(generarAsignador());
+                pq = repository.save(pq);
+                historialEstadosRespository.save(historialEstadoPQ);
 
-        if (form.lista_documentos() != null) {
-            createAdjuntosPqs(form.lista_documentos(), pq);
+                if (form.lista_documentos() != null) {
+                    createAdjuntosPqs(form.lista_documentos(), pq);
+                }
+                return pq;
+
+            } catch (org.springframework.dao.DataIntegrityViolationException e) {
+                reintentos++;
+                if (reintentos >= MAX_REINTENTOS) {
+                    throw new RuntimeException(
+                            "Error: no fue posible generar un número de radicado único tras varios intentos.", e);
+                }
+            }
         }
-        return pq;
+        throw new RuntimeException("Error inesperado al crear la PQ.");
+    }
+
+    private Persona generarAsignador() {
+        List<Usuario> asignadores = usuarioRepository.findByRolId(3L);
+        if (asignadores.isEmpty()) {
+            throw new RuntimeException("No hay asignadores disponibles");
+        }
+
+        PQ ultimaPQ = repository.findTopByResponsableIsNullOrderByFechaRadicacionDesc();
+        Usuario ultimoAsignado = null;
+        if (ultimaPQ != null && ultimaPQ.getRadicador() != null) {
+            ultimoAsignado = asignadores.stream()
+                    .filter(u -> u.getPersona().getId().equals(ultimaPQ.getRadicador().getId()))
+                    .findFirst()
+                    .orElse(null);
+        }
+
+        int nextIndex = 0;
+        if (ultimoAsignado != null) {
+            int currentIndex = asignadores.indexOf(ultimoAsignado);
+            nextIndex = (currentIndex + 1) % asignadores.size();
+        }
+
+        Usuario siguienteAsignador = asignadores.get(nextIndex);
+        return siguienteAsignador.getPersona();
     }
 
     @Transactional
@@ -315,7 +380,9 @@ public class PQService extends GenericService<PQ, Long> {
         List<File> adjuntos = createAdjuntosPqs(resolucionDto.lista_documentos(), pq);
 
         emailService.sendEmailAdjuntos(pq.getSolicitante(), pq.getNumeroRadicado(), resolucionDto.listaCorreos(),
-                resolucionDto.asunto(), resolucionDto.respuesta(), adjuntos);
+                resolucionDto.asunto(), adjuntos);
+
+        pq.setFechaResolucion(java.sql.Date.valueOf(LocalDate.now()));
 
         repository.save(pq);
 

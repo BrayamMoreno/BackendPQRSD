@@ -11,6 +11,7 @@ import com.pqrsdf.pqrsdf.models.PQ;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PQRepository extends GenericRepository<PQ, Long>, JpaSpecificationExecutor<PQ> {
@@ -73,5 +74,12 @@ public interface PQRepository extends GenericRepository<PQ, Long>, JpaSpecificat
                     )
             """, nativeQuery = true)
     Object obtenerConteoRadicador();
+
+    @Query(value = "SELECT numero_radicado FROM pqs  WHERE numero_radicado LIKE ?1 ORDER BY numero_radicado DESC LIMIT 1", nativeQuery = true)
+    String findUltimoNumeroPorFecha(String prefijo);
+
+    Optional<PQ> findByNumeroRadicado(String numeroRadicado);
+
+    PQ findTopByResponsableIsNullOrderByFechaRadicacionDesc();
 
 }

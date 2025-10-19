@@ -1,73 +1,196 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="x-apple-disable-message-reformatting">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="color-scheme" content="light dark">
-    <meta name="supported-color-schemes" content="light dark">
-    <title>Respuesta a su petición</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Respuesta a su Solicitud PQRSD</title>
+    <style type="text/css">
+        /* Reset básico */
+        body, table, td, a {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        table, td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+        img {
+            -ms-interpolation-mode: bicubic;
+        }
+
+        /* Estilos generales */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0A192F; /* 🔹 Fondo antiguo restaurado */
+            font-family: Arial, sans-serif;
+            color: #4a4a4a;
+        }
+        .main-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25); /* un leve relieve sobre fondo oscuro */
+        }
+
+        /* Header */
+        .header-bg {
+            background-color: #004d99; /* 🔹 Mantiene color institucional */
+            text-align: center;
+            padding: 20px 0;
+        }
+        .header-logo {
+            width: 90px;
+            height: auto;
+            display: block;
+            margin: 0 auto 10px;
+        }
+        .header-title {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        /* Contenido */
+        .content-area {
+            padding: 30px;
+            background-color: #ffffff;
+        }
+        .content-title {
+            color: #1a1a1a;
+            font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        .radicado-box {
+            background-color: #e0f0ff;
+            border-left: 5px solid #004d99;
+            padding: 15px;
+            margin: 25px 0;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .button-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #ff6600;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 16px;
+            border: 1px solid #ff6600;
+        }
+        .button-link:hover {
+            background-color: #e65c00;
+            border-color: #e65c00;
+        }
+
+        /* Footer */
+        .footer-bg {
+            background-color: #004d99; /* 🔹 Mantiene el azul institucional */
+            color: #ffffff;
+            padding: 25px 30px;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        .footer-columns td {
+            padding: 0 10px;
+            vertical-align: top;
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 600px) {
+            .main-wrapper {
+                width: 95% !important;
+            }
+            .column {
+                display: block !important;
+                width: 100% !important;
+                text-align: left !important;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
 </head>
 
-<body style="width: 100% !important; height: 100%; margin: 0; -webkit-text-size-adjust: none; background-color: #F2F4F6; color: #51545E;">
-
-    <span class="preheader"
-        style="display: none !important; visibility: hidden; font-size: 1px; line-height: 1px; max-height: 0; max-width: 0; opacity: 0; overflow: hidden;">
-        Hemos dado respuesta a su solicitud.
-    </span>
-
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #F2F4F6;">
+<body>
+    <table width="100%" bgcolor="#0A192F" cellpadding="0" cellspacing="0" border="0">
         <tr>
-            <td style="text-align: center;">
-                <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+            <td align="center" style="padding: 20px 0;">
+                <table class="main-wrapper" cellpadding="0" cellspacing="0" border="0">
+                    <!-- Header -->
                     <tr>
-                        <td width="570" style="background-color: #FFFFFF; margin: 0 auto; padding: 0;">
-                            <table style="margin: 0 auto; background-color: #FFFFFF;" width="570" cellpadding="0" cellspacing="0" role="presentation">
+                        <td class="header-bg">
+                            <img src="cid:logoSTTG" alt="STTG Girardot" class="header-logo" />
+                            <h1 class="header-title">Secretaría de Tránsito y Transporte de Girardot</h1>
+                        </td>
+                    </tr>
+
+                    <!-- Contenido -->
+                    <tr>
+                        <td class="content-area">
+                            <h2 class="content-title">Estimado(a) <span th:text="${nombre}">[Nombre]</span>,</h2>
+                            <p>Su Petición ha sido procesada y se ha emitido una respuesta final.</p>
+
+                            <div class="radicado-box">
+                                <p style="margin:0;">Número de radicado:</p>
+                                <p style="font-size: 20px; font-weight: bold; color: #004d99; margin:5px 0 0;">
+                                    <span th:text="${radicado}">[RADICADO-12345]</span>
+                                </p>
+                            </div>
+
+                            <p style="font-size:14px; color:#666666;">Gracias por confiar en la Secretaría de Tránsito y Transporte de Girardot.</p>
+                            <p style="font-size:14px; font-weight:bold; margin:25px 0 0;">Atentamente,</p>
+                            <p style="font-size:14px; margin:0;">Oficina de Servicio al Ciudadano</p>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td class="footer-bg">
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                    <td style="padding: 45px; font-family: 'Nunito Sans', Helvetica, Arial, sans-serif;">
-                                        <h1 style="margin-top: 0; color: #333333; font-size: 22px; font-weight: bold;">
-                                            Hola <span th:text="${nombre}">[Nombre]</span>,
-                                        </h1>
-
-                                        <p style="color: #51545E; font-size: 16px; line-height: 1.625;">
-                                            Hemos dado respuesta a su solicitud con número de radicado
-                                            <strong th:text="${radicado}">[Radicado]</strong>.
+                                    <td class="column" width="50%">
+                                        <p style="font-weight:bold; margin-bottom:5px;">Secretaría de Tránsito y Transporte</p>
+                                        <p style="margin:0; font-size:12px; color:#cccccc;">Gestión de solicitudes PQRSD de manera rápida y segura.</p>
+                                    </td>
+                                    <td class="column" width="50%" style="text-align:right;">
+                                        <p style="font-weight:bold; margin-bottom:5px;">Contáctanos</p>
+                                        <p style="margin:0; font-size:12px; color:#cccccc;">
+                                            Email: <a href="mailto:soporte@sttg.com" style="color:#ffffff; text-decoration:none;">soporte@sttg.com</a>
                                         </p>
+                                        <p style="margin:0; font-size:12px; color:#cccccc;">Teléfono: +57 300 123 4567</p>
+                                        <p style="margin:0; font-size:12px; color:#cccccc;">Dirección: Calle 10 #20-30, Girardot</p>
+                                    </td>
+                                </tr>
+                            </table>
 
-                                        <!-- Cuerpo dinámico de la respuesta -->
-                                        <p style="color: #51545E; font-size: 16px; line-height: 1.625;" th:utext="${body}">
-                                            [Aquí irá el contenido de la respuesta]
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:15px; border-top:1px solid #0A192F">
+                                <tr>
+                                    <td align="center">
+                                        <p style="margin:0; font-size:11px; color:#a0a0a0;">
+                                            © 2025 Secretaría de Tránsito y Transporte de Girardot — Todos los derechos reservados.
                                         </p>
-
-                                        <p style="color: #51545E; font-size: 16px; line-height: 1.625;">
-                                            Si tiene más preguntas o desea realizar seguimiento a su solicitud, puede comunicarse con nosotros a través de nuestra oficina de atención o responder directamente a este correo.
+                                        <p style="margin:5px 0 0; font-size:11px; color:#a0a0a0;">
+                                            Este mensaje es informativo y ha sido generado automáticamente. Por favor, no responda directamente.
                                         </p>
-
-                                        <p style="color: #51545E; font-size: 16px; line-height: 1.625;">
-                                            Gracias,<br>
-                                            <strong>Secretaría de Tránsito y Transporte</strong>
-                                        </p>
-
-                                        <!-- Sub copy -->
-                                        <table role="presentation" style="margin-top: 25px; padding-top: 25px; border-top: 1px solid #EAEAEC; width: 100%;">
-                                            <tr>
-                                                <td>
-                                                    <p style="font-size: 13px; line-height: 1.625; color: #51545E;">
-                                                        Este mensaje es informativo y ha sido generado de manera automática. Por favor, no lo responda directamente.
-                                                    </p>
-                                                </td>
-                                            </tr>
-                                        </table>
-
                                     </td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
+
                 </table>
             </td>
         </tr>
     </table>
 </body>
+
 </html>
