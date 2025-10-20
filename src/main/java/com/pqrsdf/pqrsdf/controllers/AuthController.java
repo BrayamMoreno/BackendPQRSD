@@ -9,6 +9,7 @@ import com.pqrsdf.pqrsdf.dto.auth.RegisterRequest;
 import com.pqrsdf.pqrsdf.dto.auth.logoutRequest;
 import com.pqrsdf.pqrsdf.exceptions.DniAlreadyExistsException;
 import com.pqrsdf.pqrsdf.exceptions.EmailAlreadyExistsException;
+import com.pqrsdf.pqrsdf.service.ResetPasswordService;
 import com.pqrsdf.pqrsdf.service.TokenService;
 import com.pqrsdf.pqrsdf.service.UserDetailServiceImpl;
 import com.pqrsdf.pqrsdf.service.UsuarioService;
@@ -30,7 +31,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,13 +46,15 @@ public class AuthController {
     private final UserDetailServiceImpl userDetailServiceImpl;
     private final JwtUtils jwtUtils;
     private final TokenService tokenService;
+    private final ResetPasswordService resetPasswordService;
 
     public AuthController(UsuarioService usuarioService, UserDetailServiceImpl userDetailServiceImpl,
-            JwtUtils jwtUtils, TokenService tokenService) {
+            JwtUtils jwtUtils, TokenService tokenService, ResetPasswordService resetPasswordService) {
         this.usuariosService = usuarioService;
         this.userDetailServiceImpl = userDetailServiceImpl;
         this.jwtUtils = jwtUtils;
         this.tokenService = tokenService;
+        this.resetPasswordService = resetPasswordService;
     }
 
     @PostMapping("/login")
@@ -99,8 +102,7 @@ public class AuthController {
             UserDetails userDetails = userDetailServiceImpl.loadUserByUsername(username);
 
             Authentication authentication = new UsernamePasswordAuthenticationToken(
-                userDetails.getUsername(), null, userDetails.getAuthorities()
-            );
+                    userDetails.getUsername(), null, userDetails.getAuthorities());
 
             String newToken = jwtUtils.createToken(authentication);
 
@@ -122,6 +124,30 @@ public class AuthController {
             return ResponseEntityUtil.handleDuplicatedDataError(ex.getMessage());
         } catch (DniAlreadyExistsException ex) {
             return ResponseEntityUtil.handleDuplicatedDataError(ex.getMessage());
+        } catch (Exception ex) {
+            return ResponseEntityUtil.handleInternalError(ex);
+        }
+    }
+
+    @PostMapping("/forgot-password/{email}")
+    public ResponseEntity<?> forgotPassword(@PathVariable String email) {
+        try {
+            resetPasswordService.createPasswordResetToken(email);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new Mensaje("Instrucciones para restablecer la contraseña enviadas al correo electrónico"));
+        } catch (Exception ex) {
+            return ResponseEntityUtil.handleInternalError(ex);
+        }
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> payload) {
+        try {
+            String token = payload.get("token");
+            String newPassword = payload.get("newPassword");
+            resetPasswordService.resetPassword(token, newPassword);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new Mensaje("Contraseña restablecida con éxito"));
         } catch (Exception ex) {
             return ResponseEntityUtil.handleInternalError(ex);
         }

@@ -1,11 +1,7 @@
-2025-10-19T00:07:36.223-05:00  INFO 8316 --- [http-nio-27845-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-10-19T00:07:36.451-05:00  INFO 8316 --- [http-nio-27845-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-10-19T00:07:36.618-05:00  INFO 8316 --- [http-nio-27845-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 164 ms
-2025-10-19T00:23:09.152-05:00  WARN 8316 --- [http-nio-27845-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.auth0.jwt.exceptions.TokenExpiredException: Token Expirado]
-2025-10-19T00:39:13.556-05:00  INFO 8316 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
-2025-10-19T00:39:13.644-05:00  INFO 8316 --- [Thread-59] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2025-10-19T00:39:13.650-05:00  INFO 8316 --- [Thread-59] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2025-10-19T00:39:13.691-05:00  WARN 8316 --- [Thread-59] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-16-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+2025-10-20T00:08:33.294-05:00  INFO 15296 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-10-20T00:08:33.473-05:00  INFO 15296 --- [Thread-51] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-10-20T00:08:33.478-05:00  INFO 15296 --- [Thread-51] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2025-10-20T00:08:33.495-05:00  WARN 15296 --- [Thread-51] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-14-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
  java.base/jdk.internal.misc.Unsafe.park(Native Method)
  java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
  java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
@@ -15,7 +11,7 @@
  java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
  java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
  java.base/java.lang.Thread.run(Thread.java:1583)
-2025-10-19T00:39:13.692-05:00  WARN 8316 --- [Thread-59] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pq housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+2025-10-20T00:08:33.496-05:00  WARN 15296 --- [Thread-51] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pq housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
  java.base/jdk.internal.misc.Unsafe.park(Native Method)
  java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
  java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
@@ -25,39 +21,38 @@
  java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
  java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
  java.base/java.lang.Thread.run(Thread.java:1583)
-2025-10-19T00:39:13.744-05:00  INFO 8316 --- [Thread-59] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-10-19T00:39:13.773-05:00  INFO 8316 --- [Thread-59] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
-2025-10-19T00:39:13.780-05:00  INFO 8316 --- [Thread-59] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
-2025-10-19T00:39:14.475-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 8316 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
-2025-10-19T00:39:14.476-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
-2025-10-19T00:39:15.219-05:00  INFO 8316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-10-19T00:39:15.289-05:00  INFO 8316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 69 ms. Found 17 JPA repository interfaces.
-2025-10-19T00:39:15.453-05:00  INFO 8316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
-2025-10-19T00:39:15.454-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-10-19T00:39:15.455-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-2025-10-19T00:39:15.506-05:00  INFO 8316 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-10-19T00:39:15.507-05:00  INFO 8316 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1024 ms
-2025-10-19T00:39:15.609-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
-2025-10-19T00:39:16.566-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@3a74dcef
-2025-10-19T00:39:16.566-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
-2025-10-19T00:39:16.570-05:00  INFO 8316 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-10-19T00:39:16.578-05:00  INFO 8316 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-10-19T00:39:16.579-05:00  INFO 8316 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-10-19T00:39:16.805-05:00  INFO 8316 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@48726d04
-2025-10-19T00:39:17.011-05:00 DEBUG 8316 --- [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(6, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@27e2d76) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@33ccd1d1)
-2025-10-19T00:39:17.076-05:00  INFO 8316 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-10-19T00:39:17.226-05:00  INFO 8316 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2025-10-19T00:39:17.227-05:00  INFO 8316 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-10-19T00:39:20.043-05:00  WARN 8316 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-19T00:39:20.129-05:00  INFO 8316 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2025-10-19T00:39:20.145-05:00  INFO 8316 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@56a7f695, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6910141c, org.springframework.security.web.context.SecurityContextHolderFilter@14fb0910, org.springframework.security.web.header.HeaderWriterFilter@607ed576, org.springframework.web.filter.CorsFilter@407ac99b, org.springframework.security.web.authentication.logout.LogoutFilter@574d08bd, com.pqrsdf.pqrsdf.config.JwtTokenValidator@373bb3a4, com.pqrsdf.pqrsdf.config.PermissionFilter@5e41e888, com.pqrsdf.pqrsdf.components.AuditLoggingFilter@211c193b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1097656f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@654c76e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3798b7a8, org.springframework.security.web.session.SessionManagementFilter@3bd4c5fb, org.springframework.security.web.access.ExceptionTranslationFilter@595bb666, org.springframework.security.web.access.intercept.AuthorizationFilter@5c957464]
-2025-10-19T00:39:20.220-05:00  INFO 8316 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2025-10-19T00:39:20.239-05:00  INFO 8316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 27845 (http) with context path ''
-2025-10-19T00:39:20.244-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Started PqrsdfApplication in 5.819 seconds (process running for 6012.7)
-2025-10-19T00:39:20.246-05:00  INFO 8316 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
-2025-10-19T00:39:21.773-05:00  INFO 8316 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
-2025-10-19T00:39:21.778-05:00  INFO 8316 --- [Thread-63] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2025-10-19T00:39:21.780-05:00  WARN 8316 --- [Thread-63] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-17-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+2025-10-20T00:08:33.527-05:00  INFO 15296 --- [Thread-51] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:08:33.547-05:00  INFO 15296 --- [Thread-51] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
+2025-10-20T00:08:33.551-05:00  INFO 15296 --- [Thread-51] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
+2025-10-20T00:08:34.310-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 15296 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
+2025-10-20T00:08:34.311-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-10-20T00:08:35.377-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-20T00:08:35.540-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 162 ms. Found 17 JPA repository interfaces.
+2025-10-20T00:08:35.940-05:00  INFO 15296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
+2025-10-20T00:08:35.942-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-20T00:08:35.942-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-10-20T00:08:35.999-05:00  INFO 15296 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-20T00:08:35.999-05:00  INFO 15296 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1679 ms
+2025-10-20T00:08:36.233-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
+2025-10-20T00:08:37.206-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@4a8552a
+2025-10-20T00:08:37.209-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
+2025-10-20T00:08:37.213-05:00  INFO 15296 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-20T00:08:37.229-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:08:37.229-05:00  INFO 15296 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-20T00:08:37.459-05:00  INFO 15296 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@7f0a9a3e
+2025-10-20T00:08:37.763-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:08:38.049-05:00  INFO 15296 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-10-20T00:08:38.050-05:00  INFO 15296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:08:42.909-05:00  WARN 15296 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-20T00:08:43.001-05:00  INFO 15296 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-10-20T00:08:43.017-05:00  INFO 15296 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6222205b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7e2bda1f, org.springframework.security.web.context.SecurityContextHolderFilter@2f027b32, org.springframework.security.web.header.HeaderWriterFilter@309ab437, org.springframework.web.filter.CorsFilter@1963a7bb, org.springframework.security.web.authentication.logout.LogoutFilter@6f4e7b63, com.pqrsdf.pqrsdf.config.JwtTokenValidator@36be718, com.pqrsdf.pqrsdf.config.PermissionFilter@70382fd6, com.pqrsdf.pqrsdf.components.AuditLoggingFilter@7484b585, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@21631a5c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@44bd394b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5063e8ec, org.springframework.security.web.session.SessionManagementFilter@749c63f0, org.springframework.security.web.access.ExceptionTranslationFilter@33f7a305, org.springframework.security.web.access.intercept.AuthorizationFilter@7b9c31ce]
+2025-10-20T00:08:43.114-05:00  INFO 15296 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-10-20T00:08:43.132-05:00  INFO 15296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 27845 (http) with context path ''
+2025-10-20T00:08:43.138-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Started PqrsdfApplication in 8.926 seconds (process running for 5979.343)
+2025-10-20T00:08:43.140-05:00  INFO 15296 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-10-20T00:08:44.646-05:00  INFO 15296 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-10-20T00:08:44.652-05:00  INFO 15296 --- [Thread-55] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-10-20T00:08:44.656-05:00  WARN 15296 --- [Thread-55] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-15-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
  java.base/jdk.internal.misc.Unsafe.park(Native Method)
  java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
  java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
@@ -67,7 +62,7 @@
  java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
  java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
  java.base/java.lang.Thread.run(Thread.java:1583)
-2025-10-19T00:39:21.782-05:00  WARN 8316 --- [Thread-63] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pq housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+2025-10-20T00:08:44.658-05:00  WARN 15296 --- [Thread-55] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pq housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
  java.base/jdk.internal.misc.Unsafe.park(Native Method)
  java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
  java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
@@ -77,149 +72,7 @@
  java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
  java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
  java.base/java.lang.Thread.run(Thread.java:1583)
-2025-10-19T00:39:21.782-05:00  WARN 8316 --- [Thread-63] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pq connection adder] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
- java.base/sun.nio.ch.Net.poll(Native Method)
- java.base/sun.nio.ch.NioSocketImpl.park(NioSocketImpl.java:191)
- java.base/sun.nio.ch.NioSocketImpl.park(NioSocketImpl.java:201)
- java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:309)
- java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:346)
- java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:796)
- java.base/java.net.Socket$SocketInputStream.read(Socket.java:1099)
- org.postgresql.core.VisibleBufferedInputStream.readMore(VisibleBufferedInputStream.java:161)
- org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:128)
- org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:113)
- org.postgresql.core.VisibleBufferedInputStream.read(VisibleBufferedInputStream.java:73)
- org.postgresql.core.PGStream.receiveChar(PGStream.java:453)
- org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2120)
- org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:356)
- org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:316)
- org.postgresql.core.SetupQueryRunner.run(SetupQueryRunner.java:55)
- org.postgresql.core.v3.ConnectionFactoryImpl.runInitialQueries(ConnectionFactoryImpl.java:893)
- org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:304)
- org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49)
- org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:247)
- org.postgresql.Driver.makeConnection(Driver.java:434)
- org.postgresql.Driver.connect(Driver.java:291)
- com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
- com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
- com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
- com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
- com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:733)
- com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:712)
- java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
- java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
- java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
- java.base/java.lang.Thread.run(Thread.java:1583)
-2025-10-19T00:39:21.789-05:00  INFO 8316 --- [Thread-63] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-10-19T00:39:21.790-05:00  INFO 8316 --- [Thread-63] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
-2025-10-19T00:39:21.818-05:00  INFO 8316 --- [Thread-63] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
-2025-10-19T00:39:22.018-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 8316 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
-2025-10-19T00:39:22.019-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
-2025-10-19T00:39:22.597-05:00  INFO 8316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-10-19T00:39:22.685-05:00  INFO 8316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 87 ms. Found 17 JPA repository interfaces.
-2025-10-19T00:39:22.830-05:00  INFO 8316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
-2025-10-19T00:39:22.832-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-10-19T00:39:22.832-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-2025-10-19T00:39:22.881-05:00  INFO 8316 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-10-19T00:39:22.881-05:00  INFO 8316 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 857 ms
-2025-10-19T00:39:22.967-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
-2025-10-19T00:39:23.926-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@7f899486
-2025-10-19T00:39:23.928-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
-2025-10-19T00:39:23.932-05:00  INFO 8316 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-10-19T00:39:23.961-05:00  INFO 8316 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-10-19T00:39:23.962-05:00  INFO 8316 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-10-19T00:39:24.185-05:00  INFO 8316 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@471564de
-2025-10-19T00:39:24.388-05:00 DEBUG 8316 --- [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(6, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@3b9bbe20) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@529e0422)
-2025-10-19T00:39:24.453-05:00  INFO 8316 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-10-19T00:39:24.605-05:00  INFO 8316 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2025-10-19T00:39:24.605-05:00  INFO 8316 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-10-19T00:39:25.230-05:00  WARN 8316 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-19T00:39:25.338-05:00  INFO 8316 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2025-10-19T00:39:25.351-05:00  INFO 8316 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@67009d68, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1e15cba8, org.springframework.security.web.context.SecurityContextHolderFilter@23001bbc, org.springframework.security.web.header.HeaderWriterFilter@2c6923db, org.springframework.web.filter.CorsFilter@4bb01a2a, org.springframework.security.web.authentication.logout.LogoutFilter@3d589686, com.pqrsdf.pqrsdf.config.JwtTokenValidator@2ecb0ca9, com.pqrsdf.pqrsdf.config.PermissionFilter@4dc32fc5, com.pqrsdf.pqrsdf.components.AuditLoggingFilter@2a1c3337, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4f87d9a6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2a155c76, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7d3be55e, org.springframework.security.web.session.SessionManagementFilter@7c690ddc, org.springframework.security.web.access.ExceptionTranslationFilter@404585c7, org.springframework.security.web.access.intercept.AuthorizationFilter@4c952174]
-2025-10-19T00:39:25.435-05:00  INFO 8316 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2025-10-19T00:39:25.455-05:00  INFO 8316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 27845 (http) with context path ''
-2025-10-19T00:39:25.459-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Started PqrsdfApplication in 3.499 seconds (process running for 6017.916)
-2025-10-19T00:39:25.462-05:00  INFO 8316 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
-2025-10-19T00:42:03.098-05:00  INFO 8316 --- [http-nio-27845-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-10-19T00:42:03.099-05:00  INFO 8316 --- [http-nio-27845-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-10-19T00:42:03.101-05:00  INFO 8316 --- [http-nio-27845-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2025-10-19T00:42:03.148-05:00  WARN 8316 --- [http-nio-27845-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.auth0.jwt.exceptions.TokenExpiredException: Token Expirado]
-2025-10-19T00:45:33.834-05:00  INFO 8316 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
-2025-10-19T00:45:33.840-05:00  INFO 8316 --- [Thread-67] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2025-10-19T00:45:33.842-05:00  INFO 8316 --- [Thread-67] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2025-10-19T00:45:33.846-05:00  WARN 8316 --- [Thread-67] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-18-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
- java.base/jdk.internal.misc.Unsafe.park(Native Method)
- java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
- java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
- java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
- java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
- java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
- java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
- java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
- java.base/java.lang.Thread.run(Thread.java:1583)
-2025-10-19T00:45:33.847-05:00  WARN 8316 --- [Thread-67] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pq housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
- java.base/jdk.internal.misc.Unsafe.park(Native Method)
- java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
- java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
- java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
- java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
- java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
- java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
- java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
- java.base/java.lang.Thread.run(Thread.java:1583)
-2025-10-19T00:45:33.854-05:00  INFO 8316 --- [Thread-67] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-10-19T00:45:33.855-05:00  INFO 8316 --- [Thread-67] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
-2025-10-19T00:45:33.858-05:00  INFO 8316 --- [Thread-67] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
-2025-10-19T00:45:34.025-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 8316 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
-2025-10-19T00:45:34.025-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
-2025-10-19T00:45:34.534-05:00  INFO 8316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-10-19T00:45:34.590-05:00  INFO 8316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 55 ms. Found 17 JPA repository interfaces.
-2025-10-19T00:45:34.690-05:00  INFO 8316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
-2025-10-19T00:45:34.690-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-10-19T00:45:34.691-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-2025-10-19T00:45:34.729-05:00  INFO 8316 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-10-19T00:45:34.730-05:00  INFO 8316 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 702 ms
-2025-10-19T00:45:34.792-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
-2025-10-19T00:45:35.764-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@584dea94
-2025-10-19T00:45:35.765-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
-2025-10-19T00:45:35.766-05:00  INFO 8316 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-10-19T00:45:35.774-05:00  INFO 8316 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-10-19T00:45:35.774-05:00  INFO 8316 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-10-19T00:45:36.004-05:00  INFO 8316 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@5db24e10
-2025-10-19T00:45:36.226-05:00 DEBUG 8316 --- [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(6, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@18dac5ca) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@74ffdf70)
-2025-10-19T00:45:36.297-05:00  INFO 8316 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-10-19T00:45:36.388-05:00  INFO 8316 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2025-10-19T00:45:36.389-05:00  INFO 8316 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-10-19T00:45:36.909-05:00  WARN 8316 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-19T00:45:37.009-05:00  INFO 8316 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2025-10-19T00:45:37.029-05:00  INFO 8316 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4c386160, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5494ac8c, org.springframework.security.web.context.SecurityContextHolderFilter@4c131807, org.springframework.security.web.header.HeaderWriterFilter@2574f050, org.springframework.web.filter.CorsFilter@390db4b4, org.springframework.security.web.authentication.logout.LogoutFilter@1970289b, com.pqrsdf.pqrsdf.config.JwtTokenValidator@64e26a2b, com.pqrsdf.pqrsdf.config.PermissionFilter@6b5e24b6, com.pqrsdf.pqrsdf.components.AuditLoggingFilter@7ab0cfde, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3f8f7fa6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3dfbfe77, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1adf159d, org.springframework.security.web.session.SessionManagementFilter@5504bf0d, org.springframework.security.web.access.ExceptionTranslationFilter@676291a2, org.springframework.security.web.access.intercept.AuthorizationFilter@3f2c53c5]
-2025-10-19T00:45:37.108-05:00  INFO 8316 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2025-10-19T00:45:37.123-05:00  INFO 8316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 27845 (http) with context path ''
-2025-10-19T00:45:37.127-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Started PqrsdfApplication in 3.135 seconds (process running for 6389.585)
-2025-10-19T00:45:37.132-05:00  INFO 8316 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
-2025-10-19T00:45:41.937-05:00  INFO 8316 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
-2025-10-19T00:45:41.944-05:00  INFO 8316 --- [Thread-71] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2025-10-19T00:45:41.946-05:00  WARN 8316 --- [Thread-71] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-19-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
- java.base/jdk.internal.misc.Unsafe.park(Native Method)
- java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
- java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
- java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
- java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
- java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
- java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
- java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
- java.base/java.lang.Thread.run(Thread.java:1583)
-2025-10-19T00:45:41.947-05:00  WARN 8316 --- [Thread-71] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pq housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
- java.base/jdk.internal.misc.Unsafe.park(Native Method)
- java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
- java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
- java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
- java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
- java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
- java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
- java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
- java.base/java.lang.Thread.run(Thread.java:1583)
-2025-10-19T00:45:41.949-05:00  WARN 8316 --- [Thread-71] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pq connection adder] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+2025-10-20T00:08:44.658-05:00  WARN 15296 --- [Thread-55] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pq connection adder] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
  java.base/sun.nio.ch.Net.poll(Native Method)
  java.base/sun.nio.ch.NioSocketImpl.park(NioSocketImpl.java:191)
  java.base/sun.nio.ch.NioSocketImpl.park(NioSocketImpl.java:201)
@@ -252,39 +105,38 @@
  java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
  java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
  java.base/java.lang.Thread.run(Thread.java:1583)
-2025-10-19T00:45:41.954-05:00  INFO 8316 --- [Thread-71] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-10-19T00:45:41.955-05:00  INFO 8316 --- [Thread-71] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
-2025-10-19T00:45:42.119-05:00  INFO 8316 --- [Thread-71] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
-2025-10-19T00:45:42.299-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 8316 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
-2025-10-19T00:45:42.300-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
-2025-10-19T00:45:42.745-05:00  INFO 8316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-10-19T00:45:42.812-05:00  INFO 8316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 66 ms. Found 17 JPA repository interfaces.
-2025-10-19T00:45:42.969-05:00  INFO 8316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
-2025-10-19T00:45:42.969-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-10-19T00:45:42.969-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-2025-10-19T00:45:43.006-05:00  INFO 8316 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-10-19T00:45:43.006-05:00  INFO 8316 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 702 ms
-2025-10-19T00:45:43.085-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
-2025-10-19T00:45:44.055-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@5d888098
-2025-10-19T00:45:44.055-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
-2025-10-19T00:45:44.056-05:00  INFO 8316 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-10-19T00:45:44.084-05:00  INFO 8316 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-10-19T00:45:44.085-05:00  INFO 8316 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-10-19T00:45:44.315-05:00  INFO 8316 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@2b994541
-2025-10-19T00:45:44.535-05:00 DEBUG 8316 --- [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(6, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@77d22163) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@fac053c)
-2025-10-19T00:45:44.580-05:00  INFO 8316 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-10-19T00:45:44.672-05:00  INFO 8316 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2025-10-19T00:45:44.673-05:00  INFO 8316 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-10-19T00:45:45.089-05:00  WARN 8316 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-19T00:45:45.192-05:00  INFO 8316 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2025-10-19T00:45:45.204-05:00  INFO 8316 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@374aeb1d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@63c2bc40, org.springframework.security.web.context.SecurityContextHolderFilter@1a200f86, org.springframework.security.web.header.HeaderWriterFilter@17e6cc3c, org.springframework.web.filter.CorsFilter@525472a0, org.springframework.security.web.authentication.logout.LogoutFilter@5ef155a9, com.pqrsdf.pqrsdf.config.JwtTokenValidator@3d3105d6, com.pqrsdf.pqrsdf.config.PermissionFilter@5dc3036e, com.pqrsdf.pqrsdf.components.AuditLoggingFilter@12e41941, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6fd8994b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4e7e2fa0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2b95942a, org.springframework.security.web.session.SessionManagementFilter@789e5ba2, org.springframework.security.web.access.ExceptionTranslationFilter@1d8d1011, org.springframework.security.web.access.intercept.AuthorizationFilter@4af4afcb]
-2025-10-19T00:45:45.261-05:00  INFO 8316 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2025-10-19T00:45:45.273-05:00  INFO 8316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 27845 (http) with context path ''
-2025-10-19T00:45:45.278-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Started PqrsdfApplication in 3.017 seconds (process running for 6397.735)
-2025-10-19T00:45:45.280-05:00  INFO 8316 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
-2025-10-19T00:46:34.484-05:00  INFO 8316 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
-2025-10-19T00:46:34.489-05:00  INFO 8316 --- [Thread-75] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2025-10-19T00:46:34.492-05:00  WARN 8316 --- [Thread-75] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-20-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+2025-10-20T00:08:44.664-05:00  INFO 15296 --- [Thread-55] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:08:44.667-05:00  INFO 15296 --- [Thread-55] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
+2025-10-20T00:08:44.799-05:00  INFO 15296 --- [Thread-55] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
+2025-10-20T00:08:44.956-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 15296 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
+2025-10-20T00:08:44.957-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-10-20T00:08:45.393-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-20T00:08:45.472-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 78 ms. Found 17 JPA repository interfaces.
+2025-10-20T00:08:45.569-05:00  INFO 15296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
+2025-10-20T00:08:45.569-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-20T00:08:45.570-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-10-20T00:08:45.609-05:00  INFO 15296 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-20T00:08:45.609-05:00  INFO 15296 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 650 ms
+2025-10-20T00:08:45.673-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
+2025-10-20T00:08:46.647-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@5df0933a
+2025-10-20T00:08:46.648-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
+2025-10-20T00:08:46.649-05:00  INFO 15296 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-20T00:08:46.661-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:08:46.661-05:00  INFO 15296 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-20T00:08:46.887-05:00  INFO 15296 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@36ec951f
+2025-10-20T00:08:47.177-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:08:47.370-05:00  INFO 15296 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-10-20T00:08:47.370-05:00  INFO 15296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:08:47.762-05:00  WARN 15296 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-20T00:08:47.832-05:00  INFO 15296 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-10-20T00:08:47.844-05:00  INFO 15296 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@70c6ad07, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@741fd782, org.springframework.security.web.context.SecurityContextHolderFilter@41456b1d, org.springframework.security.web.header.HeaderWriterFilter@4f93af68, org.springframework.web.filter.CorsFilter@1fe8a97a, org.springframework.security.web.authentication.logout.LogoutFilter@20149924, com.pqrsdf.pqrsdf.config.JwtTokenValidator@3dd6cdf3, com.pqrsdf.pqrsdf.config.PermissionFilter@78bdf1db, com.pqrsdf.pqrsdf.components.AuditLoggingFilter@5516f8d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@10a3a049, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4299a5da, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@72148a89, org.springframework.security.web.session.SessionManagementFilter@517b312e, org.springframework.security.web.access.ExceptionTranslationFilter@48132498, org.springframework.security.web.access.intercept.AuthorizationFilter@2200139f]
+2025-10-20T00:08:47.910-05:00  INFO 15296 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-10-20T00:08:47.922-05:00  INFO 15296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 27845 (http) with context path ''
+2025-10-20T00:08:47.926-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Started PqrsdfApplication in 3.008 seconds (process running for 5984.132)
+2025-10-20T00:08:47.927-05:00  INFO 15296 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-10-20T00:39:17.647-05:00  INFO 15296 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-10-20T00:39:17.667-05:00  INFO 15296 --- [Thread-59] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-10-20T00:39:17.683-05:00  WARN 15296 --- [Thread-59] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-16-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
  java.base/jdk.internal.misc.Unsafe.park(Native Method)
  java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
  java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
@@ -294,7 +146,7 @@
  java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
  java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
  java.base/java.lang.Thread.run(Thread.java:1583)
-2025-10-19T00:46:34.493-05:00  WARN 8316 --- [Thread-75] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pq housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+2025-10-20T00:39:17.685-05:00  WARN 15296 --- [Thread-59] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pq housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
  java.base/jdk.internal.misc.Unsafe.park(Native Method)
  java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
  java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
@@ -304,35 +156,34 @@
  java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
  java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
  java.base/java.lang.Thread.run(Thread.java:1583)
-2025-10-19T00:46:34.497-05:00  INFO 8316 --- [Thread-75] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-10-19T00:46:34.498-05:00  INFO 8316 --- [Thread-75] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
-2025-10-19T00:46:34.503-05:00  INFO 8316 --- [Thread-75] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
-2025-10-19T00:46:34.648-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 8316 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
-2025-10-19T00:46:34.649-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
-2025-10-19T00:46:35.045-05:00  INFO 8316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-10-19T00:46:35.126-05:00  INFO 8316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 80 ms. Found 17 JPA repository interfaces.
-2025-10-19T00:46:35.230-05:00  INFO 8316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
-2025-10-19T00:46:35.231-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-10-19T00:46:35.231-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-2025-10-19T00:46:35.270-05:00  INFO 8316 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-10-19T00:46:35.270-05:00  INFO 8316 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 620 ms
-2025-10-19T00:46:35.333-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
-2025-10-19T00:46:36.307-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@6b96c669
-2025-10-19T00:46:36.307-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
-2025-10-19T00:46:36.309-05:00  INFO 8316 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-10-19T00:46:36.319-05:00  INFO 8316 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-10-19T00:46:36.319-05:00  INFO 8316 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-10-19T00:46:36.544-05:00  INFO 8316 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@644e9787
-2025-10-19T00:46:36.763-05:00 DEBUG 8316 --- [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(6, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@492720f0) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2888e0a2)
-2025-10-19T00:46:36.815-05:00  INFO 8316 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-10-19T00:46:36.993-05:00  INFO 8316 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2025-10-19T00:46:36.996-05:00  INFO 8316 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-10-19T00:46:37.430-05:00  WARN 8316 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'adjuntoPQController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\AdjuntoPQController.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'PQService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\PQService.class]: Unsatisfied dependency expressed through constructor parameter 9: Error creating bean with name 'emailService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\EmailService.class]: Failed to instantiate [com.pqrsdf.pqrsdf.service.EmailService]: Constructor threw exception
-2025-10-19T00:46:37.431-05:00  INFO 8316 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-10-19T00:46:37.432-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
-2025-10-19T00:46:37.990-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
-2025-10-19T00:46:37.992-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2025-10-19T00:46:37.998-05:00  WARN 8316 --- [restartedMain] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-21-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+2025-10-20T00:39:17.695-05:00  INFO 15296 --- [Thread-59] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:39:17.697-05:00  INFO 15296 --- [Thread-59] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
+2025-10-20T00:39:17.702-05:00  INFO 15296 --- [Thread-59] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
+2025-10-20T00:39:17.923-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 15296 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
+2025-10-20T00:39:17.925-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-10-20T00:39:18.570-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-20T00:39:18.661-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 91 ms. Found 17 JPA repository interfaces.
+2025-10-20T00:39:18.794-05:00  INFO 15296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
+2025-10-20T00:39:18.795-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-20T00:39:18.795-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-10-20T00:39:18.838-05:00  INFO 15296 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-20T00:39:18.838-05:00  INFO 15296 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 906 ms
+2025-10-20T00:39:18.911-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
+2025-10-20T00:39:19.932-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@2a1e9b31
+2025-10-20T00:39:19.933-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
+2025-10-20T00:39:19.935-05:00  INFO 15296 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-20T00:39:19.949-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:39:19.951-05:00  INFO 15296 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-20T00:39:20.170-05:00  INFO 15296 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@b25f281
+2025-10-20T00:39:20.460-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:39:20.652-05:00  INFO 15296 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-10-20T00:39:20.653-05:00  INFO 15296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:39:21.181-05:00  WARN 15296 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\AuthController.class]: Failed to instantiate [com.pqrsdf.pqrsdf.controllers.AuthController]: Constructor threw exception
+2025-10-20T00:39:21.182-05:00  INFO 15296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:39:21.184-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
+2025-10-20T00:39:21.551-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
+2025-10-20T00:39:21.552-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-10-20T00:39:21.555-05:00  WARN 15296 --- [restartedMain] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-17-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
  java.base/jdk.internal.misc.Unsafe.park(Native Method)
  java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
  java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
@@ -342,14 +193,14 @@
  java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
  java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
  java.base/java.lang.Thread.run(Thread.java:1583)
-2025-10-19T00:46:38.013-05:00  INFO 8316 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+2025-10-20T00:39:21.568-05:00  INFO 15296 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2025-10-19T00:46:38.055-05:00 ERROR 8316 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+2025-10-20T00:39:21.609-05:00 ERROR 15296 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
 
-org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'adjuntoPQController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\AdjuntoPQController.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'PQService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\PQService.class]: Unsatisfied dependency expressed through constructor parameter 9: Error creating bean with name 'emailService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\EmailService.class]: Failed to instantiate [com.pqrsdf.pqrsdf.service.EmailService]: Constructor threw exception
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:245) ~[spring-beans-6.0.9.jar:6.0.9]
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\AuthController.class]: Failed to instantiate [com.pqrsdf.pqrsdf.controllers.AuthController]: Constructor threw exception
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:326) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:314) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1189) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560) ~[spring-beans-6.0.9.jar:6.0.9]
@@ -371,83 +222,47 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-3.1.0.jar:3.1.0]
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'PQService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\PQService.class]: Unsatisfied dependency expressed through constructor parameter 9: Error creating bean with name 'emailService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\EmailService.class]: Failed to instantiate [com.pqrsdf.pqrsdf.service.EmailService]: Constructor threw exception
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:245) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1189) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:888) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-6.0.9.jar:6.0.9]
-	... 22 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'emailService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\EmailService.class]: Failed to instantiate [com.pqrsdf.pqrsdf.service.EmailService]: Constructor threw exception
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:326) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:314) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1189) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:888) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-6.0.9.jar:6.0.9]
-	... 36 common frames omitted
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.pqrsdf.pqrsdf.service.EmailService]: Constructor threw exception
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.pqrsdf.pqrsdf.controllers.AuthController]: Constructor threw exception
 	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:224) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:110) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:323) ~[spring-beans-6.0.9.jar:6.0.9]
-	... 50 common frames omitted
+	... 22 common frames omitted
 Caused by: java.lang.Error: Unresolved compilation problems: 
-	address cannot be resolved to a variable
-	address cannot be resolved to a variable
-	Syntax error on token "}", delete this token
+	Syntax error, insert "enum Identifier" to complete EnumHeader
+	Syntax error, insert "EnumBody" to complete EnumDeclaration
 
-	at com.pqrsdf.pqrsdf.service.EmailService.<init>(EmailService.java:50) ~[classes/:na]
+	at com.pqrsdf.pqrsdf.controllers.AuthController.<init>(AuthController.java:144) ~[classes/:na]
 	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62) ~[na:na]
 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502) ~[na:na]
 	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486) ~[na:na]
 	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:211) ~[spring-beans-6.0.9.jar:6.0.9]
-	... 52 common frames omitted
+	... 24 common frames omitted
 
-2025-10-19T00:46:39.650-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 8316 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
-2025-10-19T00:46:39.650-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
-2025-10-19T00:46:40.098-05:00  INFO 8316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-10-19T00:46:40.166-05:00  INFO 8316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 67 ms. Found 17 JPA repository interfaces.
-2025-10-19T00:46:40.286-05:00  INFO 8316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
-2025-10-19T00:46:40.287-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-10-19T00:46:40.288-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-2025-10-19T00:46:40.334-05:00  INFO 8316 --- [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
-2025-10-19T00:46:40.334-05:00  INFO 8316 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 681 ms
-2025-10-19T00:46:40.396-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
-2025-10-19T00:46:41.374-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@46e14f74
-2025-10-19T00:46:41.375-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
-2025-10-19T00:46:41.376-05:00  INFO 8316 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-10-19T00:46:41.384-05:00  INFO 8316 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-10-19T00:46:41.385-05:00  INFO 8316 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-10-19T00:46:41.615-05:00  INFO 8316 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@5546b336
-2025-10-19T00:46:41.824-05:00 DEBUG 8316 --- [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(6, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@12c19299) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3fc2b3de)
-2025-10-19T00:46:41.866-05:00  INFO 8316 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-10-19T00:46:42.010-05:00  INFO 8316 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2025-10-19T00:46:42.010-05:00  INFO 8316 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-10-19T00:46:42.311-05:00  WARN 8316 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'adjuntoPQController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\AdjuntoPQController.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'PQService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\PQService.class]: Unsatisfied dependency expressed through constructor parameter 9: Error creating bean with name 'emailService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\EmailService.class]: Failed to instantiate [com.pqrsdf.pqrsdf.service.EmailService]: Constructor threw exception
-2025-10-19T00:46:42.312-05:00  INFO 8316 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-10-19T00:46:42.312-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
-2025-10-19T00:46:43.050-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
-2025-10-19T00:46:43.052-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2025-10-19T00:46:43.059-05:00  WARN 8316 --- [restartedMain] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-22-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+2025-10-20T00:39:23.194-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 15296 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
+2025-10-20T00:39:23.195-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-10-20T00:39:23.728-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-20T00:39:23.886-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 156 ms. Found 17 JPA repository interfaces.
+2025-10-20T00:39:24.004-05:00  INFO 15296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
+2025-10-20T00:39:24.008-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-20T00:39:24.009-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-10-20T00:39:24.050-05:00  INFO 15296 --- [restartedMain] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2025-10-20T00:39:24.050-05:00  INFO 15296 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 853 ms
+2025-10-20T00:39:24.163-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
+2025-10-20T00:39:25.115-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@a2a00a0
+2025-10-20T00:39:25.115-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
+2025-10-20T00:39:25.117-05:00  INFO 15296 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-20T00:39:25.129-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:39:25.130-05:00  INFO 15296 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-20T00:39:25.350-05:00  INFO 15296 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@1e109b03
+2025-10-20T00:39:25.629-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:39:25.751-05:00  INFO 15296 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-10-20T00:39:25.752-05:00  INFO 15296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:39:26.360-05:00  WARN 15296 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\AuthController.class]: Failed to instantiate [com.pqrsdf.pqrsdf.controllers.AuthController]: Constructor threw exception
+2025-10-20T00:39:26.362-05:00  INFO 15296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:39:26.362-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
+2025-10-20T00:39:26.768-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
+2025-10-20T00:39:26.769-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-10-20T00:39:26.773-05:00  WARN 15296 --- [restartedMain] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-18-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
  java.base/jdk.internal.misc.Unsafe.park(Native Method)
  java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
  java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
@@ -457,14 +272,14 @@ Caused by: java.lang.Error: Unresolved compilation problems:
  java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
  java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
  java.base/java.lang.Thread.run(Thread.java:1583)
-2025-10-19T00:46:43.068-05:00  INFO 8316 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+2025-10-20T00:39:26.780-05:00  INFO 15296 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2025-10-19T00:46:43.074-05:00 ERROR 8316 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+2025-10-20T00:39:26.789-05:00 ERROR 15296 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
 
-org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'adjuntoPQController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\AdjuntoPQController.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'PQService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\PQService.class]: Unsatisfied dependency expressed through constructor parameter 9: Error creating bean with name 'emailService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\EmailService.class]: Failed to instantiate [com.pqrsdf.pqrsdf.service.EmailService]: Constructor threw exception
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:245) ~[spring-beans-6.0.9.jar:6.0.9]
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\AuthController.class]: Failed to instantiate [com.pqrsdf.pqrsdf.controllers.AuthController]: Constructor threw exception
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:326) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:314) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1189) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560) ~[spring-beans-6.0.9.jar:6.0.9]
@@ -486,82 +301,46 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-3.1.0.jar:3.1.0]
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'PQService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\PQService.class]: Unsatisfied dependency expressed through constructor parameter 9: Error creating bean with name 'emailService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\EmailService.class]: Failed to instantiate [com.pqrsdf.pqrsdf.service.EmailService]: Constructor threw exception
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:245) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1189) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:888) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-6.0.9.jar:6.0.9]
-	... 22 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'emailService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\EmailService.class]: Failed to instantiate [com.pqrsdf.pqrsdf.service.EmailService]: Constructor threw exception
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:326) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:314) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1189) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:888) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-6.0.9.jar:6.0.9]
-	... 36 common frames omitted
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.pqrsdf.pqrsdf.service.EmailService]: Constructor threw exception
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.pqrsdf.pqrsdf.controllers.AuthController]: Constructor threw exception
 	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:224) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:110) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:323) ~[spring-beans-6.0.9.jar:6.0.9]
-	... 50 common frames omitted
-Caused by: java.lang.Error: Unresolved compilation problems: 
-	address cannot be resolved to a variable
-	Syntax error on token "}", delete this token
+	... 22 common frames omitted
+Caused by: java.lang.Error: Unresolved compilation problem: 
+	Syntax error, insert "}" to complete ClassBody
 
-	at com.pqrsdf.pqrsdf.service.EmailService.<init>(EmailService.java:67) ~[classes/:na]
+	at com.pqrsdf.pqrsdf.controllers.AuthController.<init>(AuthController.java:146) ~[classes/:na]
 	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62) ~[na:na]
 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502) ~[na:na]
 	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486) ~[na:na]
 	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:211) ~[spring-beans-6.0.9.jar:6.0.9]
-	... 52 common frames omitted
+	... 24 common frames omitted
 
-2025-10-19T00:46:44.650-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 8316 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
-2025-10-19T00:46:44.651-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
-2025-10-19T00:46:45.426-05:00  INFO 8316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-10-19T00:46:45.493-05:00  INFO 8316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 65 ms. Found 17 JPA repository interfaces.
-2025-10-19T00:46:45.614-05:00  INFO 8316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
-2025-10-19T00:46:45.615-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-10-19T00:46:45.615-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-2025-10-19T00:46:45.662-05:00  INFO 8316 --- [restartedMain] o.a.c.c.C.[Tomcat-2].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
-2025-10-19T00:46:45.662-05:00  INFO 8316 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1009 ms
-2025-10-19T00:46:45.731-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
-2025-10-19T00:46:46.724-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@5a6baa75
-2025-10-19T00:46:46.725-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
-2025-10-19T00:46:46.726-05:00  INFO 8316 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-10-19T00:46:46.741-05:00  INFO 8316 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-10-19T00:46:46.742-05:00  INFO 8316 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-10-19T00:46:46.954-05:00  INFO 8316 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@751605f2
-2025-10-19T00:46:47.174-05:00 DEBUG 8316 --- [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(6, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@4b8076f5) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3b0373fa)
-2025-10-19T00:46:47.231-05:00  INFO 8316 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-10-19T00:46:47.339-05:00  INFO 8316 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2025-10-19T00:46:47.340-05:00  INFO 8316 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-10-19T00:46:47.647-05:00  WARN 8316 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'adjuntoPQController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\AdjuntoPQController.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'PQService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\PQService.class]: Unsatisfied dependency expressed through constructor parameter 9: Error creating bean with name 'emailService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\EmailService.class]: Failed to instantiate [com.pqrsdf.pqrsdf.service.EmailService]: Constructor threw exception
-2025-10-19T00:46:47.647-05:00  INFO 8316 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-10-19T00:46:47.648-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
-2025-10-19T00:46:48.366-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
-2025-10-19T00:46:48.367-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2025-10-19T00:46:48.371-05:00  WARN 8316 --- [restartedMain] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-23-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+2025-10-20T00:52:58.849-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 15296 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
+2025-10-20T00:52:58.850-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-10-20T00:52:59.328-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-20T00:52:59.416-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 87 ms. Found 17 JPA repository interfaces.
+2025-10-20T00:52:59.569-05:00  INFO 15296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
+2025-10-20T00:52:59.570-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-20T00:52:59.571-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-10-20T00:52:59.645-05:00  INFO 15296 --- [restartedMain] o.a.c.c.C.[Tomcat-2].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2025-10-20T00:52:59.646-05:00  INFO 15296 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 792 ms
+2025-10-20T00:52:59.712-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
+2025-10-20T00:53:00.740-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@5f03548f
+2025-10-20T00:53:00.741-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
+2025-10-20T00:53:00.744-05:00  INFO 15296 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-20T00:53:00.755-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:53:00.756-05:00  INFO 15296 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-20T00:53:01.016-05:00  INFO 15296 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@42be9f04
+2025-10-20T00:53:01.306-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:53:01.440-05:00  INFO 15296 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-10-20T00:53:01.441-05:00  INFO 15296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:53:01.778-05:00  WARN 15296 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\AuthController.class]: Failed to instantiate [com.pqrsdf.pqrsdf.controllers.AuthController]: Constructor threw exception
+2025-10-20T00:53:01.779-05:00  INFO 15296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:53:01.780-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
+2025-10-20T00:53:02.502-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
+2025-10-20T00:53:02.503-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-10-20T00:53:02.505-05:00  WARN 15296 --- [restartedMain] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-19-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
  java.base/jdk.internal.misc.Unsafe.park(Native Method)
  java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
  java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
@@ -571,14 +350,14 @@ Caused by: java.lang.Error: Unresolved compilation problems:
  java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
  java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
  java.base/java.lang.Thread.run(Thread.java:1583)
-2025-10-19T00:46:48.375-05:00  INFO 8316 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+2025-10-20T00:53:02.509-05:00  INFO 15296 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2025-10-19T00:46:48.381-05:00 ERROR 8316 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+2025-10-20T00:53:02.513-05:00 ERROR 15296 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
 
-org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'adjuntoPQController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\AdjuntoPQController.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'PQService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\PQService.class]: Unsatisfied dependency expressed through constructor parameter 9: Error creating bean with name 'emailService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\EmailService.class]: Failed to instantiate [com.pqrsdf.pqrsdf.service.EmailService]: Constructor threw exception
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:245) ~[spring-beans-6.0.9.jar:6.0.9]
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\AuthController.class]: Failed to instantiate [com.pqrsdf.pqrsdf.controllers.AuthController]: Constructor threw exception
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:326) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:314) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1189) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560) ~[spring-beans-6.0.9.jar:6.0.9]
@@ -600,24 +379,63 @@ org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-3.1.0.jar:3.1.0]
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'PQService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\PQService.class]: Unsatisfied dependency expressed through constructor parameter 9: Error creating bean with name 'emailService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\EmailService.class]: Failed to instantiate [com.pqrsdf.pqrsdf.service.EmailService]: Constructor threw exception
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:245) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1189) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:888) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-6.0.9.jar:6.0.9]
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.pqrsdf.pqrsdf.controllers.AuthController]: Constructor threw exception
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:224) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:110) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:323) ~[spring-beans-6.0.9.jar:6.0.9]
 	... 22 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'emailService' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\service\EmailService.class]: Failed to instantiate [com.pqrsdf.pqrsdf.service.EmailService]: Constructor threw exception
+Caused by: java.lang.Error: Unresolved compilation problems: 
+	Syntax error, insert "}" to complete ClassBody
+	Syntax error, insert "Finally" to complete BlockStatements
+	Syntax error, insert "}" to complete MethodBody
+
+	at com.pqrsdf.pqrsdf.controllers.AuthController.<init>(AuthController.java:142) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486) ~[na:na]
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:211) ~[spring-beans-6.0.9.jar:6.0.9]
+	... 24 common frames omitted
+
+2025-10-20T00:53:04.142-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 15296 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
+2025-10-20T00:53:04.143-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-10-20T00:53:04.536-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-20T00:53:04.629-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 92 ms. Found 17 JPA repository interfaces.
+2025-10-20T00:53:04.726-05:00  INFO 15296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
+2025-10-20T00:53:04.727-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-20T00:53:04.727-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-10-20T00:53:04.767-05:00  INFO 15296 --- [restartedMain] o.a.c.c.C.[Tomcat-3].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2025-10-20T00:53:04.767-05:00  INFO 15296 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 622 ms
+2025-10-20T00:53:04.822-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
+2025-10-20T00:53:05.960-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@4097d62c
+2025-10-20T00:53:05.961-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
+2025-10-20T00:53:05.963-05:00  INFO 15296 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-20T00:53:05.973-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:53:05.973-05:00  INFO 15296 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-20T00:53:06.199-05:00  INFO 15296 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@596cb6f3
+2025-10-20T00:53:06.476-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:53:06.609-05:00  INFO 15296 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-10-20T00:53:06.610-05:00  INFO 15296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:53:07.005-05:00  WARN 15296 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\AuthController.class]: Failed to instantiate [com.pqrsdf.pqrsdf.controllers.AuthController]: Constructor threw exception
+2025-10-20T00:53:07.005-05:00  INFO 15296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:53:07.006-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
+2025-10-20T00:53:07.663-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
+2025-10-20T00:53:07.665-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-10-20T00:53:07.668-05:00  WARN 15296 --- [restartedMain] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-20-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-10-20T00:53:07.677-05:00  INFO 15296 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-10-20T00:53:07.680-05:00 ERROR 15296 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\AuthController.class]: Failed to instantiate [com.pqrsdf.pqrsdf.controllers.AuthController]: Constructor threw exception
 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:326) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:314) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-6.0.9.jar:6.0.9]
@@ -628,58 +446,61 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:254) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1417) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:888) ~[spring-beans-6.0.9.jar:6.0.9]
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-6.0.9.jar:6.0.9]
-	... 36 common frames omitted
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.pqrsdf.pqrsdf.service.EmailService]: Constructor threw exception
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:973) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:941) ~[spring-context-6.0.9.jar:6.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608) ~[spring-context-6.0.9.jar:6.0.9]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.0.jar:3.1.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733) ~[spring-boot-3.1.0.jar:3.1.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435) ~[spring-boot-3.1.0.jar:3.1.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
+	at com.pqrsdf.pqrsdf.PqrsdfApplication.main(PqrsdfApplication.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-3.1.0.jar:3.1.0]
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.pqrsdf.pqrsdf.controllers.AuthController]: Constructor threw exception
 	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:224) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:110) ~[spring-beans-6.0.9.jar:6.0.9]
 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:323) ~[spring-beans-6.0.9.jar:6.0.9]
-	... 50 common frames omitted
+	... 22 common frames omitted
 Caused by: java.lang.Error: Unresolved compilation problems: 
-	address cannot be resolved to a variable
-	Syntax error on token "}", delete this token
+	Syntax error, insert "}" to complete ClassBody
+	Syntax error, insert "Finally" to complete BlockStatements
+	Syntax error, insert "}" to complete MethodBody
 
-	at com.pqrsdf.pqrsdf.service.EmailService.<init>(EmailService.java:66) ~[classes/:na]
+	at com.pqrsdf.pqrsdf.controllers.AuthController.<init>(AuthController.java:142) ~[classes/:na]
 	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62) ~[na:na]
 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502) ~[na:na]
 	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486) ~[na:na]
 	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:211) ~[spring-beans-6.0.9.jar:6.0.9]
-	... 52 common frames omitted
+	... 24 common frames omitted
 
-2025-10-19T00:46:49.966-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 8316 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
-2025-10-19T00:46:49.967-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
-2025-10-19T00:46:50.367-05:00  INFO 8316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-10-19T00:46:50.436-05:00  INFO 8316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 68 ms. Found 17 JPA repository interfaces.
-2025-10-19T00:46:50.555-05:00  INFO 8316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
-2025-10-19T00:46:50.556-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-10-19T00:46:50.557-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-2025-10-19T00:46:50.604-05:00  INFO 8316 --- [restartedMain] o.a.c.c.C.[Tomcat-3].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
-2025-10-19T00:46:50.604-05:00  INFO 8316 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 635 ms
-2025-10-19T00:46:50.688-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
-2025-10-19T00:46:51.675-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@58697f44
-2025-10-19T00:46:51.676-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
-2025-10-19T00:46:51.678-05:00  INFO 8316 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-10-19T00:46:51.694-05:00  INFO 8316 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-10-19T00:46:51.695-05:00  INFO 8316 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-10-19T00:46:51.924-05:00  INFO 8316 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@42f7cbf2
-2025-10-19T00:46:52.144-05:00 DEBUG 8316 --- [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(6, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@5fcc8099) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@2aa815e3)
-2025-10-19T00:46:52.228-05:00  INFO 8316 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-10-19T00:46:52.418-05:00  INFO 8316 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2025-10-19T00:46:52.419-05:00  INFO 8316 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-10-19T00:46:52.865-05:00  WARN 8316 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-19T00:46:52.955-05:00  INFO 8316 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2025-10-19T00:46:52.968-05:00  INFO 8316 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@623ae95b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@a0bc7f, org.springframework.security.web.context.SecurityContextHolderFilter@6c27fbdc, org.springframework.security.web.header.HeaderWriterFilter@2d35015f, org.springframework.web.filter.CorsFilter@10aab20, org.springframework.security.web.authentication.logout.LogoutFilter@5776b1c2, com.pqrsdf.pqrsdf.config.JwtTokenValidator@65a1c6c6, com.pqrsdf.pqrsdf.config.PermissionFilter@50649b18, com.pqrsdf.pqrsdf.components.AuditLoggingFilter@6fb476e5, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@36748318, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@33ce5370, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5522962f, org.springframework.security.web.session.SessionManagementFilter@53bc8324, org.springframework.security.web.access.ExceptionTranslationFilter@1a680c2c, org.springframework.security.web.access.intercept.AuthorizationFilter@41c1a75]
-2025-10-19T00:46:53.031-05:00  INFO 8316 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2025-10-19T00:46:53.047-05:00  INFO 8316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 27845 (http) with context path ''
-2025-10-19T00:46:53.052-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Started PqrsdfApplication in 3.112 seconds (process running for 6465.509)
-2025-10-19T00:46:53.055-05:00  INFO 8316 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
-2025-10-19T00:46:54.624-05:00  INFO 8316 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
-2025-10-19T00:46:54.631-05:00  INFO 8316 --- [Thread-79] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2025-10-19T00:46:54.634-05:00  WARN 8316 --- [Thread-79] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-24-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+2025-10-20T00:53:09.395-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 15296 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
+2025-10-20T00:53:09.396-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-10-20T00:53:09.828-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-20T00:53:09.913-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 84 ms. Found 17 JPA repository interfaces.
+2025-10-20T00:53:10.029-05:00  INFO 15296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
+2025-10-20T00:53:10.031-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-20T00:53:10.031-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-10-20T00:53:10.078-05:00  INFO 15296 --- [restartedMain] o.a.c.c.C.[Tomcat-4].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2025-10-20T00:53:10.078-05:00  INFO 15296 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 679 ms
+2025-10-20T00:53:10.142-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
+2025-10-20T00:53:11.170-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@dd86cd2
+2025-10-20T00:53:11.171-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
+2025-10-20T00:53:11.172-05:00  INFO 15296 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-20T00:53:11.189-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:53:11.190-05:00  INFO 15296 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-20T00:53:11.409-05:00  INFO 15296 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@1103e029
+2025-10-20T00:53:11.714-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:53:11.828-05:00  INFO 15296 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-10-20T00:53:11.829-05:00  INFO 15296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:53:12.206-05:00  WARN 15296 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\AuthController.class]: Failed to instantiate [com.pqrsdf.pqrsdf.controllers.AuthController]: Constructor threw exception
+2025-10-20T00:53:12.207-05:00  INFO 15296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:53:12.207-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
+2025-10-20T00:53:12.831-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
+2025-10-20T00:53:12.832-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-10-20T00:53:12.834-05:00  WARN 15296 --- [restartedMain] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-21-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
  java.base/jdk.internal.misc.Unsafe.park(Native Method)
  java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
  java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
@@ -689,7 +510,75 @@ Caused by: java.lang.Error: Unresolved compilation problems:
  java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
  java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
  java.base/java.lang.Thread.run(Thread.java:1583)
-2025-10-19T00:46:54.635-05:00  WARN 8316 --- [Thread-79] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pq housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+2025-10-20T00:53:12.839-05:00  INFO 15296 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-10-20T00:53:12.842-05:00 ERROR 15296 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\AuthController.class]: Failed to instantiate [com.pqrsdf.pqrsdf.controllers.AuthController]: Constructor threw exception
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:326) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:314) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1189) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:973) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:941) ~[spring-context-6.0.9.jar:6.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608) ~[spring-context-6.0.9.jar:6.0.9]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.0.jar:3.1.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733) ~[spring-boot-3.1.0.jar:3.1.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435) ~[spring-boot-3.1.0.jar:3.1.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
+	at com.pqrsdf.pqrsdf.PqrsdfApplication.main(PqrsdfApplication.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-3.1.0.jar:3.1.0]
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.pqrsdf.pqrsdf.controllers.AuthController]: Constructor threw exception
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:224) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:110) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:323) ~[spring-beans-6.0.9.jar:6.0.9]
+	... 22 common frames omitted
+Caused by: java.lang.Error: Unresolved compilation problem: 
+	Syntax error, insert "}" to complete ClassBody
+
+	at com.pqrsdf.pqrsdf.controllers.AuthController.<init>(AuthController.java:155) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486) ~[na:na]
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:211) ~[spring-beans-6.0.9.jar:6.0.9]
+	... 24 common frames omitted
+
+2025-10-20T00:53:15.603-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 15296 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
+2025-10-20T00:53:15.604-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-10-20T00:53:16.087-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-20T00:53:16.179-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 92 ms. Found 17 JPA repository interfaces.
+2025-10-20T00:53:16.273-05:00  INFO 15296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
+2025-10-20T00:53:16.274-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-20T00:53:16.275-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-10-20T00:53:16.318-05:00  INFO 15296 --- [restartedMain] o.a.c.c.C.[Tomcat-5].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2025-10-20T00:53:16.318-05:00  INFO 15296 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 712 ms
+2025-10-20T00:53:16.382-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
+2025-10-20T00:53:17.370-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@3a9b437b
+2025-10-20T00:53:17.371-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
+2025-10-20T00:53:17.373-05:00  INFO 15296 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-20T00:53:17.382-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:53:17.382-05:00  INFO 15296 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-20T00:53:17.610-05:00  INFO 15296 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@a3d5ffa
+2025-10-20T00:53:17.883-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:53:18.021-05:00  INFO 15296 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-10-20T00:53:18.021-05:00  INFO 15296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:53:18.400-05:00  WARN 15296 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\AuthController.class]: Failed to instantiate [com.pqrsdf.pqrsdf.controllers.AuthController]: Constructor threw exception
+2025-10-20T00:53:18.401-05:00  INFO 15296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:53:18.401-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
+2025-10-20T00:53:19.079-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
+2025-10-20T00:53:19.081-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-10-20T00:53:19.087-05:00  WARN 15296 --- [restartedMain] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-22-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
  java.base/jdk.internal.misc.Unsafe.park(Native Method)
  java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
  java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
@@ -699,69 +588,185 @@ Caused by: java.lang.Error: Unresolved compilation problems:
  java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
  java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
  java.base/java.lang.Thread.run(Thread.java:1583)
-2025-10-19T00:46:54.636-05:00  WARN 8316 --- [Thread-79] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pq connection adder] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
- java.base/sun.nio.ch.Net.poll(Native Method)
- java.base/sun.nio.ch.NioSocketImpl.park(NioSocketImpl.java:191)
- java.base/sun.nio.ch.NioSocketImpl.park(NioSocketImpl.java:201)
- java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:309)
- java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:346)
- java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:796)
- java.base/java.net.Socket$SocketInputStream.read(Socket.java:1099)
- org.postgresql.core.VisibleBufferedInputStream.readMore(VisibleBufferedInputStream.java:161)
- org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:128)
- org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:113)
- org.postgresql.core.VisibleBufferedInputStream.read(VisibleBufferedInputStream.java:73)
- org.postgresql.core.PGStream.receiveChar(PGStream.java:453)
- org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2120)
- org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:356)
- org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:316)
- org.postgresql.core.SetupQueryRunner.run(SetupQueryRunner.java:55)
- org.postgresql.core.v3.ConnectionFactoryImpl.runInitialQueries(ConnectionFactoryImpl.java:884)
- org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:304)
- org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49)
- org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:247)
- org.postgresql.Driver.makeConnection(Driver.java:434)
- org.postgresql.Driver.connect(Driver.java:291)
- com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
- com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
- com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
- com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
- com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:733)
- com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:712)
- java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
- java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+2025-10-20T00:53:19.096-05:00  INFO 15296 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-10-20T00:53:19.101-05:00 ERROR 15296 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authController' defined in file [C:\Pqrsdf\target\classes\com\pqrsdf\pqrsdf\controllers\AuthController.class]: Failed to instantiate [com.pqrsdf.pqrsdf.controllers.AuthController]: Constructor threw exception
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:326) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:314) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1189) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:973) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:941) ~[spring-context-6.0.9.jar:6.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608) ~[spring-context-6.0.9.jar:6.0.9]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.0.jar:3.1.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733) ~[spring-boot-3.1.0.jar:3.1.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435) ~[spring-boot-3.1.0.jar:3.1.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
+	at com.pqrsdf.pqrsdf.PqrsdfApplication.main(PqrsdfApplication.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-3.1.0.jar:3.1.0]
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.pqrsdf.pqrsdf.controllers.AuthController]: Constructor threw exception
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:224) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:110) ~[spring-beans-6.0.9.jar:6.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:323) ~[spring-beans-6.0.9.jar:6.0.9]
+	... 22 common frames omitted
+Caused by: java.lang.Error: Unresolved compilation problem: 
+	Syntax error, insert "}" to complete ClassBody
+
+	at com.pqrsdf.pqrsdf.controllers.AuthController.<init>(AuthController.java:155) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486) ~[na:na]
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:211) ~[spring-beans-6.0.9.jar:6.0.9]
+	... 24 common frames omitted
+
+2025-10-20T00:53:20.722-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 15296 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
+2025-10-20T00:53:20.723-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-10-20T00:53:21.185-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-20T00:53:21.254-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 68 ms. Found 17 JPA repository interfaces.
+2025-10-20T00:53:21.346-05:00  INFO 15296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
+2025-10-20T00:53:21.347-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-20T00:53:21.348-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-10-20T00:53:21.385-05:00  INFO 15296 --- [restartedMain] o.a.c.c.C.[Tomcat-6].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2025-10-20T00:53:21.386-05:00  INFO 15296 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 660 ms
+2025-10-20T00:53:21.461-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
+2025-10-20T00:53:22.450-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@56bf4c7b
+2025-10-20T00:53:22.451-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
+2025-10-20T00:53:22.452-05:00  INFO 15296 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-20T00:53:22.459-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:53:22.460-05:00  INFO 15296 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-20T00:53:22.683-05:00  INFO 15296 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@71f1fdba
+2025-10-20T00:53:22.972-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:53:23.096-05:00  INFO 15296 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-10-20T00:53:23.096-05:00  INFO 15296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:53:23.644-05:00  WARN 15296 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-20T00:53:23.758-05:00  INFO 15296 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-10-20T00:53:23.773-05:00  INFO 15296 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@37712b25, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@306115ab, org.springframework.security.web.context.SecurityContextHolderFilter@311d3cb9, org.springframework.security.web.header.HeaderWriterFilter@71d92a50, org.springframework.web.filter.CorsFilter@2782a781, org.springframework.security.web.authentication.logout.LogoutFilter@4929d7cf, com.pqrsdf.pqrsdf.config.JwtTokenValidator@1e4bb0d8, com.pqrsdf.pqrsdf.config.PermissionFilter@20dd8837, com.pqrsdf.pqrsdf.components.AuditLoggingFilter@57402545, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5e77f90d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@66c4c339, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@18a90dca, org.springframework.security.web.session.SessionManagementFilter@3959cc7e, org.springframework.security.web.access.ExceptionTranslationFilter@71f3ced1, org.springframework.security.web.access.intercept.AuthorizationFilter@68ea235a]
+2025-10-20T00:53:23.838-05:00  INFO 15296 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-10-20T00:53:23.865-05:00  INFO 15296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 27845 (http) with context path ''
+2025-10-20T00:53:23.869-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Started PqrsdfApplication in 3.184 seconds (process running for 8660.074)
+2025-10-20T00:53:23.870-05:00  INFO 15296 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-10-20T00:56:42.468-05:00  INFO 15296 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-10-20T00:56:42.475-05:00  INFO 15296 --- [Thread-63] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-10-20T00:56:42.478-05:00  WARN 15296 --- [Thread-63] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-23-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
  java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
  java.base/java.lang.Thread.run(Thread.java:1583)
-2025-10-19T00:46:54.642-05:00  INFO 8316 --- [Thread-79] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-10-19T00:46:54.643-05:00  INFO 8316 --- [Thread-79] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
-2025-10-19T00:46:54.852-05:00  INFO 8316 --- [Thread-79] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
-2025-10-19T00:46:55.052-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 8316 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
-2025-10-19T00:46:55.053-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
-2025-10-19T00:46:55.559-05:00  INFO 8316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-10-19T00:46:55.634-05:00  INFO 8316 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 74 ms. Found 17 JPA repository interfaces.
-2025-10-19T00:46:55.740-05:00  INFO 8316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
-2025-10-19T00:46:55.742-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-10-19T00:46:55.742-05:00  INFO 8316 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-2025-10-19T00:46:55.781-05:00  INFO 8316 --- [restartedMain] o.a.c.c.C.[Tomcat-3].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
-2025-10-19T00:46:55.781-05:00  INFO 8316 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 724 ms
-2025-10-19T00:46:55.851-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
-2025-10-19T00:46:56.834-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@3320155a
-2025-10-19T00:46:56.834-05:00  INFO 8316 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
-2025-10-19T00:46:56.836-05:00  INFO 8316 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-10-19T00:46:56.843-05:00  INFO 8316 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-10-19T00:46:56.843-05:00  INFO 8316 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-10-19T00:46:57.065-05:00  INFO 8316 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@60d9369
-2025-10-19T00:46:57.284-05:00 DEBUG 8316 --- [restartedMain] o.h.t.d.sql.spi.DdlTypeRegistry          : addDescriptor(6, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@1597aa10) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@a90dc5b)
-2025-10-19T00:46:57.322-05:00  INFO 8316 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2025-10-19T00:46:57.465-05:00  INFO 8316 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2025-10-19T00:46:57.466-05:00  INFO 8316 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-10-19T00:46:57.904-05:00  WARN 8316 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-19T00:46:57.972-05:00  INFO 8316 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
-2025-10-19T00:46:57.988-05:00  INFO 8316 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@601a0916, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@40e9b04d, org.springframework.security.web.context.SecurityContextHolderFilter@e53b1d8, org.springframework.security.web.header.HeaderWriterFilter@68bab2ce, org.springframework.web.filter.CorsFilter@57483e11, org.springframework.security.web.authentication.logout.LogoutFilter@146686ae, com.pqrsdf.pqrsdf.config.JwtTokenValidator@6b17dffa, com.pqrsdf.pqrsdf.config.PermissionFilter@5b752937, com.pqrsdf.pqrsdf.components.AuditLoggingFilter@961c1a7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@16370142, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2ba6fd88, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@561381cc, org.springframework.security.web.session.SessionManagementFilter@24a1006e, org.springframework.security.web.access.ExceptionTranslationFilter@3dd4a51d, org.springframework.security.web.access.intercept.AuthorizationFilter@2623580a]
-2025-10-19T00:46:58.044-05:00  INFO 8316 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2025-10-19T00:46:58.057-05:00  INFO 8316 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 27845 (http) with context path ''
-2025-10-19T00:46:58.062-05:00  INFO 8316 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Started PqrsdfApplication in 3.059 seconds (process running for 6470.519)
-2025-10-19T00:46:58.065-05:00  INFO 8316 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
-2025-10-19T00:48:18.899-05:00  INFO 8316 --- [http-nio-27845-exec-2] o.a.c.c.C.[Tomcat-3].[localhost].[/]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-10-19T00:48:18.900-05:00  INFO 8316 --- [http-nio-27845-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-10-19T00:48:18.901-05:00  INFO 8316 --- [http-nio-27845-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-10-20T00:56:42.479-05:00  WARN 15296 --- [Thread-63] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pq housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-10-20T00:56:42.483-05:00  INFO 15296 --- [Thread-63] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:56:42.484-05:00  INFO 15296 --- [Thread-63] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
+2025-10-20T00:56:42.487-05:00  INFO 15296 --- [Thread-63] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
+2025-10-20T00:56:42.618-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 15296 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
+2025-10-20T00:56:42.619-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-10-20T00:56:43.089-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-20T00:56:43.177-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 87 ms. Found 17 JPA repository interfaces.
+2025-10-20T00:56:43.269-05:00  INFO 15296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
+2025-10-20T00:56:43.269-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-20T00:56:43.270-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-10-20T00:56:43.315-05:00  INFO 15296 --- [restartedMain] o.a.c.c.C.[Tomcat-6].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2025-10-20T00:56:43.315-05:00  INFO 15296 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 694 ms
+2025-10-20T00:56:43.377-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
+2025-10-20T00:56:44.373-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@6cfdf7d
+2025-10-20T00:56:44.373-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
+2025-10-20T00:56:44.376-05:00  INFO 15296 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-20T00:56:44.387-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:56:44.387-05:00  INFO 15296 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-20T00:56:44.606-05:00  INFO 15296 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@89a0151
+2025-10-20T00:56:44.896-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:56:45.030-05:00  INFO 15296 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-10-20T00:56:45.030-05:00  INFO 15296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:56:45.372-05:00  WARN 15296 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-20T00:56:45.439-05:00  INFO 15296 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-10-20T00:56:45.451-05:00  INFO 15296 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6522a9c6, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@58d48f4b, org.springframework.security.web.context.SecurityContextHolderFilter@489792ef, org.springframework.security.web.header.HeaderWriterFilter@1d8a8ba1, org.springframework.web.filter.CorsFilter@7750c527, org.springframework.security.web.authentication.logout.LogoutFilter@30c1b158, com.pqrsdf.pqrsdf.config.JwtTokenValidator@444737ff, com.pqrsdf.pqrsdf.config.PermissionFilter@34dbda28, com.pqrsdf.pqrsdf.components.AuditLoggingFilter@eb7bd77, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@22f8b428, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6be6f455, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4889a52f, org.springframework.security.web.session.SessionManagementFilter@64c966a4, org.springframework.security.web.access.ExceptionTranslationFilter@781242ef, org.springframework.security.web.access.intercept.AuthorizationFilter@be7086a]
+2025-10-20T00:56:45.513-05:00  INFO 15296 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-10-20T00:56:45.533-05:00  INFO 15296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 27845 (http) with context path ''
+2025-10-20T00:56:45.538-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Started PqrsdfApplication in 2.946 seconds (process running for 8861.744)
+2025-10-20T00:56:45.541-05:00  INFO 15296 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-10-20T00:57:46.002-05:00  INFO 15296 --- [http-nio-27845-exec-1] o.a.c.c.C.[Tomcat-6].[localhost].[/]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-20T00:57:46.002-05:00  INFO 15296 --- [http-nio-27845-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-20T00:57:46.004-05:00  INFO 15296 --- [http-nio-27845-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-10-20T00:57:59.382-05:00  INFO 15296 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-10-20T00:57:59.393-05:00  INFO 15296 --- [Thread-85] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-10-20T00:57:59.395-05:00  INFO 15296 --- [Thread-85] o.a.c.c.C.[Tomcat-6].[localhost].[/]     : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2025-10-20T00:57:59.400-05:00  WARN 15296 --- [Thread-85] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pool-24-thread-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-10-20T00:57:59.401-05:00  WARN 15296 --- [Thread-85] o.a.c.loader.WebappClassLoaderBase       : The web application [ROOT] appears to have started a thread named [pq housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1763)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-10-20T00:57:59.407-05:00  INFO 15296 --- [Thread-85] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:57:59.409-05:00  INFO 15296 --- [Thread-85] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
+2025-10-20T00:57:59.411-05:00  INFO 15296 --- [Thread-85] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.
+2025-10-20T00:57:59.543-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Starting PqrsdfApplication using Java 21.0.7 with PID 15296 (C:\Pqrsdf\target\classes started by Brayam Stiven Moreno in C:\Pqrsdf)
+2025-10-20T00:57:59.544-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-10-20T00:57:59.889-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-20T00:57:59.965-05:00  INFO 15296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 74 ms. Found 17 JPA repository interfaces.
+2025-10-20T00:58:00.057-05:00  INFO 15296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 27845 (http)
+2025-10-20T00:58:00.058-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-20T00:58:00.058-05:00  INFO 15296 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2025-10-20T00:58:00.096-05:00  INFO 15296 --- [restartedMain] o.a.c.c.C.[Tomcat-6].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2025-10-20T00:58:00.096-05:00  INFO 15296 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 549 ms
+2025-10-20T00:58:00.155-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Starting...
+2025-10-20T00:58:01.139-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : pq - Added connection org.postgresql.jdbc.PgConnection@426b74d3
+2025-10-20T00:58:01.139-05:00  INFO 15296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : pq - Start completed.
+2025-10-20T00:58:01.140-05:00  INFO 15296 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-20T00:58:01.153-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:58:01.154-05:00  INFO 15296 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-20T00:58:01.379-05:00  INFO 15296 --- [restartedMain] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.PostgreSQLDialect, version: org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$DialectResolutionInfoImpl@6a13ad50
+2025-10-20T00:58:01.633-05:00  INFO 15296 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-10-20T00:58:01.796-05:00  INFO 15296 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-10-20T00:58:01.797-05:00  INFO 15296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:58:02.108-05:00  WARN 15296 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-20T00:58:02.172-05:00  INFO 15296 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2025-10-20T00:58:02.183-05:00  INFO 15296 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1d0bae7a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@c2d750, org.springframework.security.web.context.SecurityContextHolderFilter@5d163de3, org.springframework.security.web.header.HeaderWriterFilter@702c049e, org.springframework.web.filter.CorsFilter@691d03f4, org.springframework.security.web.authentication.logout.LogoutFilter@156106a5, com.pqrsdf.pqrsdf.config.JwtTokenValidator@7d2d2791, com.pqrsdf.pqrsdf.config.PermissionFilter@3d153e30, com.pqrsdf.pqrsdf.components.AuditLoggingFilter@1ba75a5b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4743ebcc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@57db1f4e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2bfb0695, org.springframework.security.web.session.SessionManagementFilter@6ac89929, org.springframework.security.web.access.ExceptionTranslationFilter@611f6a1f, org.springframework.security.web.access.intercept.AuthorizationFilter@420ad5cb]
+2025-10-20T00:58:02.236-05:00  INFO 15296 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-10-20T00:58:02.249-05:00  INFO 15296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 27845 (http) with context path ''
+2025-10-20T00:58:02.252-05:00  INFO 15296 --- [restartedMain] com.pqrsdf.pqrsdf.PqrsdfApplication      : Started PqrsdfApplication in 2.735 seconds (process running for 8938.457)
+2025-10-20T00:58:02.254-05:00  INFO 15296 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-10-20T00:58:37.136-05:00  INFO 15296 --- [http-nio-27845-exec-1] o.a.c.c.C.[Tomcat-6].[localhost].[/]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-20T00:58:37.137-05:00  INFO 15296 --- [http-nio-27845-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-20T00:58:37.138-05:00  INFO 15296 --- [http-nio-27845-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-10-20T00:59:31.654-05:00  INFO 15296 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T00:59:31.656-05:00  INFO 15296 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown initiated...
+2025-10-20T00:59:31.661-05:00  INFO 15296 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : pq - Shutdown completed.

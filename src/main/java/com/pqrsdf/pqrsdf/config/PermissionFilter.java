@@ -25,7 +25,9 @@ public class PermissionFilter extends OncePerRequestFilter {
         String method = request.getMethod();
 
         // 1. Excluir rutas de autenticación (/api/auth/**)
-        if (path.startsWith("/api/auth/**")) {
+        if (path.startsWith("/api/auth/")
+                || path.startsWith("/v3/api-docs")
+                || path.startsWith("/swagger-ui")) {
             filterChain.doFilter(request, response);
             return;
         }

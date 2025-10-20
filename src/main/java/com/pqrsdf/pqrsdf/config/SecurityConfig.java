@@ -59,7 +59,9 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http,
                             "/swagger-ui.html",
                             "/v3/api-docs/**",
                             "/v3/api-docs.yaml",
-                            "/webjars/**")
+                            "/webjars/**",
+                            "/api/auth/forgot-password/**",
+                            "/api/auth/reset-password")
                     .permitAll()
                     .anyRequest().authenticated())
             .sessionManagement(session -> session

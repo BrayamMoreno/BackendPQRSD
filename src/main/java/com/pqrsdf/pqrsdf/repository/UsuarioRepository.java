@@ -15,4 +15,6 @@ public interface UsuarioRepository extends GenericRepository<Usuario, Long>, Jpa
 
     List<Usuario> findByRolId(Long id);
 
+    Optional<Usuario> findByResetToken(String resetToken);
+
 }
