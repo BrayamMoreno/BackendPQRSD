@@ -8,6 +8,7 @@ WORKDIR /backend
 COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
+COPY .env .env
 
 # Descarga las dependencias del proyecto
 RUN chmod +x ./mvnw && ./mvnw dependency:go-offline
