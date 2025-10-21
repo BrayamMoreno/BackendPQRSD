@@ -1,9 +1,6 @@
 package com.pqrsdf.pqrsdf.service;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.Base64;
 import java.util.List;
 
 import org.springframework.mail.javamail.JavaMailSender;
@@ -43,7 +40,6 @@ public class EmailService {
                 Context context = new Context();
                 context.setVariable("nombre", nombre);
                 context.setVariable("radicado", numeroRadicado);
-                context.setVariable("logoBase64", encodeImageToBase64("src/main/resources/static/Logo.webp"));
 
                 String html = templateEngine.process("email-template", context);
 
@@ -72,7 +68,6 @@ public class EmailService {
 
             Context context = new Context();
             context.setVariable("resetLink", resetLink);
-            context.setVariable("logoBase64", encodeImageToBase64("src/main/resources/static/Logo.webp"));
 
             String html = templateEngine.process("reset-password-template", context);
 
@@ -84,15 +79,6 @@ public class EmailService {
 
         } catch (Exception e) {
             throw new RuntimeException("Error al enviar correo de restablecimiento de contraseña a " + to, e);
-        }
-    }
-
-    private String encodeImageToBase64(String imagePath) {
-        try {
-            byte[] fileContent = Files.readAllBytes(new File(imagePath).toPath());
-            return Base64.getEncoder().encodeToString(fileContent);
-        } catch (IOException e) {
-            throw new RuntimeException("No se pudo leer la imagen: " + imagePath, e);
         }
     }
 }

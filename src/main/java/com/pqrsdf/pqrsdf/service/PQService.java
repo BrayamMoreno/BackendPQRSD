@@ -123,7 +123,7 @@ public class PQService extends GenericService<PQ, Long> {
 
     public Page<PQ> findProximasAVencer(Pageable pageable, Specification<PQ> spec) {
         LocalDate hoy = LocalDate.now();
-        LocalDate limite = hoy.plusDays(7); // Por ejemplo, 30 días a partir de hoy
+        LocalDate limite = hoy.plusDays(21); // Por ejemplo, 30 días a partir de hoy
 
         Specification<PQ> fechaSpec = (root, query, cb) -> cb.between(root.get("fechaResolucionEstimada"), hoy, limite);
         Specification<PQ> finalSpec = spec == null ? fechaSpec : spec.and(fechaSpec);

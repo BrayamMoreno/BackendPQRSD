@@ -58,7 +58,7 @@ public class PQController extends GenericController<PQ, Long> {
             @RequestParam(required = false) String fechaInicio,
             @RequestParam(required = false) String fechaFin) {
         try {
-            Pageable pageable = PageRequest.of(page, size, Sort.by("fechaRadicacion").descending());
+            Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
 
             Specification<PQ> spec = Specification
                     .where(PqsSpecification.hasTipoId(tipoId))
@@ -175,6 +175,29 @@ public class PQController extends GenericController<PQ, Long> {
         }
     }
 
+    @GetMapping("/vencidas_admin")
+    public ResponseEntity<?> getVencidasAdmin(
+            @RequestParam(required = false) Long responsableId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        try {
+            Pageable pageable = PageRequest.of(page, size, Sort.by("fechaResolucionEstimada").ascending());
+
+            Long estadoId = 2L;
+
+            Specification<PQ> spec = Specification
+                    .where (PqsSpecification.hasUltimoEstado(estadoId));
+
+            Page<PQ> vencidas = service.findVencidas(pageable, spec);
+            if (vencidas.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+            return ResponseEntityUtil.handlePaginationRequest(vencidas);
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
+
     @GetMapping("/vencidas")
     public ResponseEntity<?> getVencidas(
             @RequestParam(required = false) Long responsableId,
@@ -183,7 +206,7 @@ public class PQController extends GenericController<PQ, Long> {
         try {
             Pageable pageable = PageRequest.of(page, size, Sort.by("fechaResolucionEstimada").ascending());
 
-            Long estadoId = 2L; // Estado "En Proceso"
+            Long estadoId = 2L;
 
             Specification<PQ> spec = Specification
                     .where(PqsSpecification.hasResponsableId(responsableId))
@@ -206,7 +229,7 @@ public class PQController extends GenericController<PQ, Long> {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         try {
-            Pageable pageable = PageRequest.of(page, size, Sort.by("fechaResolucionEstimada").ascending());
+                Pageable pageable = PageRequest.of(page, size, Sort.by("fechaResolucionEstimada").ascending());
 
             Long estadoId = 2L;
 
