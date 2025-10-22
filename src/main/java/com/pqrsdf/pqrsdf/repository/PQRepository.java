@@ -59,21 +59,8 @@ public interface PQRepository extends GenericRepository<PQ, Long>, JpaSpecificat
     @Query(value = "SELECT * FROM vista_conteo_pq WHERE solicitante_id = :solicitanteId", nativeQuery = true)
     ConteoPQDTO contarPorSolicitante(@Param("solicitanteId") Long solicitanteId);
 
-    @Query(value = """
-                SELECT
-                    SUM(CASE WHEN he.estado_id = 1 THEN 1 ELSE 0 END) AS por_asignar,
-                    SUM(CASE WHEN he.estado_id = 2 THEN 1 ELSE 0 END) AS asignadas,
-                    SUM(CASE WHEN he.estado_id = 3 THEN 1 ELSE 0 END) AS rechazadas
-                FROM pqs p
-                LEFT JOIN historial_estados_pq he
-                    ON he.pq_id = p.id
-                    AND he.fecha_cambio = (
-                        SELECT MAX(he2.fecha_cambio)
-                        FROM historial_estados_pq he2
-                        WHERE he2.pq_id = p.id
-                    )
-            """, nativeQuery = true)
-    Object obtenerConteoRadicador();
+    @Query(value = "SELECT radicadas, asignadas, rechazadas, por_asignar from vista_resumen_radicador where radicador_id = :radicadorId", nativeQuery = true)
+    Object obtenerConteoRadicador(@Param("radicadorId") Long radicadorId);
 
     @Query(value = "SELECT numero_radicado FROM pqs  WHERE numero_radicado LIKE ?1 ORDER BY numero_radicado DESC LIMIT 1", nativeQuery = true)
     String findUltimoNumeroPorFecha(String prefijo);

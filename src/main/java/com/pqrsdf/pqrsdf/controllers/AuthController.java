@@ -96,7 +96,7 @@ public class AuthController {
 
             String token = authHeader.authHeader().substring(7);
 
-            DecodedJWT decodedJWT = jwtUtils.validateToken(token);
+            DecodedJWT decodedJWT = jwtUtils.decodeTokenAllowExpired(token);
             String username = jwtUtils.extractUsername(decodedJWT);
 
             UserDetails userDetails = userDetailServiceImpl.loadUserByUsername(username);

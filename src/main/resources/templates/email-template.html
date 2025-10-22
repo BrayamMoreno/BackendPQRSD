@@ -83,29 +83,12 @@
             line-height: 1.6;
         }
 
-        .button-link {
-            display: inline-block;
-            padding: 12px 25px;
-            background-color: #ff6600;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 16px;
-            border: 1px solid #ff6600;
-        }
-
-        .button-link:hover {
-            background-color: #e65c00;
-            border-color: #e65c00;
-        }
-
         .footer-bg {
-            background-color: #004d99;
+            background-color: #173A5E;
             color: #ffffff;
             padding: 25px 30px;
             font-size: 12px;
-            line-height: 1.4;
+            line-height: 1.6;
         }
 
         .footer-columns td {
@@ -125,6 +108,47 @@
                 margin-bottom: 15px;
             }
         }
+
+        /* Evitar inversión de colores en modo oscuro */
+        @media (prefers-color-scheme: dark) {
+
+            body,
+            table,
+            td,
+            .main-wrapper,
+            .header-bg,
+            .content-area {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+            }
+
+            .header-title {
+                color: #004d99 !important;
+            }
+
+            .content-title {
+                color: #1a1a1a !important;
+            }
+
+            .radicado-box {
+                background-color: #e0f0ff !important;
+                border-left: 5px solid #004d99 !important;
+            }
+
+            .footer-bg {
+                background-color: #173A5E !important;
+                color: #ffffff !important;
+            }
+
+            a {
+                color: #004d99 !important;
+            }
+        }
+
+        :root {
+            color-scheme: light only;
+            supported-color-schemes: light;
+        }
     </style>
 </head>
 
@@ -133,12 +157,12 @@
         <tr>
             <td align="center" style="padding:20px 0;">
                 <table class="main-wrapper" cellpadding="0" cellspacing="0" border="0">
+
                     <!-- Header -->
                     <tr>
                         <td class="header-bg">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO6bS6cgvNeADiMSQKcnPE2zL8N3Pu8zdxtA&s"
-                                alt="Logo STTG" width="60"
-                                style="display:block; margin:0 auto 10px; border:none; outline:none; text-decoration:none;" />
+                                alt="Logo STTG" width="60" style="display:block; margin:0 auto 10px;" />
                             <h1 class="header-title">Secretaría de Tránsito y Transporte de Girardot</h1>
                         </td>
                     </tr>
@@ -169,32 +193,45 @@
                             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
                                     <td class="column" width="50%">
-                                        <p style="font-weight:bold; margin-bottom:5px;">Secretaría de Tránsito y
-                                            Transporte</p>
-                                        <p style="margin:0; font-size:12px; color:#cccccc;">Gestión de solicitudes PQRSD
-                                            de manera rápida y segura.</p>
+                                        <p style="font-weight:bold; font-size:14px; margin-bottom:5px;">Plataforma PQRSD
+                                        </p>
+                                        <p style="margin:0; font-size:12px; color:#cccccc;">
+                                            Plataforma para la radicación y seguimiento de Peticiones, Quejas, Reclamos,
+                                            Sugerencias, Denuncias y Otros (PQRSD) del Municipio de Girardot -
+                                            Cundinamarca.
+                                        </p>
                                     </td>
                                     <td class="column" width="50%" style="text-align:right;">
-                                        <p style="font-weight:bold; margin-bottom:5px;">Contáctanos</p>
+                                        <p style="font-weight:bold; font-size:14px; margin-bottom:5px;">Datos de
+                                            contacto</p>
                                         <p style="margin:0; font-size:12px; color:#cccccc;">
-                                            Email: <a href="mailto:soporte@sttg.com"
-                                                style="color:#ffffff; text-decoration:none;">soporte@sttg.com</a>
+                                            Dirección: Carrera 11 No. 17 - Esquina, Palacio Municipal. Girardot -
+                                            Cundinamarca
                                         </p>
-                                        <p style="margin:0; font-size:12px; color:#cccccc;">Teléfono: +57 300 123 4567
+                                        <p style="margin:0; font-size:12px; color:#cccccc;">
+                                            Oficina: Cuarto Piso, Secretaría de Tránsito y Transporte
                                         </p>
-                                        <p style="margin:0; font-size:12px; color:#cccccc;">Dirección: Calle 10 #20-30,
-                                            Girardot</p>
+                                        <p style="margin:0; font-size:12px; color:#cccccc;">
+                                            Correo: <a href="mailto:transitoytransporte@girardot-cundinamarca.gov.co"
+                                                style="color:#ffffff; text-decoration:none;">
+                                                transitoytransporte@girardot-cundinamarca.gov.co</a>
+                                        </p>
+                                        <p style="margin:0; font-size:12px; color:#cccccc;">Teléfono: (601) 8393510 ext.
+                                            1070</p>
+                                        <p style="margin:0; font-size:12px; color:#cccccc;">
+                                            Horario: Lunes a Viernes 08:00 a.m. – 12:00 m. / 02:00 p.m. – 06:00 p.m.
+                                        </p>
                                     </td>
                                 </tr>
                             </table>
 
                             <table width="100%" cellpadding="0" cellspacing="0" border="0"
-                                style="margin-top:15px; border-top:1px solid #d0d0d0;">
+                                style="margin-top:15px; border-top:1px solid #336699;">
                                 <tr>
-                                    <td align="center">
+                                    <td align="center" style="padding-top:10px;">
                                         <p style="margin:0; font-size:11px; color:#a0a0a0;">
-                                            © 2025 Secretaría de Tránsito y Transporte de Girardot — Todos los derechos
-                                            reservados.
+                                            © 2025 Municipio de Girardot - Secretaría de Tránsito y Transporte — Todos
+                                            los derechos reservados.
                                         </p>
                                         <p style="margin:5px 0 0; font-size:11px; color:#a0a0a0;">
                                             Este mensaje es informativo y ha sido generado automáticamente. Por favor,

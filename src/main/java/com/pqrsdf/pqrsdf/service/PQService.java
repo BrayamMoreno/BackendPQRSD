@@ -417,8 +417,8 @@ public class PQService extends GenericService<PQ, Long> {
         return repository.contarPorSolicitante(solicitanteId);
     }
 
-    public ConteoRadicadorDTO conteoRadicador() {
-        Object result = repository.obtenerConteoRadicador();
+    public ConteoRadicadorDTO conteoRadicador(Long radicadorId) {
+        Object result = repository.obtenerConteoRadicador(radicadorId);
         if (result instanceof Object[] row) {
             return new ConteoRadicadorDTO(
                     ((Number) row[0]).longValue(),

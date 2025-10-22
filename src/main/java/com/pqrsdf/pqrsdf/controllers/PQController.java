@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping(path = "/api/pqs")
@@ -109,7 +110,7 @@ public class PQController extends GenericController<PQ, Long> {
         }
     }
 
-    @GetMapping("/sin_responsable")
+    @GetMapping("/por_asignar")
     public ResponseEntity<?> getMyPqsByResponsable(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
@@ -124,7 +125,7 @@ public class PQController extends GenericController<PQ, Long> {
             Specification<PQ> spec = Specification
                     .where(PqsSpecification.hasTipoId(tipoId))
                     .and(PqsSpecification.hasRadicadorId(radicadorId))
-                    .and(PqsSpecification.hasUltimoEstado(1L)) // Estado "Radicado"
+                    .and(PqsSpecification.hasUltimoEstado(1L))
                     .and(PqsSpecification.hasNumeroRadicado(numeroRadicado))
                     .and(PqsSpecification.hasFechaRango(fechaInicio, fechaFin));
 
@@ -316,10 +317,10 @@ public class PQController extends GenericController<PQ, Long> {
         }
     }
 
-    @GetMapping("/conteo-asignador")
-    public ResponseEntity<?> obtenerConteoRadicador() {
+    @GetMapping("/conteo-asignador/{radicadorId}")
+    public ResponseEntity<?> obtenerConteoRadicador(@PathVariable("radicadorId") Long radicadorId) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.conteoRadicador());
+            return ResponseEntity.status(HttpStatus.OK).body(service.conteoRadicador(radicadorId));
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }

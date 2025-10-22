@@ -26,54 +26,54 @@ public class JwtUtils {
     private String privateKey;
     private String userGenerator;
 
-    private int accessTokenExpiration = 15 * 60 * 1000;   // 15 min
+    private int accessTokenExpiration = 15 * 60 * 1000; // 15 min
 
-    public JwtUtils(Dotenv dotenv){
+    public JwtUtils(Dotenv dotenv) {
         this.privateKey = dotenv.get("JWT_PRIVATE_KEY_GENERATOR");
         this.userGenerator = dotenv.get("JWT_PRIVATE_USER_GENERATOR");
     }
 
-    public String createToken(Authentication authentication){
+    public String createToken(Authentication authentication) {
         Algorithm Algoritthm = Algorithm.HMAC256(this.privateKey);
 
         String authorities = authentication.getAuthorities()
-                                .stream()
-                                .map(GrantedAuthority::getAuthority)
-                                .collect(Collectors.joining(","));
+                .stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
 
         String jwtToken = JWT.create()
-                                .withIssuer(this.userGenerator)
-                                .withSubject(authentication.getName())
-                                .withClaim("authorities", authorities)
-                                .withIssuedAt(new Date())
-                                .withExpiresAt(new Date(System.currentTimeMillis() + accessTokenExpiration))
-                                .withJWTId(UUID.randomUUID().toString())
-                                .withNotBefore(new Date(System.currentTimeMillis()))
-                                .sign(Algoritthm);
+                .withIssuer(this.userGenerator)
+                .withSubject(authentication.getName())
+                .withClaim("authorities", authorities)
+                .withIssuedAt(new Date())
+                .withExpiresAt(new Date(System.currentTimeMillis() + accessTokenExpiration))
+                .withJWTId(UUID.randomUUID().toString())
+                .withNotBefore(new Date(System.currentTimeMillis()))
+                .sign(Algoritthm);
         return jwtToken;
     }
 
-    public DecodedJWT validateToken(String token){
+    public DecodedJWT validateToken(String token) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(this.privateKey);
 
             JWTVerifier verifier = JWT.require(algorithm)
-                                .withIssuer(this.userGenerator)
-                                .build();
+                    .withIssuer(this.userGenerator)
+                    .build();
 
             DecodedJWT decodedJWT = verifier.verify(token);
 
             return decodedJWT;
-        } catch(TokenExpiredException e){
+        } catch (TokenExpiredException e) {
             throw new TokenExpiredException("Token Expirado", null);
-        } catch(JWTVerificationException eJwt){
+        } catch (JWTVerificationException eJwt) {
             throw new JWTVerificationException("Token Invalido");
         } catch (Exception e) {
             throw new InternalError("Error: ".concat(e.getMessage()));
         }
     }
 
-    public String extractUsername(DecodedJWT decodedJWT){
+    public String extractUsername(DecodedJWT decodedJWT) {
         return decodedJWT.getSubject();
     }
 
@@ -85,11 +85,28 @@ public class JwtUtils {
         return decodedJWT.getClaims();
     }
 
-    public LocalDateTime extracExpirationTime(String token){
+    public LocalDateTime extracExpirationTime(String token) {
         DecodedJWT decodedJWT = validateToken(token);
         Date expiredAt = decodedJWT.getExpiresAt();
 
-        LocalDateTime expirationTime = LocalDateTime.ofInstant(expiredAt.toInstant(), expiredAt.toInstant().atZone(java.time.ZoneId.systemDefault()).getZone());
+        LocalDateTime expirationTime = LocalDateTime.ofInstant(expiredAt.toInstant(),
+                expiredAt.toInstant().atZone(java.time.ZoneId.systemDefault()).getZone());
         return expirationTime;
     }
+
+    public DecodedJWT decodeTokenAllowExpired(String token) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(this.privateKey);
+            JWTVerifier verifier = JWT.require(algorithm)
+                    .withIssuer(this.userGenerator)
+                    .build();
+
+            return verifier.verify(token);
+        } catch (TokenExpiredException e) {
+            return JWT.decode(token);
+        } catch (JWTVerificationException eJwt) {
+            throw new JWTVerificationException("Token inválido o manipulado");
+        }
+    }
+
 }

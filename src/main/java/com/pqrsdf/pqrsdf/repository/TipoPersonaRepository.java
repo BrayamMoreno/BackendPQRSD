@@ -7,6 +7,6 @@ import com.pqrsdf.pqrsdf.models.TipoPersona;
 
 @Repository
 public interface TipoPersonaRepository extends GenericRepository<TipoPersona, Long>{
-    
+
 }
 
