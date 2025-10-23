@@ -1,5 +1,5 @@
-# Usa la imagen oficial de OpenJDK 17 en Alpine como base
-FROM eclipse-temurin:17-jdk-alpine
+# Usa la imagen oficial de OpenJDK 21 en Alpine como base
+FROM eclipse-temurin:21-jdk-alpine
 
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /backend
