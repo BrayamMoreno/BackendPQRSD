@@ -28,8 +28,7 @@ public abstract class GenericService<T extends GenericEntity, ID> {
     }
 
     public void deleteById(T entity) {
-        entity.setEliminado(true);
-        repository.save(entity);
+        repository.delete(entity);
     }
 
     public T updateEntity(T existingEntity, T newEntity) {

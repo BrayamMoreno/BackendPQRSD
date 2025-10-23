@@ -15,22 +15,11 @@ public class GenericEntity {
     @Hidden
     protected Long id;
 
-    @Column(name = "eliminado", columnDefinition = "boolean default false")
-    private boolean eliminado = false;
-
     public Long getId(){
         return this.id;
     }
 
     public void setId(Long id){
         this.id = id;
-    }
-
-    public boolean isEliminado() {
-        return eliminado;
-    }
-
-    public void setEliminado(boolean eliminado) {
-        this.eliminado = eliminado;
     }
 }

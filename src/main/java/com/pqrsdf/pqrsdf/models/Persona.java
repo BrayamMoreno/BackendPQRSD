@@ -1,6 +1,7 @@
 package com.pqrsdf.pqrsdf.models;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import org.hibernate.annotations.Formula;
 
@@ -36,6 +37,10 @@ public class Persona extends GenericEntity {
 
     private String telefono;
     private String direccion;
+
+    @Column(name = "fecha_nacimiento")
+    private Date fechaNacimiento;
+
     private Boolean tratamientoDatos;
 
     @ManyToOne

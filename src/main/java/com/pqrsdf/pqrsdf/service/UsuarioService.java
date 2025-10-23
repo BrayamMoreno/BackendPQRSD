@@ -92,6 +92,7 @@ public class UsuarioService extends GenericService<Usuario, Long> {
                         .orElseThrow(() -> new RuntimeException(
                                 "Tipo de persona no encontrado")))
                 .telefono(entity.telefono())
+                .fechaNacimiento(entity.fechaNacimiento())
                 .direccion(entity.direccion())
                 .municipio(municipioRepository.findById(entity.municipioId())
                         .orElseThrow(() -> new RuntimeException("Municipio no encontrado")))
@@ -123,7 +124,6 @@ public class UsuarioService extends GenericService<Usuario, Long> {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         usuario.setIsEnable(false);
-        usuario.setEliminado(true);
         usuarioRepository.save(usuario);
     }
 }
