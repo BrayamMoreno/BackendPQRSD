@@ -1,7 +1,6 @@
 package com.pqrsdf.pqrsdf.generic;
 
 import io.swagger.v3.oas.annotations.Hidden;
-import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;

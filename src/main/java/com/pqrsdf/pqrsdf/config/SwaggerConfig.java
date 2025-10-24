@@ -14,14 +14,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@OpenAPIDefinition(info = @Info(title = "PQRSDF API", version = "1.0.0", description = "Bienvenido a la API del sistema de Pqrsdf"))
+@OpenAPIDefinition(info = @Info(title = "PQRSDF API", version = "1.0.0", description = "Bienvenido a la API del sistema de PQRSD"))
 public class SwaggerConfig {
-
-        private String url;
-
-        public SwaggerConfig(Dotenv dotenv) {
-                this.url = dotenv.get("URL_SERVER");
-        }
 
         @Bean
         public OpenAPI customOpenAPI() {

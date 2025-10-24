@@ -3,7 +3,6 @@ package com.pqrsdf.pqrsdf.service;
 import org.springframework.stereotype.Service;
 
 import com.pqrsdf.pqrsdf.dto.HistorialEstadoRequest;
-import com.pqrsdf.pqrsdf.dto.HistorialEstadoRequest.Estado;
 import com.pqrsdf.pqrsdf.generic.GenericService;
 import com.pqrsdf.pqrsdf.models.EstadoPQ;
 import com.pqrsdf.pqrsdf.models.HistorialEstadoPQ;

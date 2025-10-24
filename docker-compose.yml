@@ -1,36 +1,40 @@
-  services:
-    db:
-      container_name: db_pq
-      image: postgres:15.5-alpine3.18
-      ports:
-        - "48325:5432"
-      volumes:
-        - "./pq.sql:/docker-entrypoint-initdb.d/init.sql"
-        - "./postgres/data:/var/lib/postgresql/data"
-      environment:
-        - POSTGRES_USER=pq
-        - POSTGRES_PASSWORD=pq_2025
-        - POSTGRES_DB=pq
-      networks:
-        - app-net
+services:
+  db:
+    container_name: db_pq
+    image: postgres:15.5-alpine3.18
+    ports:
+      - "48325:5432"
+    volumes:
+      - "./pq.sql:/docker-entrypoint-initdb.d/init.sql"
+      - "./postgres/data:/var/lib/postgresql/data"
+    environment:
+      - POSTGRES_USER=pq
+      - POSTGRES_PASSWORD=pq_2025
+      - POSTGRES_DB=pq
+    networks:
+      - app-net
 
-    backend:
-      container_name: backend
-      build:
-        context: .
-        dockerfile: Dockerfile.prod
-      ports:
-        - "27845:27845"
-      depends_on:
-        - db
-      env_file:
-        - .env
-      networks:
-        - app-net
+  backend:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "27845:27845"
+    depends_on:
+      - db
+    env_file:
+      - .env
+    networks:
+      - app-net
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
 
-  networks:
-    app-net:
-      driver: bridge
-  volumes:
-    db:
-      driver: local
+networks:
+  app-net:
+    driver: bridge
+
+volumes:
+  db:
+    driver: local

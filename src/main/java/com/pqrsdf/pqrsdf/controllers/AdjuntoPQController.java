@@ -16,6 +16,7 @@ import com.pqrsdf.pqrsdf.utils.ResponseEntityUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.core.io.UrlResource;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -92,7 +93,7 @@ public class AdjuntoPQController extends GenericController<AdjuntoPQ, Long> {
             Resource resource = new UrlResource(filePath.toUri());
 
             if (!resource.exists()) {
-                throw new RuntimeException("Archivo no encontrado en disco");
+                throw new NotFoundException();
             }
 
             return ResponseEntity.ok()
@@ -100,6 +101,8 @@ public class AdjuntoPQController extends GenericController<AdjuntoPQ, Long> {
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + adj.getNombreArchivo() + "\"")
                     .body(resource);
 
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }

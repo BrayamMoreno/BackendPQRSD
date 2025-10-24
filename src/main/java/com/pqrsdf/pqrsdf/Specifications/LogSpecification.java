@@ -1,6 +1,5 @@
 package com.pqrsdf.pqrsdf.Specifications;
 
-import java.sql.Struct;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

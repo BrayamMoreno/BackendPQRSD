@@ -18,11 +18,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -123,7 +120,7 @@ public class PQService extends GenericService<PQ, Long> {
 
     public Page<PQ> findProximasAVencer(Pageable pageable, Specification<PQ> spec) {
         LocalDate hoy = LocalDate.now();
-        LocalDate limite = hoy.plusDays(21); // Por ejemplo, 30 días a partir de hoy
+        LocalDate limite = hoy.plusDays(150); // Por ejemplo, 150 días a partir de hoy
 
         Specification<PQ> fechaSpec = (root, query, cb) -> cb.between(root.get("fechaResolucionEstimada"), hoy, limite);
         Specification<PQ> finalSpec = spec == null ? fechaSpec : spec.and(fechaSpec);

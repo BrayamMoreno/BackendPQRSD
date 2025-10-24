@@ -7,6 +7,7 @@ import java.util.*;
 
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import io.github.cdimascio.dotenv.Dotenv;
@@ -30,6 +31,8 @@ public class BackupService {
         this.dbPort = dotenv.get("SPRING_DATASOURCE_PORT");
     }
 
+
+    @Scheduled(cron = "0 0 2 * * *", zone = "America/Bogota")
     public void createBackup() throws Exception {
         File dir = new File(backupDirectory);
         if (!dir.exists())
