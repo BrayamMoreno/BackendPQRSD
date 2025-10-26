@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
 
@@ -18,6 +20,8 @@ import lombok.*;
 @Getter
 @Entity
 @Table(name = "personas")
+@SQLDelete(sql = "UPDATE personas SET deleted_at = NOW() WHERE id = ?")
+@Where(clause = "deleted_at IS NULL")
 public class Persona extends GenericEntity {
 
     private String nombre;
@@ -67,4 +71,6 @@ public class Persona extends GenericEntity {
     @Formula("(SELECT u.correo FROM usuarios u WHERE u.persona_id = id LIMIT 1)")
     private String correoUsuario;
 
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
 }

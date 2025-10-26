@@ -1,11 +1,14 @@
 package com.pqrsdf.pqrsdf.models;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
@@ -17,6 +20,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
+import jakarta.persistence.PreRemove;
 import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -32,6 +36,8 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "pqs")
+@SQLDelete(sql = "UPDATE pqs SET deleted_at = NOW() WHERE id = ?")
+@Where(clause = "deleted_at IS NULL")
 public class PQ extends GenericEntity {
 
     @Column(unique = true, name = "numero_radicado")
@@ -85,4 +91,21 @@ public class PQ extends GenericEntity {
     @OneToMany(mappedBy = "pq", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AdjuntoPQ> adjuntos;
 
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
+
+    @PreRemove
+    public void preRemove() {
+        if (adjuntos != null) {
+            for (AdjuntoPQ adjunto : adjuntos) {
+                adjunto.setDeletedAt(LocalDateTime.now());
+            }
+        }
+
+        if (historialEstados != null) {
+            for (HistorialEstadoPQ historial : historialEstados) {
+                historial.setDeletedAt(LocalDateTime.now());
+            }
+        }
+    }
 }

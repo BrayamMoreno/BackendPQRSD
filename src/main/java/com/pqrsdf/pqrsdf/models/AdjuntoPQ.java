@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
@@ -19,6 +21,8 @@ import lombok.*;
 @Setter
 @Entity
 @Table(name = "adjuntos_pq")
+@SQLDelete(sql = "UPDATE adjuntos_pq SET deleted_at = NOW() WHERE id = ?")
+@Where(clause = "deleted_at IS NULL")
 public class AdjuntoPQ extends GenericEntity {
 
     @JsonIgnore
@@ -39,9 +43,11 @@ public class AdjuntoPQ extends GenericEntity {
 
     private Timestamp createdAt;
 
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = Timestamp.valueOf(LocalDateTime.now());
     }
-
 }

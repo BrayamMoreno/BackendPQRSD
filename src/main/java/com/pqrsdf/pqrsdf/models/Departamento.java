@@ -15,6 +15,7 @@ import lombok.*;
 public class Departamento extends GenericEntity {
 
     private String nombre;
+
     private String codigoDane;
 
 }

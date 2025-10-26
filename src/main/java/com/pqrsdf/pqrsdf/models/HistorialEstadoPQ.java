@@ -1,8 +1,11 @@
 package com.pqrsdf.pqrsdf.models;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
@@ -18,6 +21,8 @@ import lombok.*;
 @Setter
 @Entity
 @Table(name = "historial_estados_pq")
+@SQLDelete(sql = "UPDATE historial_estados_pq SET deleted_at = NOW() WHERE id = ?")
+@Where(clause = "deleted_at IS NULL")
 public class HistorialEstadoPQ extends GenericEntity {
 
     @ManyToOne
@@ -43,4 +48,7 @@ public class HistorialEstadoPQ extends GenericEntity {
     protected void onCreate() {
         this.fechaCambio = new Timestamp(System.currentTimeMillis());
     }
+
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
 }

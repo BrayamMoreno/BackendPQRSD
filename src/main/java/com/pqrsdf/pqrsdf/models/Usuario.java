@@ -2,6 +2,9 @@ package com.pqrsdf.pqrsdf.models;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
 
@@ -12,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreRemove;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
@@ -28,6 +32,8 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "usuarios")
+@SQLDelete(sql = "UPDATE usuarios SET deleted_at = NOW() WHERE id = ?")
+@Where(clause = "deleted_at IS NULL")
 public class Usuario extends GenericEntity {
 
     private String correo;
@@ -65,5 +71,15 @@ public class Usuario extends GenericEntity {
 
     public Persona getPersona() {
         return persona;
+    }
+
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
+
+    @PreRemove
+    public void preRemove() {
+        if (persona != null) {
+            persona.setDeletedAt(LocalDateTime.now());
+        }
     }
 }
