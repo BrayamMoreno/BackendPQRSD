@@ -81,5 +81,6 @@ public class Usuario extends GenericEntity {
         if (persona != null) {
             persona.setDeletedAt(LocalDateTime.now());
         }
+        setIsEnable(false);
     }
 }

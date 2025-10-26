@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,14 +41,13 @@ public class UsuarioController extends GenericController<Usuario, Long> {
         this.service = service;
     }
 
-    @PatchMapping("/disable-account/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> disableAccount(@PathVariable Long id) {
         try {
-
             if (id == null || id <= 0) {
                 return ResponseEntityUtil.handleBadRequest("ID de usuario inválido.");
             }
-            service.disableAccount(id);
+            service.deleteById(id);
             return ResponseEntity.ok("Cuenta deshabilitada correctamente.");
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);

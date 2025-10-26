@@ -2,11 +2,13 @@ package com.pqrsdf.pqrsdf.models;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Set;
 
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
 
 import jakarta.persistence.*;
@@ -58,6 +60,16 @@ public class Persona extends GenericEntity {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    @Formula("(SELECT u.correo FROM usuarios u WHERE u.persona_id = id LIMIT 1)")
+    private String correoUsuario;
+
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
+
+    @OneToMany(mappedBy = "solicitante", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<PQ> pqsSolicitadas;
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
@@ -68,9 +80,13 @@ public class Persona extends GenericEntity {
         this.updatedAt = LocalDateTime.now();
     }
 
-    @Formula("(SELECT u.correo FROM usuarios u WHERE u.persona_id = id LIMIT 1)")
-    private String correoUsuario;
+    @PreRemove
+    public void preRemove() {
+        if (pqsSolicitadas != null) {
+            for (PQ pq : pqsSolicitadas) {
+                pq.setDeletedAt(LocalDateTime.now());
+            }
+        }
+    }
 
-    @Column(name = "deleted_at")
-    private LocalDateTime deletedAt;
 }

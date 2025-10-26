@@ -120,10 +120,8 @@ public class UsuarioService extends GenericService<Usuario, Long> {
         return usuarioRepository.findAll(spec, pageable);
     }
 
-    public void disableAccount(Long id) {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        usuario.setIsEnable(false);
-        usuarioRepository.save(usuario);
+    public void deleteById(Long id) {
+        usuarioRepository.deleteById(id);
     }
+
 }
