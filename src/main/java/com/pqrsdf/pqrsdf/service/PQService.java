@@ -324,6 +324,7 @@ public class PQService extends GenericService<PQ, Long> {
                 .build();
 
         historialEstadosRespository.save(historial);
+        emailService.sendEmailAdjuntos(pq.getSolicitante(), pq.getNumeroRadicado(), List.of(pq.getSolicitante().getCorreoUsuario()), "Rechazo de Solicitud - Secretaria de Transito y Transporte de Girardot", null);
     }
 
     private Date darFechaResolucion(PQ pq) {
@@ -385,30 +386,6 @@ public class PQService extends GenericService<PQ, Long> {
 
     }
 
-    public void sendEmail(List<String> to, String subject, String body) {
-        if (to == null || to.isEmpty()) {
-            throw new IllegalArgumentException("La lista de destinatarios no puede estar vacía");
-        }
-
-        if (!validateTo(to)) {
-            throw new IllegalArgumentException("La lista de destinatarios contiene direcciones de correo no válidas");
-        }
-
-        if (to.size() > 0) {
-            System.out.println();
-        } else {
-
-        }
-    }
-
-    public boolean validateTo(List<String> to) {
-        for (String email : to) {
-            if (email == null || !email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     public ConteoPQDTO obtenerConteoPorSolicitante(Long solicitanteId) {
         return repository.contarPorSolicitante(solicitanteId);

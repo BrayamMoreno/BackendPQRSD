@@ -47,8 +47,10 @@ public class EmailService {
                 helper.setSubject(subject);
                 helper.setText(html, true);
 
-                for (File file : attachments) {
-                    helper.addAttachment(file.getName(), file);
+                if (attachments != null) {
+                    for (File file : attachments) {
+                        helper.addAttachment(file.getName(), file);
+                    }
                 }
 
                 javaMailSender.send(message);

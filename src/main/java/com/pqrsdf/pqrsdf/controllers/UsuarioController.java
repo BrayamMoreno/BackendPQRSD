@@ -64,7 +64,7 @@ public class UsuarioController extends GenericController<Usuario, Long> {
             @RequestParam(required = false) Boolean estado
             ) {
         try {
-            Pageable pageable = PageRequest.of(page, size, Sort.by(order_by));
+                Pageable pageable = PageRequest.of(page, size, Sort.by(order_by));
 
             Specification<Usuario> spec = Specification
                     .where(UsuarioSpecification.hasNombreOrApellidoorCorreo(busqueda))

@@ -25,9 +25,9 @@ public class UsuarioSpecification {
             Predicate porNombre = criteriaBuilder.like(criteriaBuilder.lower(personaJoin.get("nombre")), likePattern);
             Predicate porApellido = criteriaBuilder.like(criteriaBuilder.lower(personaJoin.get("apellido")), likePattern);
             Predicate porCorreo = criteriaBuilder.like(criteriaBuilder.lower(root.get("correo")), likePattern);
-
+            Predicate porDni = criteriaBuilder.like(criteriaBuilder.lower(personaJoin.get("dni")), likePattern);
             // busca coincidencia en cualquiera de los tres campos
-            return criteriaBuilder.or(porNombre, porApellido, porCorreo);
+            return criteriaBuilder.or(porNombre, porApellido, porCorreo, porDni);
         };
     }
 
