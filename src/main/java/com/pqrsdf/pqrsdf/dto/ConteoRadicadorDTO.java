@@ -1,10 +1,10 @@
 package com.pqrsdf.pqrsdf.dto;
 
 public record ConteoRadicadorDTO(
-    Long por_asignar,
+    Long radicadas,
     Long asignadas,
-    Long rechazadas
-    
+    Long rechazadas,
+    Long por_asignar
 ){
 
 }

@@ -53,19 +53,21 @@ public class PQController extends GenericController<PQ, Long> {
     public ResponseEntity<?> getAllPqs(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) String dniSolicitante,
             @RequestParam(required = false) Long tipoId,
             @RequestParam(required = false) Long estadoId,
             @RequestParam(required = false) String numeroRadicado,
             @RequestParam(required = false) String fechaInicio,
             @RequestParam(required = false) String fechaFin) {
         try {
-            Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+                Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
 
             Specification<PQ> spec = Specification
                     .where(PqsSpecification.hasTipoId(tipoId))
                     .and(PqsSpecification.hasUltimoEstado(estadoId))
                     .and(PqsSpecification.hasNumeroRadicado(numeroRadicado))
-                    .and(PqsSpecification.hasFechaRango(fechaInicio, fechaFin));
+                    .and(PqsSpecification.hasFechaRango(fechaInicio, fechaFin))
+                    .and(PqsSpecification.hasDniSolicitante(dniSolicitante));
 
             if (service.findAll(pageable, spec).hasContent() == false) {
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);

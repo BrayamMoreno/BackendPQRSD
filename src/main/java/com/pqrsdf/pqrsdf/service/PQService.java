@@ -395,10 +395,12 @@ public class PQService extends GenericService<PQ, Long> {
         Object result = repository.obtenerConteoRadicador(radicadorId);
         if (result instanceof Object[] row) {
             return new ConteoRadicadorDTO(
-                    ((Number) row[0]).longValue(),
-                    ((Number) row[1]).longValue(),
-                    ((Number) row[2]).longValue());
+                ((Number) row[0]).longValue(),
+                ((Number) row[1]).longValue(),
+                ((Number) row[2]).longValue(),
+                ((Number) row[3]).longValue()
+            );
         }
-        return new ConteoRadicadorDTO(0L, 0L, 0L);
+        return new ConteoRadicadorDTO(0L, 0L, 0L, 0L);
     }
 }

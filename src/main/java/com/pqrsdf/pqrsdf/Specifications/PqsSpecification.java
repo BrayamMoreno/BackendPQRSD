@@ -94,4 +94,15 @@ public class PqsSpecification {
             return criteriaBuilder.equal(root.get("responsable").get("id"), responsableId);
         };
     }
+
+    public static Specification<PQ> hasDniSolicitante(String dniSolicitante) {
+        return (root, query, criteriaBuilder) -> {
+            if (dniSolicitante == null) {
+                return criteriaBuilder.conjunction();
+            }
+            return criteriaBuilder.like(
+                    criteriaBuilder.lower(root.get("solicitante").get("dni").as(String.class)),
+                    "%" + dniSolicitante.toLowerCase() + "%");
+        };
+    }
 }
