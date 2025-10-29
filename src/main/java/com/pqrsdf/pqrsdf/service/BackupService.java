@@ -23,7 +23,7 @@ public class BackupService {
     private String dbPort;
 
     public BackupService(Dotenv dotenv) {
-        this.backupDirectory = dotenv.get("BACKUPS_DIR", "/default/backup/path");
+        this.backupDirectory = dotenv.get("BACKUPS_DIR", "./backups");
         this.dbName = dotenv.get("SPRING_DATASOURCE_NAME", "mydatabase");
         this.dbUser = dotenv.get("SPRING_DATASOURCE_USERNAME");
         this.dbPassword = dotenv.get("SPRING_DATASOURCE_PASSWORD");
