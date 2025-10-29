@@ -1,7 +1,5 @@
 package com.pqrsdf.pqrsdf.config;
 
-import io.github.cdimascio.dotenv.Dotenv;
-
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.models.Components;

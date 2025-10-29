@@ -35,8 +35,8 @@ public class HistorialEstadoPQ extends GenericEntity {
     private EstadoPQ estado;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
+    @JoinColumn(name = "cambiado_por_id", nullable = false)
+    private Usuario cambiadoPor;
 
     private String observacion;
     private Timestamp fechaCambio;

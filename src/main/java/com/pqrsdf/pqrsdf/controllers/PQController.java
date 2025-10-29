@@ -16,6 +16,7 @@ import org.springframework.data.jpa.domain.Specification;
 import com.pqrsdf.pqrsdf.Specifications.PqsSpecification;
 import com.pqrsdf.pqrsdf.dto.PqDto;
 import com.pqrsdf.pqrsdf.dto.RadicarDto;
+import com.pqrsdf.pqrsdf.dto.ReasignarRequest;
 import com.pqrsdf.pqrsdf.dto.ResolucionDto;
 import com.pqrsdf.pqrsdf.generic.GenericController;
 import com.pqrsdf.pqrsdf.models.PQ;
@@ -60,7 +61,7 @@ public class PQController extends GenericController<PQ, Long> {
             @RequestParam(required = false) String fechaInicio,
             @RequestParam(required = false) String fechaFin) {
         try {
-                Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+            Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
 
             Specification<PQ> spec = Specification
                     .where(PqsSpecification.hasTipoId(tipoId))
@@ -323,6 +324,16 @@ public class PQController extends GenericController<PQ, Long> {
     public ResponseEntity<?> obtenerConteoRadicador(@PathVariable("radicadorId") Long radicadorId) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(service.conteoRadicador(radicadorId));
+        } catch (Exception e) {
+            return ResponseEntityUtil.handleInternalError(e);
+        }
+    }
+
+    @PostMapping("/reasignar_responsable")
+    public ResponseEntity<?> reasignarResponsable(@RequestBody ReasignarRequest requestBody) {
+        try {
+            service.reasignarResponsable(requestBody);
+            return ResponseEntity.status(HttpStatus.OK).body("Responsable reasignado correctamente");
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }

@@ -43,7 +43,7 @@ public class HistorialEstadoService extends GenericService<HistorialEstadoPQ, Lo
         historial.setNumeroRadicado(request.numeroRadicado());
         historial.setEstado(estado);
         historial.setObservacion(request.observacion());
-        historial.setUsuario(usuario);
+        historial.setCambiadoPor(usuario);
 
         repository.save(historial);
     }
@@ -67,7 +67,7 @@ public class HistorialEstadoService extends GenericService<HistorialEstadoPQ, Lo
         // Actualizar campos
         historial.setEstado(estado);
         historial.setObservacion(request.observacion());
-        historial.setUsuario(usuario);
+        historial.setCambiadoPor(usuario);
 
         repository.save(historial);
     }

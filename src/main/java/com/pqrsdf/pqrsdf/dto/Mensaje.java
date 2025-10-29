@@ -1,7 +1,7 @@
 package com.pqrsdf.pqrsdf.dto;
 
 public class Mensaje {
-    
+
     private String mensaje;
 
     public Mensaje(String mensaje){

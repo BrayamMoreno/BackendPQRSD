@@ -32,6 +32,7 @@ import com.pqrsdf.pqrsdf.dto.DocumentoDTO;
 import com.pqrsdf.pqrsdf.dto.PqDto;
 import com.pqrsdf.pqrsdf.dto.PqResponseDto;
 import com.pqrsdf.pqrsdf.dto.RadicarDto;
+import com.pqrsdf.pqrsdf.dto.ReasignarRequest;
 import com.pqrsdf.pqrsdf.dto.ResolucionDto;
 import com.pqrsdf.pqrsdf.generic.GenericService;
 import com.pqrsdf.pqrsdf.models.EstadoPQ;
@@ -298,7 +299,7 @@ public class PQService extends GenericService<PQ, Long> {
         String observacion = entity.comentario();
 
         if (entity.isAprobada()) {
-            usuarioResponsable = responsablePQRepository.findById(entity.responsableId())
+            usuarioResponsable = responsablePQRepository.findByPersonaResponsableId(entity.responsableId())
                     .orElseThrow(
                             () -> new RuntimeException("Responsable no encontrado con ID: " + entity.responsableId()));
 
@@ -314,7 +315,7 @@ public class PQService extends GenericService<PQ, Long> {
         repository.save(pq);
 
         HistorialEstadoPQ historial = HistorialEstadoPQ.builder()
-                .usuario(usuarioRepository.findById(entity.radicadorId())
+                .cambiadoPor(usuarioRepository.findById(entity.radicadorId())
                         .orElseThrow(
                                 () -> new RuntimeException("Usuario no encontrado con ID: " + entity.radicadorId())))
                 .estado(nuevoEstado)
@@ -363,7 +364,7 @@ public class PQService extends GenericService<PQ, Long> {
                 .orElseThrow(() -> new RuntimeException("PQ no encontrado con ID: " + resolucionDto.pqId()));
 
         HistorialEstadoPQ historialEstadoPQ = HistorialEstadoPQ.builder()
-                .usuario(usuarioRepository.findById(resolucionDto.responsableId())
+                .cambiadoPor(usuarioRepository.findById(resolucionDto.responsableId())
                         .orElseThrow(() -> new RuntimeException(
                                 "Usuario no encontrado con ID: " + resolucionDto.responsableId())))
                 .estado(estadoPQService.getById(4L))
@@ -402,5 +403,28 @@ public class PQService extends GenericService<PQ, Long> {
             );
         }
         return new ConteoRadicadorDTO(0L, 0L, 0L, 0L);
+    }
+
+    @Transactional
+    public void reasignarResponsable(ReasignarRequest entity) {
+        PQ pq = repository.findById(entity.pqId())
+                .orElseThrow(() -> new RuntimeException("PQ no encontrado con ID: " + entity.pqId()));
+
+        ResponsablePQ nuevoResponsable = responsablePQRepository.findById(entity.nuevoResponsableId())
+                .orElseThrow(() -> new RuntimeException("Responsable no encontrado con ID: " + entity.nuevoResponsableId()));
+
+        pq.setResponsable(nuevoResponsable);
+
+        HistorialEstadoPQ historialEstadoPQ = HistorialEstadoPQ.builder()
+                .cambiadoPor(usuarioRepository.findById(entity.cambiadoPorId())
+                        .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + entity.cambiadoPorId())))
+                .estado(estadoPQService.getById(2L))
+                .pq(pq)
+                .fechaCambio(new java.sql.Timestamp(System.currentTimeMillis()))
+                .observacion(entity.comentario())
+                .build();
+
+        repository.save(pq);
+        historialEstadosRespository.save(historialEstadoPQ);
     }
 }

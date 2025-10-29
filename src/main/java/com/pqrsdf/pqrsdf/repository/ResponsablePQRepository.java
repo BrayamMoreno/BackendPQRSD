@@ -1,5 +1,7 @@
 package com.pqrsdf.pqrsdf.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
@@ -8,5 +10,7 @@ import com.pqrsdf.pqrsdf.models.ResponsablePQ;
 
 @Repository
 public interface ResponsablePQRepository extends GenericRepository<ResponsablePQ, Long>, JpaSpecificationExecutor<ResponsablePQ> {
+
+    Optional<ResponsablePQ> findByPersonaResponsableId(Long personaResponsableId);
 
 }
