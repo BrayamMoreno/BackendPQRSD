@@ -62,7 +62,7 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.OK).body(userDetailServiceImpl.login(entity));
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(new AuthResponse(null, "Credenciales incorrectas", null, null, null, false));
+                    .body(new AuthResponse(null, "Credenciales incorrectas", null, null, false));
         } catch (Exception e) {
             return ResponseEntityUtil.handleInternalError(e);
         }
@@ -79,10 +79,10 @@ public class AuthController {
         if (jwtToken != null) {
             tokenService.revokeToken(jwtToken, jwtUtils.extracExpirationTime(jwtToken));
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new AuthResponse(null, "Sesion cerrada", null, null, null, false));
+                    .body(new AuthResponse(null, "Sesion cerrada", null, null, false));
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new AuthResponse(null, "No se pudo cerrar la sesion", null, null, null, false));
+                .body(new AuthResponse(null, "No se pudo cerrar la sesion", null, null, false));
     }
 
     @PostMapping("/renew")

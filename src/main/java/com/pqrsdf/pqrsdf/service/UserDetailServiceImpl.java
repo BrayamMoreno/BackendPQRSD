@@ -3,6 +3,7 @@ package com.pqrsdf.pqrsdf.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -76,6 +77,13 @@ public class UserDetailServiceImpl implements UserDetailsService {
             throw new BadCredentialsException("Usuario no encontrado");
         }
 
+        if(usuario.getIsEnable() == false ){
+            throw new BadCredentialsException("Usuario deshabilitado");
+        }
+
+        usuario.getRol().setExposePermisos(true);
+        Hibernate.initialize(usuario.getRol().getPermisos());
+
         Authentication authentication = this.authentication(loginRequest.correo(), loginRequest.contrasena());
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -86,8 +94,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
                 "Usuario autenticado correctamente",
                 accessToken,
                 usuario,
-                usuario.getPersona(),
                 true);
     }
-
 }
