@@ -32,8 +32,10 @@ build/
 ### VS Code ###
 .vscode/
 .env
-/logs/
 
 
-.backup
-.Uploads
+# Environment and logs
+.env
+logs/
+backup/
+Uploads/
