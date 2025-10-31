@@ -8,6 +8,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
 
 import jakarta.persistence.*;
@@ -23,6 +24,7 @@ import lombok.*;
 @Table(name = "adjuntos_pq")
 @SQLDelete(sql = "UPDATE adjuntos_pq SET deleted_at = NOW() WHERE id = ?")
 @Where(clause = "deleted_at IS NULL")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class AdjuntoPQ extends GenericEntity {
 
     @JsonIgnore

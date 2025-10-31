@@ -10,12 +10,14 @@ import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.pqrsdf.pqrsdf.generic.GenericEntity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -38,6 +40,7 @@ import lombok.Setter;
 @Table(name = "pqs")
 @SQLDelete(sql = "UPDATE pqs SET deleted_at = NOW() WHERE id = ?")
 @Where(clause = "deleted_at IS NULL")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class PQ extends GenericEntity {
 
     @Column(unique = true, name = "numero_radicado")
@@ -51,7 +54,7 @@ public class PQ extends GenericEntity {
     @JoinColumn(name = "tipo_pq_id")
     private TipoPQ tipoPQ;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "solicitante_id")
     private Persona solicitante;
 
@@ -65,13 +68,13 @@ public class PQ extends GenericEntity {
     private Date fechaResolucionEstimada;
     private Date fechaResolucion;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "radicador_id")
     private Persona radicador;
 
     private String respuesta;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "responsable_id")
     private ResponsablePQ responsable;
 
@@ -84,12 +87,12 @@ public class PQ extends GenericEntity {
     private Boolean web;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "pq", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pq", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @OrderBy("fechaCambio DESC")
     private Set<HistorialEstadoPQ> historialEstados;
 
-    @OneToMany(mappedBy = "pq", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AdjuntoPQ> adjuntos;
+    @OneToMany(mappedBy = "pq", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<AdjuntoPQ> adjuntos;
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;

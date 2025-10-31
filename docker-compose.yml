@@ -26,12 +26,8 @@ services:
     env_file:
       - .env
     volumes:
-      # Monta tus carpetas locales para persistencia
-      - ./Uploads:/backend/Uploads
-      - ./backup:/backend/backup
-      # Ajuste horario del sistema
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
+      - ./uploads:/backend/uploads
+      - ./backups:/backend/backups
     networks:
       - app-net
 

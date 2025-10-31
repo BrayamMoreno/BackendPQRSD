@@ -33,3 +33,7 @@ build/
 .vscode/
 .env
 /logs/
+
+
+.backup
+.Uploads
