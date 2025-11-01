@@ -11,6 +11,12 @@ services:
       - POSTGRES_USER=pq
       - POSTGRES_PASSWORD=pq_2025
       - POSTGRES_DB=pq
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "pq", "-d", "pq"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
     networks:
       - app-net
 
@@ -22,7 +28,8 @@ services:
     ports:
       - "27845:27845"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     env_file:
       - .env
     volumes:
